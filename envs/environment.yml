@@ -1,0 +1,63 @@
+# environment.yml
+name: kr8cht_embedding_comparison
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  # —— core runtime ——
+  - python=3.11
+  - pytorch>=2.1.0
+  - torchaudio
+  - torchvision
+  - protobuf           
+  - sentencepiece     
+
+  # —— data science ——
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - statsmodels
+  - joblib
+  - gensim
+  - matplotlib
+  - seaborn
+  - adjusttext 
+  - tqdm
+  - openpyxl
+  - spacy=3.5.0
+  - ipykernel
+  - notebook
+  - libjpeg-turbo
+  - pip
+
+  # —— other ——
+  - python-docx 
+
+  # —— wheels from PyPI ——
+  - pip:
+      - transformers==4.39.3
+      - peft==0.10.0
+      - "huggingface-hub[hf_xet]>=0.23"
+      - sentence-transformers
+      - accelerate==0.30.0
+      - safetensors
+      - nltk
+      - regex
+      - psutil
+      - ujson
+      - seqeval
+      - scikit_posthocs
+      - baycomp
+      - faiss-cpu
+      - datasets
+      - evaluate
+      - bitsandbytes
+      - optuna
+      - python-dotenv
+      - openai
+      - tabulate
+      - bert-score
+      - evaluate[bertscore]
+      - langid
