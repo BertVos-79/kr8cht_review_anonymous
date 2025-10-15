@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Content & consumptie",
+    "subdomain_id": "5.2",
+    "facet": "Online creators volgen",
+    "facet_id": "5.2.1",
+    "task": "Formuleer 16 activiteiten over het volgen van online contentmakers, tutorials bekijken of entertainment consumeren via video's",
+    "lexical": {
+      "verbs": ["volgen", "kijken naar", "bekijken", "leren van", "abonneren op", "ontdekken", "zoeken", "selecteren", "favoriet maken", "aanbevelen", "delen", "bespreken"],
+      "objects": ["video", "tutorial", "vlog", "uitleg", "guide", "channel", "creator", "maker", "serie", "content", "aflevering", "tip", "trick"],
+      "settings": ["eigen kamer", "thuis", "online", "op scherm"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN platformnamen (geen YouTube, Twitch) - gebruik 'video bekijken', 'creator volgen', 'online kanaal'",
+      "content_types": "minstens 6 zinnen educatief (tutorials, uitleg), 5 zinnen entertainment (comedy, vlogs), 5 zinnen hobby-gerelateerd (gaming, knutselen)",
+      "active_consumption": "minstens 10 zinnen actieve keuzes (zoeken, selecteren, leren), maximaal 6 zinnen passief kijken",
+      "critical_thinking": "minstens 4 zinnen die kritisch denken tonen (beoordelen, vergelijken, kiezen wie te volgen)"
+    },
+    "examples": [
+      "een tutorial over tekenen online bekijken",
+      "een interessante creator over wetenschap volgen",
+      "uitleg zoeken over hoe iets werkt"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Content & consumptie",
+    "subdomain_id": "5.2",
+    "facet": "Streaming entertainment",
+    "facet_id": "5.2.2",
+    "task": "Formuleer 16 activiteiten over het streamen van series, films of muziek waarbij jongeren entertainment kiezen en consumeren",
+    "lexical": {
+      "verbs": ["streamen", "kijken", "luisteren naar", "selecteren", "kiezen", "ontdekken", "afmaken", "beginnen aan", "pauzeren", "zoeken", "aanbevelen", "bespreken"],
+      "objects": ["serie", "film", "aflevering", "seizoen", "muziek", "nummer", "album", "playlist", "genre", "artiest", "soundtrack"],
+      "settings": ["eigen kamer", "woonkamer", "thuis", "bed", "via koptelefoon"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN platformnamen (geen Netflix, Spotify, Disney+) - gebruik 'serie streamen', 'muziek luisteren', 'film kijken'",
+      "healthy_balance": "minstens 8 zinnen over bewuste keuzes (selecteren, pauzeren, tijd bewaken), maximaal 8 zinnen over kijken/luisteren zelf",
+      "content_split": "minstens 8 zinnen video (series/films), 8 zinnen audio (muziek)",
+      "moderation": "minstens 4 zinnen die gezonde gewoontes tonen (niet te lang, pauzes, samen kijken)"
+    },
+    "examples": [
+      "een interessante serie selecteren om te kijken",
+      "favoriete muziek via streaming luisteren",
+      "een pauze nemen na enkele afleveringen"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Content & consumptie",
+    "subdomain_id": "5.2",
+    "facet": "Informatie zoeken",
+    "facet_id": "5.2.3",
+    "task": "Formuleer 16 activiteiten over het online zoeken naar informatie voor school, hobby's of praktische vragen",
+    "lexical": {
+      "verbs": ["zoeken", "opzoeken", "googelen", "vinden", "lezen", "controleren", "vergelijken", "checken", "verifiëren", "bronnen raadplegen", "onderzoeken", "leren", "uitzoeken"],
+      "objects": ["informatie", "uitleg", "antwoord", "tutorial", "instructie", "hulp", "bron", "website", "artikel", "vraag", "onderwerp", "feit"],
+      "settings": ["online", "thuis", "eigen kamer", "voor huiswerk", "op computer"]
+    },
+    "constraints": {
+      "no_brands": "GEEN merknamen (geen Google, Wikipedia, Bing) - gebruik 'online zoeken', 'informatie opzoeken', 'websites raadplegen'",
+      "purpose_variety": "minstens 8 zinnen schoolgerelateerd (huiswerk, leren), 8 zinnen praktisch/hobby (how-to, tutorials, interesses)",
+      "information_literacy": "minstens 8 zinnen kritische vaardigheden (bronnen checken, vergelijken, verifiëren, beoordelen)",
+      "active_learning": "alle zinnen tonen actief zoeken en leren, niet passief consumeren"
+    },
+    "examples": [
+      "informatie voor een werkstuk online opzoeken",
+      "verschillende bronnen over een onderwerp vergelijken",
+      "een tutorial vinden om iets nieuws te leren"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Content & consumptie",
+    "subdomain_id": "5.2",
+    "facet": "Trends & virale content",
+    "facet_id": "5.2.4",
+    "task": "Formuleer 16 activiteiten over het volgen van online trends, challenges of virale content waarbij jongeren deelnemen of observeren",
+    "lexical": {
+      "verbs": ["volgen", "ontdekken", "proberen", "meedoen", "bekijken", "delen", "lachen om", "uitproberen", "nadoen", "kiezen", "bespreken", "begrijpen", "beoordelen"],
+      "objects": ["trend", "challenge", "meme", "viral video", "hype", "rage", "beweging", "format", "idee", "fenomeen"],
+      "settings": ["online", "eigen kamer", "thuis", "met vrienden"]
+    },
+    "constraints": {
+      "balanced_approach": "minstens 8 zinnen observeren/genieten van trends, 8 zinnen bewust kiezen of kritisch zijn",
+      "safety_judgment": "minstens 6 zinnen die gezond oordeel tonen (veiligheid checken, zelf kiezen, niet alles doen)",
+      "positive_trends": "alleen veilige, leeftijdsgeschikte trends (geen gevaarlijke challenges)",
+      "peer_pressure": "minstens 4 zinnen die autonomie tonen (zelf kiezen, niet alles meevolgen)"
+    },
+    "examples": [
+      "een nieuwe online trend met vrienden bespreken",
+      "zelf kiezen welke challenge je veilig kunt proberen",
+      "genieten van grappige virale video's"
+    ]
+  }
+]

@@ -1,0 +1,103 @@
+[
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Zintuiglijke verkenning",
+    "subdomain_id": "7.1",
+    "facet": "Visuele waarneming & observatie",
+    "facet_id": "7.1.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren bewust visueel observeren, kijken naar details, patronen herkennen of visuele ervaringen bewust beleven",
+    "lexical": {
+      "verbs": ["observeren", "kijken naar", "bekijken", "bestuderen", "waarnemen", "herkennen", "ontdekken", "opmerken", "focussen op", "analyseren", "vergelijken", "tekenen", "fotograferen"],
+      "objects": ["detail", "patroon", "kleur", "vorm", "compositie", "perspectief", "licht", "schaduw", "beweging", "omgeving", "kunstwerk", "natuur", "textuur"],
+      "settings": ["buiten", "museum", "natuur", "thuis", "school", "straat"]
+    },
+    "constraints": {
+      "active_observation": "alle 16 zinnen over actief, bewust kijken en observeren - niet passief waarnemen",
+      "skill_variety": "minstens 6 zinnen over details zien, 5 zinnen over patronen/structuren, 5 zinnen over visuele analyse",
+      "contexts": "minstens 5 zinnen natuur, 5 zinnen kunst/cultuur, 6 zinnen alledaagse omgeving",
+      "cognitive_visual": "minstens 8 zinnen die visuele cognitie tonen (vergelijken, analyseren, interpreteren)"
+    },
+    "examples": [
+      "patronen in de natuur observeren",
+      "details in een kunstwerk bestuderen",
+      "kleuren en vormen in de omgeving vergelijken"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Zintuiglijke verkenning",
+    "subdomain_id": "7.1",
+    "facet": "Auditieve verkenning",
+    "facet_id": "7.1.2",
+    "task": "Formuleer 16 activiteiten waarin jongeren bewust luisteren, geluiden onderscheiden, aandacht geven aan auditieve details of geluidslandschappen verkennen",
+    "lexical": {
+      "verbs": ["luisteren naar", "beluisteren", "onderscheiden", "herkennen", "ontdekken", "identificeren", "focussen op", "waarnemen", "analyseren", "genieten van", "vergelijken", "experimenteren met"],
+      "objects": ["geluid", "muziek", "melodie", "ritme", "toon", "klank", "stilte", "geluidslandschap", "instrument", "stem", "natuurgeluid", "omgevingsgeluid"],
+      "settings": ["thuis", "buiten", "natuur", "stad", "concertzaal", "eigen kamer"]
+    },
+    "constraints": {
+      "active_listening": "alle 16 zinnen over actief, bewust luisteren - niet achtergrond/passief",
+      "sound_variety": "minstens 6 zinnen muziek, 5 zinnen natuurgeluiden, 5 zinnen alledaagse omgevingsgeluiden",
+      "auditory_skills": "minstens 8 zinnen over onderscheiden, identificeren, analyseren van geluiden",
+      "appreciation": "minstens 6 zinnen over genieten, waarderen van auditieve ervaringen"
+    },
+    "examples": [
+      "verschillende geluiden in de natuur onderscheiden",
+      "aandachtig naar de details in muziek luisteren",
+      "ritmes en melodieën in een nummer herkennen"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Zintuiglijke verkenning",
+    "subdomain_id": "7.1",
+    "facet": "Tactiele ervaring",
+    "facet_id": "7.1.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren door aanraken en voelen materialen verkennen, texturen ontdekken en tactiele verschillen waarnemen",
+    "lexical": {
+      "verbs": ["voelen", "aanraken", "betasten", "verkennen", "ontdekken", "ervaren", "vergelijken", "onderscheiden", "experimenteren met", "waarnemen", "herkennen", "onderzoeken"],
+      "objects": ["textuur", "materiaal", "oppervlak", "structuur", "stof", "object", "gladheid", "ruwheid", "vorm", "temperatuur", "natuurmateriaal", "verschil"],
+      "settings": ["buiten", "natuur", "atelier", "thuis", "werkplaats", "museum"]
+    },
+    "constraints": {
+      "tactile_exploration": "alle 16 zinnen over bewuste tactiele verkenning en waarneming",
+      "material_variety": "minstens 5 zinnen natuurmaterialen, 5 zinnen kunstmaterialen/stoffen, 6 zinnen alledaagse objecten",
+      "comparative": "minstens 8 zinnen over vergelijken, onderscheiden tussen texturen/materialen",
+      "safe_appropriate": "alleen veilige, leeftijdsgeschikte tactiele verkenning"
+    },
+    "examples": [
+      "verschillende texturen van materialen voelen",
+      "door aanraking natuurmaterialen verkennen",
+      "gladde en ruwe oppervlakken vergelijken"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Zintuiglijke verkenning",
+    "subdomain_id": "7.1",
+    "facet": "Smaak & geur verkennen",
+    "facet_id": "7.1.4",
+    "task": "Formuleer 16 activiteiten waarin jongeren bewust smaken proeven, geuren waarnemen en smaak- en geurervaringen verkennen en differentiëren",
+    "lexical": {
+      "verbs": ["proeven", "ruiken", "ontdekken", "herkennen", "onderscheiden", "vergelijken", "waarnemen", "experimenteren met", "identificeren", "genieten van", "verkennen"],
+      "objects": ["smaak", "geur", "aroma", "kruid", "ingrediënt", "gerecht", "fruit", "voedsel", "bloem", "kruiden", "parfum", "natuurgeur"],
+      "settings": ["keuken", "thuis", "buiten", "natuur", "tuin", "winkel"]
+    },
+    "constraints": {
+      "sensory_exploration": "alle 16 zinnen over bewuste, nieuwsgierige sensorische verkenning",
+      "no_eating_disorders": "ABSOLUUT GEEN zinnen over restricties, compensatie, 'goed/slecht' voedsel - alleen over zintuiglijke ervaring en nieuwsgierigheid",
+      "variety": "minstens 8 zinnen over smaken, 8 zinnen over geuren",
+      "natural_food": "minstens 6 zinnen over natuurlijke smaken/geuren (fruit, kruiden, natuur), 6 zinnen culinair, 4 andere geuren",
+      "curiosity_joy": "focus op ontdekking, nieuwsgierigheid en plezier - niet op oordeel of voorkeur"
+    },
+    "examples": [
+      "nieuwe smaken en kruiden uitproberen",
+      "verschillende geuren in de natuur herkennen",
+      "bewust de aroma's van eten waarnemen"
+    ]
+  }
+]

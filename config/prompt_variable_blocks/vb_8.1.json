@@ -1,0 +1,128 @@
+[
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Verplaatsingspatronen",
+    "subdomain_id": "8.1",
+    "facet": "Schooltraject",
+    "facet_id": "8.1.1",
+    "task": "Formuleer 16 activiteiten over de dagelijkse verplaatsing naar en van school via verschillende vervoersmiddelen",
+    "lexical": {
+      "verbs": ["fietsen", "gaan", "nemen", "stappen", "reizen", "vertrekken", "aankomen", "wachten op", "instappen", "uitstappen", "meegaan", "voorbereiden", "plannen"],
+      "objects": ["fiets", "bus", "schoolbus", "weg", "route", "traject", "vervoer", "bushalte", "fietsenstalling", "auto", "afstand"],
+      "settings": ["naar school", "van school", "onderweg", "bushalte", "fietspad", "schoolomgeving"]
+    },
+    "constraints": {
+      "transport_variety": "minstens 6 zinnen fietsen, 4 zinnen openbaar vervoer/schoolbus, 3 zinnen te voet, 3 zinnen carpool/auto",
+      "safety_awareness": "minstens 6 zinnen die verkeersveiligheid tonen (opletten, wachten, veilig oversteken)",
+      "independence_appropriate": "balans tussen begeleide en zelfstandige verplaatsingen passend bij 10-14 jaar",
+      "routine": "minstens 8 zinnen over dagelijkse routine en planning (vertrekken, aankomen, voorbereiden)"
+    },
+    "examples": [
+      "op tijd naar de bushalte fietsen",
+      "veilig de weg naar school oversteken",
+      "met de schoolbus naar huis reizen"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Verplaatsingspatronen",
+    "subdomain_id": "8.1",
+    "facet": "Buurtmobiliteit",
+    "facet_id": "8.1.2",
+    "task": "Formuleer 16 activiteiten over zelfstandige verplaatsingen in de buurt naar vrienden, winkels of andere bekende bestemmingen",
+    "lexical": {
+      "verbs": ["fietsen naar", "gaan naar", "lopen naar", "bezoeken", "ophalen", "brengen", "ontmoeten", "afspreken", "terugkeren", "verkennen", "navigeren"],
+      "objects": ["vriend", "vriendin", "winkel", "bakker", "buurt", "straat", "bestemming", "fiets", "route", "afstand"],
+      "settings": ["buurt", "wijk", "dorp", "lokale winkel", "bij vrienden", "bekend gebied"]
+    },
+    "constraints": {
+      "local_independence": "alle 16 zinnen over verplaatsingen binnen bekende, lokale omgeving",
+      "safety_familiarity": "minstens 8 zinnen binnen veilige, bekende buurt met groeiende actieradius",
+      "purpose_variety": "minstens 6 zinnen naar vrienden, 5 zinnen praktische bestemmingen (winkel), 5 zinnen verkennen/vrije tijd",
+      "age_appropriate_distance": "afstanden en bestemmingen passend bij 10-14 jaar met geleidelijke uitbreiding"
+    },
+    "examples": [
+      "naar een vriend in de buurt fietsen",
+      "zelfstandig naar de lokale winkel gaan",
+      "de buurt op de fiets verkennen"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Verplaatsingspatronen",
+    "subdomain_id": "8.1",
+    "facet": "Begeleide verplaatsingen",
+    "facet_id": "8.1.3",
+    "task": "Formuleer 16 activiteiten over verplaatsingen samen met ouders of verzorgers naar verder gelegen bestemmingen",
+    "lexical": {
+      "verbs": ["meegaan", "meerijden", "vergezellen", "samen gaan", "gebracht worden", "opgehaald worden", "reizen met", "bezoeken", "uitstapje maken"],
+      "objects": ["ouder", "verzorger", "auto", "vervoer", "bestemming", "stad", "winkelcentrum", "familielid", "activiteit", "afspraak"],
+      "settings": ["in de auto", "samen onderweg", "stad", "winkelcentrum", "bij familie", "naar activiteit"]
+    },
+    "constraints": {
+      "accompanied_focus": "alle 16 zinnen over begeleide verplaatsingen met ouders/verzorgers",
+      "destination_variety": "minstens 5 zinnen praktisch (stad, winkel, afspraken), 5 zinnen sociaal (familie, vrienden), 6 zinnen activiteiten/vrije tijd",
+      "transition_preparation": "minstens 4 zinnen die voorbereiding tonen op latere zelfstandigheid (opletten, route leren)",
+      "bonding": "minstens 6 zinnen die positieve, veilige aspecten van samen reizen tonen"
+    },
+    "examples": [
+      "met ouders naar de stad gaan",
+      "samen met een ouder familie bezoeken",
+      "opgehaald worden na een activiteit"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Verplaatsingspatronen",
+    "subdomain_id": "8.1",
+    "facet": "Autonomie-ontwikkeling in mobiliteit",
+    "facet_id": "8.1.4",
+    "task": "Formuleer 16 activiteiten over het geleidelijk ontwikkelen van zelfstandigheid in verplaatsingen, nieuwe routes uitproberen en verder durven reizen",
+    "lexical": {
+      "verbs": ["durven", "proberen", "uitbreiden", "oefenen", "leren", "zelfstandig gaan", "verkennen", "navigeren", "plannen", "regelen", "groeien in"],
+      "objects": ["zelfstandigheid", "vertrouwen", "nieuwe route", "verdere afstand", "onbekende bestemming", "verantwoordelijkheid", "ervaring", "stap"],
+      "settings": ["nieuwe route", "verder weg", "onbekende omgeving", "alleen onderweg", "zelfstandig"]
+    },
+    "constraints": {
+      "gradual_growth": "alle 16 zinnen over geleidelijke, veilige groei in autonomie",
+      "confidence_building": "minstens 10 zinnen over vertrouwen opbouwen, nieuwe dingen durven, stapsgewijs verder gaan",
+      "safety_awareness": "minstens 6 zinnen die veiligheidsbewustzijn tonen bij nieuwe situaties (plannen, opletten, afspreken)",
+      "realistic_progression": "progressie passend bij 10-14 jaar: eerst dichtbij, dan verder; eerst bekend, dan onbekend",
+      "no_recklessness": "groei in autonomie, NIET roekeloos gedrag of risico's nemen"
+    },
+    "examples": [
+      "voor het eerst alleen naar de training fietsen",
+      "een nieuwe route naar school uitproberen",
+      "stapsgewijs verder durven fietsen"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Verplaatsingspatronen",
+    "subdomain_id": "8.1",
+    "facet": "Openbaar vervoer gebruiken",
+    "facet_id": "8.1.5",
+    "task": "Formuleer 16 activiteiten over het leren gebruiken van openbaar vervoer zoals bus, tram of trein, eerst begeleid en later zelfstandig",
+    "lexical": {
+      "verbs": ["nemen", "instappen", "uitstappen", "wachten op", "checken", "betalen", "plannen", "overstappen", "navigeren", "reizen met", "leren gebruiken"],
+      "objects": ["bus", "tram", "trein", "openbaar vervoer", "halte", "station", "ticket", "kaart", "route", "dienstregeling", "perron"],
+      "settings": ["bushalte", "tramhalte", "station", "in bus/tram/trein", "onderweg", "openbaar vervoer"]
+    },
+    "constraints": {
+      "learning_progression": "minstens 8 zinnen over leren en oefenen (eerst begeleid), 8 zinnen over zelfstandig gebruiken",
+      "practical_skills": "minstens 10 zinnen over praktische vaardigheden (instappen, betalen, overstappen, route plannen)",
+      "safety_rules": "minstens 6 zinnen over veiligheidsregels en verantwoordelijk gedrag in openbaar vervoer",
+      "age_appropriate": "gebruik van openbaar vervoer passend bij 10-14 jaar met gepaste begeleiding waar nodig"
+    },
+    "examples": [
+      "leren hoe je de bus moet nemen",
+      "zelfstandig met de trein reizen",
+      "de juiste halte voor uitstappen herkennen"
+    ]
+  }
+]

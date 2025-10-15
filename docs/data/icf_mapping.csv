@@ -1,0 +1,213 @@
+domain_id,domain,subdomain_id,subdomain,facet_id,facet,icf_code,icf_label,component
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d310,Communicating with - receiving - spoken messages,Activities & Participation
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d115,Listening,Activities & Participation
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d110,Watching,Activities & Participation
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d132,Acquiring information,Activities & Participation
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.1,Whole-class instruction,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d210,Undertaking a single task,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d160,Focusing attention,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d166,Reading,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d170,Writing,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d172,Calculating,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.2,Independent work,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.3,Group work,d350,Conversation,Activities & Participation
+1,Education,1.1,Learning activities,1.1.3,Group work,d355,Discussion,Activities & Participation
+1,Education,1.1,Learning activities,1.1.3,Group work,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.3,Group work,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d166,Reading,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d170,Writing,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d172,Calculating,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d155,Acquiring skills,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d160,Focusing attention,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.4,Homework & study,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.5,Digital learning,d360,Using communication devices and techniques,Activities & Participation
+1,Education,1.1,Learning activities,1.1.5,Digital learning,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.5,Digital learning,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.5,Digital learning,e130,Products and technology for education,Environmental Factors
+1,Education,1.1,Learning activities,1.1.6,Problem-solving learning,d175,Solving problems,Activities & Participation
+1,Education,1.1,Learning activities,1.1.6,Problem-solving learning,d177,Making decisions,Activities & Participation
+1,Education,1.1,Learning activities,1.1.6,Problem-solving learning,d163,Thinking,Activities & Participation
+1,Education,1.1,Learning activities,1.1.6,Problem-solving learning,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.6,Problem-solving learning,d835,School life and related activities,Activities & Participation
+1,Education,1.1,Learning activities,1.1.7,Creative & artistic learning,d155,Acquiring skills,Activities & Participation
+1,Education,1.1,Learning activities,1.1.7,Creative & artistic learning,d820,School education,Activities & Participation
+1,Education,1.1,Learning activities,1.1.7,Creative & artistic learning,d835,School life and related activities,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d510,Washing oneself,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d520,Caring for body parts,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d530,Toileting,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d540,Dressing,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d550,Eating,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d560,Drinking,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d570,Looking after one’s health,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.1,Personal care,d571,Looking after one’s safety,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.2,Meals,d630,Preparing meals,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.2,Meals,d550,Eating,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.2,Meals,d560,Drinking,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.2,Meals,e110,Products or substances for personal consumption,Environmental Factors
+2,Family domain,2.1,Care & household,2.1.3,Household tasks,d640,Doing housework,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.3,Household tasks,d650,Caring for household objects,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.4,Logistics (scheduling & transport),d230,Carrying out daily routine,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.4,Logistics (scheduling & transport),d220,Undertaking multiple tasks,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.4,Logistics (scheduling & transport),d470,Using transportation,Activities & Participation
+2,Family domain,2.1,Care & household,2.1.5,Caring for others,d660,Assisting others,Activities & Participation
+2,Family domain,2.2,Family relationships,2.2.1,Parent–child interaction,d760,Family relationships,Activities & Participation
+2,Family domain,2.2,Family relationships,2.2.1,Parent–child interaction,e310,Immediate family,Environmental Factors
+2,Family domain,2.2,Family relationships,2.2.2,Siblings,d760,Family relationships,Activities & Participation
+2,Family domain,2.2,Family relationships,2.2.2,Siblings,e310,Immediate family,Environmental Factors
+2,Family domain,2.2,Family relationships,2.2.3,Extended family,d760,Family relationships,Activities & Participation
+2,Family domain,2.2,Family relationships,2.2.3,Extended family,e315,Extended family,Environmental Factors
+2,Family domain,2.2,Family relationships,2.2.4,Family rituals,d760,Family relationships,Activities & Participation
+2,Family domain,2.3,Autonomy & boundaries,2.3.1,Rules & agreements,d250,Managing one’s own behaviour,Activities & Participation
+2,Family domain,2.3,Autonomy & boundaries,2.3.3,Negotiation,d720,Complex interpersonal interactions,Activities & Participation
+2,Family domain,2.3,Autonomy & boundaries,2.3.4,Independence,d230,Carrying out daily routine,Activities & Participation
+3,Peer domain,3.1,Friendship patterns,3.1.1,Best friends,d750,Informal social relationships,Activities & Participation
+3,Peer domain,3.1,Friendship patterns,3.1.1,Best friends,e320,Friends,Environmental Factors
+3,Peer domain,3.1,Friendship patterns,3.1.2,Friend group,d750,Informal social relationships,Activities & Participation
+3,Peer domain,3.1,Friendship patterns,3.1.2,Friend group,e320,Friends,Environmental Factors
+3,Peer domain,3.1,Friendship patterns,3.1.3,Classmates,d750,Informal social relationships,Activities & Participation
+3,Peer domain,3.1,Friendship patterns,3.1.3,Classmates,e325,"Acquaintances, peers colleagues, neighbours and community members",Environmental Factors
+3,Peer domain,3.1,Friendship patterns,3.1.4,Early romance,d770,Intimate relationships,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.1,Play & relaxation,d880,Engagement in play,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.1,Play & relaxation,d920,Recreation and leisure,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.2,Hanging out,d920,Recreation and leisure,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.3,Group activities,d920,Recreation and leisure,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.3,Group activities,d910,Community life,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.4,Social events,d920,Recreation and leisure,Activities & Participation
+3,Peer domain,3.2,Social activities,3.2.4,Social events,d910,Community life,Activities & Participation
+3,Peer domain,3.3,Social navigation,3.3.1,Peer pressure,d720,Complex interpersonal interactions,Activities & Participation
+3,Peer domain,3.3,Social navigation,3.3.1,Peer pressure,e325,"Acquaintances, peers colleagues, neighbours and community members",Environmental Factors
+3,Peer domain,3.3,Social navigation,3.3.2,Conflict,d720,Complex interpersonal interactions,Activities & Participation
+3,Peer domain,3.3,Social navigation,3.3.2,Conflict,e325,"Acquaintances, peers colleagues, neighbours and community members",Environmental Factors
+3,Peer domain,3.3,Social navigation,3.3.4,Communication skills,d350,Conversation,Activities & Participation
+3,Peer domain,3.3,Social navigation,3.3.4,Communication skills,d355,Discussion,Activities & Participation
+4,Leisure domain,4.1,Organized activities,4.1.1,Sport,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.1,Organized activities,4.1.1,Sport,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+4,Leisure domain,4.1,Organized activities,4.1.2,"Youth movement (Scouts, etc.)",d910,Community life,Activities & Participation
+4,Leisure domain,4.1,Organized activities,4.1.2,"Youth movement (Scouts, etc.)",d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.1,Organized activities,4.1.3,Artistic hobbies,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.1,Organized activities,4.1.3,Artistic hobbies,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+4,Leisure domain,4.1,Organized activities,4.1.4,Courses & workshops,d810,Informal education,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.1,Gaming,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.1,Gaming,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+4,Leisure domain,4.2,Free time at home,4.2.2,Media consumption,d110,Watching,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.2,Media consumption,d115,Listening,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.2,Media consumption,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.3,Creative activities,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.4,Games/play,d880,Engagement in play,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.4,Games/play,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.2,Free time at home,4.2.5,Solo play,d880,Engagement in play,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.1,Neighbourhood play,d880,Engagement in play,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.1,Neighbourhood play,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.2,Nature,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.2,Nature,e210,Physical geography,Environmental Factors
+4,Leisure domain,4.3,Outdoor activities,4.3.2,Nature,e220,Flora and fauna,Environmental Factors
+4,Leisure domain,4.3,Outdoor activities,4.3.3,Pool & playground,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.3,Pool & playground,e150,"Design, construction and building products and technology of buildings for public use",Environmental Factors
+4,Leisure domain,4.3,Outdoor activities,4.3.4,Boredom & free play,d880,Engagement in play,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.5,Recreational venues,d920,Recreation and leisure,Activities & Participation
+4,Leisure domain,4.3,Outdoor activities,4.3.5,Recreational venues,e150,"Design, construction and building products and technology of buildings for public use",Environmental Factors
+5,Digital domain,5.1,Social media & communication,5.1.1,Messaging,d325,Communicating with - receiving - written messages,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.1,Messaging,d345,Writing messages,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.1,Messaging,d360,Using communication devices and techniques,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.2,Social media,d350,Conversation,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.2,Social media,d355,Discussion,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.2,Social media,d360,Using communication devices and techniques,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.3,Social gaming,d880,Engagement in play,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.3,Social gaming,d920,Recreation and leisure,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.3,Social gaming,d360,Using communication devices and techniques,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.4,Video calling,d310,Communicating with - receiving - spoken messages,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.4,Video calling,d330,Speaking,Activities & Participation
+5,Digital domain,5.1,Social media & communication,5.1.4,Video calling,d360,Using communication devices and techniques,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.1,Following online creators,d110,Watching,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.1,Following online creators,d115,Listening,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.1,Following online creators,d920,Recreation and leisure,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.2,Streaming entertainment,d110,Watching,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.2,Streaming entertainment,d115,Listening,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.2,Streaming entertainment,d920,Recreation and leisure,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.3,Information seeking,d132,Acquiring information,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.4,Trends & viral content,d132,Acquiring information,Activities & Participation
+5,Digital domain,5.2,Content & consumption,5.2.4,Trends & viral content,d920,Recreation and leisure,Activities & Participation
+5,Digital domain,5.3,Digital skills & identity,5.3.1,Account management & security,d360,Using communication devices and techniques,Activities & Participation
+5,Digital domain,5.3,Digital skills & identity,5.3.1,Account management & security,e125,Products and technology for communication,Environmental Factors
+5,Digital domain,5.3,Digital skills & identity,5.3.3,Digital communication etiquette,d350,Conversation,Activities & Participation
+5,Digital domain,5.3,Digital skills & identity,5.3.3,Digital communication etiquette,d355,Discussion,Activities & Participation
+5,Digital domain,5.3,Digital skills & identity,5.3.4,Online safety & risk awareness,d571,Looking after one’s safety,Activities & Participation
+6,Physical–emotional domain,6.1,Body awareness & puberty,6.1.2,Bodily self-care & hygiene,d510,Washing oneself,Activities & Participation
+6,Physical–emotional domain,6.1,Body awareness & puberty,6.1.2,Bodily self-care & hygiene,d520,Caring for body parts,Activities & Participation
+6,Physical–emotional domain,6.1,Body awareness & puberty,6.1.2,Bodily self-care & hygiene,d530,Toileting,Activities & Participation
+6,Physical–emotional domain,6.1,Body awareness & puberty,6.1.2,Bodily self-care & hygiene,d540,Dressing,Activities & Participation
+6,Physical–emotional domain,6.1,Body awareness & puberty,6.1.2,Bodily self-care & hygiene,d570,Looking after one’s health,Activities & Participation
+6,Physical–emotional domain,6.2,Emotional development,6.2.4,Recognizing & healthy coping with stress,d240,Handling stress and other psychological demands,Activities & Participation
+6,Physical–emotional domain,6.2,Emotional development,6.2.5,Emotion regulation skills,d250,Managing one’s own behaviour,Activities & Participation
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.1,Developing healthy sleep habits,d230,Carrying out daily routine,Activities & Participation
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.2,Intuitive & varied eating,d550,Eating,Activities & Participation
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.2,Intuitive & varied eating,d560,Drinking,Activities & Participation
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.2,Intuitive & varied eating,e110,Products or substances for personal consumption,Environmental Factors
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.3,Physical activity for enjoyment & wellbeing,d920,Recreation and leisure,Activities & Participation
+6,Physical–emotional domain,6.3,Health & wellbeing,6.3.4,Safety & risk awareness,d571,Looking after one’s safety,Activities & Participation
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.1,Visual perception & observation,d110,Watching,Activities & Participation
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.1,Visual perception & observation,e240,Light,Environmental Factors
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.2,Auditory exploration,d115,Listening,Activities & Participation
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.2,Auditory exploration,e250,Sound,Environmental Factors
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.3,Tactile experience,d120,Other purposeful sensing,Activities & Participation
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.4,Taste & smell exploration,d120,Other purposeful sensing,Activities & Participation
+7,Sensory–motor domain,7.1,Sensory exploration,7.1.4,Taste & smell exploration,e260,Air quality,Environmental Factors
+7,Sensory–motor domain,7.2,Motor skills,7.2.1,Gross motor movement,d450,Walking,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.1,Gross motor movement,d455,Moving around,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.2,Fine motor precision,d440,Fine hand use,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.2,Fine motor precision,d445,Hand and arm use,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.3,Body control & spatial awareness,d415,Maintaining a body position,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.3,Body control & spatial awareness,d410,Changing basic body position,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.4,Fundamental sport skills,d455,Moving around,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.4,Fundamental sport skills,d430,Lifting and carrying objects,Activities & Participation
+7,Sensory–motor domain,7.2,Motor skills,7.2.4,Fundamental sport skills,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+7,Sensory–motor domain,7.3,Spatial awareness,7.3.1,Orientation & wayfinding,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.1,School commute,d470,Using transportation,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.2,Neighbourhood mobility,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.3,Accompanied travel,d470,Using transportation,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.4,Developing mobility autonomy,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.4,Developing mobility autonomy,d470,Using transportation,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.5,Using public transport,d470,Using transportation,Activities & Participation
+8,Spatial–mobility domain,8.1,Mobility patterns,8.1.5,Using public transport,e120,Products and technology for personal indoor and outdoor mobility and transportation,Environmental Factors
+8,Spatial–mobility domain,8.2,Use of space,8.2.1,Using home territories,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.2,Use of space,8.2.1,Using home territories,e155,"Design, construction and building products and technology of buildings for private use",Environmental Factors
+8,Spatial–mobility domain,8.2,Use of space,8.2.2,Using neighbourhood spaces,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.2,Use of space,8.2.3,Exploring commercial spaces,d620,Acquisition of goods and services,Activities & Participation
+8,Spatial–mobility domain,8.2,Use of space,8.2.3,Exploring commercial spaces,e150,"Design, construction and building products and technology of buildings for public use",Environmental Factors
+8,Spatial–mobility domain,8.2,Use of space,8.2.4,Using public outdoor space,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.2,Use of space,8.2.5,Using community venues,d910,Community life,Activities & Participation
+8,Spatial–mobility domain,8.2,Use of space,8.2.5,Using community venues,e150,"Design, construction and building products and technology of buildings for public use",Environmental Factors
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.1,Local,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.2,Regional,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.3,Transition spaces,d460,Moving around in different locations,Activities & Participation
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.4,Cultural venues,d920,Recreation and leisure,Activities & Participation
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.4,Cultural venues,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+8,Spatial–mobility domain,8.3,Geographic horizon,8.3.5,Travel,d470,Using transportation,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.1,Developing financial skills,d860,Basic economic transactions,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.1,Developing financial skills,d865,Complex economic transactions,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.2,Developing personal style,d540,Dressing,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.2,Developing personal style,d520,Caring for body parts,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.3,Critically engaging with media influences,d132,Acquiring information,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.3,Critically engaging with media influences,d360,Using communication devices and techniques,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.4,Collecting as hobby & social activity,d920,Recreation and leisure,Activities & Participation
+9,Cultural–societal domain,9.1,Consumer culture,9.1.4,Collecting as hobby & social activity,d910,Community life,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.1,Events,d920,Recreation and leisure,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.1,Events,d910,Community life,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.2,Cultural institutions,e140,"Products and technology for culture, recreation and sport",Environmental Factors
+9,Cultural–societal domain,9.2,Cultural participation,9.2.2,Cultural institutions,e150,"Design, construction and building products and technology of buildings for public use",Environmental Factors
+9,Cultural–societal domain,9.2,Cultural participation,9.2.3,Seasonal traditions & festivals,d910,Community life,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.3,Seasonal traditions & festivals,d920,Recreation and leisure,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.4,Religious/ideological,d930,Religion and spirituality,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.5,Religious–spiritual,d930,Religion and spirituality,Activities & Participation
+9,Cultural–societal domain,9.2,Cultural participation,9.2.5,Religious–spiritual,e145,Products and technology for the practice of religion and spirituality,Environmental Factors
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.1,Social issues,d940,Human rights,Activities & Participation
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.2,Ecology,e225,Climate,Environmental Factors
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.2,Ecology,e260,Air quality,Environmental Factors
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.3,Media literacy,d132,Acquiring information,Activities & Participation
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.3,Media literacy,d360,Using communication devices and techniques,Activities & Participation
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.4,Early activism,d950,Political life and citizenship,Activities & Participation
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.4,Early activism,d940,Human rights,Activities & Participation
+9,Cultural–societal domain,9.3,Civic & social awareness,9.3.5,Citizenship,d950,Political life and citizenship,Activities & Participation

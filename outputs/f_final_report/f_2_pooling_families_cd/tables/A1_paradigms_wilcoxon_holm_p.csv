@@ -1,0 +1,4 @@
+,local,chain,global
+local,1.0,0.0085,0.0003
+chain,0.0085,1.0,0.0003
+global,0.0003,0.0003,1.0

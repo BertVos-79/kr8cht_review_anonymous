@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Digitale vaardigheden & identiteit",
+    "subdomain_id": "5.3",
+    "facet": "Account beheer & beveiliging",
+    "facet_id": "5.3.1",
+    "task": "Formuleer 16 activiteiten over het veilig beheren van online accounts, wachtwoorden instellen, privacy bewaken en beveiligingsinstellingen controleren",
+    "lexical": {
+      "verbs": ["instellen", "kiezen", "wijzigen", "controleren", "beveiligen", "beschermen", "beheren", "updaten", "checken", "aanpassen", "verifiëren", "uitloggen", "activeren"],
+      "objects": ["wachtwoord", "account", "privacy-instellingen", "beveiliging", "verificatie", "profiel", "gegevens", "toegang", "sessie", "apparaat"],
+      "settings": ["online", "eigen kamer", "thuis", "op telefoon"]
+    },
+    "constraints": {
+      "security_focus": "alle 16 zinnen over VEILIGE praktijken (sterke wachtwoorden, privacy, beveiliging) - GEEN activiteiten over veiligheid omzeilen of regels ontwijken",
+      "proactive_safety": "minstens 10 zinnen over actief beveiligen (instellen, controleren, beschermen), 6 zinnen over bewustzijn (checken, verifiëren)",
+      "age_appropriate": "praktijken geschikt voor 10-14 jaar met begeleiding waar nodig",
+      "responsible_digital": "alle activiteiten tonen verantwoordelijk digitaal burgerschap"
+    },
+    "examples": [
+      "een sterk wachtwoord voor je account kiezen",
+      "de privacy-instellingen van je profiel controleren",
+      "regelmatig uitloggen op gedeelde apparaten"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Digitale vaardigheden & identiteit",
+    "subdomain_id": "5.3",
+    "facet": "Online identiteit & zelfpresentatie",
+    "facet_id": "5.3.2",
+    "task": "Formuleer 16 activiteiten over het vormgeven van een online identiteit, profielen maken en nadenken over online zelfpresentatie",
+    "lexical": {
+      "verbs": ["kiezen", "maken", "schrijven", "presenteren", "tonen", "delen", "nadenken over", "overwegen", "aanpassen", "uitdrukken", "creëren", "vormgeven"],
+      "objects": ["profielfoto", "avatar", "bio", "beschrijving", "profiel", "gebruikersnaam", "identiteit", "interesse", "hobby", "persoonlijkheid"],
+      "settings": ["online", "eigen kamer", "thuis"]
+    },
+    "constraints": {
+      "authentic_healthy": "minstens 10 zinnen over authentieke, gezonde zelfpresentatie, maximaal 6 over externe validatie (likes, followers)",
+      "reflection": "minstens 8 zinnen die nadenken/overwegen tonen (wat deel je, hoe presenteer je jezelf)",
+      "privacy_awareness": "minstens 6 zinnen over bewust zijn wat je deelt, privacygrenzen",
+      "self_worth": "focus op eigenwaarde uit authenticiteit, niet uit likes of populariteit"
+    },
+    "examples": [
+      "een profielfoto kiezen die bij je past",
+      "nadenken over wat je in je bio schrijft",
+      "je interesses op je profiel authentiek weergeven"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Digitale vaardigheden & identiteit",
+    "subdomain_id": "5.3",
+    "facet": "Digitale communicatie-etiquette",
+    "facet_id": "5.3.3",
+    "task": "Formuleer 16 activiteiten over respectvolle online communicatie, het gebruik van emoji's, toon in berichten en omgaan met online meningsverschillen",
+    "lexical": {
+      "verbs": ["communiceren", "schrijven", "reageren", "beantwoorden", "emoji's gebruiken", "toon kiezen", "respecteren", "begrijpen", "verduidelijken", "pauzeren", "kalmeren", "oplossen"],
+      "objects": ["bericht", "toon", "emoji", "reactie", "miscommunicatie", "meningsverschil", "online gesprek", "groepschat", "context", "intentie"],
+      "settings": ["online", "in chat", "groepsgesprek", "eigen kamer"]
+    },
+    "constraints": {
+      "respectful_communication": "alle 16 zinnen over respectvolle, constructieve communicatie",
+      "conflict_resolution": "minstens 6 zinnen over online meningsverschillen constructief oplossen (niet escaleren, pauzeren, verhelderen)",
+      "misunderstanding": "minstens 6 zinnen over miscommunicatie voorkomen/oplossen (toon, emoji's, verduidelijken)",
+      "positive_digital_culture": "alle activiteiten bevorderen positieve online cultuur"
+    },
+    "examples": [
+      "de juiste toon in een bericht kiezen",
+      "bij online ruzie eerst even pauzeren",
+      "een miscommunicatie online verduidelijken"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Digitale vaardigheden & identiteit",
+    "subdomain_id": "5.3",
+    "facet": "Online veiligheid & risicobewustzijn",
+    "facet_id": "5.3.4",
+    "task": "Formuleer 16 activiteiten over het herkennen van online risico's, veilig navigeren, clickbait vermijden en weten wanneer hulp te vragen",
+    "lexical": {
+      "verbs": ["herkennen", "identificeren", "vermijden", "negeren", "blokkeren", "melden", "rapporteren", "hulp vragen", "checken", "verifiëren", "wantrouwen", "beschermen", "opletten"],
+      "objects": ["clickbait", "scam", "verdacht bericht", "vreemde", "risico", "gevaar", "valse informatie", "spam", "phishing", "vertrouwenspersoon", "hulp"],
+      "settings": ["online", "thuis", "eigen kamer"]
+    },
+    "constraints": {
+      "recognition_protection": "alle 16 zinnen over HERKENNEN van risico's en BESCHERMEN (niet over risico's zelf uitvoeren)",
+      "help_seeking": "minstens 8 zinnen over hulp vragen, melden, blokkeren, vertrouwenspersoon inschakelen",
+      "critical_skills": "minstens 8 zinnen over kritisch denken (herkennen, verifiëren, wantrouwen bij verdachte zaken)",
+      "empowerment_safety": "focus op empowerment: jongeren leren zichzelf te beschermen"
+    },
+    "examples": [
+      "verdachte berichten van vreemden herkennen",
+      "clickbait links niet zomaar aanklikken",
+      "bij online problemen hulp vragen aan een volwassene"
+    ]
+  }
+]

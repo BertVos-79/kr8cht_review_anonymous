@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Sociale schooldynamiek",
+    "subdomain_id": "1.3",
+    "facet": "Leerkracht-interactie",
+    "facet_id": "1.3.1",
+    "task": "Formuleer 16 activiteiten waarin leerlingen communiceren met leerkrachten, hulp vragen, uitleg krijgen of zaken bespreken",
+    "lexical": {
+      "verbs": ["vragen", "uitleggen", "melden", "bespreken", "overleggen", "tonen", "hulp vragen", "verduidelijken", "antwoorden", "luisteren naar", "terugkomen", "nablijven", "informeren", "raadplegen"],
+      "objects": ["vraag", "probleem", "uitleg", "onduidelijkheid", "oefening", "toets", "huiswerk", "afwezigheid", "lesonderdeel", "opmerking", "feedback", "moeilijkheid", "toelichting"],
+      "settings": ["klaslokaal", "gang", "na de les", "tijdens de les", "voor de les"]
+    },
+    "constraints": {
+      "interaction_type": "minstens 6 zinnen over vragen stellen/uitleg vragen, 5 zinnen over communicatie/overleg, 5 zinnen over follow-up/nablijven",
+      "initiative": "varieer tussen leerling-initiatief en leerkracht-initiatief",
+      "timing": "minstens 4 zinnen tijdens lesuur, 4 zinnen buiten lesuur",
+      "constructive": "alle interacties constructief en respectvol"
+    },
+    "examples": [
+      "een vraag over de lesstof stellen",
+      "extra uitleg aan de leerkracht vragen",
+      "na de les even terugkomen voor hulp"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Sociale schooldynamiek",
+    "subdomain_id": "1.3",
+    "facet": "Peer-interactie",
+    "facet_id": "1.3.2",
+    "task": "Formuleer 16 activiteiten waarin leerlingen met klasgenoten omgaan, elkaar helpen, babbelen, samenspelen of kleine conflicten oplossen",
+    "lexical": {
+      "verbs": ["babbelen", "kletsen", "helpen", "uitleggen", "grappen maken", "lachen", "ruziemaken", "bekvechten", "bijleggen", "verzoenen", "excuses maken", "delen", "uitlenen", "troosten", "samenwerken"],
+      "objects": ["klasgenoot", "vriend", "grap", "gesprek", "ruzie", "conflict", "meningsverschil", "hulp", "spullen", "uitleg", "excuses", "verzoening", "grappig verhaal"],
+      "settings": ["speelplaats", "pauze", "gang", "refter", "klaslokaal"]
+    },
+    "constraints": {
+      "interaction_balance": "minstens 8 positieve interacties (helpen, babbelen, samenwerken), 4 conflictgerelateerd (ruzie, bijleggen, verzoenen), 4 neutrale sociale interacties",
+      "conflict_resolution": "bij conflict: altijd constructieve afloop tonen (bijleggen, excuses, verzoenen)",
+      "prosocial": "minstens 5 zinnen over helpen/ondersteunen/delen",
+      "social_context": "varieer tussen informele (pauze) en formele (klas) momenten"
+    },
+    "examples": [
+      "een klasgenoot met een oefening helpen",
+      "met vrienden in de pauze kletsen",
+      "een ruzie met een klasgenoot bijleggen"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Sociale schooldynamiek",
+    "subdomain_id": "1.3",
+    "facet": "Klasgroepsdynamiek",
+    "facet_id": "1.3.3",
+    "task": "Formuleer 16 activiteiten over groepsvorming, aansluiten bij anderen, sociale keuzes maken of je plaats vinden in de klasgroep",
+    "lexical": {
+      "verbs": ["aansluiten", "meedoen", "kiezen", "vormen", "zoeken", "vinden", "toenaderen", "opnemen", "accepteren", "samenzitten", "meespelen", "erbij komen", "groeperen", "organiseren"],
+      "objects": ["groep", "groepje", "vriendengroep", "kring", "team", "ploeg", "tafeltje", "plek", "zitplaats", "spelgroep", "werkgroep", "maatje", "partner"],
+      "settings": ["speelplaats", "klaslokaal", "refter", "gang", "sporthal"]
+    },
+    "constraints": {
+      "group_actions": "minstens 6 zinnen over groepen vormen/aansluiten, 5 zinnen over keuzes maken, 5 zinnen over meedoen/participeren",
+      "neutral_framing": "focus op sociale navigatie en keuzes, niet op negatieve labels of destructief gedrag",
+      "inclusion_focus": "minstens 4 zinnen over aansluiten/opnemen/meedoen (positief)",
+      "variety": "varieer groepsgroottes (duo, klein groepje, hele klas)"
+    },
+    "examples": [
+      "bij een groepje op de speelplaats aansluiten",
+      "een tafelgenoot voor het project kiezen",
+      "een nieuwe klasgenoot in de groep opnemen"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Sociale schooldynamiek",
+    "subdomain_id": "1.3",
+    "facet": "Overgang basisonderwijs-secundair",
+    "facet_id": "1.3.4",
+    "task": "Formuleer 16 activiteiten rond de overgang naar het secundair onderwijs, zoals scholen bezoeken, kennismaken, wennen of voorbereiden",
+    "lexical": {
+      "verbs": ["kiezen", "bezoeken", "bekijken", "oriënteren", "informeren", "kennismaken", "verkennen", "wennen", "voorbereiden", "aanpassen", "vragen", "rondkijken", "inschrijven", "afwegen"],
+      "objects": ["nieuwe school", "middelbare school", "studierichting", "schoolkeuze", "opendeurdag", "infomoment", "klasgenoten", "lokaal", "gebouw", "richting", "school", "mentor", "brochure"],
+      "settings": ["opendeurdag", "nieuwe school", "basisschool", "thuis", "infoavond"]
+    },
+    "constraints": {
+      "transition_phase": "minstens 5 zinnen over voorbereiding/oriëntatie, 5 zinnen over eerste kennismaking, 6 zinnen over aanpassing/wennen",
+      "practical_emotional": "minstens 8 praktische activiteiten (bezoeken, kiezen, informeren), 4 sociale activiteiten (kennismaken, vrienden maken), 4 aanpassingsactiviteiten",
+      "decision_making": "minstens 4 zinnen over keuzes maken/afwegen",
+      "realistic": "focus op concrete stappen in het transitieproces"
+    },
+    "examples": [
+      "de nieuwe school op opendeurdag bezoeken",
+      "een studierichting voor het secundair kiezen",
+      "kennismaken met de nieuwe klasgenoten"
+    ]
+  }
+]

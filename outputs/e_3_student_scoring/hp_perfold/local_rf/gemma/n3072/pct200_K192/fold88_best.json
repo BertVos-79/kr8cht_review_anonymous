@@ -1,0 +1,6 @@
+{
+  "pca__n_components": 0.9,
+  "reg__estimator__n_estimators": 50,
+  "reg__estimator__max_depth": null,
+  "reg__estimator__min_samples_leaf": 1
+}

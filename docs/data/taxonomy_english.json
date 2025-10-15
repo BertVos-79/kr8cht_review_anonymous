@@ -1,0 +1,346 @@
+{
+  "taxonomy": "Life Domains 10–14 (Flanders, 2025)",
+  "description": "Aligned with ICF-CY Activities & Participation and Environmental Factors; canonical places integrated",
+  "domains": [
+    {
+      "domain": "Education domain",
+      "domain_id": "1",
+      "subdomains": [
+        {
+          "subdomain": "Learning activities",
+          "subdomain_id": "1.1",
+          "facets": [
+            { "facet": "Whole-class instruction", "facet_id": "1.1.1" },
+            { "facet": "Independent work", "facet_id": "1.1.2" },
+            { "facet": "Group work", "facet_id": "1.1.3" },
+            { "facet": "Homework & study", "facet_id": "1.1.4" },
+            { "facet": "Digital learning", "facet_id": "1.1.5" },
+            { "facet": "Problem-solving learning", "facet_id": "1.1.6" },
+            { "facet": "Creative & artistic learning", "facet_id": "1.1.7" }
+          ]
+        },
+        {
+          "subdomain": "School routines & organization",
+          "subdomain_id": "1.2",
+          "facets": [
+            { "facet": "Daily structure", "facet_id": "1.2.1" },
+            { "facet": "Assessments", "facet_id": "1.2.2" },
+            { "facet": "Administrative tasks", "facet_id": "1.2.3" },
+            { "facet": "School events", "facet_id": "1.2.4" }
+          ]
+        },
+        {
+          "subdomain": "School social dynamics",
+          "subdomain_id": "1.3",
+          "facets": [
+            { "facet": "Teacher interaction", "facet_id": "1.3.1" },
+            { "facet": "Peer interaction", "facet_id": "1.3.2" },
+            { "facet": "Class group dynamics", "facet_id": "1.3.3" },
+            { "facet": "Transition primary–secondary", "facet_id": "1.3.4" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Family domain",
+      "domain_id": "2",
+      "subdomains": [
+        {
+          "subdomain": "Care & household",
+          "subdomain_id": "2.1",
+          "facets": [
+            { "facet": "Personal care", "facet_id": "2.1.1" },
+            { "facet": "Meals", "facet_id": "2.1.2" },
+            { "facet": "Household tasks", "facet_id": "2.1.3" },
+            { "facet": "Logistics (scheduling & transport)", "facet_id": "2.1.4" },
+            { "facet": "Caring for others", "facet_id": "2.1.5" }
+          ]
+        },
+        {
+          "subdomain": "Family relationships",
+          "subdomain_id": "2.2",
+          "facets": [
+            { "facet": "Parent–child interaction", "facet_id": "2.2.1" },
+            { "facet": "Siblings", "facet_id": "2.2.2" },
+            { "facet": "Extended family", "facet_id": "2.2.3" },
+            { "facet": "Family rituals", "facet_id": "2.2.4" }
+          ]
+        },
+        {
+          "subdomain": "Autonomy & boundaries",
+          "subdomain_id": "2.3",
+          "facets": [
+            { "facet": "Rules & agreements", "facet_id": "2.3.1" },
+            { "facet": "Privacy", "facet_id": "2.3.2" },
+            { "facet": "Negotiation", "facet_id": "2.3.3" },
+            { "facet": "Independence", "facet_id": "2.3.4" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Peer domain",
+      "domain_id": "3",
+      "subdomains": [
+        {
+          "subdomain": "Friendship patterns",
+          "subdomain_id": "3.1",
+          "facets": [
+            { "facet": "Best friends", "facet_id": "3.1.1" },
+            { "facet": "Friend group", "facet_id": "3.1.2" },
+            { "facet": "Classmates", "facet_id": "3.1.3" },
+            { "facet": "Early romance", "facet_id": "3.1.4" }
+          ]
+        },
+        {
+          "subdomain": "Social activities",
+          "subdomain_id": "3.2",
+          "facets": [
+            { "facet": "Play & relaxation", "facet_id": "3.2.1" },
+            { "facet": "Hanging out", "facet_id": "3.2.2" },
+            { "facet": "Group activities", "facet_id": "3.2.3" },
+            { "facet": "Social events", "facet_id": "3.2.4" }
+          ]
+        },
+        {
+          "subdomain": "Social navigation",
+          "subdomain_id": "3.3",
+          "facets": [
+            { "facet": "Peer pressure", "facet_id": "3.3.1" },
+            { "facet": "Conflict", "facet_id": "3.3.2" },
+            { "facet": "Reputation", "facet_id": "3.3.3" },
+            { "facet": "Communication skills", "facet_id": "3.3.4" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Leisure domain",
+      "domain_id": "4",
+      "subdomains": [
+        {
+          "subdomain": "Organized activities",
+          "subdomain_id": "4.1",
+          "facets": [
+            { "facet": "Sport", "facet_id": "4.1.1" },
+            { "facet": "Youth movement (Scouts, etc.)", "facet_id": "4.1.2" },
+            { "facet": "Artistic hobbies", "facet_id": "4.1.3" },
+            { "facet": "Courses & workshops", "facet_id": "4.1.4" }
+          ]
+        },
+        {
+          "subdomain": "Free time at home",
+          "subdomain_id": "4.2",
+          "facets": [
+            { "facet": "Gaming", "facet_id": "4.2.1" },
+            { "facet": "Media consumption", "facet_id": "4.2.2" },
+            { "facet": "Creative activities", "facet_id": "4.2.3" },
+            { "facet": "Games/play", "facet_id": "4.2.4" },
+            { "facet": "Solo play", "facet_id": "4.2.5" }
+          ]
+        },
+        {
+          "subdomain": "Outdoor activities",
+          "subdomain_id": "4.3",
+          "facets": [
+            { "facet": "Neighbourhood play", "facet_id": "4.3.1" },
+            { "facet": "Nature", "facet_id": "4.3.2" },
+            { "facet": "Pool & playground", "facet_id": "4.3.3" },
+            { "facet": "Boredom & free play", "facet_id": "4.3.4" },
+            { "facet": "Recreational venues", "facet_id": "4.3.5" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Digital domain",
+      "domain_id": "5",
+      "subdomains": [
+        {
+          "subdomain": "Social media & communication",
+          "subdomain_id": "5.1",
+          "facets": [
+            { "facet": "Messaging", "facet_id": "5.1.1" },
+            { "facet": "Social media", "facet_id": "5.1.2" },
+            { "facet": "Social gaming", "facet_id": "5.1.3" },
+            { "facet": "Video calling", "facet_id": "5.1.4" },
+            { "facet": "Digital etiquette & boundaries", "facet_id": "5.1.5" }
+          ]
+        },
+        {
+          "subdomain": "Content & consumption",
+          "subdomain_id": "5.2",
+          "facets": [
+            { "facet": "Following online creators", "facet_id": "5.2.1" },
+            { "facet": "Streaming entertainment", "facet_id": "5.2.2" },
+            { "facet": "Information seeking", "facet_id": "5.2.3" },
+            { "facet": "Trends & viral content", "facet_id": "5.2.4" }
+          ]
+        },
+        {
+          "subdomain": "Digital skills & identity",
+          "subdomain_id": "5.3",
+          "facets": [
+            { "facet": "Account management & security", "facet_id": "5.3.1" },
+            { "facet": "Online identity & self-presentation", "facet_id": "5.3.2" },
+            { "facet": "Digital communication etiquette", "facet_id": "5.3.3" },
+            { "facet": "Online safety & risk awareness", "facet_id": "5.3.4" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Physical–emotional domain",
+      "domain_id": "6",
+      "subdomains": [
+        {
+          "subdomain": "Body awareness & puberty",
+          "subdomain_id": "6.1",
+          "facets": [
+            { "facet": "Recognizing & accepting physical changes", "facet_id": "6.1.1" },
+            { "facet": "Bodily self-care & hygiene", "facet_id": "6.1.2" },
+            { "facet": "Healthy self-esteem & body positivity", "facet_id": "6.1.3" }
+          ]
+        },
+        {
+          "subdomain": "Emotional development",
+          "subdomain_id": "6.2",
+          "facets": [
+            { "facet": "Recognizing & naming emotions", "facet_id": "6.2.1" },
+            { "facet": "Self-awareness & self-confidence", "facet_id": "6.2.2" },
+            { "facet": "Identity exploration", "facet_id": "6.2.3" },
+            { "facet": "Recognizing stress & healthy coping", "facet_id": "6.2.4" },
+            { "facet": "Emotion regulation skills", "facet_id": "6.2.5" }
+          ]
+        },
+        {
+          "subdomain": "Health & wellbeing",
+          "subdomain_id": "6.3",
+          "facets": [
+            { "facet": "Developing healthy sleep habits", "facet_id": "6.3.1" },
+            { "facet": "Intuitive & varied eating", "facet_id": "6.3.2" },
+            { "facet": "Physical activity for enjoyment & wellbeing", "facet_id": "6.3.3" },
+            { "facet": "Safety & risk awareness", "facet_id": "6.3.4" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Sensory–motor domain",
+      "domain_id": "7",
+      "subdomains": [
+        {
+          "subdomain": "Sensory exploration",
+          "subdomain_id": "7.1",
+          "facets": [
+            { "facet": "Visual perception & observation", "facet_id": "7.1.1" },
+            { "facet": "Auditory exploration", "facet_id": "7.1.2" },
+            { "facet": "Tactile experience", "facet_id": "7.1.3" },
+            { "facet": "Taste & smell exploration", "facet_id": "7.1.4" }
+          ]
+        },
+        {
+          "subdomain": "Motor skills",
+          "subdomain_id": "7.2",
+          "facets": [
+            { "facet": "Gross motor movement", "facet_id": "7.2.1" },
+            { "facet": "Fine motor precision", "facet_id": "7.2.2" },
+            { "facet": "Body control & spatial awareness", "facet_id": "7.2.3" },
+            { "facet": "Fundamental sport skills", "facet_id": "7.2.4" }
+          ]
+        },
+        {
+          "subdomain": "Spatial awareness",
+          "subdomain_id": "7.3",
+          "facets": [
+            { "facet": "Orientation & wayfinding", "facet_id": "7.3.1" },
+            { "facet": "Spatial reasoning & distance estimation", "facet_id": "7.3.2" },
+            { "facet": "Body schema & movement planning", "facet_id": "7.3.3" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Spatial–mobility domain",
+      "domain_id": "8",
+      "subdomains": [
+        {
+          "subdomain": "Mobility patterns",
+          "subdomain_id": "8.1",
+          "facets": [
+            { "facet": "School commute", "facet_id": "8.1.1" },
+            { "facet": "Neighbourhood mobility", "facet_id": "8.1.2" },
+            { "facet": "Accompanied travel", "facet_id": "8.1.3" },
+            { "facet": "Developing mobility autonomy", "facet_id": "8.1.4" },
+            { "facet": "Using public transport", "facet_id": "8.1.5" }
+          ]
+        },
+        {
+          "subdomain": "Use of space",
+          "subdomain_id": "8.2",
+          "facets": [
+            { "facet": "Using home territories", "facet_id": "8.2.1" },
+            { "facet": "Using neighbourhood spaces", "facet_id": "8.2.2" },
+            { "facet": "Exploring commercial spaces", "facet_id": "8.2.3" },
+            { "facet": "Using public outdoor space", "facet_id": "8.2.4" },
+            { "facet": "Using community venues", "facet_id": "8.2.5" }
+          ]
+        },
+        {
+          "subdomain": "Geographic horizon",
+          "subdomain_id": "8.3",
+          "facets": [
+            { "facet": "Local", "facet_id": "8.3.1" },
+            { "facet": "Regional", "facet_id": "8.3.2" },
+            { "facet": "Transition spaces", "facet_id": "8.3.3" },
+            { "facet": "Cultural venues", "facet_id": "8.3.4" },
+            { "facet": "Travel", "facet_id": "8.3.5" }
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Cultural–societal domain",
+      "domain_id": "9",
+      "subdomains": [
+        {
+          "subdomain": "Consumer culture",
+          "subdomain_id": "9.1",
+          "facets": [
+            { "facet": "Developing financial skills", "facet_id": "9.1.1" },
+            { "facet": "Developing personal style", "facet_id": "9.1.2" },
+            { "facet": "Critically engaging with media influences", "facet_id": "9.1.3" },
+            { "facet": "Collecting as hobby & social activity", "facet_id": "9.1.4" }
+          ]
+        },
+        {
+          "subdomain": "Cultural participation",
+          "subdomain_id": "9.2",
+          "facets": [
+            { "facet": "Events", "facet_id": "9.2.1" },
+            { "facet": "Cultural institutions", "facet_id": "9.2.2" },
+            { "facet": "Seasonal traditions & festivals", "facet_id": "9.2.3" },
+            { "facet": "Religious/ideological", "facet_id": "9.2.4" },
+            { "facet": "Religious–spiritual", "facet_id": "9.2.5" }
+          ]
+        },
+        {
+          "subdomain": "Civic & social awareness",
+          "subdomain_id": "9.3",
+          "facets": [
+            { "facet": "Social issues", "facet_id": "9.3.1" },
+            { "facet": "Ecology", "facet_id": "9.3.2" },
+            { "facet": "Media literacy", "facet_id": "9.3.3" },
+            { "facet": "Early activism", "facet_id": "9.3.4" },
+            { "facet": "Citizenship", "facet_id": "9.3.5" }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "total_domains": 9,
+    "total_subdomains": 27,
+    "total_facets": 123
+  }
+}

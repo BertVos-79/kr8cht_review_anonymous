@@ -1,5 +1,5 @@
 # environment.cuda.yml
-name: kr8cht_embedding_comparison
+name: kr8cht_review_anonymous
 channels:
   - pytorch
   - nvidia
@@ -8,10 +8,10 @@ channels:
 dependencies:
   # —— core runtime ——
   - python=3.11
-  - pytorch::pytorch>=2.1.0  # Explicitly use pytorch channel
-  - pytorch::torchvision     # Explicitly use pytorch channel
-  - pytorch::torchaudio      # Explicitly use pytorch channel
-  - pytorch-cuda=12.1        # This should come from nvidia channel
+  - pytorch::pytorch>=2.1.0  
+  - pytorch::torchvision     
+  - pytorch::torchaudio      
+  - pytorch-cuda=12.1        
   - protobuf           
   - sentencepiece     
 

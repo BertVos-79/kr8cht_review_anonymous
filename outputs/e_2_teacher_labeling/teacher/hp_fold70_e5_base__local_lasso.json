@@ -1,0 +1,11 @@
+{
+  "embedding": "e5_base",
+  "model": "local_lasso",
+  "fold": 70,
+  "best_params": {
+    "pca__n_components": 0.9,
+    "reg__estimator__alpha": 0.001
+  },
+  "selection_metric": "GridSearchCV default R\u00b2 (cv=5) on fold training seeds",
+  "timestamp": "2025-10-02 18:40:25"
+}

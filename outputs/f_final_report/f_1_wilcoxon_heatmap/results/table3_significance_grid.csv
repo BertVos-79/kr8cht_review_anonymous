@@ -1,0 +1,6 @@
+row,w2v,ftxt,bert,rbt,rbt_23,rmbrt,xlmr,e5,sbert,sbrrt,simcse
+local_lasso,True,True,True,True,True,True,True,False,False,False,False
+local_rf,True,True,True,True,True,True,True,True,True,True,True
+chain_lr,True,True,True,True,True,True,True,False,True,False,False
+chain_rf,True,True,True,True,True,True,True,True,True,True,True
+global_rf,True,True,True,True,True,True,True,True,True,True,True

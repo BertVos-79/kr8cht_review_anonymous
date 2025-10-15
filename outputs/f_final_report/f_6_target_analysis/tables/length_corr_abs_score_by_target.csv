@@ -1,0 +1,15 @@
+domain_id,domain_title,domain_type,corr_len_abs_score,mean_len,median_len
+8,Voeding en Horeca,Education,-0.27692802265675354,4.71875,4.0
+1,Taal en Cultuur,Education,-0.16433522683576124,4.71875,4.0
+5,Economie en Organisatie,Education,-0.15038971115140046,4.71875,4.0
+11,Artistiek,Personality,-0.12700385430340377,4.71875,4.0
+13,Ondernemend,Personality,-0.12252393670181527,4.71875,4.0
+10,Intellectueel,Personality,-0.11916002602869252,4.71875,4.0
+6,Sport,Education,-0.11815824536712202,4.71875,4.0
+2,STEM,Education,-0.0981251773386167,4.71875,4.0
+3,Kunst en Creatie,Education,-0.09119650825482645,4.71875,4.0
+9,Realistisch,Personality,-0.03218596440478472,4.71875,4.0
+7,Maatschappij en Welzijn,Education,-0.02852145181108537,4.71875,4.0
+4,Land- en Tuinbouw,Education,-0.025003080246688965,4.71875,4.0
+14,Conventioneel,Personality,0.04015079571257997,4.71875,4.0
+12,Sociaal,Personality,0.05730182030141166,4.71875,4.0

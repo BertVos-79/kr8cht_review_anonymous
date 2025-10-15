@@ -1,0 +1,15 @@
+domain_id,domain_title,domain_type,n,mean,median,q25,q75,iqr,min,max
+1,Taal en Cultuur,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+2,STEM,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+3,Kunst en Creatie,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+4,Land- en Tuinbouw,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+5,Economie en Organisatie,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+6,Sport,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+7,Maatschappij en Welzijn,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+8,Voeding en Horeca,Education,96,4.71875,4.0,3.0,7.0,4.0,2,12
+9,Realistisch,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12
+10,Intellectueel,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12
+11,Artistiek,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12
+12,Sociaal,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12
+13,Ondernemend,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12
+14,Conventioneel,Personality,96,4.71875,4.0,3.0,7.0,4.0,2,12

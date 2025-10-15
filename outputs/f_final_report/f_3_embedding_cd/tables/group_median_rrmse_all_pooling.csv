@@ -1,0 +1,4 @@
+,median_rrmse
+Frozen sentence-level,0.8109604511957036
+Static,0.8821852693359808
+Frozen word-level (mean|max|cls),0.9326667284277372

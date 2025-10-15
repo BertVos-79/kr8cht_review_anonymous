@@ -1,0 +1,4 @@
+,Static,Frozen_Transformer,Partial_Fine_tuned
+Static,1.0,0.837,-1.0
+Frozen_Transformer,-0.837,1.0,-1.0
+Partial_Fine_tuned,1.0,1.0,1.0

@@ -1,0 +1,8 @@
+,,,Median_RRMSE,Median_RRMSE,Median_RRMSE,Q25,Q75
+,,,median,mean,std,median,median
+Model,Family,Paradigm,,,,,
+chain_ERCcv_lr,linear,chain,0.857,0.863,0.104,0.494,1.426
+chain_ERCcv_rf,tree,chain,0.897,0.901,0.07,0.62,1.256
+global_rf,tree,global,0.929,0.926,0.054,0.689,1.203
+local_lasso,linear,local,0.853,0.852,0.099,0.497,1.321
+local_rf,tree,local,0.906,0.909,0.066,0.626,1.253

@@ -1,0 +1,127 @@
+[
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Vrije tijd thuis",
+    "subdomain_id": "4.2",
+    "facet": "Gaming",
+    "facet_id": "4.2.1",
+    "task": "Formuleer 16 activiteiten over digitaal gamen waarin jongeren online of offline spellen spelen, missies voltooien, bouwen of met anderen samenspelen",
+    "lexical": {
+      "verbs": ["spelen", "gamen", "bouwen", "creëren", "verkennen", "voltooien", "winnen", "verliezen", "samenwerken", "communiceren", "uitdagen", "proberen", "strategieën bedenken", "oefenen"],
+      "objects": ["spel", "game", "level", "missie", "uitdaging", "wereld", "bouwwerk", "creatie", "avatar", "karakter", "team", "medespeler", "tegenstander", "strategie"],
+      "settings": ["eigen kamer", "woonkamer", "console", "computer", "online"]
+    },
+    "constraints": {
+      "solo_social_balance": "minstens 8 zinnen solo gamen, 8 zinnen samen/online gamen",
+      "activity_types": "minstens 6 zinnen bouwen/creëren, 5 zinnen uitdagingen/missies, 5 zinnen sociale interactie tijdens gamen",
+      "active_engagement": "alle zinnen tonen actieve betrokkenheid (strategieën, bouwen, samenwerken), niet enkel passief consumeren",
+      "no_brands": "geen specifieke games of platformen noemen, algemeen houden (bouwspel, online game, avonturenspel)"
+    },
+    "examples": [
+      "een grote creatie in een bouwspel maken",
+      "een moeilijk level in het spel voltooien",
+      "online met vrienden samenwerken in een game"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Vrije tijd thuis",
+    "subdomain_id": "4.2",
+    "facet": "Media consumptie",
+    "facet_id": "4.2.2",
+    "task": "Formuleer 16 activiteiten over het kijken naar video's, series, tv-programma's of andere digitale content thuis",
+    "lexical": {
+      "verbs": ["kijken", "bekijken", "streamen", "bingewatchen", "volgen", "ontdekken", "zoeken", "selecteren", "afmaken", "pauzeren", "doorspoelen", "herkijken"],
+      "objects": ["video", "filmpje", "serie", "aflevering", "seizoen", "film", "documentaire", "tv-programma", "kanaal", "creator", "content", "playlist"],
+      "settings": ["woonkamer", "eigen kamer", "bank", "bed", "tablet", "televisie"]
+    },
+    "constraints": {
+      "content_variety": "minstens 6 zinnen korte video's, 5 zinnen series/films, 5 zinnen educatieve/informatieve content",
+      "active_selection": "minstens 8 zinnen tonen actieve keuzes maken (zoeken, selecteren, ontdekken), niet alleen passief kijken",
+      "social_dimension": "minstens 4 zinnen samen kijken met familie of vrienden",
+      "no_platforms": "geen specifieke platformnamen, algemeen houden (video bekijken, serie streamen)"
+    },
+    "examples": [
+      "een interessante documentaire bekijken",
+      "samen met het gezin naar een film kijken",
+      "een nieuwe serie ontdekken en volgen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Vrije tijd thuis",
+    "subdomain_id": "4.2",
+    "facet": "Creatieve bezigheden",
+    "facet_id": "4.2.3",
+    "task": "Formuleer 16 activiteiten over creatief bezig zijn thuis zoals tekenen, knutselen, muziek maken of lezen",
+    "lexical": {
+      "verbs": ["tekenen", "schilderen", "knutselen", "maken", "creëren", "bouwen", "componeren", "spelen", "musiceren", "lezen", "schrijven", "ontwerpen", "uitproberen", "experimenteren"],
+      "objects": ["tekening", "schilderij", "knutselwerk", "creatie", "project", "instrument", "melodie", "liedje", "boek", "verhaal", "gedicht", "dagboek", "schets", "ontwerp"],
+      "settings": ["eigen kamer", "bureau", "keukentafel", "atelier", "creatieve hoek", "bed"]
+    },
+    "constraints": {
+      "creative_domains": "minstens 5 zinnen beeldend (tekenen, knutselen), 4 zinnen muzikaal, 4 zinnen literair (lezen, schrijven), 3 andere",
+      "process_outcome": "minstens 10 zinnen over het maakproces, 6 zinnen over eindresultaat of genieten van creatie",
+      "intrinsic_motivation": "minstens 8 zinnen die plezier, ontdekken, experimenteren tonen (niet prestatie of beoordeling)",
+      "variety": "varieer materialen, technieken en uitdrukkingsvormen"
+    },
+    "examples": [
+      "een tekening met kleurpotloden maken",
+      "een favoriet boek in alle rust lezen",
+      "een eigen melodie op het instrument verzinnen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Vrije tijd thuis",
+    "subdomain_id": "4.2",
+    "facet": "Spel",
+    "facet_id": "4.2.4",
+    "task": "Formuleer 16 activiteiten over klassiek speelgoed en spellen zoals bouwblokken, bordspellen of kaartspellen thuis",
+    "lexical": {
+      "verbs": ["bouwen", "construeren", "maken", "stapelen", "spelen", "gooien", "trekken", "zetten", "winnen", "verliezen", "proberen", "uitvinden", "verzamelen", "sorteren"],
+      "objects": ["bouwblokken", "bouwwerk", "constructie", "bordspel", "kaartspel", "spelletje", "dobbelsteen", "speelkaart", "pion", "zet", "regel", "puzzel", "legoblokje"],
+      "settings": ["woonkamer", "eigen kamer", "keukentafel", "speelkamer", "vloer"]
+    },
+    "constraints": {
+      "game_types": "minstens 6 zinnen bouwspel/constructie, 6 zinnen bordspel/kaartspel, 4 zinnen puzzels/andere",
+      "solo_social": "minstens 8 zinnen samen spelen (familie/vrienden), 8 zinnen solo spel",
+      "cognitive_skills": "minstens 6 zinnen die cognitieve vaardigheden tonen (strategie, probleem oplossen, plannen)",
+      "traditional_play": "focus op fysiek, niet-digitaal speelgoed"
+    },
+    "examples": [
+      "een ingewikkelde constructie met blokken bouwen",
+      "een bordspel met het gezin spelen",
+      "een uitdagende puzzel proberen op te lossen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Vrije tijd thuis",
+    "subdomain_id": "4.2",
+    "facet": "Solistisch spel",
+    "facet_id": "4.2.5",
+    "task": "Formuleer 16 activiteiten over alleen spelen, fantaseren, eigen werelden uitvinden of in gedachten verzonken zijn",
+    "lexical": {
+      "verbs": ["fantaseren", "dromen", "uitvinden", "verzinnen", "voorstellen", "nadenken", "peinzen", "spelen", "uitbeelden", "creëren", "verkennen", "ontdekken", "experimenteren", "mijmeren"],
+      "objects": ["fantasiewereld", "verhaal", "avontuur", "karakter", "scenario", "idee", "gedachte", "droom", "rol", "figuur", "universum", "verhaallijn"],
+      "settings": ["eigen kamer", "bed", "speelhoek", "geheime plek", "favoriete plekje", "tent in kamer"]
+    },
+    "constraints": {
+      "imagination_focus": "alle 16 zinnen over innerlijke verbeeldingswereld, fantasie, zelfstandig denken",
+      "play_types": "minstens 8 zinnen fantasiespel/verhalen verzinnen, 4 zinnen dagdromen/nadenken, 4 zinnen symbolisch/rollenspel",
+      "healthy_solitude": "alle zinnen tonen gezonde alleen-tijd (creativiteit, verkenning), geen isolatie of terugtrekking uit angst",
+      "developmental_value": "minstens 8 zinnen die creativiteit, autonomie of innerlijke wereld ontwikkelen"
+    },
+    "examples": [
+      "je in een fantasy-held verkleden",
+      "een stripverhaal verzinnen en tekenen",
+      "rustig alleen met speelgoed een verhaal naspelen"
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+,chain_ERCcv_lr,chain_ERCcv_rf,global_rf,local_lasso,local_mean,local_rf
+chain_ERCcv_lr,1.0,-0.255,-0.194,-0.051,-0.429,-0.245
+chain_ERCcv_rf,0.255,1.0,0.204,0.235,-0.429,0.051
+global_rf,0.194,-0.204,1.0,0.122,-0.571,-0.092
+local_lasso,0.051,-0.235,-0.122,1.0,-0.571,-0.194
+local_mean,0.429,0.429,0.571,0.571,1.0,0.571
+local_rf,0.245,-0.051,0.092,0.194,-0.571,1.0

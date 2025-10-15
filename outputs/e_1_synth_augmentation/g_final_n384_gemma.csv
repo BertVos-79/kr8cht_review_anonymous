@@ -1,0 +1,385 @@
+domain_id,subdomain_id,facet_id,method,rank,text,passed
+1,1.1,1.1.1,gemma,1,bijhouden wat er wordt uitgelegd tijdens de les,True
+1,1.1,1.1.2,gemma,2,een taak met behulp van woordenlijsten uitvoeren,True
+1,1.1,1.1.3,gemma,3,ideeën delen voor de presentatie,True
+1,1.1,1.1.4,gemma,4,lesnotities doornemen en samenvatten,True
+1,1.1,1.1.5,gemma,5,naar een digitale les inloggen,True
+1,1.1,1.1.6,gemma,6,strategieën zoeken om een moeilijk puzzel te kunnen aanpakken,True
+1,1.1,1.1.7,gemma,7,een eigen lied componeren met verschillende melodieën,True
+1,1.2,1.2.1,gemma,8,je spullen klaarleggen voor de volgende les,True
+1,1.2,1.2.2,gemma,9,het resultaat van je examen bekijken,True
+1,1.2,1.2.3,gemma,10,een document ordenen op alfabet,True
+1,1.2,1.2.4,gemma,11,aanmoedigen tijdens een wedstrijd tussen klassen,True
+1,1.3,1.3.1,gemma,12,de leerkracht om uitleg vragen,True
+1,1.3,1.3.2,gemma,13,een grap vertellen aan een klasgenoot,True
+1,1.3,1.3.3,gemma,14,samen een kring vormen voor de les,True
+1,1.3,1.3.4,gemma,15,meer informatie over de schoolkeuze krijgen,True
+2,2.1,2.1.1,gemma,16,de huid goed afdrogen,True
+2,2.1,2.1.2,gemma,17,een lekkere maaltijd klaarmaken,True
+2,2.1,2.1.3,gemma,18,ramen schoonmaken met een doekje,True
+2,2.1,2.1.4,gemma,19,kleren voor morgen sorteren in de kast,True
+2,2.1,2.1.5,gemma,20,ouders helpen met de was opvouwen,True
+2,2.2,2.2.1,gemma,21,vragen om advies over een probleem met vrienden,True
+2,2.2,2.2.2,gemma,22,delen van je spullen met je broer of zus,True
+2,2.2,2.2.3,gemma,23,meegaan op visite bij oom en tante,True
+2,2.2,2.2.4,gemma,24,plezier hebben tijdens gezinstijd,True
+2,2.3,2.3.1,gemma,25,informeren over de tijd die wordt gebruikt,True
+2,2.3,2.3.2,gemma,26,privacy nodig hebben om te kunnen denken,True
+2,2.3,2.3.3,gemma,27,vragen of jullie afspraken kunnen maken over gezinstijd,True
+2,2.3,2.3.4,gemma,28,zelf een plan maken voor een activiteit,True
+3,3.1,3.1.1,gemma,29,een geheim delen met iemand vertrouwd,True
+3,3.1,3.1.2,gemma,30,organiseren van een activiteit voor je groep vrienden,True
+3,3.1,3.1.3,gemma,31,grappen maken samen met een klasgenoot tijdens les,True
+3,3.1,3.1.4,gemma,32,een kus geven na veel flirtgedrag,True
+3,3.2,3.2.1,gemma,33,met vrienden een spelletje tikken,True
+3,3.2,3.2.2,gemma,34,via bericht met een vriend afspraak plannen,True
+3,3.2,3.2.3,gemma,35,een leuke serie samen bekijken,True
+3,3.2,3.2.4,gemma,36,plezier beleven met vrienden op een feest,True
+3,3.3,3.3.1,gemma,37,beslissen wat goed is voor jou ook als anderen het anders vinden,True
+3,3.3,3.3.2,gemma,38,een meningsverschil met iemand bespreken,True
+3,3.3,3.3.3,gemma,39,laten zien dat je geïnteresseerd bent,True
+3,3.3,3.3.4,gemma,40,proberen om anderen te overtuigen met argumenten,True
+4,4.1,4.1.1,gemma,41,aanmoedigen en ondersteunen tijdens de wedstrijd,True
+4,4.1,4.1.2,gemma,42,een project bedenken en uitvoeren als groep,True
+4,4.1,4.1.3,gemma,43,een muziekstuk uitvoeren tijdens een optreden,True
+4,4.1,4.1.4,gemma,44,nieuwe vaardigheden in de cursus toepassen,True
+4,4.2,4.2.1,gemma,45,een nieuwe strategie bedenken om een level te winnen,True
+4,4.2,4.2.2,gemma,46,een spannende video bekijken,True
+4,4.2,4.2.3,gemma,47,een mooie tekening met kleurpotloden maken,True
+4,4.2,4.2.4,gemma,48,kaarten uitdelen voor een spannend spel,True
+4,4.2,4.2.5,gemma,49,een eigen fantasiewereld verzinnen,True
+4,4.3,4.3.1,gemma,50,een hindernisparcours bouwen op straat,True
+4,4.3,4.3.2,gemma,51,de bomen observeren en hun bladeren voelen,True
+4,4.3,4.3.3,gemma,52,in het zwembad met je armen en benen bewegen,True
+4,4.3,4.3.4,gemma,53,rondlopen en je omgeving bestuderen,True
+4,4.3,4.3.5,gemma,54,beleven een onvergetelijke dag in een leuke recreatiepark,True
+5,5.1,5.1.1,gemma,55,een grappig bericht doorsturen,True
+5,5.1,5.1.2,gemma,56,denken over wat je online plaatst,True
+5,5.1,5.1.3,gemma,57,online met vrienden een team vormen voor een competitie,True
+5,5.1,5.1.4,gemma,58,samen een project maken met je klas via online videobellen,True
+5,5.1,5.1.5,gemma,59,nadenken over wat je online wilt delen,True
+5,5.2,5.2.1,gemma,60,leren van tips en trucs in een video,True
+5,5.2,5.2.2,gemma,61,een genre selecteren om te zoeken,True
+5,5.2,5.2.3,gemma,62,website met instructies voor een hobby opzoeken,True
+5,5.2,5.2.4,gemma,63,laten zien dat je mee bent met trends online,True
+5,5.3,5.3.1,gemma,64,dubbele verificatie activeren op je accounts,True
+5,5.3,5.3.2,gemma,65,vertel over je interesses op je profiel,True
+5,5.3,5.3.3,gemma,66,begrijp de context van een gesprek,True
+5,5.3,5.3.4,gemma,67,vreemde verzoeken online negeren,True
+6,6.1,6.1.1,gemma,68,leren over de verschillende veranderingen in het lichaam,True
+6,6.1,6.1.2,gemma,69,een routine voor persoonlijke hygiëne maken,True
+6,6.1,6.1.3,gemma,70,uitdruk jezelf op een manier die bij je past,True
+6,6.2,6.2.1,gemma,71,merk op wanneer je blij of verdrietig bent,True
+6,6.2,6.2.2,gemma,72,ontwikkel vertrouwen in je kunnen,True
+6,6.2,6.2.3,gemma,73,overwegen wat je echt belangrijk vindt,True
+6,6.2,6.2.4,gemma,74,zorg goed voor je lichaam en geest,True
+6,6.2,6.2.5,gemma,75,nadenken over hoe je reageert op iets onaangenaams,True
+6,6.3,6.3.1,gemma,76,rekening houden met je natuurlijke ritme van wakker worden,True
+6,6.3,6.3.2,gemma,77,combineer verschillende voedingsgroepen in je maaltijden,True
+6,6.3,6.3.3,gemma,78,creëer een routine met leuke bewegingsactiviteiten,True
+6,6.3,6.3.4,gemma,79,gebruik duidelijke signalen als je hulp nodig hebt,True
+7,7.1,7.1.1,gemma,80,focussen op kleine details in een natuurfoto,True
+7,7.1,7.1.2,gemma,81,herken bewegingen door geluiden te beluisteren,True
+7,7.1,7.1.3,gemma,82,ruwheid en gladheid van materialen waarnemen,True
+7,7.1,7.1.4,gemma,83,ontdekken de smaak van zure en zoete vruchten,True
+7,7.2,7.2.1,gemma,84,met je benen kracht zetten en springen,True
+7,7.2,7.2.2,gemma,85,een complex patroon op papier tekening maken,True
+7,7.2,7.2.3,gemma,86,je armen in verschillende posities bewegen,True
+7,7.2,7.2.4,gemma,87,een bal met kracht gooien,True
+7,7.3,7.3.1,gemma,88,richting aanwijzingen gebruiken om ergens te komen,True
+7,7.3,7.3.2,gemma,89,meten met blokken of takken om ruimtes te bepalen,True
+7,7.3,7.3.3,gemma,90,timing hebben voor een beweging over een kleine afstand,True
+8,8.1,8.1.1,gemma,91,vertrekken van school op tijd voor het vervoer,True
+8,8.1,8.1.2,gemma,92,een bestemming in de buurt bezoeken,True
+8,8.1,8.1.3,gemma,93,reizen met oma naar een activiteit,True
+8,8.1,8.1.4,gemma,94,ervaring opdoen met zelfstandig reizen naar nieuwe plekken,True
+8,8.1,8.1.5,gemma,95,overstap van tram naar bus op de halte,True
+8,8.2,8.2.1,gemma,96,een werkplek creëren in de garage voor hobby s zoals houtbewerking,True
+8,8.2,8.2.2,gemma,97,op het pleintje een spelletje improviseren,True
+8,8.2,8.2.3,gemma,98,een speciale aankoop in de winkel vinden,True
+8,8.2,8.2.4,gemma,99,nieuwe paden bewandelen en de natuur leren kennen,True
+8,8.2,8.2.5,gemma,100,samenwerken aan een creatieve activiteit,True
+9,9.1,9.1.1,gemma,101,plannen hoe je je geld besteedt,True
+9,9.1,9.1.2,gemma,102,een outfit aanpassen naar je smaak,True
+9,9.1,9.1.3,gemma,103,beïnvloeding door reclame erkennen,True
+9,9.1,9.1.4,gemma,104,je kaartverzameling uitbreiden met nieuwe sets,True
+9,9.2,9.2.1,gemma,105,uitproberen wat er te beleven is op de kermis,True
+9,9.2,9.2.2,gemma,106,een programma met activiteiten bestuderen,True
+9,9.2,9.2.3,gemma,107,samen kerststol proeven op kerstavond,True
+9,9.2,9.2.4,gemma,108,een feestje geven na de viering,True
+9,9.2,9.2.5,gemma,109,delen van je spirituele ervaringen,True
+9,9.3,9.3.1,gemma,110,bespreken wat respect voor anderen inhoudt,True
+9,9.3,9.3.2,gemma,111,afval verminderen door opnieuw te gebruiken,True
+9,9.3,9.3.3,gemma,112,analyseer hoe informatie online wordt gepresenteerd,True
+9,9.3,9.3.4,gemma,113,een actie organiseren voor een belangrijk thema,True
+9,9.3,9.3.5,gemma,114,bespreken wat democratie betekent en hoe het werkt,True
+1,1.1,1.1.1,gemma,115,meedoen aan de discussie in de klas,True
+1,1.1,1.1.2,gemma,116,een puzzel zonder hulp proberen te maken,True
+1,1.1,1.1.3,gemma,117,taken verdelen in de groep,True
+1,1.1,1.1.4,gemma,118,de toets voorbereiden met behulp van flashcards,True
+1,1.1,1.1.5,gemma,119,een online spel spelen over biologie,True
+1,1.1,1.1.6,gemma,120,een patroon herkennen in de omgeving,True
+1,1.1,1.1.7,gemma,121,een korte film draaien met klasgenoten,True
+1,1.2,1.2.1,gemma,122,naar de refter gaan voor lunch,True
+1,1.2,1.2.2,gemma,123,tijdens de proefwerk bespreken,True
+1,1.2,1.2.3,gemma,124,je naam op het papier schrijven,True
+1,1.2,1.2.4,gemma,125,meegaan op excursie naar het museum,True
+1,1.3,1.3.1,gemma,126,informatie inwinnen over afwezigheid,True
+1,1.3,1.3.2,gemma,127,met je klasgenoten babbelen over de vakantie,True
+1,1.3,1.3.3,gemma,128,samen met anderen een spel organiseren,True
+1,1.3,1.3.4,gemma,129,naar huis lopen met je ouders na het bezoeken,True
+2,2.1,2.1.1,gemma,130,kleding aan kiezen voor vandaag,True
+2,2.1,2.1.2,gemma,131,afdrukken met een doekje,True
+2,2.1,2.1.3,gemma,132,de vloer schoonmaken met de dweil,True
+2,2.1,2.1.4,gemma,133,schoolboeken controleren of ze compleet zijn,True
+2,2.1,2.1.5,gemma,134,het kindje troosten als het huilt,True
+2,2.2,2.2.1,gemma,135,luisteren naar het verhaal van oma,True
+2,2.2,2.2.2,gemma,136,ruziemaken over wie de beste is in het spel,True
+2,2.2,2.2.3,gemma,137,helpen met de decoratie tijdens een feest,True
+2,2.2,2.2.4,gemma,138,verhalen lezen voor het slapen gaan,True
+2,2.3,2.3.1,gemma,139,in de woonkamer regels bespreken met het gezin,True
+2,2.3,2.3.2,gemma,140,lezen in een boekje zonder afleidingen,True
+2,2.3,2.3.3,gemma,141,met ouders bespreken wat er vanavond op het menu staat,True
+2,2.3,2.3.4,gemma,142,een lekkere maaltijd maken,True
+3,3.1,3.1.1,gemma,143,excuses maken als je iets fout hebt gedaan,True
+3,3.1,3.1.2,gemma,144,proberen mee te doen aan een nieuwe activiteit,True
+3,3.1,3.1.3,gemma,145,een verhaal vertellen aan een vriendje uit de klas,True
+3,3.1,3.1.4,gemma,146,verliefd zijn op iemand in je klas,True
+3,3.2,3.2.1,gemma,147,samen skeeleren over het pleintje,True
+3,3.2,3.2.2,gemma,148,een afspraak maken voor een film kijkje,True
+3,3.2,3.2.3,gemma,149,een act oefenen voor op de kamer,True
+3,3.2,3.2.4,gemma,150,films kijken tijdens een logeerpartij,True
+3,3.3,3.3.1,gemma,151,weerstaan aan druk om iets te doen wat niet goed voelt,True
+3,3.3,3.3.2,gemma,152,inleven in hoe de ander zich voelt tijdens een conflict,True
+3,3.3,3.3.3,gemma,153,humor gebruiken om te lachen,True
+3,3.3,3.3.4,gemma,154,stel vragen om meer informatie te krijgen,True
+4,4.1,4.1.1,gemma,155,een spannende wedstrijd spelen,True
+4,4.1,4.1.2,gemma,156,aan de leiding deelnemen in een groepsspel voor de jongere leden,True
+4,4.1,4.1.3,gemma,157,een melodie op het instrument spelen,True
+4,4.1,4.1.4,gemma,158,een nieuwe taal tijdens de cursus spreken,True
+4,4.2,4.2.1,gemma,159,een game bespreken met je familie,True
+4,4.2,4.2.2,gemma,160,pauzeren tijdens je favoriete show om te snacken,True
+4,4.2,4.2.3,gemma,161,een liedje op de gitaar componeren,True
+4,4.2,4.2.4,gemma,162,je speelgoed opruimen na afloop,True
+4,4.2,4.2.5,gemma,163,spelen met kleurpotloden en mooie tekeningen maken,True
+4,4.3,4.3.1,gemma,164,op de fiets over bruggen rijden,True
+4,4.3,4.3.2,gemma,165,in de verte een verstopplaats zoeken,True
+4,4.3,4.3.3,gemma,166,op de wipkip heen en weer wiebelen,True
+4,4.3,4.3.4,gemma,167,peinzen over een lastig vraagstuk,True
+4,4.3,4.3.5,gemma,168,spelen met zand en schelpjes op het strand,True
+5,5.1,5.1.1,gemma,169,een appgroep oprichten met je vrienden,True
+5,5.1,5.1.2,gemma,170,een reactie op een post maken,True
+5,5.1,5.1.3,gemma,171,een server vinden waar je met gelijkgestemde mensen kunt spelen,True
+5,5.1,5.1.4,gemma,172,je huiswerk tonen tijdens een videogesprek,True
+5,5.1,5.1.5,gemma,173,in de keuken helpen met het koken van een maaltijd,True
+5,5.2,5.2.1,gemma,174,tips en trucs over coding ontdekken,True
+5,5.2,5.2.2,gemma,175,naar je favoriete artiest zoeken,True
+5,5.2,5.2.3,gemma,176,feiten controleren via betrouwbare bronnen,True
+5,5.2,5.2.4,gemma,177,kijken naar virale video s thuis,True
+5,5.3,5.3.1,gemma,178,meld verdachte activiteiten aan de juiste instanties,True
+5,5.3,5.3.2,gemma,179,bedenk een ander gebruikersnaam,True
+5,5.3,5.3.3,gemma,180,schrijf respectvolle berichten,True
+5,5.3,5.3.4,gemma,181,je eigen wachtwoorden controleren,True
+6,6.1,6.1.1,gemma,182,accepteer je lichaam zoals het nu is,True
+6,6.1,6.1.2,gemma,183,je gevoelens erkennen en uiten,True
+6,6.1,6.1.3,gemma,184,vier de kleine overwinningen in je leven,True
+6,6.2,6.2.1,gemma,185,erken dat iedereen verschillende emoties heeft,True
+6,6.2,6.2.2,gemma,186,accepteer dat iedereen anders is,True
+6,6.2,6.2.3,gemma,187,praat met familie en ontdek hun interesses,True
+6,6.2,6.2.4,gemma,188,praat met iemand over je zorgen,True
+6,6.2,6.2.5,gemma,189,herken je emoties zoals blij of verdrietig,True
+6,6.3,6.3.1,gemma,190,een rustig programma maken voor in de avonduren,True
+6,6.3,6.3.2,gemma,191,eet wanneer je honger hebt,True
+6,6.3,6.3.3,gemma,192,spelen met vrienden in het park,True
+6,6.3,6.3.4,gemma,193,laat je niet afleiden door je telefoon,True
+7,7.1,7.1.1,gemma,194,kijk naar de patronen in een mozaïek,True
+7,7.1,7.1.2,gemma,195,experimenten met geluidsbronnen uitvoeren,True
+7,7.1,7.1.3,gemma,196,verschillende stoffen aanraken met je vingers,True
+7,7.1,7.1.4,gemma,197,ruiken wat er in een winkel hangt,True
+7,7.2,7.2.1,gemma,198,hinkel snel tussen de markeringen,True
+7,7.2,7.2.2,gemma,199,blokken stapelen tot een hoge toren,True
+7,7.2,7.2.3,gemma,200,door een hinderbaan manoeuvreren,True
+7,7.2,7.2.4,gemma,201,de fiets stevig oprichten op stilstaan,True
+7,7.3,7.3.1,gemma,202,op zoek gaan naar een verborgen locatie,True
+7,7.3,7.3.2,gemma,203,visualiseer de route naar je huis,True
+7,7.3,7.3.3,gemma,204,navigeren door een labyrint van obstakels,True
+8,8.1,8.1.1,gemma,205,veilig oversteken van de weg met een verkeerslicht,True
+8,8.1,8.1.2,gemma,206,terugkeren van het park naar huis,True
+8,8.1,8.1.3,gemma,207,verrijden met vader naar het strand,True
+8,8.1,8.1.4,gemma,208,leren om je weg te vinden met behulp van borden,True
+8,8.1,8.1.5,gemma,209,leer de namen van verschillende halte en stationsnamen,True
+8,8.2,8.2.1,gemma,210,op zolder een creatieve ruimte inrichten voor schilderijen,True
+8,8.2,8.2.2,gemma,211,met je bmx race tegen je vrienden,True
+8,8.2,8.2.3,gemma,212,samen trainen met vrienden in de sporthal,True
+8,8.2,8.2.4,gemma,213,een verborgen weg zoeken tijdens een verkenningstocht,True
+8,8.2,8.2.5,gemma,214,oefenen met een muziekband in het jeugdhuis,True
+9,9.1,9.1.1,gemma,215,zakgeld in categorieën verdelen,True
+9,9.1,9.1.2,gemma,216,creëer een garderobe vol mooie stukken die bij jou passen,True
+9,9.1,9.1.3,gemma,217,vraag jezelf af wat echt belangrijk voor je is,True
+9,9.1,9.1.4,gemma,218,een kaart uitwisselen met een vriend,True
+9,9.2,9.2.1,gemma,219,eten bestellen en drinken tijdens de fuif,True
+9,9.2,9.2.2,gemma,220,luisteren naar verhalen verteld door een acteur,True
+9,9.2,9.2.3,gemma,221,met je familie naar een zomerkamp gaan,True
+9,9.2,9.2.4,gemma,222,een kaart schrijven voor een genodigde,True
+9,9.2,9.2.5,gemma,223,luisteren naar spirituele muziek,True
+9,9.3,9.3.1,gemma,224,bedenken wat gelijkheid betekent voor jou,True
+9,9.3,9.3.2,gemma,225,letten op energieverbruik bij apparaten,True
+9,9.3,9.3.3,gemma,226,herken nepnieuws door te controleren met betrouwbare bronnen,True
+9,9.3,9.3.4,gemma,227,informatie over rechten delen met vrienden,True
+9,9.3,9.3.5,gemma,228,leren over de geschiedenis van democratie in nederland,True
+1,1.1,1.1.1,gemma,229,notities maken over de belangrijkste punten,True
+1,1.1,1.1.2,gemma,230,je eigen verhaaltje in je notitieboekje maken,True
+1,1.1,1.1.3,gemma,231,ideeën uitwisselen tijdens het brainstormen,True
+1,1.1,1.1.4,gemma,232,in het boek teruglezen wat je niet weet,True
+1,1.1,1.1.5,gemma,233,documenten opslaan op de computerscherm,True
+1,1.1,1.1.6,gemma,234,een strategie zoeken om verder te komen,True
+1,1.1,1.1.7,gemma,235,een eigen instrument bouwen uit herbruikbare materialen,True
+1,1.2,1.2.1,gemma,236,opruimen na het eten in de refter,True
+1,1.2,1.2.2,gemma,237,puntjes bij je toets verbeteren,True
+1,1.2,1.2.3,gemma,238,de computer voor school gebruiken,True
+1,1.2,1.2.4,gemma,239,organiseren een stand tijdens de opendeurdag,True
+1,1.3,1.3.1,gemma,240,aan de leerkracht vertellen wat duidelijk is,True
+1,1.3,1.3.2,gemma,241,elkaar complimenten geven op goed werk,True
+1,1.3,1.3.3,gemma,242,kiezen voor een tafelgenoot bij het eten,True
+1,1.3,1.3.4,gemma,243,meedenken met je ouders over de schoolkeuze,True
+2,2.1,2.1.1,gemma,244,schoenen uitzoeken voor buiten,True
+2,2.1,2.1.2,gemma,245,de glazen opruimen,True
+2,2.1,2.1.3,gemma,246,de borden en glazen afdrogen,True
+2,2.1,2.1.4,gemma,247,de wasmand legen in de wasruimte,True
+2,2.1,2.1.5,gemma,248,papa assisteren bij het opruimen,True
+2,2.2,2.2.1,gemma,249,knuffelen bij een emotioneel moment op je kamer,True
+2,2.2,2.2.2,gemma,250,het kleine broertje helpen met zijn puzzel,True
+2,2.2,2.2.3,gemma,251,verhalen vertellen over school aan oom,True
+2,2.2,2.2.4,gemma,252,een familiebijeenkomst plannen,True
+2,2.3,2.3.1,gemma,253,afspraken nakomen over vrijetijdsbesteding,True
+2,2.3,2.3.2,gemma,254,de deur dicht doen voor even alleen zijn,True
+2,2.3,2.3.3,gemma,255,verdedigen waarom je wel op het computer moet blijven zitten,True
+2,2.3,2.3.4,gemma,256,ervoor zorgen dat je huiswerk klaar is,True
+3,3.1,3.1.1,gemma,257,elkaar steunen als iets misgaat,True
+3,3.1,3.1.2,gemma,258,in de groep een compliment geven aan een vriend,True
+3,3.1,3.1.3,gemma,259,uitnodigen voor het spelen met een nieuwe klasgenoot,True
+3,3.1,3.1.4,gemma,260,hand vasthouden tijdens een film,True
+3,3.2,3.2.1,gemma,261,een spelletje verstoppen met je team,True
+3,3.2,3.2.2,gemma,262,bellen met een vriendin om langs te gaan,True
+3,3.2,3.2.3,gemma,263,grappige sketches bedenken,True
+3,3.2,3.2.4,gemma,264,samen zingen tijdens een karaoke avond,True
+3,3.3,3.3.1,gemma,265,op een vriendelijke manier nee zeggen,True
+3,3.3,3.3.2,gemma,266,vergeven aan een klasgenoot die iets verkeerd gedaan heeft,True
+3,3.3,3.3.3,gemma,267,aardig zijn tegen iedereen op de speelplaats,True
+3,3.3,3.3.4,gemma,268,compromissen zoeken tijdens een discussie,True
+4,4.1,4.1.1,gemma,269,een voetbaltraining volgen onder begeleiding,True
+4,4.1,4.1.2,gemma,270,tijdens het opruimen samenwerken om alles netjes te houden,True
+4,4.1,4.1.3,gemma,271,een kunstacademiecursus volgen voor beginners,True
+4,4.1,4.1.4,gemma,272,de theorie van het zwemmen begrijpen,True
+4,4.2,4.2.1,gemma,273,online met andere gamers communiceren tijdens een game,True
+4,4.2,4.2.2,gemma,274,een documentaire over dieren in de jungle kijken,True
+4,4.2,4.2.3,gemma,275,een eigen spel bedenken en spelen met vrienden,True
+4,4.2,4.2.4,gemma,276,de juiste kleur blok zoeken voor je bouwwerk,True
+4,4.2,4.2.5,gemma,277,in je bed een geheime plek bouwen,True
+4,4.3,4.3.1,gemma,278,een mooie route vinden met je skateboard,True
+4,4.3,4.3.2,gemma,279,door het bos wandelen en naar vogels luisteren,True
+4,4.3,4.3.3,gemma,280,op het zandplein hutjes bouwen,True
+4,4.3,4.3.4,gemma,281,in het gras liggen en mijmeren,True
+4,4.3,4.3.5,gemma,282,bezoeken tot de laatste attractie in het pretpark,True
+5,5.1,5.1.1,gemma,283,een emoji gebruiken bij je reactie,True
+5,5.1,5.1.2,gemma,284,opnemen met je telefoon,True
+5,5.1,5.1.3,gemma,285,meewerken aan een gemeenschappelijk doel,True
+5,5.1,5.1.4,gemma,286,een online les volgen via videostreaming,True
+5,5.1,5.1.5,gemma,287,respectvol zijn met anderen in berichten en reacties,True
+5,5.2,5.2.1,gemma,288,ontdekken nieuwe creators op het platform,True
+5,5.2,5.2.2,gemma,289,muziek vinden die bij jouw humeur past,True
+5,5.2,5.2.3,gemma,290,een antwoord op een vraag opzoeken in het internet,True
+5,5.2,5.2.4,gemma,291,proberen een challenge thuis te doen,True
+5,5.3,5.3.1,gemma,292,check regelmatig of er nieuwe software updates beschikbaar zijn,True
+5,5.3,5.3.2,gemma,293,deel alleen dingen die je echt wilt delen online,True
+5,5.3,5.3.3,gemma,294,zoek oplossingen samen met andere gebruikers,True
+5,5.3,5.3.4,gemma,295,online altijd voorzichtig zijn,True
+6,6.1,6.1.1,gemma,296,vinden wat je mooi vindt aan jezelf,True
+6,6.1,6.1.2,gemma,297,jeukende huidirritaties verlichten,True
+6,6.1,6.1.3,gemma,298,respecteer je eigen grenzen,True
+6,6.2,6.2.1,gemma,299,uiten hoe je je voelt met een tekeninge,True
+6,6.2,6.2.2,gemma,300,leer om kritiek te accepteren,True
+6,6.2,6.2.3,gemma,301,maak een lijst met dingen die je waardeert,True
+6,6.2,6.2.4,gemma,302,ga vroeg genoeg naar bed slapen,True
+6,6.2,6.2.5,gemma,303,verander je gedachten als ze negatief zijn,True
+6,6.3,6.3.1,gemma,304,naar je lichaam luisteren,True
+6,6.3,6.3.2,gemma,305,respecteert wat je lichaam nodig heeft,True
+6,6.3,6.3.3,gemma,306,ontdek nieuwe vaardigheden tijdens een sportles,True
+6,6.3,6.3.4,gemma,307,praat met iemand als je je onzeker voelt,True
+7,7.1,7.1.1,gemma,308,vormen en kleuren in een schilderij analyseren,True
+7,7.1,7.1.2,gemma,309,herken bekende liedjes op basis van enkele noten,True
+7,7.1,7.1.3,gemma,310,waarnemen de temperatuur van een koffiecup,True
+7,7.1,7.1.4,gemma,311,verschillende kruiden ruiken en hun namen zeggen,True
+7,7.2,7.2.1,gemma,312,draaien terwijl je rondloopt,True
+7,7.2,7.2.2,gemma,313,met een schaar precies langs een lijn knippen,True
+7,7.2,7.2.3,gemma,314,de ruimte om je heen observeren,True
+7,7.2,7.2.4,gemma,315,de techniek van rennen perfectioneren,True
+7,7.3,7.3.1,gemma,316,een adres zoeken in een buurt,True
+7,7.3,7.3.2,gemma,317,leg uit hoe je een tafelstuk wilt plaatsen,True
+7,7.3,7.3.3,gemma,318,ga liggen op de grond en kijk om je heen,True
+8,8.1,8.1.1,gemma,319,fietsen naar de schoolomgeving,True
+8,8.1,8.1.2,gemma,320,lopen naar de bakker om brood halen,True
+8,8.1,8.1.3,gemma,321,samen met ouders naar een concert gaan,True
+8,8.1,8.1.4,gemma,322,zelfstandig naar het park fietsen,True
+8,8.1,8.1.5,gemma,323,controleer de dienstregeling van de tram,True
+8,8.2,8.2.1,gemma,324,een plant op de vensterbank plaatsen voor meer groen,True
+8,8.2,8.2.2,gemma,325,een wedstrijdje basketbal spelen met vrienden,True
+8,8.2,8.2.3,gemma,326,een speciale snack bestellen bij de frituur,True
+8,8.2,8.2.4,gemma,327,op het plein een spelletje doen met anderen,True
+8,8.2,8.2.5,gemma,328,in de speeltuin een wedstrijd organiseren,True
+9,9.1,9.1.1,gemma,329,geld overmaken naar een familielid,True
+9,9.1,9.1.2,gemma,330,je persoonlijkheid uiten door je kleding,True
+9,9.1,9.1.3,gemma,331,kritisch kijken naar influencers op social media,True
+9,9.1,9.1.4,gemma,332,duplicaten uit je collectie verwijderen,True
+9,9.2,9.2.1,gemma,333,samen dansen met anderen op het festival,True
+9,9.2,9.2.2,gemma,334,deelnemen aan een spelavond in de buurt,True
+9,9.2,9.2.3,gemma,335,een sinterklaasbrief schrijven,True
+9,9.2,9.2.4,gemma,336,delen van je ervaring met iemand die er niet bij was,True
+9,9.2,9.2.5,gemma,337,zingen met anderen tijdens een dienst,True
+9,9.3,9.3.1,gemma,338,luisteren naar een podcast over sociale thema s,True
+9,9.3,9.3.2,gemma,339,producten met weinig verpakking kopen,True
+9,9.3,9.3.3,gemma,340,bekijk de datum van publicatie van een artikel,True
+9,9.3,9.3.4,gemma,341,deelnemen aan een campagne voor milieuvriendelijkheid,True
+9,9.3,9.3.5,gemma,342,beslissen als klassenraad over een nieuw regel,True
+1,1.1,1.1.1,gemma,343,belangrijke woorden op je bladzijde noteren,True
+1,1.1,1.1.2,gemma,344,een vraag uit je boek zelf beantwoorden,True
+1,1.1,1.1.3,gemma,345,samen een spreekbeurt voorbereiden,True
+1,1.1,1.1.4,gemma,346,de vragenlijst voor biologie nakijken,True
+1,1.1,1.1.5,gemma,347,e mails van de leerkracht bekijken,True
+1,1.1,1.1.6,gemma,348,verschillende oplossingsmethodes proberen,True
+1,1.1,1.1.7,gemma,349,een sierlijke armband knutselen met kralen,True
+1,1.2,1.2.1,gemma,350,naar de schoolpoort wandelen,True
+1,1.2,1.2.2,gemma,351,een test rustig maken,True
+1,1.2,1.2.3,gemma,352,de handtekening op het document plaatsen,True
+1,1.2,1.2.4,gemma,353,helpen met het opbouwen van de stand,True
+1,1.3,1.3.1,gemma,354,feedback geven op een methode,True
+1,1.3,1.3.2,gemma,355,eerst naar de mening van anderen luisteren,True
+1,1.3,1.3.3,gemma,356,mee doen aan de dansles,True
+1,1.3,1.3.4,gemma,357,aanpassen aan nieuwe regels en gewoontes,True
+2,2.1,2.1.1,gemma,358,tanden poetsen tot ze glanzen,True
+2,2.1,2.1.2,gemma,359,de tafel met een leuk kleedje versieren,True
+2,2.1,2.1.3,gemma,360,afwas netjes in het kraanbakje leggen,True
+2,2.1,2.1.4,gemma,361,de jas van de kapstok halen,True
+2,2.1,2.1.5,gemma,362,de zusje begeleiden tijdens het kleuren,True
+2,2.2,2.2.1,gemma,363,onderhandelen over het uitgangsuur,True
+2,2.2,2.2.2,gemma,364,helpen met het aan doen van de schoenen van je zus,True
+2,2.2,2.2.3,gemma,365,een verhaal horen van oma,True
+2,2.2,2.2.4,gemma,366,spelletjes doen in de woonkamer,True
+2,2.3,2.3.1,gemma,367,beslis hoe je geld wilt uitgeven,True
+2,2.3,2.3.2,gemma,368,muziek luisteren met hoofdtelefoon,True
+2,2.3,2.3.3,gemma,369,proberen ouders te overreden om mee te gaan naar een concert,True
+2,2.3,2.3.4,gemma,370,verantwoordelijkheid nemen voor je huisdier,True
+3,3.1,3.1.1,gemma,371,een spelletje spelen terwijl jullie lachen,True
+3,3.1,3.1.2,gemma,372,meedoen met een spelletje in het park,True
+3,3.1,3.1.3,gemma,373,een gesprek voeren over een interessante film,True
+3,3.1,3.1.4,gemma,374,lachen om alle grappen van je crush,True
+3,3.2,3.2.1,gemma,375,op straat badminton spelen met een raket,True
+3,3.2,3.2.2,gemma,376,naar het park samen rijden,True
+3,3.2,3.2.3,gemma,377,een filmpje samen monteren,True
+3,3.2,3.2.4,gemma,378,deelnemen aan een spannende danswedstrijd,True
+3,3.3,3.3.1,gemma,379,eerlijk vertellen hoe je je voelt,True
+3,3.3,3.3.2,gemma,380,begrijpen hoe de ander zich voelt,True
+3,3.3,3.3.3,gemma,381,respect tonen voor elkaars mening in de groep,True
+3,3.3,3.3.4,gemma,382,je mening duidelijk en respectvol uitleggen,True
+4,4.1,4.1.1,gemma,383,zwemmen in het zwembad tijdens de les,True
+4,4.1,4.1.2,gemma,384,een uniform aan en dragen met trots,True

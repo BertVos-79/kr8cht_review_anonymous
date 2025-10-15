@@ -1,0 +1,127 @@
+[
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Sociale media & communicatie",
+    "subdomain_id": "5.1",
+    "facet": "Messaging",
+    "facet_id": "5.1.1",
+    "task": "Formuleer 16 activiteiten over het versturen van berichten, chatten in groepen of communiceren via tekstberichten met vrienden",
+    "lexical": {
+      "verbs": ["sturen", "versturen", "typen", "appen", "chatten", "beantwoorden", "reageren", "delen", "doorsturen", "lezen", "checken", "bijpraten", "afspreken via", "updaten"],
+      "objects": ["bericht", "berichtje", "chat", "groepschat", "gesprek", "foto", "emoji", "reactie", "update", "nieuws", "afspraak", "vraag"],
+      "settings": ["eigen kamer", "thuis", "op telefoon", "via app"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN platformnamen (geen WhatsApp, Snapchat, Discord) - gebruik algemene termen als 'berichtje sturen', 'in groepschat'",
+      "communication_balance": "minstens 10 zinnen over communiceren/delen, 6 zinnen over organiseren/plannen via berichten",
+      "healthy_digital": "minstens 4 zinnen die gezonde digitale gewoontes tonen (antwoorden op gepast moment, bewust zijn van tijd)",
+      "social_connection": "alle zinnen tonen constructieve sociale verbinding, geen negatieve communicatie"
+    },
+    "examples": [
+      "een berichtje naar een vriend sturen",
+      "in de groepschat een afspraak maken",
+      "op een bericht van een vriendin reageren"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Sociale media & communicatie",
+    "subdomain_id": "5.1",
+    "facet": "Social media",
+    "facet_id": "5.1.2",
+    "task": "Formuleer 16 activiteiten over het bekijken, maken of delen van online content zoals video's, foto's of posts",
+    "lexical": {
+      "verbs": ["bekijken", "kijken", "scrollen", "liken", "maken", "filmen", "posten", "delen", "uploaden", "volgen", "reageren op", "ontdekken", "zoeken", "bewaren"],
+      "objects": ["video", "filmpje", "foto", "post", "content", "trend", "challenge", "reactie", "like", "verhaal", "account", "profiel"],
+      "settings": ["eigen kamer", "thuis", "op telefoon", "online"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN platformnamen (geen TikTok, Instagram, YouTube) - gebruik 'video bekijken', 'filmpje maken', 'content delen'",
+      "passive_active": "minstens 10 zinnen passief (bekijken, volgen, liken), 6 zinnen actief (maken, posten, creëren)",
+      "privacy_awareness": "minstens 4 zinnen die privacy-bewustzijn tonen (nadenken wat te delen, wie kan zien)",
+      "age_appropriate": "alle content leeftijdsgeschikt, geen risicovol of ongepast gedrag"
+    },
+    "examples": [
+      "een grappige video online bekijken",
+      "zelf een creatief filmpje maken",
+      "nadenken voordat je iets online deelt"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Sociale media & communicatie",
+    "subdomain_id": "5.1",
+    "facet": "Gaming social",
+    "facet_id": "5.1.3",
+    "task": "Formuleer 16 activiteiten over online samen spelen en communiceren binnen games of spelwerelden",
+    "lexical": {
+      "verbs": ["samenspelen", "chatten", "communiceren", "samenwerken", "helpen", "uitleggen", "afspreken", "plannen", "bouwen samen", "verkennen samen", "teamwork hebben", "coördineren"],
+      "objects": ["team", "medespeler", "missie", "project", "chat", "voice chat", "server", "wereld", "groep", "samenwerking", "strategie", "plan"],
+      "settings": ["online", "in game", "eigen kamer", "thuis"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN game-namen (geen Minecraft, Roblox, Fortnite) - gebruik 'online spel', 'spelwereld', 'game'",
+      "collaboration_focus": "minstens 12 zinnen over samenwerking, teamwork, elkaar helpen in spel",
+      "communication_skills": "minstens 8 zinnen over communiceren, plannen, strategieën bespreken",
+      "positive_interaction": "alle interacties constructief en respectvol, geen toxisch gedrag"
+    },
+    "examples": [
+      "online met vrienden aan een project samenwerken",
+      "in het spel een strategie met het team bespreken",
+      "een medespeler in de game helpen"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Sociale media & communicatie",
+    "subdomain_id": "5.1",
+    "facet": "Video calling",
+    "facet_id": "5.1.4",
+    "task": "Formuleer 16 activiteiten over videobellen met vrienden, familie of voor school om contact te houden of samen te leren",
+    "lexical": {
+      "verbs": ["videobellen", "bellen", "zien", "praten met", "tonen", "samen kijken", "uitleggen", "bijpraten", "samenwerken", "presenteren", "deelnemen", "afspreken via"],
+      "objects": ["video-oproep", "videogesprek", "scherm", "camera", "huiswerk", "project", "uitleg", "presentatie", "les", "familie", "vriend", "groepsgesprek"],
+      "settings": ["eigen kamer", "thuis", "bureau", "online"]
+    },
+    "constraints": {
+      "no_platforms": "GEEN platformnamen (geen FaceTime, Zoom, Teams) - gebruik 'videobellen', 'video-oproep', 'online gesprek'",
+      "purpose_variety": "minstens 8 zinnen sociaal (vrienden/familie), 8 zinnen educatief (school/huiswerk)",
+      "engagement": "minstens 10 zinnen actieve deelname (praten, samenwerken, tonen), 6 zinnen organiseren/plannen",
+      "healthy_balance": "minstens 3 zinnen die bewustzijn tonen van duur of moment (niet te lang, op gepast moment)"
+    },
+    "examples": [
+      "met een vriend videobellen om bij te praten",
+      "via video-oproep samen aan huiswerk werken",
+      "online met de klas aan een project samenwerken"
+    ]
+  },
+  {
+    "domain": "Digitaal Domein",
+    "domain_id": "5",
+    "subdomain": "Sociale media & communicatie",
+    "subdomain_id": "5.1",
+    "facet": "Digitale etiquette & grenzen",
+    "facet_id": "5.1.5",
+    "task": "Formuleer 16 activiteiten over het navigeren van online gedrag, grenzen stellen, privacy bewaken of de balans tussen online en offline vinden",
+    "lexical": {
+      "verbs": ["instellen", "bewaken", "controleren", "beperken", "kiezen", "beslissen", "nadenken", "pauzeren", "stoppen", "afloggen", "respecteren", "overwegen", "beschermen", "beheren"],
+      "objects": ["privacy", "instellingen", "grens", "tijd online", "schermtijd", "wachtwoord", "account", "profiel", "keuze", "moment", "pauze", "balans"],
+      "settings": ["online", "thuis", "eigen kamer", "op telefoon"]
+    },
+    "constraints": {
+      "empowerment_focus": "alle 16 zinnen over gezonde digitale vaardigheden, autonomie, bewuste keuzes",
+      "boundary_setting": "minstens 8 zinnen over grenzen stellen (tijd, privacy, wat delen), 8 zinnen over bewuste keuzes maken",
+      "balance": "minstens 6 zinnen over online-offline balans, pauzes nemen, afloggen",
+      "privacy_security": "minstens 6 zinnen over privacy, veiligheid, wachtwoorden, instellingen"
+    },
+    "examples": [
+      "de privacy-instellingen van je account checken",
+      "bewust een pauze van online activiteiten nemen",
+      "zelf beslissen hoeveel tijd je online doorbrengt"
+    ]
+  }
+]

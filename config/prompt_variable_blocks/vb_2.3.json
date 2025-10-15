@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Autonomie & grenzen",
+    "subdomain_id": "2.3",
+    "facet": "Regels & afspraken",
+    "facet_id": "2.3.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren omgaan met huisregels over schermtijd, zakgeld, uitgangsuur of vrienden ontvangen",
+    "lexical": {
+      "verbs": ["afspreken", "bespreken", "volgen", "respecteren", "nakomen", "checken", "controleren", "plannen", "vragen", "informeren", "melden", "budgetteren", "sparen", "beheren"],
+      "objects": ["schermtijd", "beeldschermtijd", "zakgeld", "uitgangsuur", "afspraak", "regel", "budget", "toestemming", "vrienden", "visite", "tijd", "geld", "limiet", "uur"],
+      "settings": ["woonkamer", "keuken", "eigen kamer", "tafel", "thuis"]
+    },
+    "constraints": {
+      "rule_types": "minstens 4 zinnen over schermtijd, 4 zinnen over zakgeld/geld, 4 zinnen over sociale regels (vrienden, uitgaan), 4 algemene afspraken",
+      "compliance_balance": "minstens 10 zinnen over naleven/respecteren van regels, 6 zinnen over bespreken/afspreken van regels",
+      "responsibility": "minstens 8 zinnen die verantwoordelijk gedrag tonen (nakomen, informeren, plannen)",
+      "constructive_framing": "focus op samenwerking en begrip, niet op rebellie of overtreding"
+    },
+    "examples": [
+      "de afgesproken schermtijd in de gaten houden",
+      "het zakgeld voor de maand budgetteren",
+      "toestemming vragen om vrienden uit te nodigen"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Autonomie & grenzen",
+    "subdomain_id": "2.3",
+    "facet": "Privacy",
+    "facet_id": "2.3.2",
+    "task": "Formuleer 16 activiteiten waarin jongeren hun privéruimte en persoonlijke grenzen bewaken, zoals op hun kamer terugtrekken of persoonlijke zaken voor zichzelf houden",
+    "lexical": {
+      "verbs": ["terugtrekken", "afsluiten", "schrijven", "noteren", "bewaren", "verbergen", "afsluiten", "alleen zijn", "nadenken", "dromen", "lezen", "luisteren", "ontspannen", "verwerken"],
+      "objects": ["kamer", "deur", "dagboek", "schrift", "notities", "gedachten", "muziek", "boek", "privacy", "rust", "eigen tijd", "persoonlijke spullen", "geheimen"],
+      "settings": ["eigen kamer", "slaapkamer", "bureauhoek", "bed"]
+    },
+    "constraints": {
+      "privacy_aspects": "minstens 6 zinnen over fysieke privacy (kamer, deur), 5 zinnen over mentale privacy (dagboek, gedachten), 5 zinnen over emotionele ruimte (alleen zijn, nadenken)",
+      "healthy_privacy": "alle activiteiten tonen gezonde privacybehoefte (ruimte om te ontwikkelen), geen isolatie of verbergen van gevaar",
+      "balance": "minstens 4 zinnen die tonen dat privacy én verbondenheid met gezin kunnen samengaan",
+      "age_appropriate": "privacybehoeftes passend bij 10-14 jaar (geen extreme afzondering)"
+    },
+    "examples": [
+      "op de eigen kamer even alleen zijn",
+      "gedachten in een dagboek noteren",
+      "met deur dicht naar muziek luisteren"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Autonomie & grenzen",
+    "subdomain_id": "2.3",
+    "facet": "Onderhandeling",
+    "facet_id": "2.3.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren onderhandelen met ouders, argumenten geven, toestemming vragen of constructief protesteren tegen regels",
+    "lexical": {
+      "verbs": ["vragen", "onderhandelen", "overtuigen", "argumenteren", "uitleggen", "voorstellen", "bepleiten", "compromis zoeken", "redeneren", "bespreken", "motiveren", "verdedigen", "proberen", "overreden"],
+      "objects": ["toestemming", "argument", "reden", "voorstel", "compromis", "uitleg", "standpunt", "mening", "wens", "verzoek", "plan", "uitstapje", "afspraak", "gunst"],
+      "settings": ["keuken", "woonkamer", "tafel", "bank", "tijdens eten"]
+    },
+    "constraints": {
+      "negotiation_skills": "minstens 8 zinnen over argumenteren/overtuigen, 4 zinnen over vragen/verzoeken, 4 zinnen over compromissen zoeken",
+      "constructive_approach": "alle onderhandelingen respectvol en constructief (geen schreeuwen, dwingen, manipuleren)",
+      "communication_skills": "minstens 6 zinnen die goede communicatievaardigheden tonen (uitleggen, luisteren, redeneren)",
+      "realistic_outcomes": "varieer tussen wel/niet toestemming krijgen, maar altijd met respect voor ouders' beslissing"
+    },
+    "examples": [
+      "met argumenten voor langer opblijven pleiten",
+      "een compromis over schermtijd voorstellen",
+      "rustig uitleggen waarom je naar een feest wilt"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Autonomie & grenzen",
+    "subdomain_id": "2.3",
+    "facet": "Zelfstandigheid",
+    "facet_id": "2.3.4",
+    "task": "Formuleer 16 activiteiten waarin jongeren zelfstandig handelen, alleen thuisblijven, eigen beslissingen nemen of verantwoordelijkheid dragen",
+    "lexical": {
+      "verbs": ["kiezen", "beslissen", "bepalen", "regelen", "organiseren", "verzorgen", "oplossen", "alleen zijn", "thuisblijven", "beheren", "plannen", "zorgen voor", "doen", "afhandelen"],
+      "objects": ["beslissing", "keuze", "verantwoordelijkheid", "situatie", "probleem", "taak", "tijd alleen", "avond", "huis", "eigen agenda", "plan", "activiteit", "zaken"],
+      "settings": ["thuis", "eigen kamer", "keuken", "woonkamer", "huis"]
+    },
+    "constraints": {
+      "autonomy_types": "minstens 5 zinnen over alleen thuisblijven (veilig), 5 zinnen over beslissingen nemen, 6 zinnen over verantwoordelijkheid dragen",
+      "age_appropriate_independence": "alleen zelfstandigheid passend bij 10-14 jaar (geen gevaarlijke situaties, geen volledige verzorging jongere broers/zussen)",
+      "safety_awareness": "minstens 4 zinnen die veiligheidsbewustzijn tonen (weten wat te doen, hulp kunnen vragen)",
+      "gradual_growth": "toon dat zelfstandigheid geleidelijk groeit (eerst korte periodes, dan langer)"
+    },
+    "examples": [
+      "een uurtje alleen thuis zijn",
+      "zelf beslissen wat te doen met vrije tijd",
+      "kleine problemen zelfstandig oplossen"
+    ]
+  }
+]

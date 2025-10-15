@@ -1,0 +1,132 @@
+[
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Ruimtegebruik",
+    "subdomain_id": "8.2",
+    "facet": "Thuisterritoria gebruiken",
+    "facet_id": "8.2.1",
+    "task": "Formuleer 16 activiteiten die specifiek mogelijk zijn in verschillende ruimtes thuis - activiteiten die eigen kamer, tuin, garage of gedeelde ruimtes uniek maken",
+    "lexical": {
+      "verbs": ["inrichten", "personaliseren", "creëren", "bouwen", "spelen", "oefenen", "experimenteren", "maken", "organiseren", "ontspannen", "terugtrekken", "tuinieren", "knutselen", "opslaan"],
+      "objects": ["eigen plek", "privacy", "werkplek", "creatieve ruimte", "project", "hobby", "planten", "gereedschap", "materiaal", "verzameling", "persoonlijke spullen"],
+      "settings": ["eigen kamer", "tuin", "garage", "zolder", "kelder", "gedeelde ruimte", "schuur"]
+    },
+    "constraints": {
+      "location_activity_link": "elke zin MOET een activiteit bevatten die specifiek bij die ruimte past (wat KAN je daar uniek doen)",
+      "space_variety": "minstens 5 zinnen eigen kamer, 4 zinnen tuin, 4 zinnen garage/schuur/zolder, 3 zinnen gedeelde ruimtes",
+      "unique_possibilities": "focus op wat elke ruimte uniek mogelijk maakt (privacy kamer, bouwen garage, kweken tuin)",
+      "age_appropriate_use": "activiteiten passend bij 10-14 jaar met groeiende zelfstandigheid in ruimtegebruik",
+      "location_explicit": "locatie MAG en MOET genoemd worden als context voor de activiteit"
+    },
+    "examples": [
+      "in de tuin groenten of kruiden kweken",
+      "in de garage aan een knutselproject werken",
+      "de eigen kamer naar je smaak inrichten"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Ruimtegebruik",
+    "subdomain_id": "8.2",
+    "facet": "Buurtruimte benutten",
+    "facet_id": "8.2.2",
+    "task": "Formuleer 16 activiteiten die specifiek mogelijk zijn op buurtlocaties zoals speelpleinen, pleintjes, voetbalkooien of skateparks - wat maakt elke plek uniek bruikbaar",
+    "lexical": {
+      "verbs": ["spelen", "oefenen", "trainen", "skaten", "voetballen", "basketballen", "ontmoeten", "chillen", "tricks doen", "racen", "uitdagen", "samenspelen", "improviseren"],
+      "objects": ["toestel", "speeltuig", "bal", "skateboard", "bmx", "doel", "basket", "hindernis", "ramp", "vrienden", "groep", "wedstrijdje"],
+      "settings": ["speelplein", "pleintje", "voetbalkooi", "skatepark", "basketbalveld", "buurtplein"]
+    },
+    "constraints": {
+      "location_activity_link": "elke zin MOET tonen wat die specifieke buurtlocatie uniek mogelijk maakt",
+      "space_variety": "minstens 4 zinnen speelplein, 4 zinnen sportlocaties (kooi, skatepark), 4 zinnen sociale pleintjes, 4 zinnen gemengd",
+      "unique_features": "benadruk unieke kenmerken (doelen in kooi, rampen in skatepark, toestellen op speelplein)",
+      "social_solo": "minstens 8 zinnen sociale activiteiten, 8 zinnen individueel oefenen/spelen",
+      "location_explicit": "locatie expliciteren als essentieel voor de activiteit"
+    },
+    "examples": [
+      "tricks oefenen op de rampen van het skatepark",
+      "een partijtje voetbal in de buurtkooi spelen",
+      "op het speelplein nieuwe vrienden ontmoeten"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Ruimtegebruik",
+    "subdomain_id": "8.2",
+    "facet": "Commerciële ruimtes verkennen",
+    "facet_id": "8.2.3",
+    "task": "Formuleer 16 activiteiten die specifiek mogelijk zijn in commerciële en publieke voorzieningen zoals winkels, bibliotheken of sporthallen - wat biedt elke plek uniek aan",
+    "lexical": {
+      "verbs": ["ontdekken", "uitzoeken", "lenen", "kopen", "bestellen", "uitproberen", "bladeren", "kiezen", "sporten", "trainen", "snacken", "verzamelen", "vinden", "ruilen"],
+      "objects": ["boek", "tijdschrift", "artikel", "product", "snack", "materiaal", "sportuitrusting", "collectie", "info", "aankoop", "leenkaart"],
+      "settings": ["bibliotheek", "winkelcentrum", "sporthal", "winkel", "boekhandel", "frituur", "mediatheek"]
+    },
+    "constraints": {
+      "location_activity_link": "elke zin MOET een activiteit bevatten die die specifieke commerciële ruimte uniek maakt",
+      "space_variety": "minstens 5 zinnen bibliotheek/mediatheek, 4 zinnen winkels, 4 zinnen sporthal, 3 zinnen horeca/snacks",
+      "age_appropriate_commerce": "activiteiten passend bij 10-14 jaar (geen grote aankopen, wel verkennen, lenen, kleine aankopen)",
+      "discovery_focus": "minstens 10 zinnen over ontdekken, verkennen, uitproberen (niet alleen consumeren)",
+      "location_explicit": "locatie benoemen als essentieel onderdeel van wat er kan"
+    },
+    "examples": [
+      "een nieuw boek in de bibliotheek uitzoeken",
+      "in de sporthal een nieuwe sport uitproberen",
+      "in de winkel spullen voor een hobby zoeken"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Ruimtegebruik",
+    "subdomain_id": "8.2",
+    "facet": "Publieke buitenruimte gebruiken",
+    "facet_id": "8.2.4",
+    "task": "Formuleer 16 activiteiten die specifiek mogelijk zijn in publieke buitenruimtes zoals parken, bossen, straten of pleinen - wat maakt de openbare ruimte uniek bruikbaar",
+    "lexical": {
+      "verbs": ["verkennen", "ontdekken", "wandelen", "fietsen", "picknicken", "observeren", "spelen", "verzamelen", "klimmen", "bouwen", "rennen", "genieten van", "ontmoeten"],
+      "objects": ["natuur", "boom", "pad", "bankje", "gras", "ruimte", "omgeving", "landmark", "fontein", "monument", "plein", "avontuur"],
+      "settings": ["park", "bos", "plein", "straat", "marktplein", "natuurgebied", "stadspark"]
+    },
+    "constraints": {
+      "location_activity_link": "elke zin MOET tonen wat die publieke ruimte specifiek mogelijk maakt (bv. bomen klimmen in park, niet thuis)",
+      "space_variety": "minstens 5 zinnen park, 4 zinnen bos/natuur, 4 zinnen straat/plein, 3 zinnen gemengd",
+      "public_space_unique": "focus op wat openbare ruimte biedt: ruimte, natuur, ontmoeting, verkenning",
+      "respectful_use": "minstens 4 zinnen die respectvol gebruik van publieke ruimte tonen",
+      "location_explicit": "locatie benoemen als belangrijk kenmerk van de activiteit"
+    },
+    "examples": [
+      "in het park op een bankje picknicken",
+      "het bos verkennen en nieuwe paden ontdekken",
+      "op het plein met anderen ontmoeten"
+    ]
+  },
+  {
+    "domain": "Ruimtelijk-mobiel domein",
+    "domain_id": "8",
+    "subdomain": "Ruimtegebruik",
+    "subdomain_id": "8.2",
+    "facet": "Gemeenschapslocaties benutten",
+    "facet_id": "8.2.5",
+    "task": "Formuleer 16 activiteiten die specifiek mogelijk zijn in gemeenschapsvoorzieningen zoals buurthuizen, jeugdhuizen, gemeenschapscentra of georganiseerde speeltuinen - wat bieden deze plekken uniek aan",
+    "lexical": {
+      "verbs": ["deelnemen", "organiseren", "samenwerken", "creëren", "repeteren", "voorbereiden", "helpen", "ontmoeten", "leren", "oefenen", "bijdragen", "verzamelen"],
+      "objects": ["activiteit", "workshop", "evenement", "project", "groep", "club", "initiatief", "voorstelling", "bijeenkomst", "samenwerking", "gemeenschap"],
+      "settings": ["buurthuis", "jeugdhuis", "gemeenschapscentrum", "speeltuin", "wijkcentrum", "jeugdlokaal"]
+    },
+    "constraints": {
+      "location_activity_link": "elke zin MOET tonen wat gemeenschapslocaties uniek mogelijk maken (samenwerking, georganiseerde activiteiten, gemeenschap)",
+      "space_variety": "minstens 5 zinnen buurthuis/gemeenschapscentrum, 5 zinnen jeugdhuis, 6 zinnen georganiseerde speeltuinen/wijkactiviteiten",
+      "community_focus": "minstens 12 zinnen over sociale cohesie, samenwerking, gemeenschapsactiviteiten",
+      "participation": "minstens 8 zinnen actieve deelname, 8 zinnen organiseren/bijdragen",
+      "location_explicit": "locatie benoemen als faciliterend voor gemeenschapsactiviteit"
+    },
+    "examples": [
+      "in het buurthuis aan een wijkproject meewerken",
+      "in het jeugdhuis een evenement helpen organiseren",
+      "in het gemeenschapscentrum een workshop volgen"
+    ]
+  }
+]

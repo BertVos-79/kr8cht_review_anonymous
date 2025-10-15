@@ -1,0 +1,5 @@
+{
+  "pca__n_components": 0.8,
+  "chain__n_chains": 5,
+  "chain__cv_splits": 5
+}

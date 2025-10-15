@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale navigatie",
+    "subdomain_id": "3.3",
+    "facet": "Groepsdruk",
+    "facet_id": "3.3.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren omgaan met groepsdruk, voor zichzelf opkomen, nee durven zeggen of authentiek blijven",
+    "lexical": {
+      "verbs": ["weigeren", "nee zeggen", "durven", "kiezen", "blijven bij", "volgen", "weerstaan", "beslissen", "afwijzen", "vasthouden aan", "verdedigen", "uitleggen", "zelf zijn"],
+      "objects": ["mening", "keuze", "beslissing", "standpunt", "eigen gevoel", "grens", "overtuiging", "voorstel", "druk", "verwachting"],
+      "settings": ["speelplaats", "groep vrienden", "schoolplein", "bij vrienden", "feest"]
+    },
+    "constraints": {
+      "empowerment_focus": "minstens 12 zinnen over assertief zijn, nee zeggen, eigen keuzes maken (empowerment), maximaal 4 zinnen over druk voelen",
+      "positive_resistance": "alle zinnen tonen gezonde weerbaarheid en zelfrespect, geen meegaan in negatieve groepsdruk",
+      "autonomy": "minstens 10 zinnen die autonomie en zelfbeschikking benadrukken",
+      "constructive_framing": "focus op voor jezelf opkomen, niet op rebellie of confrontatie om de confrontatie"
+    },
+    "examples": [
+      "nee durven zeggen tegen de groep",
+      "bij je eigen mening blijven",
+      "een voorstel rustig afwijzen"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale navigatie",
+    "subdomain_id": "3.3",
+    "facet": "Conflicten",
+    "facet_id": "3.3.2",
+    "task": "Formuleer 16 activiteiten over hoe jongeren omgaan met conflicten, moeilijke sociale situaties oplossen, hulp zoeken of verzoenen na ruzie",
+    "lexical": {
+      "verbs": ["verzoenen", "bijleggen", "praten over", "oplossen", "hulp vragen", "melden", "bespreken", "uitleggen", "begrijpen", "excuses maken", "accepteren", "vergeven", "herstellen", "bemiddelen"],
+      "objects": ["conflict", "ruzie", "meningsverschil", "probleem", "vertrouwenspersoon", "leerkracht", "ouder", "excuses", "oplossing", "compromis", "gesprek", "bemiddelaar"],
+      "settings": ["speelplaats", "school", "thuis", "bij vertrouwenspersoon", "klaslokaal"]
+    },
+    "constraints": {
+      "solution_focused": "alle 16 zinnen over conflictoplossing, herstel, hulp zoeken - GEEN zinnen over pesten zelf of conflict veroorzaken",
+      "help_seeking": "minstens 6 zinnen over hulp zoeken bij volwassenen of bemiddelaars",
+      "reconciliation": "minstens 6 zinnen over verzoenen, herstellen, begrijpen",
+      "constructive_only": "alleen constructieve coping strategieën, geen wraak, terugtrekken of escalatie"
+    },
+    "examples": [
+      "een conflict met een klasgenoot bijleggen",
+      "hulp vragen aan een vertrouwenspersoon",
+      "rustig een meningsverschil bespreken"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale navigatie",
+    "subdomain_id": "3.3",
+    "facet": "Reputatie",
+    "facet_id": "3.3.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren proberen een goede indruk te maken, erbij te horen, authentiek te zijn of sociale waardering te krijgen",
+    "lexical": {
+      "verbs": ["presenteren", "tonen", "laten zien", "bewijzen", "helpen", "aardig zijn", "bijdragen", "meedoen", "inzetten voor", "delen", "complimenteren", "waarderen", "respecteren", "zelf zijn"],
+      "objects": ["talent", "kwaliteit", "hulpvaardigheid", "eerlijkheid", "humor", "interesse", "betrokkenheid", "prestatie", "eigenheid", "authenticiteit", "respect"],
+      "settings": ["school", "speelplaats", "groep", "klaslokaal", "bij vrienden"]
+    },
+    "constraints": {
+      "authentic_positive": "minstens 10 zinnen over authentiek en positief gedrag (helpen, aardig zijn, jezelf zijn), maximaal 6 over indruk maken",
+      "prosocial_reputation": "minstens 8 zinnen die prosociaal gedrag tonen als weg naar waardering",
+      "no_manipulation": "geen manipulatief, vals of negatief sociaal gedrag (roddelen, vals spelen voor aandacht)",
+      "balanced": "balans tussen erbij willen horen (normaal) en authentiek blijven (gezond)"
+    },
+    "examples": [
+      "door behulpzaam zijn respect verdienen",
+      "jezelf durven zijn in de groep",
+      "een positieve bijdrage aan de klas leveren"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale navigatie",
+    "subdomain_id": "3.3",
+    "facet": "Communicatievaardigheden",
+    "facet_id": "3.3.4",
+    "task": "Formuleer 16 activiteiten waarin jongeren effectief communiceren, discussiëren, luisteren, onderhandelen of anderen overtuigen",
+    "lexical": {
+      "verbs": ["luisteren", "luisteren naar", "discussiëren", "overtuigen", "argumenteren", "onderhandelen", "uitleggen", "verduidelijken", "samenvatten", "begrijpen", "doorvragen", "afstemmen", "overleggen", "compromis zoeken"],
+      "objects": ["argument", "mening", "standpunt", "idee", "voorstel", "plan", "discussie", "gesprek", "debat", "compromis", "oplossing", "afspraak"],
+      "settings": ["klaslokaal", "groepsgesprek", "discussie", "overleg", "vergadering"]
+    },
+    "constraints": {
+      "skill_distribution": "minstens 6 zinnen over luisteren/begrijpen (receptief), 6 zinnen over discussiëren/argumenteren (actief), 4 zinnen over onderhandelen/compromissen",
+      "respectful_communication": "alle communicatie respectvol en constructief, geen schreeuwen, dwingen of manipuleren",
+      "collaborative": "minstens 8 zinnen die samenwerking en wederzijds begrip tonen",
+      "critical_thinking": "minstens 6 zinnen die kritisch denken tonen (argumenten wegen, verschillende standpunten begrijpen)"
+    },
+    "examples": [
+      "aandachtig naar een ander standpunt luisteren",
+      "met argumenten voor een idee pleiten",
+      "samen een compromis proberen te vinden"
+    ]
+  }
+]

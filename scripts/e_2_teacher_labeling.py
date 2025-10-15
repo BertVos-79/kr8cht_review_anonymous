@@ -1,0 +1,1049 @@
+"""
+e_2_teacher_labeling.ipynb
+───────────────────────────────────────────────────────────────────────────────
+Per-fold, leak-free teacher labeling of synthetic Dutch activity sentences for
+multiple sentence-embedding backbones. The script tunes one teacher per
+(embedding, model, fold) on the 95 training seeds in LOOCV, then uses the
+fitted teacher to label all synthetics from Script e_1. All artifacts are cached
+per embedding to enable full reuse across runs.
+
+This script:
+1) Loads seed data and selects embeddings to use
+   - Reads 96 seed questions with 14 target scores (domain1..domain14).
+   - Resolves the selected embedding aliases via EMBEDDING_SPECS and SELECTED_EMBEDDINGS.
+
+2) Caches seed and synthetic embeddings per embedding
+   - STATIC seed vectors (word2vec, fasttext) are loaded from:
+       outputs/a_static/results/baseline_{word2vec|fasttext}_vectors.npy
+     (produced by a_static in compute mode).
+   - FROZEN seed vectors (all other HF/SentenceTransformer encoders) are loaded from, or
+     computed and saved to:
+       outputs/b_frozen/results/{embedding}_vectors.npy
+   - For each Script e_1 source, synthetic vectors are cached at:
+       outputs/e_2_teacher_labeling/cache/synth_embeds/{stem}__{embedding}.npy
+     with the paired index CSV at:
+       outputs/e_2_teacher_labeling/cache/synth_embeds/{stem}__index.csv
+
+3) Tunes teachers per (embedding, model, fold) leak-free
+   - Supported models: local_lasso, local_rf, chain_ERCcv_rf, chain_ERCcv_lr, global_rf.
+   - GridSearchCV (R²) on 95 training seeds with small/default grids.
+   - Caches best HPs as:
+       outputs/e_2_teacher_labeling/teacher/hp_fold{ii}_{embedding}__{model}.json
+   - Saves fitted fold-i teacher as:
+       models/teacher/teacher_fold{ii}_{embedding}__{model}.pkl
+
+4) Labels synthetics per (embedding, model, fold)
+   - Applies the fold-i teacher to every row of each Script e_1 CSV.
+   - Writes labels to:
+       outputs/e_2_teacher_labeling/g2f_labels_fold{ii}_{stem}__{embedding}__{model}.csv
+     and optionally a JSONL alongside it.
+   - Idempotent: skips re-labeling if a complete CSV already exists.
+
+5) Records summary and manifest
+   - Appends or writes:
+       outputs/e_2_teacher_labeling/run_summary.csv
+     with (embedding, model, source, fold, status, timing).
+   - Writes:
+       outputs/e_2_teacher_labeling/run_config.json
+     with configuration, cache locations, and results roots.
+
+REVIEW mode (REVIEW_MODE = True) — artifact-only:
+- Scans existing label CSVs and the cache/synth_embeds directory;
+  rebuilds run_summary.csv and a light run_config.json;
+- No encoding/tuning/fitting/labeling.
+
+Inputs:
+- data/activity_scores.csv
+- data/activities.csv
+- outputs/e_1_synth_augmentation/g_final_n{N}_{method}.csv
+  (columns include: domain_id, subdomain_id, facet_id, method, rank, text, passed)
+
+Outputs:
+- under outputs/e_2_teacher_labeling/:
+  • g2f_labels_fold{ii}_{stem}__{embedding}__{model}.csv
+  • (optional) g2f_labels_fold{ii}_{stem}__{embedding}__{model}.jsonl
+  • cache/synth_embeds/{stem}__{embedding}.npy
+  • cache/synth_embeds/{stem}__index.csv
+  • teacher/hp_fold{ii}_{embedding}__{model}.json
+  • run.log, run_summary.csv, run_config.json
+- under outputs/a_static/results/ (from script a_static):
+  • baseline_{word2vec|fasttext}_vectors.npy
+- under outputs/b_frozen/results/ (computed here if missing):
+  • {embedding}_vectors.npy
+- under models/teacher/:
+  • teacher_fold{ii}_{embedding}__{model}.pkl
+"""
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Imports
+# ────────────────────────────────────────────────────────────────────────────
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+
+import json
+import logging
+import os
+import pickle
+import re
+import sys
+import time
+import warnings
+
+import numpy as np
+import pandas as pd
+import torch
+from sentence_transformers import SentenceTransformer
+from sklearn.base import BaseEstimator, RegressorMixin, clone
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import Lasso, LinearRegression
+from sklearn.model_selection import GridSearchCV, KFold
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.pipeline import Pipeline
+from sklearn.utils import check_random_state
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+warnings.filterwarnings("ignore", category=UserWarning, module="sentence_transformers")
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Device, cores, seeding
+# ────────────────────────────────────────────────────────────────────────────
+device = torch.device(
+    "cuda" if torch.cuda.is_available()
+    else "mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available()
+    else "cpu"
+)
+DEVICE_STR = device.type
+
+SEED = 42
+np.random.seed(SEED)
+try:
+    torch.manual_seed(SEED)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(SEED)
+    if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available():
+        torch.manual_seed(SEED)
+    torch.use_deterministic_algorithms(True)
+except Exception:
+    pass
+
+def clear_gpu_memory():
+    try:
+        if torch.cuda.is_available():
+            torch.cuda.synchronize(); torch.cuda.empty_cache()
+        if DEVICE_STR == "mps":
+            torch.mps.empty_cache()
+    except Exception:
+        pass
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Paths
+# ────────────────────────────────────────────────────────────────────────────
+def project_root(marker: str = "LICENSE") -> Path:
+    here = Path.cwd().resolve()
+    for d in (here, *here.parents):
+        if (d / marker).is_file():
+            return d
+    return Path.cwd().resolve()
+
+ROOT = project_root()
+DATA_DIR = ROOT / "data"
+
+G1_DIR  = ROOT / "outputs" / "e_1_synth_augmentation"
+G2_DIR  = ROOT / "outputs" / "e_2_teacher_labeling"
+
+STATIC_RESULTS_DIR = ROOT / "outputs" / "a_static" / "results"   # baseline_{emb}_vectors.npy
+FROZEN_RESULTS_DIR = ROOT / "outputs" / "b_frozen" / "results"   # {emb}_vectors.npy
+
+CACHE_DIR = G2_DIR / "cache" / "synth_embeds"
+TEACHER_HP_DIR = G2_DIR / "teacher"
+MODELS_TEACHER_DIR = ROOT / "models" / "teacher"
+
+for p in (G2_DIR, TEACHER_HP_DIR, MODELS_TEACHER_DIR, CACHE_DIR):
+    p.mkdir(parents=True, exist_ok=True)
+
+RUN_SUMMARY = G2_DIR / "run_summary.csv"
+LOG_FILE = G2_DIR / "run.log"
+
+for fpath in (RUN_SUMMARY, LOG_FILE):
+    fpath.parent.mkdir(parents=True, exist_ok=True)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Logging
+# ────────────────────────────────────────────────────────────────────────────
+for h in list(logging.root.handlers):
+    logging.root.removeHandler(h)
+logging.basicConfig(
+    filename=str(LOG_FILE),
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+log = logging.getLogger(__name__)
+console = logging.StreamHandler(sys.stdout)
+console.setLevel(logging.INFO)
+console.setFormatter(logging.Formatter("%(message)s"))
+logging.getLogger().addHandler(console)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Configuration
+# ────────────────────────────────────────────────────────────────────────────
+# Modes
+REVIEW_MODE = True         # artifact-only summary, no labeling/tuning
+TUNE_ONLY   = False        # tune HP JSONs only; no teacher fitting or labeling
+
+# Embedding registry & selection
+EMBEDDING_SPECS: Dict[str, str] = {
+    "e5_base": "embaas/sentence-transformers-multilingual-e5-base",
+    # "e5_large":         "embaas/sentence-transformers-multilingual-e5-large",
+    # "simcse_xlmr_base": "sentence-transformers/paraphrase-xlm-r-multilingual-v1",
+    # "sbert_bert":       "jegormeister/bert-base-dutch-cased-snli",
+}
+SELECTED_EMBEDDINGS: List[str] = ["e5_base"]  # choose from EMBEDDING_SPECS
+for k in SELECTED_EMBEDDINGS:
+    if k not in EMBEDDING_SPECS:
+        raise ValueError(f"Unknown embedding alias: '{k}'. Allowed: {list(EMBEDDING_SPECS)}")
+
+# Modeling
+ALL_MODELS: List[str] = ["chain_ERCcv_lr"]   # others available: "local_lasso", "local_rf", "chain_ERCcv_rf", "global_rf"
+MODELS_TO_TUNE: List[str] = ["chain_ERCcv_lr"]  # subset of ALL_MODELS
+
+# Text/encoder limits
+MAX_SEQ_LEN = 128
+
+# Folds to run: "all", "0,1,2", "10-20"
+FOLD_SPEC: str = "all"
+
+# Script e_1 inputs (optional filters)
+INCLUDE_G_FILES: List[str] = []  # e.g. ["g_final_n192_gemma.csv"]
+GLOB_OVERRIDE: str = ""          # e.g. "g_final_n*_gemma.csv"
+
+# Outputs/serialization
+WRITE_JSONL        = True
+SAVE_FOLD_TEACHER  = True
+
+# Cores
+N_CORES = 6
+
+# Common target columns used in prior steps
+TARGET_COLS = [f"domain{i}" for i in range(1, 15)]
+
+print(f"[e_2 (per-fold tuned)] Using device: {DEVICE_STR} | N_CORES={N_CORES}")
+# ────────────────────────────────────────────────────────────────────────────
+#  0. Sentence encoders
+# ────────────────────────────────────────────────────────────────────────────
+_ST_MODELS: Dict[str, SentenceTransformer] = {}
+
+def get_encoder(emb_key: str) -> SentenceTransformer:
+    """Load/cache a SentenceTransformer for the given embedding alias."""
+    if emb_key in _ST_MODELS:
+        return _ST_MODELS[emb_key]
+    repo = EMBEDDING_SPECS[emb_key]
+    log.info(f"Loading SentenceTransformer [{emb_key}]: {repo} → device={DEVICE_STR}")
+    mdl = SentenceTransformer(repo, device=DEVICE_STR)
+    mdl.max_seq_length = MAX_SEQ_LEN
+    _ST_MODELS[emb_key] = mdl
+    return mdl
+
+def encode_texts(emb_key: str, texts: List[str], batch_size: int = 64,
+                 show_progress_bar: bool = False) -> np.ndarray:
+    mdl = get_encoder(emb_key)
+    vecs = mdl.encode(
+        texts,
+        batch_size=batch_size,
+        convert_to_numpy=True,
+        show_progress_bar=show_progress_bar,
+        normalize_embeddings=False
+    )
+    return vecs.astype(np.float32)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  1. Chain models
+# ────────────────────────────────────────────────────────────────────────────
+class RegressorChainCV(BaseEstimator, RegressorMixin):
+    """
+    Chain regressor with out-of-fold (OOF) meta-features per target.
+    Baseline-aligned RNG: check_random_state(...) and pass rng into KFold.
+    """
+    def __init__(self, base_estimator, order=None, cv_splits=5, random_state=SEED):
+        self.base_estimator = base_estimator
+        self.order = order
+        self.cv_splits = cv_splits
+        self.random_state = random_state
+        self.chain_models_ = []
+        self.n_targets_ = None
+
+    def fit(self, X, Y):
+        rng = check_random_state(self.random_state)
+        n_samples, self.n_targets_ = Y.shape
+        if self.order is None:
+            self.order = np.arange(self.n_targets_)
+        kf = KFold(n_splits=self.cv_splits, shuffle=True, random_state=rng)
+
+        # OOF predictions appended as features
+        oof_cols = []
+        X_chain = np.copy(X)
+        for target_idx in self.order:
+            y = Y[:, target_idx]
+            oof = np.zeros(n_samples)
+            for tr, va in kf.split(X_chain):
+                m = clone(self.base_estimator)
+                m.fit(X_chain[tr], y[tr])
+                oof[va] = m.predict(X_chain[va])
+            oof = oof.reshape(-1, 1)
+            oof_cols.append(oof)
+            X_chain = np.hstack([X_chain, oof])
+
+        # Final per-target models trained on full data with accumulated OOF cols
+        self.chain_models_ = []
+        X_full = np.copy(X)
+        acc = []
+        for i, target_idx in enumerate(self.order):
+            if i > 0:
+                acc.append(oof_cols[i-1])
+                X_full = np.hstack([X, np.hstack(acc)])
+            m = clone(self.base_estimator)
+            m.fit(X_full, Y[:, target_idx])
+            self.chain_models_.append(m)
+        return self
+
+    def predict(self, X):
+        X_ext = np.copy(X)
+        n = X.shape[0]
+        Yh = np.zeros((n, self.n_targets_), dtype=float)
+        for i, target_idx in enumerate(self.order):
+            m = self.chain_models_[i]
+            yhat = m.predict(X_ext).reshape(-1, 1)
+            Yh[:, target_idx] = yhat[:, 0]
+            X_ext = np.hstack([X_ext, yhat])
+        return Yh
+
+
+class EnsembleRegressorChainsCV(BaseEstimator, RegressorMixin):
+    """
+    Ensemble of RegressorChainCV with random target orders; predictions averaged.
+    Baseline-aligned RNG via check_random_state(...).
+    """
+    def __init__(self, base_estimator, n_chains=5, cv_splits=5, random_state=SEED):
+        self.base_estimator = base_estimator
+        self.n_chains = n_chains
+        self.cv_splits = cv_splits
+        self.random_state = random_state
+        self.ensemble_ = None
+        self.n_targets_ = None
+
+    def fit(self, X, Y):
+        rng = check_random_state(self.random_state)
+        self.n_targets_ = Y.shape[1]
+        self.ensemble_ = []
+        for _ in range(self.n_chains):
+            order = np.arange(self.n_targets_)
+            rng.shuffle(order)
+            chain = RegressorChainCV(
+                self.base_estimator,
+                order=order,
+                cv_splits=self.cv_splits,
+                random_state=rng.randint(0, 1_000_000)
+            )
+            chain.fit(X, Y)
+            self.ensemble_.append((order, chain))
+        return self
+
+    def predict(self, X):
+        preds = [chain.predict(X) for (_, chain) in self.ensemble_]
+        return np.mean(preds, axis=0)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  3. Data loaders & caches
+# ────────────────────────────────────────────────────────────────────────────
+def load_data_min() -> pd.DataFrame:
+    """
+    Rebuild data_merged with domain1..domain14 + 'question' in the same way
+    as earlier steps, to ensure Y aligns with cached seed vectors.
+    Sorted by activity_id for deterministic fold order.
+    """
+    activity_scores_path = DATA_DIR / "activity_scores.csv"
+    activities_path      = DATA_DIR / "activities.csv"
+
+    df_scores     = pd.read_csv(activity_scores_path)
+    df_activities = pd.read_csv(activities_path)
+
+    dm = df_scores.pivot(index="activity_id", columns="domain_id", values="score").reset_index()
+    dm = dm.rename(columns=lambda x: f"domain{x}" if isinstance(x, (int, np.integer)) else x)
+    dm = pd.merge(dm, df_activities[["activity_id", "question"]], on="activity_id", how="left")
+    dm = dm.sort_values("activity_id").reset_index(drop=True)
+    return dm
+
+def ensure_seed_vectors(dm: pd.DataFrame, emb_key: str) -> np.ndarray:
+    """
+    Load seed embeddings for `emb_key` from disk. If missing:
+      - STATIC (word2vec/fasttext): require precomputed baseline vectors (a_static).
+      - FROZEN (all others): compute via HF encoder and save under b_frozen/results.
+    """
+    expected_rows = len(dm)
+
+    # Candidate locations, in order of preference
+    candidates: List[Path] = []
+    if emb_key in {"word2vec", "fasttext"}:
+        candidates.append(STATIC_RESULTS_DIR / f"baseline_{emb_key}_vectors.npy")  
+    else:
+        candidates.append(FROZEN_RESULTS_DIR / f"{emb_key}_vectors.npy")          
+
+    # Try to load from disk
+    for vec_path in candidates:
+        if vec_path.exists():
+            try:
+                X = np.load(vec_path, mmap_mode="r")
+                if X.shape[0] == expected_rows:
+                    log.info("✔ [%s] Loaded cached seed embeddings (%d×%s) from %s",
+                             emb_key, X.shape[0],
+                             X.shape[1] if X.ndim == 2 else "?",  # defensive
+                             vec_path.relative_to(ROOT))
+                    return np.array(X, dtype=np.float32, copy=True)  # drop mmap
+                else:
+                    log.warning("↻ [%s] Cached rows (%d) != expected seeds (%d) at %s; continuing search.",
+                                emb_key, X.shape[0], expected_rows, vec_path.relative_to(ROOT))
+            except Exception as e:
+                log.warning("↻ [%s] Could not read cached seed vectors (%s): %s; continuing search.",
+                            emb_key, vec_path.name, e)
+
+    # Not found / invalid → compute only for frozen
+    if emb_key in {"word2vec", "fasttext"}:
+        raise FileNotFoundError(
+            f"Static seed vectors for '{emb_key}' not found. Expected at "
+            f"{(STATIC_RESULTS_DIR / f'baseline_{emb_key}_vectors.npy').relative_to(ROOT)}. "
+            "Please run `a_static.ipynb` in compute mode first."
+        )
+
+    # Compute frozen seed vectors now and cache under b_frozen/results
+    log.info("… [%s] Cached seed vectors not found/valid → encoding %d seeds via HF model.",
+             emb_key, expected_rows)
+    texts = dm["question"].astype(str).fillna("").tolist()
+    X = encode_texts(emb_key, texts, batch_size=64, show_progress_bar=True).astype(np.float32)
+
+    out_path = FROZEN_RESULTS_DIR / f"{emb_key}_vectors.npy"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    np.save(out_path, X)
+    log.info("✔ [%s] Saved seed vectors → %s", emb_key, out_path.relative_to(ROOT))
+    return X
+
+def discover_g1_sources() -> List[Path]:
+    paths = sorted(G1_DIR.glob(GLOB_OVERRIDE)) if GLOB_OVERRIDE else sorted(G1_DIR.glob("g_final_n*_*.csv"))
+    if INCLUDE_G_FILES:
+        names = set(INCLUDE_G_FILES)
+        paths = [p for p in paths if p.name in names]
+    return [p for p in paths if p.suffix.lower() == ".csv" and p.stat().st_size]
+
+def synth_cache_paths(src: Path, emb_key: str) -> tuple[Path, Path]:
+    """
+    Return (X_synth_npy_path, index_csv_path) for a Script e_1 CSV and embedding key,
+    using the dedicated cache folder only (for strict reproducibility).
+    """
+    stem = src.stem  # e.g., g_final_n384_gemma
+    return (
+        CACHE_DIR / f"{stem}__{emb_key}.npy",
+        CACHE_DIR / f"{stem}__index.csv"
+    )
+
+def ensure_synth_embeddings(src: Path, emb_key: str) -> Tuple[np.ndarray, pd.DataFrame]:
+    """
+    For a Script e_1 CSV, ensure we have:
+      • X_synth npy cache (emb_key vectors)
+      • index CSV (provenance + text)
+    """
+    X_path, idx_path = synth_cache_paths(src, emb_key)
+    if idx_path.exists() and X_path.exists():
+        try:
+            df_idx = pd.read_csv(idx_path)
+            X = np.load(X_path)
+            if len(df_idx) == X.shape[0] and "text" in df_idx.columns:
+                return X, df_idx
+        except Exception:
+            pass
+
+    df = pd.read_csv(src)
+    if "text" not in df.columns:
+        raise ValueError(f"{src.name}: missing 'text' column.")
+
+    texts = df["text"].astype(str).fillna("").tolist()
+    log.info("[%s] Computing synthetic embeddings (%s): %d rows", emb_key, src.name, len(texts))
+    X = encode_texts(emb_key, texts, batch_size=64, show_progress_bar=True)
+    df_idx = df.copy()
+
+    np.save(X_path, X)
+    df_idx.to_csv(idx_path, index=False)
+    log.info("✔ [%s] Cached synth embeddings/index → %s | %s",
+             emb_key, X_path.relative_to(ROOT), idx_path.relative_to(ROOT))
+    return X, df_idx
+
+# ────────────────────────────────────────────────────────────────────────────
+#  4. Fold utilities & naming
+# ────────────────────────────────────────────────────────────────────────────
+def parse_folds(n_seeds: int, spec: str = FOLD_SPEC) -> List[int]:
+    s = (spec or "all").strip().lower()
+    if s in {"", "all", "alles"}:
+        return list(range(n_seeds))
+    parts = [p.strip() for p in spec.split(",") if p.strip()]
+    out: List[int] = []
+    for p in parts:
+        if "-" in p:
+            a, b = p.split("-", 1)
+            out.extend(list(range(int(a), int(b) + 1)))
+        else:
+            out.append(int(p))
+    out = sorted(set(i for i in out if 0 <= i < n_seeds))
+    return out or list(range(n_seeds))
+
+def out_base_for(src: Path) -> str:
+    """
+    Example:
+      g_final_n384_gemma.csv  →  base = n384_gemma
+    """
+    m = re.match(r"g_final_(n\d+)_([A-Za-z0-9_]+)\.csv$", src.name)
+    if m:
+        size_tag, method_tag = m.group(1), m.group(2)
+        base = f"{size_tag}_{method_tag}"
+    else:
+        base = src.stem
+    return base
+
+def out_paths_for_fold(src: Path, fold_idx: int, model_key: str, emb_key: str) -> Tuple[Path, Path]:
+    base = out_base_for(src)
+    csv_out  = G2_DIR / f"g2f_labels_fold{fold_idx:02d}_{base}__{emb_key}__{model_key}.csv"
+    json_out = G2_DIR / f"g2f_labels_fold{fold_idx:02d}_{base}__{emb_key}__{model_key}.jsonl"
+    return csv_out, json_out
+
+def hp_json_path(fold_idx: int, model_key: str, emb_key: str) -> Path:
+    return TEACHER_HP_DIR / f"hp_fold{fold_idx:02d}_{emb_key}__{model_key}.json"
+
+def teacher_pkl_path(fold_idx: int, model_key: str, emb_key: str) -> Path:
+    return MODELS_TEACHER_DIR / f"teacher_fold{fold_idx:02d}_{emb_key}__{model_key}.pkl"
+
+# ────────────────────────────────────────────────────────────────────────────
+#  5. Pipelines & grids
+# ────────────────────────────────────────────────────────────────────────────
+def make_pipeline(model_key: str) -> Pipeline:
+    if model_key == "local_lasso":
+        return Pipeline([
+            ("pca", PCA(random_state=SEED)),
+            ("reg", MultiOutputRegressor(Lasso(random_state=SEED, max_iter=10_000))),
+        ])
+    elif model_key == "local_rf":
+        return Pipeline([
+            ("pca", PCA(random_state=SEED)),
+            ("reg", MultiOutputRegressor(RandomForestRegressor(random_state=SEED, n_jobs=1))),
+        ])
+    elif model_key == "global_rf":
+        return Pipeline([
+            ("pca", PCA(random_state=SEED)),
+            ("reg", RandomForestRegressor(random_state=SEED, n_jobs=1)),
+        ])
+    elif model_key == "chain_ERCcv_lr":
+        return Pipeline([
+            ("pca", PCA(random_state=SEED)),
+            ("chain", EnsembleRegressorChainsCV(base_estimator=LinearRegression(), random_state=SEED)),
+        ])
+    elif model_key == "chain_ERCcv_rf":
+        return Pipeline([
+            ("pca", PCA(random_state=SEED)),
+            ("chain", EnsembleRegressorChainsCV(
+                base_estimator=RandomForestRegressor(random_state=SEED, n_jobs=1), random_state=SEED
+            )),
+        ])
+    else:
+        raise ValueError(f"Unknown model_key: {model_key}")
+
+def small_grid(model_key: str) -> Dict[str, List]:
+    if model_key == "local_lasso":
+        return {
+            "pca__n_components": [0.7, 0.8, 0.9],
+            "reg__estimator__alpha": [0.001, 0.01, 0.1, 1.0, 10.0],
+        }
+    elif model_key == "local_rf":
+        return {
+            "pca__n_components": [0.7, 0.8, 0.9],
+            "reg__estimator__n_estimators": [50, 100],
+            "reg__estimator__max_depth": [None, 5, 10],
+            "reg__estimator__min_samples_leaf": [1],
+        }
+    elif model_key == "global_rf":
+        return {
+            "pca__n_components": [0.7, 0.8, 0.9],
+            "reg__n_estimators": [50, 100],
+            "reg__max_depth": [None, 5, 10],
+            "reg__min_samples_leaf": [1],
+        }
+    elif model_key == "chain_ERCcv_lr":
+        return {
+            "pca__n_components": [0.7, 0.8, 0.9],
+            "chain__n_chains": [3, 5],
+            "chain__cv_splits": [3, 5],
+        }
+    elif model_key == "chain_ERCcv_rf":
+        # "small" grid: do not tune RF inner hyperparams here (runtime-friendly)
+        return {
+            "pca__n_components": [0.7, 0.8, 0.9],
+            "chain__n_chains": [3, 5],
+            "chain__cv_splits": [3, 5],
+        }
+    else:
+        raise ValueError(f"Unknown model_key: {model_key}")
+
+# ────────────────────────────────────────────────────────────────────────────
+#  6. HP tuning (per fold) and teacher build/load
+# ────────────────────────────────────────────────────────────────────────────
+def ensure_best_params_for_fold(model_key: str, X_seed: np.ndarray, Y_seed: np.ndarray,
+                                train_idx: np.ndarray, fold_idx: int, emb_key: str) -> Dict[str, object]:
+    """Return best_params dict for (embedding, model, fold), reusing JSON if present."""
+    path = hp_json_path(fold_idx, model_key, emb_key)
+    if path.exists():
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+            if (payload.get("model") == model_key and
+                payload.get("fold") == int(fold_idx) and
+                payload.get("embedding") == emb_key and
+                "best_params" in payload):
+                return payload["best_params"]
+        except Exception:
+            pass
+
+    # Tune with GridSearchCV (default R² scoring) on the 95 training seeds
+    pipe = make_pipeline(model_key)
+    grid = small_grid(model_key)
+    ncomb = 1
+    for v in grid.values(): ncomb *= len(v)
+    log.info(f"  [{emb_key}] [Fold {fold_idx:02d} | {model_key}] Tuning {ncomb} combos via GridSearchCV…")
+    gs = GridSearchCV(pipe, param_grid=grid, cv=5, n_jobs=1, refit=True)
+    gs.fit(X_seed[train_idx], Y_seed[train_idx])
+    best_params = gs.best_params_
+    log.info(f"    [{emb_key}] Best params: {best_params}")
+
+    # Persist per-fold HP JSON (idempotency)
+    payload = {
+        "embedding": emb_key,
+        "model": model_key,
+        "fold": int(fold_idx),
+        "best_params": best_params,
+        "selection_metric": "GridSearchCV default R² (cv=5) on fold training seeds",
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+    return best_params
+
+def load_or_fit_teacher(model_key: str, X_seed: np.ndarray, Y_seed: np.ndarray,
+                        train_idx: np.ndarray, fold_idx: int, emb_key: str,
+                        save_pickle: bool = True):
+    """
+    Load teacher pickle for (embedding, model, fold) if available; else fit using
+    per-fold best params and return.
+    """
+    tp = teacher_pkl_path(fold_idx, model_key, emb_key)
+    if tp.exists():
+        try:
+            with open(tp, "rb") as f:
+                teacher = pickle.load(f)
+            log.info(f"    [{emb_key}] Loaded cached teacher for fold {fold_idx:02d}, model={model_key}")
+            return teacher
+        except Exception:
+            pass
+
+    # Ensure best params, then fit on fold's training seeds
+    best = ensure_best_params_for_fold(model_key, X_seed, Y_seed, train_idx, fold_idx, emb_key)
+    pipe = make_pipeline(model_key)
+    pipe.set_params(**best)
+    pipe.fit(X_seed[train_idx], Y_seed[train_idx])
+
+    if save_pickle and SAVE_FOLD_TEACHER:
+        try:
+            with open(tp, "wb") as f:
+                pickle.dump(pipe, f)
+            log.info(f"    [{emb_key}] Saved teacher fold {fold_idx:02d} → {tp.relative_to(ROOT)}")
+        except Exception as e:
+            log.warning(f"    [{emb_key}] Could not save teacher fold {fold_idx:02d}: {e}")
+    return pipe
+
+def label_with_teacher(X_synth: np.ndarray, df_index: pd.DataFrame, teacher) -> pd.DataFrame:
+    """
+    Predict 14 targets for X_synth; return df with original columns + domain1..domain14.
+    """
+    Y_hat = teacher.predict(X_synth)  # (n, 14)
+    if Y_hat.ndim != 2 or Y_hat.shape[1] != 14:
+        raise RuntimeError(f"Teacher returned shape {Y_hat.shape}, expected (n, 14).")
+    out = df_index.copy()
+    for i, col in enumerate(TARGET_COLS):
+        out[col] = Y_hat[:, i].astype(float)
+    return out
+
+# ────────────────────────────────────────────────────────────────────────────
+#  7. Main functions
+# ────────────────────────────────────────────────────────────────────────────
+
+def run_pipeline_compute():
+    """Full pipeline (tuning + optional teacher fitting + labeling)."""
+    log.info("=== step e_2 (per-fold tuned; multi-embedding) started ===")
+    log.info(f"Embeddings to use: {SELECTED_EMBEDDINGS}")
+    log.info(f"Models to tune/label: {MODELS_TO_TUNE}")
+
+    # 0) Load seeds table (texts + targets)
+    dm = load_data_min()
+    Y_seed = dm[TARGET_COLS].to_numpy(dtype=float)
+    n_seeds = len(dm)
+    assert n_seeds == 96, f"Expected 96 seeds, found {n_seeds}."
+
+    # 1) (guarded) Discover Script e_1 inputs
+    if not TUNE_ONLY:
+        sources = discover_g1_sources()
+        if not sources:
+            raise FileNotFoundError(
+                f"No inputs found under: {G1_DIR} "
+                f"(look for g_final_n*_*.csv; optionally use GLOB_OVERRIDE / INCLUDE_G_FILES)."
+            )
+        log.info(f"Found {len(sources)} input file(s) from step e_1.")
+    else:
+        sources = []  # not used in tune-only
+
+    # 2) Which folds to run?
+    fold_list = parse_folds(n_seeds, FOLD_SPEC)
+    log.info(f"Running folds: {fold_list[0]}..{fold_list[-1]} (total {len(fold_list)})")
+
+    summary_rows = []
+
+    # 3) Process each embedding independently (full idempotency per embedding)
+    for emb_key in SELECTED_EMBEDDINGS:
+        log.info(f"— Embedding: {emb_key}")
+
+        # Seed vectors for this embedding
+        X_seed = ensure_seed_vectors(dm, emb_key)
+
+        # ── Always tune per (model, fold) to ensure HP JSON exists
+        for model_key in MODELS_TO_TUNE:
+            log.info(f"  Tuning per-fold HPs for model: {model_key}")
+            for fold_idx in fold_list:
+                train_idx = np.array([i for i in range(n_seeds) if i != fold_idx], dtype=int)
+                _ = ensure_best_params_for_fold(
+                    model_key, X_seed, Y_seed, train_idx, fold_idx, emb_key
+                )
+                # Optional: show where it went
+                log.info(f"    ✔ [{emb_key}] fold {fold_idx:02d} HPs saved → "
+                         f"{hp_json_path(fold_idx, model_key, emb_key).relative_to(ROOT)}")
+
+        # ── Tune-only guard: stop before fitting teachers / labeling synthetics
+        if TUNE_ONLY:
+            log.info("[tune-only] Skipping teacher pickles and synthetic labeling.")
+            clear_gpu_memory()
+            # Write a small manifest and exit early
+            manifest = {
+                "embeddings": SELECTED_EMBEDDINGS,
+                "embedding_repos": {k: EMBEDDING_SPECS[k] for k in SELECTED_EMBEDDINGS},
+                "models": MODELS_TO_TUNE,
+                "folds_used": len(fold_list),
+                "device": DEVICE_STR,
+                "n_cores": N_CORES,
+                "labels_root": str(G2_DIR.relative_to(ROOT)),
+                "e1_root": str(G1_DIR.relative_to(ROOT)),
+                "hp_cache_pattern": "outputs/e_2_teacher_labeling/teacher/hp_fold{ii}_{embedding}__{model}.json",
+                "teacher_pickles_pattern": "models/teacher/teacher_fold{ii}_{embedding}__{model}.pkl",
+                "results_roots": {
+                    "static": str(STATIC_RESULTS_DIR.relative_to(ROOT)),
+                    "frozen": str(FROZEN_RESULTS_DIR.relative_to(ROOT))
+                },
+                "seed_vectors_patterns": {
+                    "static": "outputs/a_static/results/baseline_{embedding}_vectors.npy",
+                    "frozen": "outputs/b_frozen/results/{embedding}_vectors.npy"
+                },
+                "synth_vectors_cache_pattern": "outputs/e_2_teacher_labeling/cache/synth_embeds/{stem}__{embedding}.npy",
+                "tune_only": True,
+            }
+            with open(G2_DIR / "run_config.json", "w", encoding="utf-8") as f:
+                json.dump(manifest, f, indent=2)
+            log.info("=== step e_2 (tune-only) completed ===")
+            print("Done (tune-only). Artifacts in:", G2_DIR)
+            return  # ← STOP SCRIPT HERE
+
+        # ── (normal path) Pre-compute/load teachers per (model, fold) — reused across all sources
+        teachers: Dict[Tuple[str, int], object] = {}
+        for model_key in MODELS_TO_TUNE:
+            log.info(f"  Preparing teachers for model: {model_key}")
+            for fold_idx in fold_list:
+                train_idx = np.array([i for i in range(n_seeds) if i != fold_idx], dtype=int)
+                t0 = time.time()
+                teacher_i = load_or_fit_teacher(
+                    model_key, X_seed, Y_seed, train_idx, fold_idx, emb_key, save_pickle=True
+                )
+                teachers[(model_key, fold_idx)] = teacher_i
+                log.info(f"    ✔ [{emb_key}] fold {fold_idx:02d} teacher ready in {time.time()-t0:.1f}s")
+                clear_gpu_memory()
+
+        # For each source, ensure synth vectors once; then loop folds × models
+        for s_idx, src in enumerate(sources, 1):
+            log.info(f"  [{emb_key}] [{s_idx}/{len(sources)}] Source → {src.relative_to(ROOT)}")
+            X_synth, df_index = ensure_synth_embeddings(src, emb_key)
+            n_synth = X_synth.shape[0]
+
+            for fold_idx in fold_list:
+                for model_key in MODELS_TO_TUNE:
+                    csv_out, json_out = out_paths_for_fold(src, fold_idx, model_key, emb_key)
+
+                    # Idempotent skip if file already complete
+                    if csv_out.exists():
+                        try:
+                            n_rows = sum(1 for _ in open(csv_out, "r", encoding="utf-8")) - 1
+                            if max(0, n_rows) >= n_synth:
+                                log.info(f"    ↻ [{emb_key}] {model_key} | fold {fold_idx:02d}: found complete labels ({n_rows}) → skip")
+                                summary_rows.append({
+                                    "embedding": emb_key, "model": model_key, "input": src.name,
+                                    "fold": fold_idx, "output_csv": csv_out.name, "n_synth": n_synth,
+                                    "status": "skip_existing", "dt_s": 0.0
+                                })
+                                continue
+                        except Exception:
+                            pass
+
+                    # Label with prebuilt teacher
+                    t0 = time.time()
+                    teacher_i = teachers[(model_key, fold_idx)]
+                    df_labeled = label_with_teacher(X_synth, df_index, teacher_i)
+                    dt = time.time() - t0
+                    log.info(f"    ✔ [{emb_key}] {model_key} | fold {fold_idx:02d}: labeled {len(df_labeled)} rows in {dt:.1f}s → {csv_out.name}")
+
+                    # Write CSV (overwrite to keep file atomic & consistent)
+                    df_labeled.to_csv(csv_out, index=False)
+
+                    # Optional JSONL
+                    if WRITE_JSONL:
+                        with open(json_out, "w", encoding="utf-8") as f:
+                            for obj in df_labeled.to_dict(orient="records"):
+                                f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+                    clear_gpu_memory()
+
+                    # Summarize
+                    summary_rows.append({
+                        "embedding": emb_key, "model": model_key, "input": src.name,
+                        "fold": fold_idx, "output_csv": csv_out.name, "n_synth": n_synth,
+                        "status": "labeled", "dt_s": round(dt, 3)
+                    })
+
+    # 4) Run summary (only in non-tune-only path; tune-only returned already)
+    if summary_rows:
+        cols = ["embedding", "model", "input", "fold", "output_csv", "n_synth", "status", "dt_s"]
+        df_sum = pd.DataFrame(summary_rows, columns=cols)
+        if RUN_SUMMARY.exists() and RUN_SUMMARY.stat().st_size:
+            df_sum.to_csv(RUN_SUMMARY, mode="a", header=False, index=False)
+        else:
+            df_sum.to_csv(RUN_SUMMARY, index=False)
+
+    # 5) Manifest (compute path)
+    manifest = {
+        "embeddings": SELECTED_EMBEDDINGS,
+        "embedding_repos": {k: EMBEDDING_SPECS[k] for k in SELECTED_EMBEDDINGS},
+        "models": MODELS_TO_TUNE,
+        "folds_used": len(fold_list),
+        "device": DEVICE_STR,
+        "n_cores": N_CORES,
+        "labels_root": str(G2_DIR.relative_to(ROOT)),
+        "e1_root": str(G1_DIR.relative_to(ROOT)),
+        "hp_cache_pattern": "outputs/e_2_teacher_labeling/teacher/hp_fold{ii}_{embedding}__{model}.json",
+        "teacher_pickles_pattern": "models/teacher/teacher_fold{ii}_{embedding}__{model}.pkl",
+        "results_roots": {
+            "static": str(STATIC_RESULTS_DIR.relative_to(ROOT)),
+            "frozen": str(FROZEN_RESULTS_DIR.relative_to(ROOT))
+        },
+        "seed_vectors_patterns": {
+            "static": "outputs/a_static/results/baseline_{embedding}_vectors.npy",
+            "frozen": "outputs/b_frozen/results/{embedding}_vectors.npy"
+        },
+        "synth_vectors_cache_pattern": "outputs/e_2_teacher_labeling/cache/synth_embeds/{stem}__{embedding}.npy",
+        "tune_only": False,
+    }
+
+    with open(G2_DIR / "run_config.json", "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2)
+
+    log.info("=== step e_2 (per-fold tuned; multi-embedding) completed ===")
+    print("Done. Artifacts in:", G2_DIR)
+
+
+_LABEL_RE = re.compile(
+    r"^g2f_labels_fold(?P<fold>\d{2})_(?P<base>.+?)__(?P<emb>[A-Za-z0-9_]+)__(?P<model>[A-Za-z0-9_]+)\.csv$"
+)
+
+def _parse_label_file(p: Path):
+    m = _LABEL_RE.match(p.name)
+    if not m:
+        return None
+    d = m.groupdict()
+    d["fold"]  = int(d["fold"])
+    d["path"]  = str(p)
+    return d
+
+def _count_csv_rows(path: Path) -> int:
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            return max(0, sum(1 for _ in f) - 1)
+    except Exception:
+        return 0
+
+def run_pipeline_review():
+    """
+    Fast, artifact-only review:
+      - Lists label CSVs by filename.
+      - Gets expected_rows per base from cache index
+        'cache/synth_embeds/g_final_{base}__index.csv'.
+      - Checks presence of synth .npy, HP JSONs, and teacher pickles.
+      - Writes run_summary.csv and run_config.json.
+    """
+    log.info("=== step e_2 REVIEW_MODE: artifact-only scan started ===")
+
+    read_root = CACHE_DIR
+    try:
+        log.info("Using synth cache dir: %s", read_root.relative_to(ROOT))
+    except Exception:
+        log.info("Using synth cache dir: %s", read_root)
+
+    label_files = sorted([p for p in G2_DIR.glob("g2f_labels_fold*__*.csv") if p.stat().st_size])
+    if not label_files:
+        # Write empty summary & a minimal but informative manifest
+        pd.DataFrame(columns=[
+            "embedding", "model", "fold", "base", "output_csv",
+            "expected_rows", "has_index", "has_synth_npy", "has_hp_json", "has_teacher_pkl", "status"
+        ]).to_csv(RUN_SUMMARY, index=False)
+        manifest = {
+            "review_mode": True,
+            "labels_root": str(G2_DIR.relative_to(ROOT)),
+            "synth_cache_dir": str(read_root.relative_to(ROOT)),
+            "results_roots": {
+                "static": str(STATIC_RESULTS_DIR.relative_to(ROOT)),
+                "frozen": str(FROZEN_RESULTS_DIR.relative_to(ROOT))
+            },
+            "seed_vectors_patterns": {
+                "static": "outputs/a_static/results/baseline_{embedding}_vectors.npy",
+                "frozen": "outputs/b_frozen/results/{embedding}_vectors.npy"
+            },
+            "embeddings_discovered": [],
+            "models_discovered": [],
+            "folds_discovered": [],
+            "fast_scan": True,
+            "bases_indexed": 0,
+            "label_files": 0,
+        }
+        (G2_DIR / "run_config.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        log.info("✔ Wrote empty run_summary.csv (no labels found)")
+        print("Review complete. Summary in:", RUN_SUMMARY)
+        return
+
+    # Parse filenames and collect unique bases (e.g., 'n384_gemma')
+    metas, bases = [], set()
+    _LABEL_RE = re.compile(
+        r"^g2f_labels_fold(?P<fold>\d{2})_(?P<base>.+?)__(?P<emb>[A-Za-z0-9_]+)__(?P<model>[A-Za-z0-9_]+)\.csv$"
+    )
+    for p in label_files:
+        m = _LABEL_RE.match(p.name)
+        if not m:
+            continue
+        d = m.groupdict()
+        d["fold"] = int(d["fold"])
+        d["path"] = str(p)
+        metas.append(d)
+        bases.add(d["base"])
+
+    # For each base, read expected row count ONCE from its index.csv (small)
+    def _idx_path_for(base: str) -> Path:
+        return read_root / f"g_final_{base}__index.csv"
+
+    expected_by_base: Dict[str, Optional[int]] = {}
+    for b in bases:
+        idx = _idx_path_for(b)
+        try:
+            expected_by_base[b] = (
+                max(0, sum(1 for _ in open(idx, "r", encoding="utf-8", errors="ignore")) - 1)
+                if idx.exists() else None
+            )
+        except Exception:
+            expected_by_base[b] = None
+
+    rows, emb_set, model_set, fold_set = [], set(), set(), set()
+    for meta in metas:
+        fold = meta["fold"]
+        base = meta["base"]
+        emb = meta["emb"]
+        model = meta["model"]
+        p = Path(meta["path"])
+
+        emb_set.add(emb)
+        model_set.add(model)
+        fold_set.add(fold)
+        idx_name = f"g_final_{base}__index.csv"
+        npy_name = f"g_final_{base}__{emb}.npy"
+
+        has_index = (read_root / idx_name).exists()
+        has_npy = (read_root / npy_name).exists()
+        hp_ok = (TEACHER_HP_DIR / f"hp_fold{fold:02d}_{emb}__{model}.json").exists()
+        tp_ok = (MODELS_TEACHER_DIR / f"teacher_fold{fold:02d}_{emb}__{model}.pkl").exists()
+
+        rows.append({
+            "embedding": emb,
+            "model": model,
+            "fold": fold,
+            "base": base,
+            "output_csv": p.name,
+            "expected_rows": expected_by_base.get(base, None),  # from index.csv (fast, reliable)
+            "has_index": has_index,
+            "has_synth_npy": has_npy,
+            "has_hp_json": hp_ok,
+            "has_teacher_pkl": tp_ok,
+            "status": "present"
+        })
+
+    df = (pd.DataFrame(rows, columns=[
+        "embedding", "model", "fold", "base", "output_csv",
+        "expected_rows", "has_index", "has_synth_npy", "has_hp_json", "has_teacher_pkl", "status"
+    ]).sort_values(["embedding", "model", "fold", "base", "output_csv"]))
+    df.to_csv(RUN_SUMMARY, index=False)
+    log.info("✔ Wrote run_summary.csv with %d rows", len(df))
+
+    manifest = {
+        "review_mode": True,
+        "labels_root": str(G2_DIR.relative_to(ROOT)),
+        "synth_cache_dir": str(read_root.relative_to(ROOT)),
+        "results_roots": {
+            "static": str(STATIC_RESULTS_DIR.relative_to(ROOT)),
+            "frozen": str(FROZEN_RESULTS_DIR.relative_to(ROOT))
+        },
+        "seed_vectors_patterns": {
+            "static": "outputs/a_static/results/baseline_{embedding}_vectors.npy",
+            "frozen": "outputs/b_frozen/results/{embedding}_vectors.npy"
+        },
+        "embeddings_discovered": sorted(emb_set),
+        "models_discovered": sorted(model_set),
+        "folds_discovered": sorted(fold_set),
+        "fast_scan": True,
+        "bases_indexed": len(bases),
+        "label_files": len(metas),
+    }
+    (G2_DIR / "run_config.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    log.info("=== step e_2 REVIEW_MODE completed ===")
+    print("Review complete. Summary in:", RUN_SUMMARY)
+
+
+
+# ────────────────────────────────────────────────────────────────────────────
+#  8. Entry-point
+# ────────────────────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    try:
+        if REVIEW_MODE:
+            run_pipeline_review()
+        else:
+            run_pipeline_compute()
+        print("Run completed.")
+    except Exception as e:
+        log.exception("Fatal error in step e_2: %s", e)
+        print(f"Error: {e}")
+

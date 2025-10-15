@@ -1,0 +1,1033 @@
+"""
+b_frozen.ipynb
+───────────────────────────────────────────────────────────────────────────────
+Performance comparison of 24 frozen transformer embeddings with different training protocol
+(18 word vs 6 sentence embeddings) and pooling strategies (mean vs max vs cls) for five best 
+multi-target regression models and mean baseline model of script a_static.ipynb.
+
+This script can run in two modes (controlled by REVIEW_MODE):
+
+• COMPUTE mode (REVIEW_MODE = False) — full, end-to-end reproduction:
+  1) Loads baseline data and static embeddings:
+     - Inherits activity scores, descriptions, and precomputed Word2Vec/FastText vectors (reuses
+       `outputs/a_static/results/baseline_{word2vec|fasttext}_vectors.npy` when available).
+  2) Configures computation environment:
+     - Selects GPU/MPS/CPU device and enables LRU caching for efficient model loading.
+  3) Computes transformer embeddings across 24 variants:
+     - Dutch (BERT, RoBERTa, RoBERTa-2023), multilingual (XLM-R, ReMBERT, DeBERTa),
+       and sentence transformers (SBERT, E5, LaBSE, SimCSE).
+     - Evaluates token-level pooling (mean, max, CLS) and sentence-level encoding.
+     - Saves per-embedding matrices: `{embedding}_vectors.npy`.
+  4) Trains and evaluates regression models:
+     - Uses six selected multi-target regressors from baseline.
+     - Executes LOOCV with PCA + hyperparameter tuning.
+     - Computes RRMSE, MAE, and RMSE per fold.
+     - Saves per-embedding fold arrays: `{embedding}_loocv_rrmse.npy`.
+  5) Performs statistical analyses:
+     - Per-embedding: aligned/original Friedman with Nemenyi post-hoc, pairwise Wilcoxon,
+       and critical-difference (CD) diagrams. Writes `{embedding}_{aligned|original}_nemenyi_p.csv`,
+       `{embedding}_wilcoxon_p.csv`, and plots `{embedding}_{aligned|original}_cd.png`.
+     - Across embeddings: aligned/original Friedman + Nemenyi and pairwise Wilcoxon.
+       Writes `embeddings_{aligned|original}_nemenyi_p.csv`, `embeddings_pairwise_wilcoxon_p.csv`,
+       and plots `embeddings_{aligned|original}_cd.png`.
+  6) Summarizes and visualizes results:
+     - Per-embedding extended stats (RRMSE-only): `{embedding}_extended_stats.csv`.
+     - Bar chart over embeddings: `rrmse_across_embeddings_median.png`.
+     - Overall ranking table (embedding × regressor, median RRMSE):
+       `overall_ranking_embedding_regressor.csv`.
+
+• REVIEW mode (REVIEW_MODE = True) — fast, artifact-only reproduction:
+  - Skips raw data and model inference.
+  - Starts from saved artifacts in `outputs/b_frozen/results/*_loocv_rrmse.npy`.
+  - Recomputes and overwrites all downstream products to match COMPUTE mode:
+    per-embedding significance CSVs and CD plots, per-embedding extended stats,
+    across-embedding tests/plots, the grouped bar chart, and the overall ranking CSV.
+  - Prints the overall ranking to the screen for quick inspection.
+
+Inputs:
+- `data/activity_scores.csv`
+- `data/activities.csv`
+- `data/domains.xlsx`
+- `outputs/a_static/results/baseline_{word2vec|fasttext}_vectors.npy`
+- Transformer model repositories on HuggingFace
+
+Outputs:
+- `outputs/b_frozen/results/{embedding}_vectors.npy`
+- `outputs/b_frozen/results/{embedding}_loocv_rrmse.npy`
+- `outputs/b_frozen/results/{embedding}_extended_stats.csv`
+- `outputs/b_frozen/results/embeddings_{aligned|original}_nemenyi_p.csv`
+- `outputs/b_frozen/results/embeddings_pairwise_wilcoxon_p.csv`
+- `outputs/b_frozen/plots/{embedding}_{aligned|original}_cd.png`
+- `outputs/b_frozen/plots/embeddings_{aligned|original}_cd.png`
+- `outputs/b_frozen/plots/rrmse_across_embeddings_median.png`
+- `outputs/b_frozen/results/overall_ranking_embedding_regressor.csv`
+"""
+
+# ────────────────────────────────────────────
+# Imports
+# ────────────────────────────────────────────
+
+from __future__ import annotations
+
+from functools import lru_cache
+from itertools import combinations
+import os
+from pathlib import Path
+import shutil
+import sys
+import time
+from typing import Dict, List, DefaultDict
+import warnings
+import re
+from collections import defaultdict
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scikit_posthocs as sp
+from scipy.stats import f as f_dist, friedmanchisquare, wilcoxon
+from sentence_transformers import SentenceTransformer
+from statsmodels.stats.multitest import multipletests
+import torch
+from transformers import AutoModel, AutoTokenizer
+
+# ────────────────────────────────────────────
+# Paths
+# ────────────────────────────────────────────
+
+def get_project_root(marker: str = "LICENSE") -> Path:
+    cwd = Path.cwd().resolve()
+    for candidate in (cwd, *cwd.parents):
+        if (candidate / marker).is_file():
+            return candidate
+    raise FileNotFoundError(f"Could not find '{marker}' in {cwd} or any parent directories.")
+
+ROOT         = get_project_root()
+os.chdir(ROOT)
+sys.path.insert(0, str(ROOT / "scripts"))
+import a_static as BASE
+
+
+# Silence transformers / torch warnings
+warnings.filterwarnings("ignore", category=UserWarning, module=r"transformers")
+warnings.filterwarnings("ignore", category=UserWarning, module=r"sentence_transformers")
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+# Aliases for baseline utilities
+load_data                           = BASE.load_data
+load_embeddings                     = BASE.load_embeddings
+text_to_embedding                   = BASE.text_to_embedding
+build_pipeline_for_model            = BASE.build_pipeline_for_model
+evaluate_models_loocv_with_tuning   = BASE.evaluate_models_loocv_with_tuning
+model_comparison_per_target         = BASE.model_comparison_per_target
+
+PLOTS_DIR   = ROOT / "outputs" / "b_frozen" / "plots"
+RESULTS_DIR = ROOT / "outputs" / "b_frozen" / "results"
+
+for p in (PLOTS_DIR, RESULTS_DIR):
+    p.mkdir(parents=True, exist_ok=True)
+
+# ────────────────────────────────────────────
+# Global configuration
+# ────────────────────────────────────────────
+
+REVIEW_MODE = True 
+RANDOM_SEED = BASE.RANDOM_SEED   
+n_cores     = BASE.n_cores
+
+# ────────────────────────────────────────────
+# 0. Artifact loading (REVIEW_MODE)
+# ────────────────────────────────────────────
+
+def _load_rrmse_artifact(npy_path: Path) -> dict:
+    """Load {model_name -> (folds x targets) ndarray} saved via np.save(dict, allow_pickle=True)."""
+    arr = np.load(npy_path, allow_pickle=True)
+    if isinstance(arr.item(), dict):
+        return arr.item()
+    raise ValueError(f"Unexpected artifact format in {npy_path}")
+
+def discover_frozen_artifacts() -> dict:
+    """
+    Discover per-embedding artifacts in outputs/b_frozen/results:
+      -> {canonical_embedding_name: newest_npy_path} for '*_loocv_rrmse.npy'
+    Canonical key = lowercase, non-word chars -> '_'.
+    If multiple files exist for the same key, pick the newest (mtime).
+    """
+    groups: DefaultDict[str, list[Path]] = defaultdict(list)
+    for f in RESULTS_DIR.glob("*_loocv_rrmse.npy"):
+        stem = f.stem  # e.g., 'bert_mean_loocv_rrmse'
+        emb  = stem[:-len("_loocv_rrmse")] if stem.endswith("_loocv_rrmse") else stem
+        key  = re.sub(r"[^\w]+", "_", emb).strip("_").lower()
+        groups[key].append(f)
+
+    chosen = {}
+    for key, files in groups.items():
+        newest = max(files, key=lambda p: p.stat().st_mtime)
+        chosen[key] = newest
+    return dict(sorted(chosen.items()))
+
+def write_extended_stats_rrmse_only(embedding_name: str, rrmse_dict: dict) -> pd.DataFrame:
+    """
+    Canonical extended stats: RRMSE-only (mean/std/median/25th/75th), overwrite same filename.
+      -> outputs/b_frozen/results/{embedding}_extended_stats.csv
+    """
+    rows = []
+    for model_name in sorted(rrmse_dict.keys()):
+        flat = np.asarray(rrmse_dict[model_name]).flatten()
+        rows.append({
+            "model": model_name,
+            "rrmse_mean":   float(np.mean(flat)),
+            "rrmse_std":    float(np.std(flat)),
+            "rrmse_median": float(np.median(flat)),
+            "rrmse_25th":   float(np.percentile(flat, 25)),
+            "rrmse_75th":   float(np.percentile(flat, 75)),
+        })
+    df = pd.DataFrame(rows).set_index("model")
+    out = RESULTS_DIR / f"{embedding_name}_extended_stats.csv"
+    df.to_csv(out)  # overwrite
+    print(f"[INFO] Extended stats (RRMSE-only) → {out}")
+    return df
+
+def as_rrmse_dict_from_final_metrics(final_metrics: dict) -> dict:
+    """Convert compute-mode `final_metrics` -> {model: (folds x targets) ndarray} (RRMSE only)."""
+    return {m: np.asarray(final_metrics[m]["rrmse"]) for m in sorted(final_metrics.keys())}
+
+
+# ──────────────────────────────────────────────────────────────
+# 1.  Device selection
+# ──────────────────────────────────────────────────────────────
+device = torch.device(
+    "cuda" if torch.cuda.is_available()
+    else "mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available()
+    else "cpu"
+)
+
+# ──────────────────────────────────────────────────────────────
+# 2.  Embedding selection
+# ──────────────────────────────────────────────────────────────
+WORD_EMB_KEYS = ["word2vec", "fasttext"]
+
+# Token-level pooling on regular transformers
+TRANSFORMER_POOL_EMBS = {
+    # ── Dutch encoders ─────────────────────────
+    
+    # BERT 
+    "bert_mean": {"model": "GroNLP/bert-base-dutch-cased", "pool": "mean"},
+    "bert_max":  {"model": "GroNLP/bert-base-dutch-cased", "pool": "max"},
+    "bert_cls":  {"model": "GroNLP/bert-base-dutch-cased", "pool": "cls"},
+
+    # RoBERTa (base)
+    "robbert_v2_mean": {"model": "pdelobelle/robbert-v2-dutch-base", "pool": "mean"},
+    "robbert_v2_max":  {"model": "pdelobelle/robbert-v2-dutch-base", "pool": "max"},
+    "robbert_v2_cls":  {"model": "pdelobelle/robbert-v2-dutch-base", "pool": "cls"},
+
+    # RoBERTa (large)
+    "robbert2023_mean": {"model": "DTAI-KULeuven/robbert-2023-dutch-large", "pool": "mean"},
+    "robbert2023_max":  {"model": "DTAI-KULeuven/robbert-2023-dutch-large", "pool": "max"},
+    "robbert2023_cls":  {"model": "DTAI-KULeuven/robbert-2023-dutch-large", "pool": "cls"},
+
+    # ── English encoder with strong x-lingual zero-shot ──
+    
+    # DeBERTa-v3 
+    "deberta_mean": {"model": "microsoft/deberta-v3-large", "pool": "mean"},
+    "deberta_max":  {"model": "microsoft/deberta-v3-large", "pool": "max"},
+    "deberta_cls":  {"model": "microsoft/deberta-v3-large", "pool": "cls"},
+
+    # ── Multilingual encoders ───────────────────
+    
+    # XLM-R (large)
+    "xlmr_large_mean": {"model": "FacebookAI/xlm-roberta-large", "pool": "mean"},
+    "xlmr_large_max":  {"model": "FacebookAI/xlm-roberta-large", "pool": "max"},
+    "xlmr_large_cls":  {"model": "FacebookAI/xlm-roberta-large", "pool": "cls"},
+
+    # ReMBERT
+    "rembert_mean": {"model": "google/rembert", "pool": "mean"},
+    "rembert_max":  {"model": "google/rembert", "pool": "max"},
+    "rembert_cls":  {"model": "google/rembert", "pool": "cls"},
+}
+
+
+# Sentence-level transformers
+SENTENCE_TRANSFORMERS = {
+
+    # SBERT
+    "sbert_bert":        "jegormeister/bert-base-dutch-cased-snli",
+    
+    # SBERT_RoBERTa
+    "sbert_roberta":     "NetherlandsForensicInstitute/robbert-2022-dutch-sentence-transformers",
+    
+    # E5 (base)
+    "e5_base":           "embaas/sentence-transformers-multilingual-e5-base",
+
+    # E5 (large)
+    "e5_large":          "embaas/sentence-transformers-multilingual-e5-large",
+
+    # LABSE              
+    "labse":             "sentence-transformers/LaBSE",
+
+    # SimCSE
+    "simcse_xlmr_base":  "sentence-transformers/paraphrase-xlm-r-multilingual-v1",
+}
+
+ALL_EMBEDDINGS: Dict[str, Dict] = {
+    **{k: {"kind": "word"} for k in WORD_EMB_KEYS},
+    **{k: {"kind": "hf", **v} for k, v in TRANSFORMER_POOL_EMBS.items()},
+    **{k: {"kind": "sbert", "model": v} for k, v in SENTENCE_TRANSFORMERS.items()},
+}
+
+
+# ──────────────────────────────────────────────────────────────
+# 3.  Model selection
+# ──────────────────────────────────────────────────────────────
+SELECTED_MODELS = [
+    "local_mean",
+    "local_lasso",
+    "local_rf",
+    "chain_ERCcv_rf",
+    "chain_ERCcv_lr",
+    "global_rf",
+]
+model_dict = {m: BASE.model_constructors[m] for m in SELECTED_MODELS}
+
+# ──────────────────────────────────────────────────────────────
+# 4.  Frozen transformer helpers
+# ──────────────────────────────────────────────────────────────
+
+def _batch_iter(seq: List[str], n: int):
+    for i in range(0, len(seq), n):
+        yield seq[i : i + n]
+
+@lru_cache(maxsize=None)
+def _load_hf(model_name: str):
+    tok = AutoTokenizer.from_pretrained(model_name)
+    mdl = AutoModel.from_pretrained(model_name).to(device).eval()
+    return tok, mdl
+
+@lru_cache(maxsize=None)
+def _load_sbert(model_name: str):
+    return SentenceTransformer(model_name, device=str(device))
+
+def _token_pool(texts: np.ndarray, model_name: str, pooling: str) -> np.ndarray:
+    """Compute mean / max / CLS pooling for a HuggingFace model."""
+    tok, mdl = _load_hf(model_name)
+    vecs = []
+    with torch.no_grad():
+        for batch in _batch_iter(texts.tolist(), 32):
+            enc = tok(batch, padding=True, truncation=True, max_length=128, return_tensors="pt").to(device)
+            out = mdl(**enc).last_hidden_state  # (B, L, H)
+            mask = enc["attention_mask"].unsqueeze(-1)  # (B, L, 1)
+            if pooling == "mean":
+                summed = (out * mask).sum(dim=1)
+                lens = mask.sum(dim=1)
+                emb = summed / lens
+            elif pooling == "max":
+                # pad tokens → -∞ so they don't dominate max
+                out_masked = out.masked_fill(mask == 0, -1e9)
+                emb = out_masked.max(dim=1).values
+            elif pooling in {"cls", "s"}:
+                emb = out[:, 0, :]
+            else:
+                raise ValueError(f"Unknown pooling: {pooling}")
+            vecs.append(emb.cpu().numpy())
+    return np.vstack(vecs)
+
+def _sbert_pool(texts: np.ndarray, model_name: str) -> np.ndarray:
+    sbert = _load_sbert(model_name)
+    return sbert.encode(texts.tolist(), batch_size=32, show_progress_bar=True)
+
+# Dispatcher — returns (N, D) numpy array
+def compute_embedding_matrix(texts: np.ndarray, key: str, w2v=None, ft=None) -> np.ndarray:
+    spec = ALL_EMBEDDINGS[key]
+    if spec["kind"] == "word":
+        model = w2v if key == "word2vec" else ft
+        return np.vstack([text_to_embedding(t, model, embedding_dim=300) for t in texts])
+
+    if spec["kind"] == "hf":
+        return _token_pool(texts, spec["model"], spec["pool"])
+
+    if spec["kind"] == "sbert":
+        return _sbert_pool(texts, spec["model"])
+
+    raise ValueError(f"Unrecognised embedding key: {key}")
+
+# ──────────────────────────────────────────────────────────────
+# 5.  Statistical helpers
+# ──────────────────────────────────────────────────────────────
+
+def section(title):
+    """Print section header"""
+    bar = "═" * len(title)
+    print(f"\n{bar}\n{title}\n{bar}")
+
+def _save_and_show(fig, path: str):
+    """Save and display figure"""
+    fig.savefig(path, bbox_inches="tight", dpi=300)
+    plt.show()
+    print(f"Plot saved → {path}")
+
+def aligned_ranks(mat):
+    """Hodges–Lehmann alignment + ranking along rows (lower is better)"""
+    aligned = mat - np.median(mat, axis=1, keepdims=True)
+    return np.apply_along_axis(lambda r: np.argsort(np.argsort(r)) + 1, 1, aligned)
+
+def friedman_aligned(mat):
+    """Aligned-Friedman χ² and Iman–Davenport F-statistic (expects ranks or aligned data)"""
+    k = mat.shape[1]
+    from scipy.stats import friedmanchisquare
+    chi2, _ = friedmanchisquare(*[mat[:, i] for i in range(k)])
+    Ff = ((mat.shape[0] - 1) * chi2) / (mat.shape[0] * (k - 1) - chi2)
+    return chi2, Ff
+
+def wilcoxon_matrix(mat, labels):
+    """Pairwise two-sided Wilcoxon (zero-method = zsplit)"""
+    df = pd.DataFrame(np.ones((len(labels), len(labels))), index=labels, columns=labels)
+    for i, j in combinations(range(len(labels)), 2):
+        diff = mat[:, i] - mat[:, j]
+        p    = 1.0 if np.allclose(diff, 0) else wilcoxon(diff, zero_method="zsplit")[1]
+        df.iat[i, j] = df.iat[j, i] = p
+    return df.round(4)
+
+def holm_correct_and_effects(raw_p, data, labels):
+    """Holm–Bonferroni correction and Cliff's Δ effect sizes"""
+    idx = list(combinations(range(len(labels)), 2))
+    pvals = [raw_p.iat[i, j] for i, j in idx]
+    _, p_adj, _, _ = multipletests(pvals, method="holm")
+
+    adj_df = raw_p.copy()
+    for (i, j), p in zip(idx, p_adj):
+        adj_df.iat[i, j] = adj_df.iat[j, i] = p
+    adj_df[np.eye(len(labels), dtype=bool)] = 1.0
+
+    def cliffs_delta(x, y):
+        diffs = np.subtract.outer(x, y)
+        n = len(x) * len(y)
+        return (np.sum(diffs > 0) - np.sum(diffs < 0)) / n
+
+    delta_df = pd.DataFrame(np.ones((len(labels), len(labels))), index=labels, columns=labels)
+    for (i, j) in idx:
+        d_ij = cliffs_delta(data[:, i], data[:, j])
+        delta_df.iat[i, j] = d_ij
+        delta_df.iat[j, i] = -d_ij
+
+    return adj_df.round(4), delta_df.round(3)
+
+def conover_posthoc(ranks, labels, fname_tag):
+    """Conover–Iman test with Holm correction"""
+    p_df = sp.posthoc_conover_friedman(ranks, p_adjust="holm")
+    p_df.index = p_df.columns = labels
+    out = RESULTS_DIR / f"{fname_tag}_conover_p.csv"
+    p_df.to_csv(out)
+    print("\nConover–Iman post-hoc p-values (Holm-adjusted):")
+    print(p_df.round(4).to_string())
+    print("  ↳ saved →", out)
+    return p_df
+
+def run_friedman(mat, block_name, col_labels, fname_tag):
+    """Generic routine for Friedman analysis with post-hoc tests (FULL verbose printout)"""
+    k       = len(col_labels)
+    nblocks = mat.shape[0]
+
+    # Save & print medians (PRINT SORTED low→high; CSV keeps original order)
+    col_meds = pd.Series(np.median(mat, axis=0), index=col_labels)
+    med_path = RESULTS_DIR / f"{fname_tag}_median.csv"
+    col_meds.to_csv(med_path, header=["median_rrmse"])
+    print(f"\nMedian RRMSE per {block_name[:-1] if block_name.endswith('s') else block_name} (sorted low→high):")
+    print(col_meds.sort_values().round(3).to_string())
+    print("  ↳ saved →", med_path)
+
+    # Only two blocks → Wilcoxon only
+    if nblocks == 2:
+        print(f"\nOnly two {block_name} → skipping Friedman/post-hoc.")
+        wilc = wilcoxon_matrix(mat, col_labels)
+        print("\nWilcoxon pairwise p-values:")
+        print(wilc.round(4).to_string())
+        wilc_path = RESULTS_DIR / f"{fname_tag}_wilcoxon_raw_p.csv"
+        wilc.to_csv(wilc_path)
+        print("  ↳ saved →", wilc_path)
+
+        adj, delta = holm_correct_and_effects(wilc, mat, col_labels)
+        print("\nHolm–Bonferroni adjusted p-values:")
+        print(adj.round(4).to_string())
+        adj_path = RESULTS_DIR / f"{fname_tag}_wilcoxon_holm_p.csv"
+        adj.to_csv(adj_path)
+        print("  ↳ saved →", adj_path)
+
+        print("\nCliff's Δ effect sizes:")
+        print(delta.round(3).to_string())
+        delta_path = RESULTS_DIR / f"{fname_tag}_cliffs_delta.csv"
+        delta.to_csv(delta_path)
+        print("  ↳ saved →", delta_path)
+        return
+
+    # Only two methods → paired Wilcoxon only
+    if k == 2:
+        p = wilcoxon(mat[:, 0], mat[:, 1], zero_method="zsplit")[1]
+        print(f"\nPaired Wilcoxon ({col_labels[0]} vs {col_labels[1]}): p = {p:.5g}")
+        return
+
+    # Friedman statistics (aligned + original)
+    ranks = aligned_ranks(mat)
+    chi2_a, Ff_a = friedman_aligned(ranks)
+    chi2_o, p_o  = friedmanchisquare(*[mat[:, i] for i in range(k)])
+    Ff_o = ((nblocks - 1) * chi2_o) / (nblocks * (k - 1) - chi2_o)
+
+    print(f"\n*Aligned-Friedman* (blocks = {block_name})")
+    print(f"  χ²_F = {chi2_a:.3f}    F_F = {Ff_a:.3f}")
+    print(f"\n*Original-Friedman* (blocks = {block_name})")
+    print(f"  χ²_F = {chi2_o:.3f}    p = {p_o:.3g}    F_F = {Ff_o:.3f}")
+
+    # Post-hoc: Conover (few blocks) or Nemenyi (many blocks)
+    if nblocks < 10:
+        conover_posthoc(ranks, col_labels, fname_tag)
+    else:
+        pvals_nem = sp.posthoc_nemenyi_friedman(ranks)
+        pvals_nem.index = pvals_nem.columns = col_labels
+        nem_path = RESULTS_DIR / f"{fname_tag}_nemenyi_p.csv"
+        pvals_nem.to_csv(nem_path)
+        print("\nNemenyi p-values (aligned post-hoc):")
+        print(pvals_nem.round(4).to_string())
+        print("  ↳ saved →", nem_path)
+
+    # Wilcoxon raw + Holm + Cliff’s Δ
+    wilc = wilcoxon_matrix(mat, col_labels)
+    print("\nWilcoxon pairwise p-values:")
+    print(wilc.round(4).to_string())
+    wilc_path = RESULTS_DIR / f"{fname_tag}_wilcoxon_raw_p.csv"
+    wilc.to_csv(wilc_path)
+    print("  ↳ saved →", wilc_path)
+
+    adj, delta = holm_correct_and_effects(wilc, mat, col_labels)
+    print("\nHolm–Bonferroni adjusted p-values:")
+    print(adj.round(4).to_string())
+    adj_path = RESULTS_DIR / f"{fname_tag}_wilcoxon_holm_p.csv"
+    adj.to_csv(adj_path)
+    print("  ↳ saved →", adj_path)
+
+    print("\nCliff's Δ effect sizes:")
+    print(delta.round(3).to_string())
+    delta_path = RESULTS_DIR / f"{fname_tag}_cliffs_delta.csv"
+    delta.to_csv(delta_path)
+    print("  ↳ saved →", delta_path)
+
+def cd_plot(matrix, labels, title, fname):
+    """Critical-distance diagram with robust p-value alignment to labels."""
+    if matrix.shape[1] < 2:
+        print(f"⚠  Skipping CD-plot '{title}' (need ≥2 methods, got {matrix.shape[1]})")
+        return
+
+    ranks = aligned_ranks(matrix)
+
+    # Compute post-hoc p-values and FORCE index/columns to match `labels`
+    pvals_raw = sp.posthoc_nemenyi_friedman(ranks)
+    if not isinstance(pvals_raw, pd.DataFrame):
+        pvals = pd.DataFrame(pvals_raw, index=range(len(labels)), columns=range(len(labels)))
+    else:
+        pvals = pvals_raw.copy()
+
+    # Defensive shape fix (trim/pad unlikely; trim covers rare inconsistencies)
+    if pvals.shape != (len(labels), len(labels)):
+        pvals = pvals.iloc[:len(labels), :len(labels)]
+        if pvals.shape != (len(labels), len(labels)):
+            # Last resort: identity p-values (no significant lines)
+            pvals = pd.DataFrame(np.ones((len(labels), len(labels))), index=range(len(labels)), columns=range(len(labels)))
+
+    # Align names to your model labels, sanitize & symmetrize
+    pvals.index = labels
+    pvals.columns = labels
+    pvals = pvals.astype(float).fillna(1.0)
+    pvals = pd.DataFrame(np.minimum(pvals.values, pvals.values.T), index=labels, columns=labels)
+    np.fill_diagonal(pvals.values, 1.0)
+
+    fig, ax = plt.subplots(figsize=(8, 3), dpi=120)
+    sp.critical_difference_diagram(pd.Series(ranks.mean(0), index=labels), pvals, ax=ax)
+    ax.set_title(title, pad=10)
+    _save_and_show(fig, PLOTS_DIR / fname)
+
+def cd_plot_dual(matrix1, labels1, matrix2, labels2, title1, title2, fname):
+    """Two CD-diagrams side-by-side with robust p-value alignment."""
+    if matrix1.shape[1] < 2 or matrix2.shape[1] < 2:
+        print("⚠  Skipping dual CD-plot (need ≥2 methods for both)")
+        return
+
+    def _aligned_pvals(M, lbls):
+        r = aligned_ranks(M)
+        raw = sp.posthoc_nemenyi_friedman(r)
+        if not isinstance(raw, pd.DataFrame):
+            P = pd.DataFrame(raw, index=range(len(lbls)), columns=range(len(lbls)))
+        else:
+            P = raw.copy()
+        if P.shape != (len(lbls), len(lbls)):
+            P = P.iloc[:len(lbls), :len(lbls)]
+            if P.shape != (len(lbls), len(lbls)):
+                P = pd.DataFrame(np.ones((len(lbls), len(lbls))), index=range(len(lbls)), columns=range(len(lbls)))
+        P.index = lbls
+        P.columns = lbls
+        P = P.astype(float).fillna(1.0)
+        P = pd.DataFrame(np.minimum(P.values, P.values.T), index=lbls, columns=lbls)
+        np.fill_diagonal(P.values, 1.0)
+        return r, P
+
+    ranks1, pvals1 = _aligned_pvals(matrix1, labels1)
+    ranks2, pvals2 = _aligned_pvals(matrix2, labels2)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 3), dpi=120)
+    sp.critical_difference_diagram(pd.Series(ranks1.mean(0), index=labels1), pvals1, ax=ax1)
+    ax1.set_title(title1, pad=10)
+    sp.critical_difference_diagram(pd.Series(ranks2.mean(0), index=labels2), pvals2, ax=ax2)
+    ax2.set_title(title2, pad=10)
+    plt.tight_layout()
+    _save_and_show(fig, PLOTS_DIR / fname)
+
+
+def per_embedding_significance(rrmse_results: dict, emb_name: str):
+    """
+    Per-embedding tests & plots.
+    Keeps legacy filenames:
+      - results/{emb}_aligned_nemenyi_p.csv
+      - results/{emb}_original_nemenyi_p.csv
+      - results/{emb}_wilcoxon_p.csv
+      - plots/{emb}_{aligned|original}_cd.png
+    Also writes the richer outputs from run_friedman with prefix {emb}_aligned_*.
+    """
+    model_names = sorted(rrmse_results.keys())
+
+    # rows = targets, cols = models  (folds collapsed by median)
+    M = np.column_stack([
+        np.median(np.asarray(rrmse_results[m]), axis=0)
+        for m in model_names
+    ])
+
+    # ——— Aligned: CD + full verbose tables via run_friedman ———
+    cd_plot(
+        M,
+        model_names,
+        f"{emb_name}: per-target (aligned ranks)",
+        f"{emb_name}_aligned_cd.png",
+    )
+    run_friedman(
+        M,
+        block_name="targets",
+        col_labels=model_names,
+        fname_tag=f"{emb_name}_aligned",   # writes *_aligned_{nemenyi|conover|wilcoxon_*|cliffs_delta}.csv
+    )
+
+    # Back-compat: copy raw Wilcoxon to the legacy name
+    src = RESULTS_DIR / f"{emb_name}_aligned_wilcoxon_raw_p.csv"
+    dst = RESULTS_DIR / f"{emb_name}_wilcoxon_p.csv"
+    if src.exists():
+        shutil.copyfile(src, dst)
+
+    # Back-compat: ensure aligned Nemenyi file name exists if applicable
+    # (run_friedman writes Nemenyi when nblocks >= 10, else Conover.)
+    nem_src = RESULTS_DIR / f"{emb_name}_aligned_nemenyi_p.csv"
+    if not nem_src.exists():
+        # Nothing to do if Conover was chosen; we keep your legacy contract:
+        # aligned_nemenyi_p.csv only when Nemenyi applies.
+        pass
+
+    # ——— Original (non-aligned): Nemenyi + CD with the legacy names ———
+    try:
+        pvals_o = sp.posthoc_nemenyi_friedman(M)
+        pvals_o.index = pvals_o.columns = model_names
+        pvals_o.to_csv(RESULTS_DIR / f"{emb_name}_original_nemenyi_p.csv")
+
+        # rank per row (no alignment) only for plotting
+        ranks_o = np.apply_along_axis(lambda r: np.argsort(np.argsort(r)) + 1, 1, M)
+        fig, ax = plt.subplots(figsize=(8, 3), dpi=120)
+        sp.critical_difference_diagram(
+            pd.Series(ranks_o.mean(0), index=model_names),
+            pvals_o,
+            ax=ax
+        )
+        ax.set_title(f"{emb_name}: per-target (original ranks)", pad=10)
+        _save_and_show(fig, PLOTS_DIR / f"{emb_name}_original_cd.png")
+    except Exception as e:
+        print(f"[WARN] Original Nemenyi failed for {emb_name}: {e}")
+
+def embedding_comparison_per_model(
+    embedding_rrmse_summary: Dict[str, Dict[str, Dict[str, float]]]
+) -> None:
+    """
+    Across-embedding comparison using median RRMSE aggregated over the selected models.
+    Writes:
+      - results/embeddings_aligned_nemenyi_p.csv
+      - results/embeddings_original_nemenyi_p.csv
+      - results/embeddings_pairwise_wilcoxon_p.csv
+      - plots/embeddings_aligned_cd.png
+      - plots/embeddings_original_cd.png
+    """
+    if not embedding_rrmse_summary:
+        print("[WARN] No embeddings available for across-embedding comparison.")
+        return
+
+    embeddings = sorted(embedding_rrmse_summary.keys())
+    models = sorted(next(iter(embedding_rrmse_summary.values())).keys())
+
+    # Matrix shape: rows=models, columns=embeddings
+    matrix = np.array([
+        [embedding_rrmse_summary[e][m]["median"] for e in embeddings]
+        for m in models
+    ])
+
+    print("\n" + "=" * 60)
+    print("Across-embedding comparison (median RRMSE over selected models)")
+    print("=" * 60)
+
+    # ----- Aligned Friedman -----
+    ranks_aligned = aligned_ranks(matrix)
+    k, nblocks = matrix.shape[1], matrix.shape[0]
+    chi2_a, F_a = friedman_aligned(ranks_aligned)
+    p_a = 1.0 - f_dist.cdf(F_a, k - 1, (k - 1) * (nblocks - 1))
+    print(f"Aligned Friedman:  χ²_F = {chi2_a:.4f} (p = {p_a:.6f});  F_F = {F_a:.4f}")
+
+    if p_a < 0.05:
+        nem = sp.posthoc_nemenyi_friedman(ranks_aligned)
+        nem.index = nem.columns = embeddings
+        nem_path = RESULTS_DIR / "embeddings_aligned_nemenyi_p.csv"
+        nem.to_csv(nem_path)
+        print("  ↳ Nemenyi p-values saved →", nem_path)
+
+        # Draw on an explicit figure; scikit-posthocs draws on current axes.
+        fig = plt.figure(figsize=(8, 2), dpi=120)
+        sp.critical_difference_diagram(
+            pd.Series(ranks_aligned.mean(0), index=embeddings),
+            nem
+        )
+        _save_and_show(fig, PLOTS_DIR / "embeddings_aligned_cd.png")
+
+    # ----- Original Friedman -----
+    chi2_o, p_o = friedmanchisquare(*[matrix[:, i] for i in range(k)])
+    F_o = ((nblocks - 1) * chi2_o) / (nblocks * (k - 1) - chi2_o)
+    print(f"Original Friedman:  χ²_F = {chi2_o:.4f} (p = {p_o:.6f});  F_F = {F_o:.4f}")
+
+    if p_o < 0.05:
+        nem = sp.posthoc_nemenyi_friedman(matrix)
+        nem.index = nem.columns = embeddings
+        nem_path = RESULTS_DIR / "embeddings_original_nemenyi_p.csv"
+        nem.to_csv(nem_path)
+        print("  ↳ Nemenyi p-values saved →", nem_path)
+
+        # Rank per row then average ranks per column
+        ranks = np.apply_along_axis(lambda r: np.argsort(np.argsort(r)) + 1, 1, matrix)
+        fig = plt.figure(figsize=(8, 2), dpi=120)
+        sp.critical_difference_diagram(
+            pd.Series(ranks.mean(0), index=embeddings),
+            nem
+        )
+        _save_and_show(fig, PLOTS_DIR / "embeddings_original_cd.png")
+
+    # ----- Pairwise Wilcoxon across embeddings -----
+    wilc = wilcoxon_matrix(matrix, embeddings)  # columns=embeddings
+    wilc_path = RESULTS_DIR / "embeddings_pairwise_wilcoxon_p.csv"
+    wilc.to_csv(wilc_path)
+    print("Pairwise Wilcoxon p-values saved →", wilc_path)
+
+
+def plot_rrmse_median_across_embeddings_frozen(embedding_rrmse_summary: Dict[str, Dict[str, Dict[str, float]]]):
+    """
+    Grouped-bar chart of median RRMSE for each (model, embedding) — saved under b_frozen.
+    """
+    if not embedding_rrmse_summary:
+        print("No embeddings to plot.")
+        return
+
+    embeddings_list = sorted(embedding_rrmse_summary.keys())
+    model_list = sorted(next(iter(embedding_rrmse_summary.values())).keys())
+    df_plot = pd.DataFrame(index=model_list)
+
+    for emb in embeddings_list:
+        df_plot[emb] = [embedding_rrmse_summary[emb][m]["median"] for m in model_list]
+
+    fig, ax = plt.subplots(figsize=(8, 5), dpi=110)
+    df_plot.plot(kind="bar", width=0.7, edgecolor="black", ax=ax)
+    ax.set_xlabel("Models")
+    ax.set_ylabel("Median RRMSE (↓ better)")
+    ax.set_title("Median Model Performance Across Embeddings")
+    ax.grid(axis="y")
+    ax.legend(title="Embeddings")
+    plt.tight_layout()
+
+    _save_and_show(fig, PLOTS_DIR / "rrmse_across_embeddings_median.png")
+
+# ──────────────────────────────────────────────────────────────
+# 6.  Main functions
+# ──────────────────────────────────────────────────────────────
+def run_pipeline_review():
+
+    artifacts = discover_frozen_artifacts()
+    if not artifacts:
+        raise FileNotFoundError(
+            "No artifacts found in outputs/b_frozen/results/. "
+            "Expected files like '{embedding}_loocv_rrmse.npy'."
+        )
+
+    # Per-embedding stats → medians (for across-embedding tests & plots)
+    embedding_rrmse_summary = {}
+
+    for emb_name, npy_path in artifacts.items():
+        print("\n" + "="*60)
+        print(f"[REVIEW] Using artifact for: {emb_name}")
+        print("="*60)
+        rrmse_results = _load_rrmse_artifact(npy_path)
+        print(f"  → using {npy_path.name}  (models={len(rrmse_results.keys())}: {sorted(rrmse_results.keys())})")
+        
+        # Per-embedding significance + CDs
+        per_embedding_significance(rrmse_results, emb_name)
+
+        # Extended stats (RRMSE-only), overwrite canonical file
+        write_extended_stats_rrmse_only(emb_name, rrmse_results)
+
+        # Collect medians for across-embedding tests/plots
+        embedding_rrmse_summary[emb_name] = {
+            m: {"median": float(np.median(np.asarray(rrmse_results[m]).flatten()))}
+            for m in sorted(rrmse_results.keys())
+        }
+
+    # Across-embedding tests/plots (writes embeddings_* CSVs + CDs)
+    try:
+        embedding_comparison_per_model(embedding_rrmse_summary)
+    except Exception as e:
+        print(f"Across-embedding tests failed: {e}")
+
+    # Performance grid bar plot
+    plot_rrmse_median_across_embeddings_frozen(embedding_rrmse_summary)
+
+    # Overall ranking (embedding, regressor) from artifacts
+    rows = []
+    for npy in sorted(RESULTS_DIR.glob("*_loocv_rrmse.npy")):
+        emb = npy.stem.replace("_loocv_rrmse", "")
+        data = np.load(npy, allow_pickle=True).item()
+        for reg, arr in data.items():
+            rows.append({"embedding": emb, "regressor": reg, "median_rrmse": float(np.median(arr))})
+
+    df = pd.DataFrame(rows).sort_values("median_rrmse").reset_index(drop=True)
+    out_csv = RESULTS_DIR / "overall_ranking_embedding_regressor.csv"
+    df.to_csv(out_csv, index=False)
+    print(f"[REVIEW] Saved → {out_csv}")
+
+    print("\n" + "-"*65)
+    print("OVERALL RANKING – embedding × regressor (median RRMSE)")
+    print("-"*65)
+    print(df.to_string(index=False, formatters={"median_rrmse":"{:.4f}".format}))
+
+    root_csv = RESULTS_DIR / "overall_ranking_embedding_regressor.csv"
+    df.to_csv(root_csv, index=False)
+    print(f"[REVIEW] Saved → {root_csv}")
+
+def run_pipeline_compute():
+    warnings.simplefilter("ignore", FutureWarning)
+
+    # 1) Load data
+    try:
+        data_merged, _, _ = load_data()
+    except Exception as e:
+        print(f"Failed to load data: {e}")
+        return
+    target_cols = [f"domain{i}" for i in range(1, 15)]
+    texts = data_merged["question"].values
+    Y_all = data_merged[target_cols].values
+
+    # 2) Word2Vec/FastText
+    try:
+        w2v_vectors, fasttext_model = load_embeddings()
+    except Exception as e:
+        print(f"Failed to load embeddings: {e}")
+        return
+
+    # 3) Iterate over embeddings
+    embedding_rrmse_summary = {}
+    for emb_key in ALL_EMBEDDINGS:
+        print("\n" + "=" * 60)
+        print(f"Embedding: {emb_key}")
+        print("=" * 60)
+
+        # Compute / reuse vectors
+        if ALL_EMBEDDINGS[emb_key]["kind"] == "word":
+            vec_local = RESULTS_DIR / f"{emb_key}_vectors.npy"
+            vec_step_a = Path(ROOT / "outputs" / "a_static" / "results" / f"baseline_{emb_key}_vectors.npy")
+            if vec_local.exists():
+                X_all = np.load(vec_local)
+                print(f"Loaded {emb_key} vectors → {vec_local}")
+            elif vec_step_a.exists():
+                X_all = np.load(vec_step_a)
+                print(f"Loaded baseline {emb_key} vectors → {vec_step_a}")
+            else:
+                X_all = compute_embedding_matrix(texts, emb_key, w2v_vectors, fasttext_model)
+        else:
+            X_all = compute_embedding_matrix(texts, emb_key, w2v_vectors, fasttext_model)
+
+        np.save(os.path.join(RESULTS_DIR, f"{emb_key}_vectors.npy"), X_all)
+
+        # LOOCV + tuning over selected models
+        try:
+            rrmse_results, final_metrics = BASE.evaluate_models_loocv_with_tuning(X_all, Y_all, model_dict)
+        except Exception as e:
+            print(f"LOOCV failure for {emb_key}: {e}")
+            continue
+
+        np.save(os.path.join(RESULTS_DIR, f"{emb_key}_loocv_rrmse.npy"), rrmse_results)
+
+        # Per-embedding significance + CDs (local naming, no 'baseline_')
+        try:
+            per_embedding_significance(rrmse_results, emb_key)
+        except Exception as e:
+            print(f"Significance test error for {emb_key}: {e}")
+
+        # Extended stats (RRMSE-only) — same file name as review
+        write_extended_stats_rrmse_only(emb_key, as_rrmse_dict_from_final_metrics(final_metrics))
+
+        # Medians for across-embedding tests/plots
+        embedding_rrmse_summary[emb_key] = {
+            m: {"median": float(np.median(np.asarray(final_metrics[m]['rrmse']).flatten()))}
+            for m in final_metrics
+        }
+
+    # -----------------------------------------------------------------
+    # ## [OPTIONAL] FULL PER-TARGET MODEL COMPARISON  (not only folds, but also embeddings collapsed)
+    #
+    # This reproduces Spyromitros’ 2-D analysis:
+    #   • blocks  = 14 target variables
+    #   • columns = the 6 models in SELECTED_MODELS
+    #
+    # Uncomment to run.
+    #
+    # targets_matrix = np.column_stack([
+    #     np.median(  # collapse folds & embeddings
+    #         np.concatenate([
+    #             np.load(RESULTS_DIR/f"{e}_loocv_rrmse.npy", allow_pickle=True)
+    #               .item()[m]                           # (folds, targets)
+    #             for e in embedding_rrmse_summary.keys()
+    #         ], axis=0),
+    #         axis=0)                                   # → 1×targets
+    #     for m in SELECTED_MODELS
+    # ])
+    #
+    # ranks = aligned_ranks(targets_matrix)
+    # chi2, p, Ff = friedman(ranks)
+    # print("\n=== ALIGNED FRIEDMAN  (targets × models, embeddings collapsed) ===")
+    # print(f"χ²_F = {chi2:.3f}, p = {p:.3g}, F_F = {Ff:.3f}")
+    # if p < .05:
+    #     nem = sp.posthoc_nemenyi_friedman(ranks)
+    #     nem.index = nem.columns = SELECTED_MODELS
+    #     sp.critical_difference_diagram(
+    #         pd.Series(ranks.mean(0), index=SELECTED_MODELS),
+    #         nem, title="Per-target (embeddings collapsed)"
+    #     )
+    #     plt.show()
+    
+    # 4. Across-embedding tests & plots
+    try:
+        embedding_comparison_per_model(embedding_rrmse_summary)
+    except Exception as e:
+        print(f"Across-embedding tests failed: {e}")
+
+    # -----------------------------------------------------------------
+    # ## [OPTIONAL] PER-EMBEDDING MODEL COMPARISON  (targets collapsed)
+    #
+    #  • blocks  = embeddings
+    #  • columns = models
+    #
+    # emb_matrix = np.vstack([
+    #     [ np.median( 
+    #           np.load(RESULTS_DIR/f"{e}_loocv_rrmse.npy", allow_pickle=True)
+    #             .item()[m] )               # scalar over folds & targets
+    #       for m in SELECTED_MODELS ]
+    #     for e in embedding_rrmse_summary.keys()
+    # ])
+    #
+    # ranks = aligned_ranks(emb_matrix)
+    # chi2, p, Ff = friedman(ranks)
+    # print("\n=== ALIGNED FRIEDMAN  (embeddings × models, targets collapsed) ===")
+    # print(f"χ²_F = {chi2:.3f}, p = {p:.3g}, F_F = {Ff:.3f}")
+    # if p < .05:
+    #     nem = sp.posthoc_nemenyi_friedman(ranks)
+    #     nem.index = nem.columns = SELECTED_MODELS
+    #     sp.critical_difference_diagram(
+    #         pd.Series(ranks.mean(0), index=SELECTED_MODELS),
+    #         nem, title="Per-embedding (targets collapsed)"
+    #     )
+    #     plt.show()
+
+    
+    # -----------------------------------------------------------------
+    # ## [OPTIONAL] PER-TARGET EMBEDDING COMPARISON  (models collapsed)
+    #
+    # Matrix: targets × embeddings
+    #
+    # tgt_emb_matrix = np.column_stack([
+    #     np.median(  # collapse folds & models
+    #         np.stack([
+    #             np.load(RESULTS_DIR/f"{e}_loocv_rrmse.npy", allow_pickle=True)
+    #               .item()[m]
+    #             for m in SELECTED_MODELS
+    #         ], axis=0),
+    #         axis=(0,1))  # collapse model & fold axes
+    #     for e in embedding_rrmse_summary.keys()
+    # ])
+    #
+    # ranks = aligned_ranks(tgt_emb_matrix)
+    # chi2, p, Ff = friedman(ranks)
+    # print("\n=== ALIGNED FRIEDMAN  (targets × embeddings, models collapsed) ===")
+    # print(f"χ²_F = {chi2:.3f}, p = {p:.3g}, F_F = {Ff:.3f}")
+    # if p < .05:
+    #     nem = sp.posthoc_nemenyi_friedman(ranks)
+    #     nem.index = nem.columns = embedding_rrmse_summary.keys()
+    #     sp.critical_difference_diagram(
+    #         pd.Series(ranks.mean(0), index=embedding_rrmse_summary.keys()),
+    #         nem, title="Per-target Embedding comparison"
+    #     )
+    #     plt.show()
+
+    try:
+        plot_rrmse_median_across_embeddings_frozen(embedding_rrmse_summary)
+
+    except Exception as e:
+        print(f"Plotting RRMSE comparison failed: {e}")
+
+    # Ranking table
+    rows = []
+    for npy in sorted(RESULTS_DIR.glob("*_loocv_rrmse.npy")):
+        emb = npy.stem.replace("_loocv_rrmse", "")
+        data = np.load(npy, allow_pickle=True).item()
+        for reg, arr in data.items():
+            rows.append({"embedding": emb, "regressor": reg, "median_rrmse": float(np.median(arr))})
+
+    df = pd.DataFrame(rows).sort_values("median_rrmse").reset_index(drop=True)
+    out_csv = RESULTS_DIR / "overall_ranking_embedding_regressor.csv"
+    df.to_csv(out_csv, index=False)
+    print(f"Saved → {out_csv}")
+
+    print("\n" + "-"*65)
+    print("OVERALL RANKING – embedding × regressor (median RRMSE)")
+    print("-"*65)
+    print(df.to_string(index=False, formatters={"median_rrmse":"{:.4f}".format}))
+
+    root_csv = RESULTS_DIR / "overall_ranking_embedding_regressor.csv"
+    df.to_csv(root_csv, index=False)
+    print(f"Saved → {root_csv}")
+
+# ──────────────────────────────────────────────────────────────
+# 7.  Entry-point
+# ──────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    torch.manual_seed(BASE.RANDOM_SEED)
+    np.random.seed(BASE.RANDOM_SEED)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(BASE.RANDOM_SEED)
+    if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available():
+        torch.manual_seed(BASE.RANDOM_SEED)
+
+    start = time.time()
+    try:
+        try:
+            _load_sbert.cache_clear()
+        except Exception:
+            pass
+
+        if REVIEW_MODE:
+            run_pipeline_review()
+        else:
+            run_pipeline_compute()
+    except Exception as e:
+        print(f"Error during pipeline execution: {e}")
+    print(f"Total execution time: {time.time() - start:.1f} s")

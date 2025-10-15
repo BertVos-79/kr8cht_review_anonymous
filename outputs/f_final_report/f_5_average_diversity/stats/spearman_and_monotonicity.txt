@@ -1,0 +1,5 @@
+Spearman ρ between AvgDiv and ΔRRMSE (baseline − full)
+  • Linear (chain_lr + local_lasso):    rho = -0.600, p = 0.208
+  • Tree-based (local_rf + global_rf + chain_rf): rho = 0.486, p = 0.329
+
+Monotonicity check for AvgDiv (non-decreasing): FAIL (first decrease at column % = 10).

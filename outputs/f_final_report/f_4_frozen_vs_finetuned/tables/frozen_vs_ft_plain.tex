@@ -1,0 +1,17 @@
+% Auto-generated: wilcoxon_frozen_vs_ftuned plain table
+% Requires: \usepackage{booktabs} \usepackage{amssymb}
+\begin{table}[t]\centering\small
+\setlength\tabcolsep{6pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lccccc}\toprule
+ & \texttt{local_las} & \texttt{local_rf} & \texttt{chain_lr} & \texttt{chain_rf} & \texttt{global_rf} \\
+\midrule
+\texttt{sbert} & 0.753 \(\blacktriangle\) & 0.823 \(\blacktriangle\) & 0.749 \(\blacktriangle\) & 0.797 \(\blacktriangle\) & 0.830 \(\blacktriangle\) \\
+\texttt{sbert\_ft} & 0.989 & 0.989 & 0.989 & 0.989 & 0.989 \\
+\texttt{e5} & 0.708 \(\blacktriangle\) & 0.819 \(\blacktriangle\) & 0.719 \(\blacktriangle\) & 0.811 \(\blacktriangle\) & 0.877 \(\blacktriangle\) \\
+\texttt{e5\_ft} & 0.998 & 0.998 & 0.998 & 0.998 & 0.998 \\
+\texttt{simcse} & 0.744 \(\blacktriangle\) & 0.801 \(\blacktriangle\) & 0.726 \(\blacktriangle\) & 0.782 \(\blacktriangle\) & 0.858 \(\blacktriangle\) \\
+\texttt{simcse\_ft} & 0.983 & 0.983 & 0.983 & 0.983 & 0.983 \\
+\bottomrule
+\caption{Frozen vs Fine-tuned Sentence Encoders (\(\blacktriangle\) marks Wilcoxon $p<0.05$ for frozen vs fine-tuned).}
+\label{tab:frozen_vs_ft_plain}
+\end{tabular}\end{table}

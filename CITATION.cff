@@ -1,4 +1,23 @@
 cff-version: 1.2.0
-title: "Kr8cht: Reproducibility Package"
-authors: []
-date-released: 2025-10-10
+message: >-
+  This repository is anonymized for peer review. Please cite the
+  corresponding article once available; replace the placeholder
+  metadata below upon acceptance.
+title: "Investigating study choice in Flemish Schools: An application of multi-target regression and large language models"
+type: software
+version: 0.1.0-anon
+date-released: 2025-10-14
+authors:
+  - name: "Anonymous"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "Investigating study choice in Flemish Schools: An application of multi-target regression and large language models"
+  authors:
+    - name: "Anonymous"
+  journal: "TBD"
+  year: 2026
+  start: 1
+  end: 14
+  doi: "TBD"
+repository-code: "TBD (to be filled after de-anonymization)"

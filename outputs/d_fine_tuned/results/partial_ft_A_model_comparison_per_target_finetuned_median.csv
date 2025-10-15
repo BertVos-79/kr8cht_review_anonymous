@@ -1,0 +1,4 @@
+,median_rrmse
+partial_ft_sbert_bert,0.988660315558263
+partial_ft_simcse_xlmr_base,0.9834130826133543
+partial_ft_e5_large,0.9980617910539669

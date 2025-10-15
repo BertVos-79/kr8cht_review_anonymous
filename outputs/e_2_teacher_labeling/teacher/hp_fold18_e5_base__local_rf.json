@@ -1,0 +1,13 @@
+{
+  "embedding": "e5_base",
+  "model": "local_rf",
+  "fold": 18,
+  "best_params": {
+    "pca__n_components": 0.8,
+    "reg__estimator__max_depth": 10,
+    "reg__estimator__min_samples_leaf": 1,
+    "reg__estimator__n_estimators": 100
+  },
+  "selection_metric": "GridSearchCV default R\u00b2 (cv=5) on fold training seeds",
+  "timestamp": "2025-10-02 23:02:30"
+}

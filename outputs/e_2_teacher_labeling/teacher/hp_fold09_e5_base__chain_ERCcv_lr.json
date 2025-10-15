@@ -1,0 +1,12 @@
+{
+  "embedding": "e5_base",
+  "model": "chain_ERCcv_lr",
+  "fold": 9,
+  "best_params": {
+    "chain__cv_splits": 5,
+    "chain__n_chains": 5,
+    "pca__n_components": 0.8
+  },
+  "selection_metric": "GridSearchCV default R\u00b2 (cv=5) on fold training seeds",
+  "timestamp": "2025-10-03 20:57:43"
+}

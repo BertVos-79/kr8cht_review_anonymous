@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Schoolse rituelen & organisatie",
+    "subdomain_id": "1.2",
+    "facet": "Dagstructuur",
+    "facet_id": "1.2.1",
+    "task": "Formuleer 16 activiteiten die deel uitmaken van de dagelijkse schoolroutine, zoals naar school gaan, pauzes nemen, wisselen tussen lessen of eten",
+    "lexical": {
+      "verbs": ["fietsen", "vertrekken", "aankomen", "wachten", "rusten", "pauzeren", "eten", "drinken", "kletsen", "spelen", "verzamelen", "haasten", "wandelen", "opruimen", "klaarmaken"],
+      "objects": ["brooddoos", "drinkbus", "fiets", "bel", "speelplaats", "refter", "pauze", "middagpauze", "leswissel", "schoolpoort", "gang", "trap", "boterham", "fruit"],
+      "settings": ["speelplaats", "refter", "gang", "schoolpoort", "fietsenstalling", "klaslokaal"]
+    },
+    "constraints": {
+      "time_moments": "minstens 4 zinnen over ochtend/aankomst, 4 over pauzes, 4 over middagpauze, 4 over verplaatsingen/wissels",
+      "social_dimension": "minstens 6 zinnen met sociale interactie (met vrienden, klasgenoten)",
+      "transitions": "minstens 5 zinnen over overgangen tussen activiteiten",
+      "avoid_location": "gebruik locaties alleen als inspiratie, vermeld ze niet expliciet in de zin"
+    },
+    "examples": [
+      "met vrienden naar school fietsen",
+      "de boterham tijdens de pauze opeten",
+      "naar het volgende lokaal wandelen"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Schoolse rituelen & organisatie",
+    "subdomain_id": "1.2",
+    "facet": "Evaluatiemomenten",
+    "facet_id": "1.2.2",
+    "task": "Formuleer 16 activiteiten rond toetsen, examens, punten en evaluatie waarin leerlingen getest of beoordeeld worden",
+    "lexical": {
+      "verbs": ["studeren", "herhalen", "maken", "schrijven", "invullen", "afleggen", "voorbereiden", "controleren", "nakijken", "verbeteren", "ontvangen", "bekijken", "bespreken", "zenuwen"],
+      "objects": ["toets", "test", "examen", "proefwerk", "overhoring", "punten", "resultaat", "rapport", "beoordeling", "quotering", "cijfer", "fout", "correctie", "feedback"],
+      "settings": ["klaslokaal", "examenlokaal", "studiezaal", "bibliotheekhoek"]
+    },
+    "constraints": {
+      "phase_distribution": "minstens 5 zinnen over voorbereiding, 6 zinnen over het maken/afleggen, 5 zinnen over resultaten/nabespreking",
+      "emotion_cognition": "minstens 4 zinnen die emotionele of cognitieve aspecten tonen (concentreren, zenuwen, opluchting)",
+      "variety": "varieer tussen verschillende toetsvormen (overhoring, proefwerk, examen, rapport)",
+      "avoid": "geen specifieke vakken vermelden tenzij abstract (geen 'wiskunde', wel 'rekentoets')"
+    },
+    "examples": [
+      "een proefwerk zorgvuldig invullen",
+      "de toets nog eens nakijken op fouten",
+      "het rapport met spanning ontvangen"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Schoolse rituelen & organisatie",
+    "subdomain_id": "1.2",
+    "facet": "Administratieve taken",
+    "facet_id": "1.2.3",
+    "task": "Formuleer 16 activiteiten waarin leerlingen organisatorische of administratieve taken uitvoeren zoals agenda bijhouden, documenten verzorgen of klasadministratie doen",
+    "lexical": {
+      "verbs": ["noteren", "invullen", "bijhouden", "afvinken", "tekenen", "afgeven", "inleveren", "ordenen", "sorteren", "verdelen", "ophangen", "uitdelen", "verzamelen", "controleren", "doorgeven"],
+      "objects": ["agenda", "planner", "brief", "document", "toestemmingsformulier", "bewijs", "schriftje", "map", "bericht", "takenlijst", "klasdienst", "weekplanning", "handtekening", "papier"],
+      "settings": ["klaslokaal", "gang", "bureauhoek", "computerlokaal"]
+    },
+    "constraints": {
+      "task_type": "minstens 5 zinnen over persoonlijke administratie (agenda, brieven), 5 zinnen over klasadministratie (taken, diensten), 6 zinnen over communicatie/overdracht",
+      "responsibility": "minstens 4 zinnen die verantwoordelijkheid of zelfstandigheid tonen",
+      "collaboration": "minstens 3 zinnen waarin leerlingen elkaar helpen of taken verdelen",
+      "practical": "focus op concrete, uitvoerbare handelingen"
+    },
+    "examples": [
+      "het huiswerk in de agenda noteren",
+      "een brief voor thuis laten tekenen",
+      "de klasdienst voor deze week verdelen"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Schoolse rituelen & organisatie",
+    "subdomain_id": "1.2",
+    "facet": "Schoolevenementen",
+    "facet_id": "1.2.4",
+    "task": "Formuleer 16 activiteiten die horen bij bijzondere schoolevenementen zoals sportdagen, uitstappen, feesten of andere speciale gelegenheden",
+    "lexical": {
+      "verbs": ["deelnemen", "meedoen", "organiseren", "voorbereiden", "helpen", "versieren", "opbouwen", "afbreken", "meegaan", "bezoeken", "bekijken", "genieten", "aanmoedigen", "samenwerken", "vieren"],
+      "objects": ["uitstap", "excursie", "sportdag", "spelevenement", "fuif", "feest", "opendeurdag", "projectweek", "themaklas", "voorstelling", "wedstrijd", "activiteit", "decoratie", "stand"],
+      "settings": ["sporthal", "speelplaats", "refter", "bus", "museum", "natuurgebied"]
+    },
+    "constraints": {
+      "event_variety": "minstens 4 sportgerelateerd, 4 cultureel/educatief, 4 feestelijk, 4 organisatorisch",
+      "participation_level": "minstens 6 zinnen over actieve deelname, 5 zinnen over voorbereiding/organisatie, 5 zinnen over sociale interactie",
+      "special_character": "toon dat het om bijzondere, niet-dagelijkse activiteiten gaat",
+      "safety": "alle activiteiten veilig en onder toezicht uitvoerbaar"
+    },
+    "examples": [
+      "met de klas een museum bezoeken",
+      "de klasstand voor de opendeurdag versieren",
+      "meedoen aan de schoolsportwedstrijd"
+    ]
+  }
+]

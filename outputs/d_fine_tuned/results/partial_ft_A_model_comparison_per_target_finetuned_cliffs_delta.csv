@@ -1,0 +1,4 @@
+,partial_ft_sbert_bert,partial_ft_simcse_xlmr_base,partial_ft_e5_large
+partial_ft_sbert_bert,1.0,0.367,-0.306
+partial_ft_simcse_xlmr_base,-0.367,1.0,-0.439
+partial_ft_e5_large,0.306,0.439,1.0

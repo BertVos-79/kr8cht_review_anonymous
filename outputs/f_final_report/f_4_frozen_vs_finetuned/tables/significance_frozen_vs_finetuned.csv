@@ -1,0 +1,7 @@
+,local_las,local_rf,chain_lr,chain_rf,global_rf
+sbert,True,True,True,True,True
+sbert_ft,False,False,False,False,False
+e5,True,True,True,True,True
+e5_ft,False,False,False,False,False
+simcse,True,True,True,True,True
+simcse_ft,False,False,False,False,False

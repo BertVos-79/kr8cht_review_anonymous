@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale activiteiten",
+    "subdomain_id": "3.2",
+    "facet": "Spel & ontspanning",
+    "facet_id": "3.2.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren informeel buiten spelen, sporten of ontspannen met vrienden",
+    "lexical": {
+      "verbs": ["voetballen", "spelen", "rennen", "tikken", "verstoppen", "zoeken", "gooien", "vangen", "skateboarden", "skeeleren", "fietsen", "klimmen", "ballen", "rondlopen", "hangen"],
+      "objects": ["bal", "voetbal", "fiets", "skateboard", "skeelers", "verstopplaats", "basis", "tikkertje", "spelletje", "groep", "team", "vrienden"],
+      "settings": ["straat", "buurt", "speelplaats", "park", "pleintje", "veld"]
+    },
+    "constraints": {
+      "activity_intensity": "minstens 10 zinnen over actieve spellen (voetbal, tikker, rennen), 6 zinnen over rustigere ontspanning (hangen, fietsen, rondlopen)",
+      "group_dynamics": "minstens 8 zinnen groepsspel, 4 zinnen individueel met anderen erbij, 4 zinnen duo-activiteiten",
+      "spontaneity": "minstens 10 zinnen die spontaan, informeel karakter tonen (niet georganiseerd)",
+      "outdoor_focus": "alle activiteiten buitenspel, geen georganiseerde sportclub"
+    },
+    "examples": [
+      "met vrienden op straat voetballen",
+      "verstoppertje in de buurt spelen",
+      "samen op het skateboard oefenen"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale activiteiten",
+    "subdomain_id": "3.2",
+    "facet": "Afspreken",
+    "facet_id": "3.2.2",
+    "task": "Formuleer 16 activiteiten over het plannen van afspraken, samen ergens naartoe gaan of bij elkaar op bezoek",
+    "lexical": {
+      "verbs": ["afspreken", "plannen", "regelen", "appen", "bellen", "samen gaan", "fietsen naar", "wandelen naar", "bezoeken", "langsgaan", "ophalen", "meegaan", "ontmoeten", "verzamelen"],
+      "objects": ["afspraak", "plan", "tijdstip", "plaats", "vriend", "vriendin", "fiets", "route", "bestemming", "bericht", "oproep"],
+      "settings": ["bij vriend thuis", "park", "winkel", "buurt", "speelplaats", "centrum"]
+    },
+    "constraints": {
+      "planning_execution": "minstens 6 zinnen over plannen/organiseren, 10 zinnen over uitvoeren/samen zijn",
+      "communication": "minstens 4 zinnen over digitale afspraken (appen, bellen), 4 zinnen over fysiek afspreken",
+      "destinations": "varieer bestemmingen: 4 bij iemand thuis, 4 openbare plekken, 4 onderweg/verplaatsingen",
+      "social_coordination": "minstens 6 zinnen die coördinatie tussen vrienden tonen"
+    },
+    "examples": [
+      "via app met een vriend afspreken",
+      "samen naar het park fietsen",
+      "bij een vriendin thuis langsgaan"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale activiteiten",
+    "subdomain_id": "3.2",
+    "facet": "Groepsactiviteiten",
+    "facet_id": "3.2.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren samen video's kijken, content maken, trends volgen of challenges uitproberen",
+    "lexical": {
+      "verbs": ["kijken", "bekijken", "maken", "filmen", "doen", "uitproberen", "oefenen", "nadoen", "lachen om", "delen", "samen kijken", "creëren", "repeteren"],
+      "objects": ["video", "filmpje", "challenge", "dans", "trend", "meme", "serie", "aflevering", "sketche", "choreografie", "act", "content"],
+      "settings": ["bij iemand thuis", "op de kamer", "in de tuin", "woonkamer"]
+    },
+    "constraints": {
+      "passive_active_balance": "minstens 8 zinnen over kijken/bekijken (passief), 8 zinnen over maken/doen (actief)",
+      "digital_content": "minstens 10 zinnen over digitale content (video's, trends), 6 zinnen over fysieke groepsactiviteiten",
+      "creativity": "minstens 6 zinnen die creativiteit of samen-creëren tonen",
+      "no_brands": "geen specifieke platformnamen, algemeen houden (video, filmpje, trend)"
+    },
+    "examples": [
+      "samen grappige filmpjes bekijken",
+      "een populaire dans met vrienden oefenen",
+      "een challenge met de groep uitproberen"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Sociale activiteiten",
+    "subdomain_id": "3.2",
+    "facet": "Sociale evenementen",
+    "facet_id": "3.2.4",
+    "task": "Formuleer 16 activiteiten over bijzondere sociale gelegenheden zoals feesten, fuiven, verjaardagen of logeerpartijen",
+    "lexical": {
+      "verbs": ["gaan naar", "vieren", "feesten", "dansen", "slapen bij", "overnachten", "logeren", "genieten", "deelnemen", "meegaan", "uitnodigen", "organiseren", "voorbereiden", "klaarmaken"],
+      "objects": ["fuif", "feest", "verjaardag", "verjaardagsfeest", "logeerpartij", "sleepover", "schoolfeest", "dans", "muziek", "spelletjes", "slaapzak", "cadeautje"],
+      "settings": ["school", "bij vriend", "feestzaal", "thuis", "jeugdhuis"]
+    },
+    "constraints": {
+      "event_types": "minstens 5 zinnen schoolfeest/fuif, 5 zinnen verjaardagsfeest, 6 zinnen logeren/overnachten",
+      "participation_level": "minstens 8 zinnen over deelnemen/meemaken, 4 zinnen over voorbereiden/organiseren, 4 zinnen over sociale interactie tijdens event",
+      "age_appropriate": "alle activiteiten geschikt voor 10-14 jaar (geen alcohol, geen gevaarlijke situaties)",
+      "special_character": "alle activiteiten benadrukken het bijzondere, feestelijke karakter"
+    },
+    "examples": [
+      "naar de schoolfuif gaan",
+      "bij een vriend of vriendin overnachten",
+      "samen een verjaardagsfeest vieren"
+    ]
+  }
+]

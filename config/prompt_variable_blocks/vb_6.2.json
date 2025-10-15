@@ -1,0 +1,132 @@
+[
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Emotionele ontwikkeling",
+    "subdomain_id": "6.2",
+    "facet": "Emoties herkennen & benoemen",
+    "facet_id": "6.2.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren emoties bij zichzelf herkennen, benoemen en begrijpen als normaal onderdeel van ontwikkeling",
+    "lexical": {
+      "verbs": ["herkennen", "benoemen", "begrijpen", "voelen", "merken", "opmerken", "accepteren", "uitdrukken", "uiten", "delen", "bespreken", "normaliseren", "erkennen"],
+      "objects": ["emotie", "gevoel", "stemming", "gevoelswisseling", "reactie", "blijdschap", "boosheid", "verdriet", "angst", "opwinding", "frustratie"],
+      "settings": ["thuis", "eigen kamer", "bij vertrouwenspersoon", "dagboek"]
+    },
+    "constraints": {
+      "normalization": "alle 16 zinnen over emoties als normaal, gezond onderdeel van ontwikkeling",
+      "recognition_skills": "minstens 10 zinnen over herkennen en benoemen van emoties bij zichzelf",
+      "expression": "minstens 6 zinnen over gezonde manieren om emoties te uiten (praten, schrijven, creëren)",
+      "no_suppression": "geen zinnen over emoties onderdrukken, negeren of wegduwen",
+      "validation": "alle zinnen valideren dat emoties oké zijn, inclusief moeilijke emoties"
+    },
+    "examples": [
+      "herkennen wanneer je boos of gefrustreerd bent",
+      "je gevoelens in een dagboek opschrijven",
+      "begrijpen dat gevoelswisselingen normaal zijn"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Emotionele ontwikkeling",
+    "subdomain_id": "6.2",
+    "facet": "Zelfbewustzijn & zelfvertrouwen",
+    "facet_id": "6.2.2",
+    "task": "Formuleer 16 activiteiten over het ontwikkelen van zelfbewustzijn, omgaan met onzekerheid en zelfvertrouwen opbouwen",
+    "lexical": {
+      "verbs": ["ontdekken", "herkennen", "accepteren", "waarderen", "opbouwen", "ontwikkelen", "oefenen", "durven", "proberen", "geloven in", "vertrouwen op", "groeien"],
+      "objects": ["zelfvertrouwen", "eigenwaarde", "kracht", "talent", "kwaliteit", "mogelijkheid", "groei", "ontwikkeling", "onzekerheid", "trots", "succeservaring"],
+      "settings": ["thuis", "eigen kamer", "school", "bij activiteit"]
+    },
+    "constraints": {
+      "growth_mindset": "alle 16 zinnen over groei, ontwikkeling en positieve zelfontdekking",
+      "strengths_focus": "minstens 10 zinnen over krachten, talenten en positieve kwaliteiten ontdekken",
+      "healthy_challenges": "minstens 6 zinnen over gezond uitdagingen aangaan, buiten comfortzone stappen",
+      "no_comparison": "GEEN zinnen over vergelijken met anderen - focus op eigen groei",
+      "realistic": "geen valse zelfverheffing of arrogantie, wel gezonde eigenwaarde"
+    },
+    "examples": [
+      "ontdekken waar je goed in bent",
+      "iets nieuws durven proberen",
+      "trots zijn op een kleine overwinning"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Emotionele ontwikkeling",
+    "subdomain_id": "6.2",
+    "facet": "Identiteitsverkenning",
+    "facet_id": "6.2.3",
+    "task": "Formuleer 16 activiteiten over identiteitsvorming waarin jongeren hun interesses ontdekken, waarden verkennen en nadenken over wie ze zijn en willen worden",
+    "lexical": {
+      "verbs": ["ontdekken", "verkennen", "uitproberen", "nadenken over", "overwegen", "vormen", "ontwikkelen", "kiezen", "reflecteren", "experimenteren", "zoeken naar", "begrijpen"],
+      "objects": ["interesse", "hobby", "passie", "waarde", "overtuiging", "droom", "doel", "identiteit", "persoonlijkheid", "authenticiteit", "toekomst"],
+      "settings": ["thuis", "eigen kamer", "tijdens activiteiten", "in gedachten"]
+    },
+    "constraints": {
+      "exploration_focus": "alle 16 zinnen over verkennen, ontdekken, uitproberen (proces, niet product)",
+      "open_ended": "minstens 10 zinnen over open verkenning zonder druk om antwoorden te hebben",
+      "authenticity": "minstens 6 zinnen over authenticiteit, eigen waarden, niet wat anderen verwachten",
+      "no_pressure": "geen zinnen over druk om 'jezelf te vinden' - benadruk dat het een proces is",
+      "developmental": "erkennen dat identiteit zich ontwikkelt, niet statisch is"
+    },
+    "examples": [
+      "nieuwe interesses en hobby's uitproberen",
+      "nadenken over wat je belangrijk vindt",
+      "ontdekken wat je gelukkig maakt"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Emotionele ontwikkeling",
+    "subdomain_id": "6.2",
+    "facet": "Stress herkennen & gezond copen",
+    "facet_id": "6.2.4",
+    "task": "Formuleer 16 activiteiten over het herkennen van stress en het toepassen van gezonde copingstrategieën zoals ontspannen, bewegen of hulp zoeken",
+    "lexical": {
+      "verbs": ["herkennen", "opmerken", "ontspannen", "ademhalen", "bewegen", "sporten", "pauzeren", "rusten", "praten over", "hulp vragen", "delen", "zorgen voor", "kalmeren"],
+      "objects": ["stress", "spanning", "druk", "angst", "zorgen", "ademhaling", "ontspanning", "pauze", "beweging", "sport", "vertrouwenspersoon", "hulp", "steun"],
+      "settings": ["thuis", "eigen kamer", "buiten", "bij vertrouwenspersoon", "rustige plek"]
+    },
+    "constraints": {
+      "healthy_coping_only": "ALLEEN gezonde copingstrategieën (bewegen, ontspannen, praten, ademhalen, pauze) - GEEN destructieve coping",
+      "help_seeking": "minstens 6 zinnen over hulp vragen, praten met vertrouwenspersoon, steun zoeken",
+      "proactive_strategies": "minstens 10 zinnen over actieve copingstrategieën (bewegen, ademhalen, ontspannen, pauze)",
+      "stress_normal": "stress herkennen als normaal, copingvaardigheden als te leren",
+      "no_avoidance": "geen vermijdingsgedrag of terugtrekking als coping"
+    },
+    "examples": [
+      "bij stress even rustig ademhalen",
+      "over je zorgen met iemand praten",
+      "door te bewegen spanning loslaten"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Emotionele ontwikkeling",
+    "subdomain_id": "6.2",
+    "facet": "Emotieregulatie vaardigheden",
+    "facet_id": "6.2.5",
+    "task": "Formuleer 16 activiteiten over het leren reguleren van emoties, impulsen beheersen en constructief omgaan met frustratie of boosheid",
+    "lexical": {
+      "verbs": ["kalmeren", "pauzeren", "wachten", "tellen", "ademhalen", "reflecteren", "nadenken", "reguleren", "beheersen", "herkennen", "stoppen", "afkoelen", "herstellen"],
+      "objects": ["emotie", "impuls", "reactie", "boosheid", "frustratie", "teleurstelling", "pauze", "moment", "kalmte", "controle", "strategie", "techniek"],
+      "settings": ["thuis", "eigen kamer", "school", "rustige plek", "safe space"]
+    },
+    "constraints": {
+      "regulation_skills": "alle 16 zinnen over gezonde emotieregulatie vaardigheden",
+      "pause_reflect": "minstens 8 zinnen over pauzeren, nadenken voordat reageren, afstand nemen",
+      "calming_techniques": "minstens 8 zinnen over kalmerende technieken (ademhalen, tellen, afkoelen)",
+      "no_suppression": "emotieregulatie = gezond uiten en kanaliseren, NIET onderdrukken of explosief uiten",
+      "constructive": "alle strategieën constructief, niemand (incl. zichzelf) beschadigen"
+    },
+    "examples": [
+      "tot tien tellen als je boos wordt",
+      "even pauzeren voordat je reageert",
+      "rustig ademhalen om te kalmeren"
+    ]
+  }
+]

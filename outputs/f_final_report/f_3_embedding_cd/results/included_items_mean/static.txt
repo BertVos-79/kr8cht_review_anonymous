@@ -1,0 +1,10 @@
+word2vec/local_lasso
+word2vec/local_rf
+word2vec/chain_ERCcv_lr
+word2vec/chain_ERCcv_rf
+word2vec/global_rf
+fasttext/local_lasso
+fasttext/local_rf
+fasttext/chain_ERCcv_lr
+fasttext/chain_ERCcv_rf
+fasttext/global_rf

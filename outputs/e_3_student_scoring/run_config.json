@@ -1,0 +1,52 @@
+{
+  "run_id": "20251016-003534",
+  "timestamp": "2025-10-16 00:35:34",
+  "device": "mps",
+  "seed": 42,
+  "n_jobs": 6,
+  "student_embeddings": [
+    "e5_base"
+  ],
+  "current_student_embedding": "e5_base",
+  "students": [
+    "chain_ERCcv_lr",
+    "local_lasso",
+    "local_rf",
+    "global_rf",
+    "chain_ERCcv_rf"
+  ],
+  "methods_filter_env": null,
+  "pct_list": [
+    10,
+    20,
+    50,
+    100,
+    200,
+    400
+  ],
+  "pcts_for_plots": [
+    10,
+    20,
+    50,
+    100,
+    200,
+    400
+  ],
+  "label_source_embedding": "e5_base",
+  "label_source_model": "chain_ERCcv_lr",
+  "max_folds": 0,
+  "boot_B": 5000,
+  "write_per_embed_tables": true,
+  "write_per_embed_plots": true,
+  "skip_baseline_if_present": "0",
+  "do_refits": "1",
+  "paths": {
+    "root": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous",
+    "g1_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_1_synth_augmentation",
+    "g2_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_2_teacher_labeling",
+    "g3a_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_3_student_scoring",
+    "results_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_3_student_scoring/results",
+    "tables_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_3_student_scoring/tables",
+    "figs_dir": "/Users/bertvos/Documents/Notebooks/kr8cht_review_anonymous/outputs/e_3_student_scoring/plots"
+  }
+}

@@ -1,0 +1,1135 @@
+"""
+e_1_synth_augmentation.py
+───────────────────────────────────────────────────────────────────────────────
+Facet-driven generation and diverse selection of synthetic Dutch activity sentences
+using LLMs, strict validation, and K-center (medoid + D²) sampling to build
+nested-prefix datasets of sizes N ∈ {96, 192, 384, 768, 1536, 3072} per method
+(and COMBO when multiple methods are present).
+
+This script:
+1. Loads facet variable blocks
+   - Reads prompt variable JSONs per subdomain/facet (task, lexical palettes, examples).
+   - Orders facets deterministically (subdomain → facet) for reproducible streams.
+2. Configures environment & reproducibility
+   - Auto-selects CUDA/MPS/CPU and sets deterministic seeds.
+   - Tunes modest concurrency for generation; provides GPU memory hygiene helpers.
+3. Generates candidate pools per (facet, method)
+   - Supports GPT-4o (OpenAI) and local Ollama models (Gemma/Llama3/Mistral).
+   - Builds compact prompts (fixed rules + facet-specific block) requesting exactly K lines.
+   - Validates candidates: Dutch language gate, ≤20 tokens (warn >12), normalization,
+     and high-threshold dedupe (surface + cosine).
+   - Persists *per-facet* pools incrementally to disk and resumes from prior runs.
+4. Performs global near-duplicate filtering per method
+   - Cross-facet dedupe with a PROTECT_FLOOR to avoid starving any facet.
+   - Precomputes unit embeddings once per facet; cosine-based screening.
+5. Selects diverse sentences per facet
+   - K=27 via medoid start + D²-sampling (k-means++ style) on unit embeddings.
+   - Tracks intrinsic diversity metrics (mean/min pairwise 1−cosine).
+6. Assembles nested-prefix finals and optional COMBO sets
+   - Deterministic round-robin interleaving across facets to form global ordered lists.
+   - Writes g_final_n{N}_{method}.csv for each target size; builds COMBO when >1 method.
+7. Summarizes and logs
+   - Writes per-facet intrinsic metrics and a run summary of row counts.
+   - Streams all raw candidates with validator flags to JSONL; logs progress to file.
+
+Idempotency:
+• If all target finals exist with the required row counts for every method
+  (g_final_n{96|192|384|768|1536|3072}_{method}.csv), the script performs a
+  clean no-op and exits — no prompting, no pool building, no selection, no metrics.
+• If some finals are missing, the script resumes from per-facet pools in
+  outputs/e_1_synth_augmentation/facet_pools and only calls LLMs for facets
+  whose pools contain < POOL_MIN_FACET items.
+• Final writers are idempotent (skip files already complete). COMBO outputs are
+  written only when multiple methods are present.
+
+Inputs:
+- data/activities.csv, data/activity_scores.csv, data/domains.xlsx (Not in idempotent run)
+- outputs/e_1_synth_augmentation/prompt_variable_blocks/*.json
+- (optional) .env with OPENAI_API_KEY
+- (optional) Local Ollama models installed
+
+Outputs:
+- 'outputs/e_1_synth_augmentation/facet_pools/pool_{method}_{facet_id}.txt'
+- 'outputs/e_1_synth_augmentation/g_raw_{method}.jsonl'
+- 'outputs/e_1_synth_augmentation/g_intrinsic_metrics.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n96_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n192_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n384_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n768_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n1536_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n3072_{method}.csv'
+- 'outputs/e_1_synth_augmentation/g_final_n96_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/g_final_n192_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/g_final_n384_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/g_final_n768_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/g_final_n1536_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/g_final_n3072_COMBO.csv' (only when multiple methods)
+- 'outputs/e_1_synth_augmentation/run_summary.csv'
+- 'outputs/e_1_synth_augmentation/run.log'
+"""
+
+# ────────────────────────────────────────────
+# Imports
+# ────────────────────────────────────────────
+
+from __future__ import annotations
+
+from collections import Counter, defaultdict
+from concurrent.futures import as_completed, ThreadPoolExecutor
+from difflib import SequenceMatcher
+from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple
+
+import json
+import logging
+import os
+import random
+import re
+import shutil
+import subprocess
+import sys
+import threading
+import time
+import warnings
+
+import numpy as np
+import pandas as pd
+import torch
+from sentence_transformers import SentenceTransformer
+
+try:
+    import dotenv
+    dotenv.load_dotenv()
+except Exception:
+    pass
+
+try:
+    import openai
+except Exception:
+    openai = None
+
+try:
+    import langid
+    _HAS_LANGID = True
+except Exception:
+    _HAS_LANGID = False
+
+try:
+    import spacy
+    _NLP = spacy.load("nl_core_news_lg")
+    _SPACY_STOPWORDS = _NLP.Defaults.stop_words
+except Exception:
+    _NLP = None
+    _SPACY_STOPWORDS = set()
+
+# Silence some warnings
+os.environ["BITSANDBYTES_NOWELCOME"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+warnings.filterwarnings("ignore", message="The current process just got forked")
+warnings.filterwarnings("ignore", category=UserWarning, module="sentence_transformers")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Device & cores, seeds
+# ────────────────────────────────────────────────────────────────────────────
+device = torch.device(
+    "cuda" if torch.cuda.is_available()
+    else "mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available()
+    else "cpu"
+)
+DEVICE_STR = device.type
+N_CORES = 4
+SEED = 42
+RAND_SEED = SEED
+random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(SEED)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+try:
+    torch.use_deterministic_algorithms(True)
+except Exception:
+    pass
+
+def clear_gpu_memory():
+    try:
+        if torch.cuda.is_available():
+            torch.cuda.synchronize(); torch.cuda.empty_cache()
+        if DEVICE_STR == "mps":
+            torch.mps.empty_cache()
+    except Exception:
+        pass
+
+print(f"[g_1] Using device: {DEVICE_STR} | N_CORES={N_CORES}")
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Paths 
+# ────────────────────────────────────────────────────────────────────────────
+def project_root(marker: str = "LICENSE") -> Path:
+    here = Path.cwd().resolve()
+    for d in (here, *here.parents):
+        if (d / marker).is_file():
+            return d
+    return Path.cwd().resolve()
+
+ROOT        = project_root()
+DATA_DIR    = ROOT / "data"
+
+PV_BLOCKS   = ROOT / "config" / "prompt_variable_blocks"
+
+G_OUT_DIR   = ROOT / "outputs" / "e_1_synth_augmentation"
+POOLS_DIR   = G_OUT_DIR / "facet_pools"
+RUN_SUMMARY = G_OUT_DIR / "run_summary.csv"
+LOG_FILE    = G_OUT_DIR / "run.log"
+
+for p in (G_OUT_DIR, POOLS_DIR):
+    p.mkdir(parents=True, exist_ok=True)
+
+for fpath in (RUN_SUMMARY, LOG_FILE):
+    fpath.parent.mkdir(parents=True, exist_ok=True)
+    
+# ────────────────────────────────────────────────────────────────────────────
+#  Logging
+# ────────────────────────────────────────────────────────────────────────────
+for h in list(logging.root.handlers):
+    logging.root.removeHandler(h)
+
+logging.basicConfig(
+    filename=str(LOG_FILE),
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+log = logging.getLogger(__name__)
+logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  Constants
+# ────────────────────────────────────────────────────────────────────────────
+METHODS = ("gemma",)                      # single-method run OK 
+SIZES   = (96, 192, 384, 768, 1536, 3072)
+
+# Candidate pool targets per (facet, method)
+POOL_MIN_FACET = 48
+POOL_MAX_FACET = 72
+BLOCK_K        = 16                       # ask the LLM for exactly 16 lines per call
+POOL_TRIES_MAX = 8
+K_PER_FACET    = 27
+
+# Near-duplicate thresholds (HIGH; keep only near-identical as dup)
+NEAR_DUP_CHAR_RATIO = 0.975
+NEAR_DUP_EMB        = 0.995
+
+# Length limits
+MAX_TOKENS_HARD = 20
+SOFT_WARN_AT    = 12  # >12 = warn, but keep
+
+# Concurrency pacing
+SLEEP = 0.25
+
+PROTECT_FLOOR = max(K_PER_FACET, 32)    # protect each facet at 32 during global dedupe
+
+_RAW_LOCK = threading.Lock()
+
+# ────────────────────────────────────────────────────────────────────────────
+#  0. Idempotency helpers
+# ────────────────────────────────────────────────────────────────────────────
+
+def _csv_n_rows(path: Path) -> int:
+    if not (path.exists() and path.stat().st_size):
+        return 0
+    try:
+        # header + rows; return data rows only
+        return max(0, sum(1 for _ in open(path, "r", encoding="utf-8", errors="ignore")) - 1)
+    except Exception:
+        return 0
+
+def finals_complete_for(method: str, sizes=SIZES) -> bool:
+    """All target finals for this method exist and meet their required row count."""
+    return all(_csv_n_rows(G_OUT_DIR / f"g_final_n{N}_{method}.csv") >= N for N in sizes)
+
+def all_methods_complete(methods=METHODS, sizes=SIZES) -> bool:
+    """Every method has all target finals complete."""
+    return all(finals_complete_for(m, sizes) for m in methods)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  1. Embedding ensemble
+# ────────────────────────────────────────────────────────────────────────────
+ENCODERS = [
+    "jegormeister/bert-base-dutch-cased-snli",
+    # "sentence-transformers/paraphrase-xlm-r-multilingual-v1",
+    # "embaas/sentence-transformers-multilingual-e5-base",
+]
+_MODELS: Dict[str, SentenceTransformer] = {}
+
+def _get_model(name: str) -> SentenceTransformer:
+    if name not in _MODELS:
+        _MODELS[name] = SentenceTransformer(name, device=DEVICE_STR)
+    return _MODELS[name]
+
+def encode_texts(texts: List[str], name: str, batch_size: int = 128) -> np.ndarray:
+    m = _get_model(name)
+    return m.encode(texts, batch_size=batch_size, convert_to_numpy=True, show_progress_bar=False)
+
+def _unit_rows(A: np.ndarray) -> np.ndarray:
+    return A / np.clip(np.linalg.norm(A, axis=1, keepdims=True), 1e-9, None)
+
+def _unit(v: np.ndarray) -> np.ndarray:
+    n = float(np.linalg.norm(v));  return v / max(n, 1e-9)
+
+def ensemble_unit_vecs(per_encoder_vecs: List[np.ndarray]) -> np.ndarray:
+    U = np.stack([_unit(v) for v in per_encoder_vecs], axis=0)
+    return _unit(np.mean(U, axis=0))
+
+def embed_unit(texts: List[str]) -> np.ndarray:
+    if not texts:
+        return np.empty((0, 768), dtype=np.float32)
+    mats = []
+    for enc in ENCODERS:
+        mats.append(_unit_rows(encode_texts(texts, enc)))
+    # average unit vectors encoder-wise, then renormalize per row
+    E = np.stack(mats, axis=0).mean(axis=0)
+    return _unit_rows(E).astype(np.float32)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  2. Language gate & normalization
+# ────────────────────────────────────────────────────────────────────────────
+_COMMON_NL_FUN = {"de","het","een","en","om","te","met","voor","naar","bij","als","dat","die","er","dan","ook","maar"}
+_PUNCT_RE = re.compile(r"[^\w\sÀ-ÖØ-öø-ÿ]", flags=re.UNICODE)
+
+def normalize_text(s: str) -> str:
+    """lowercase + remove punctuation; collapse whitespace; strip."""
+    s = (s or "").strip().lower()
+    s = _PUNCT_RE.sub(" ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+def token_count(s: str) -> int:
+    return 0 if not s else len(s.split())
+
+def is_probably_dutch(txt: str) -> bool:
+    if not txt:
+        return False
+    s = txt.strip()
+    # 1) langid when strong
+    if _HAS_LANGID:
+        lang, score = langid.classify(s)
+        if lang == "nl" and score >= 0.85:
+            return True
+        if lang != "nl" and score >= 0.85:
+            return False
+    # 2) heuristic: stopword/function rate
+    toks = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]+", s.lower())
+    if not toks:
+        return False
+    hits = sum(1 for t in toks if t in _SPACY_STOPWORDS or t in _COMMON_NL_FUN)
+    rate = hits / max(1, len(toks))
+    if rate >= 0.20:
+        return True
+    # 3) negative English cue
+    if any(t in {"the","and","to","a","for","or"} for t in toks):
+        return False
+    return True
+
+# ────────────────────────────────────────────────────────────────────────────
+#  3. Dedupe helpers
+# ────────────────────────────────────────────────────────────────────────────
+def char_sim(a: str, b: str) -> float:
+    return SequenceMatcher(None, (a or "").lower(), (b or "").lower()).ratio()
+
+def soft_near_dedup(texts: List[str], U: Optional[np.ndarray]=None) -> List[str]:
+    """
+    High-threshold near-dup removal (surface + embedding). Preserve order.
+    If U given (unit embeddings matching texts), used for cosine screening.
+    """
+    keep, keep_vecs = [], []
+    for i, t in enumerate(texts):
+        low = t.lower().strip()
+        # surface
+        if any(char_sim(low, u.lower().strip()) >= NEAR_DUP_CHAR_RATIO for u in keep):
+            continue
+        if U is not None:
+            v = U[i]
+            if any(float(np.dot(v, uvec)) >= NEAR_DUP_EMB for uvec in keep_vecs):
+                continue
+            keep_vecs.append(v)
+        keep.append(t)
+    return keep
+
+# ────────────────────────────────────────────────────────────────────────────
+#  4. K-center selection: medoid + D²-sampling (k-means++)
+# ────────────────────────────────────────────────────────────────────────────
+def medoid_index(U: np.ndarray) -> int:
+    """Return index of row with highest mean cosine to all others (most 'central')."""
+    if len(U) == 0:
+        return -1
+    cos_with_all = U @ U.T
+    means = cos_with_all.mean(axis=1)
+    return int(np.argmax(means))
+
+def kcenter_d2_select(texts: List[str], U: np.ndarray, k: int, rng: random.Random) -> List[int]:
+    """
+    Return indices of selected items via:
+      1) medoid start
+      2) k-1 steps of D²-sampling: pick j with probability ∝ (min_distance_to_S)^2
+    """
+    n = len(texts)
+    if n == 0:
+        return []
+    if n <= k:
+        return list(range(n))
+    start = medoid_index(U)
+    S = [start]
+    dmin = 1.0 - (U @ U[start])
+    dmin[start] = 0.0
+    while len(S) < k:
+        w = np.square(np.clip(dmin, 0.0, 1.0))
+        s = float(np.sum(w))
+        if s <= 1e-12:
+            j = int(np.argmax(dmin))
+        else:
+            p = (w / s).astype(np.float64)
+            r = rng.random()
+            cum = np.cumsum(p)
+            j = int(np.searchsorted(cum, r))
+        if j in S:
+            cand = np.argsort(-dmin)
+            for jj in cand:
+                if int(jj) not in S:
+                    j = int(jj); break
+        S.append(j)
+        dnew = 1.0 - (U @ U[j])
+        dmin = np.minimum(dmin, dnew)
+    return S
+
+def pairwise_diversity(U_sel: np.ndarray) -> Dict[str, float]:
+    """Return mean/min pairwise (1 - cosine) among selected rows."""
+    if U_sel.shape[0] <= 1:
+        return dict(mean_pairwise_dist=0.0, min_pairwise_dist=0.0)
+    S = U_sel @ U_sel.T
+    iu = np.triu_indices(S.shape[0], k=1)
+    d = 1.0 - S[iu]
+    return dict(mean_pairwise_dist=float(np.mean(d)),
+                min_pairwise_dist=float(np.min(d)))
+
+# ────────────────────────────────────────────────────────────────────────────
+#  5. OpenAI / Ollama setup + prompts
+# ────────────────────────────────────────────────────────────────────────────
+OPENAI_MODEL       = "gpt-4o-mini"
+OPENAI_TEMPERATURE = 0.8
+OPENAI_SYSTEM_PROMPT = (
+    "Je bent een educatieve copywriter. Schrijf korte, kindvriendelijke "
+    "Nederlandse activiteitenzinnen volgens de regels."
+)
+
+def have_openai() -> bool:
+    try:
+        key = os.getenv("OPENAI_API_KEY", "")
+        if openai is None:
+            return False
+        openai.api_key = key
+        return bool(key)
+    except Exception:
+        return False
+
+def ollama_installed() -> bool:
+    return shutil.which("ollama") is not None
+
+OLLAMA_MODELS = {
+    "gemma":   "gemma2:9b-instruct-q4_0",
+    "llama3":  "llama3:8b-instruct-q4_0",
+    "mistral": "mistral:7b-instruct-v0.2-q4_0",
+}
+
+def _gpt_call(messages, max_tokens=600, temperature=OPENAI_TEMPERATURE, timeout=60, tries=3) -> str:
+    last = None
+    for i in range(tries):
+        try:
+            if hasattr(openai, "OpenAI"):
+                client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+                r = client.chat.completions.create(
+                    model=OPENAI_MODEL,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                    messages=messages,
+                    timeout=timeout,
+                )
+                return (r.choices[0].message.content or "").strip()
+            # legacy fallback
+            r = openai.ChatCompletion.create(
+                model=OPENAI_MODEL,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                messages=messages,
+                request_timeout=timeout,
+            )
+            return (r["choices"][0]["message"]["content"] or "").strip()
+        except Exception as e:
+            last = e
+            time.sleep(2 ** i)
+    raise last
+
+def call_ollama_model(prompt: str, model: str, max_retries=3, timeout=180) -> Optional[str]:
+    for i in range(max_retries):
+        try:
+            res = subprocess.run(
+                ["ollama", "run", model],
+                input=prompt, text=True,
+                capture_output=True, timeout=timeout
+            )
+            if res.returncode == 0:
+                return res.stdout.strip()
+            log.warning("Ollama exit code %d: %s", res.returncode, res.stderr.strip())
+        except Exception as e:
+            log.warning("Ollama error: %s", e)
+        time.sleep(2 ** i)
+    return None
+
+# Prompt builder (fixed + facet-variable)
+def build_facet_prompt(facet: dict) -> str:
+    """
+    Build a compact prompt that asks for EXACTLY BLOCK_K numbered lines,
+    NL only, lowercase, no punctuation, 5–12 tokens, no intro/outro.
+    """
+    domain      = str(facet.get("domain","")).strip()
+    subdomain   = str(facet.get("subdomain","")).strip()
+    facet_name  = str(facet.get("facet","")).strip()
+    task        = str(facet.get("task","")).strip()
+    L           = facet.get("lexical", {}) or {}
+    verbs       = ", ".join(L.get("verbs", [])[:24])
+    objects     = ", ".join(L.get("objects", [])[:24])
+    settings    = ", ".join(L.get("settings", [])[:24])
+    exs         = facet.get("examples", []) or []
+
+    examples_block = ""
+    if exs:
+        exs = [normalize_text(x) for x in exs[:3] if x]
+        exs = [x for x in exs if x]
+        if exs:
+            examples_block = "VOORBEELDEN:\n" + "\n".join(f"- {x}" for x in exs) + "\n"
+
+    lexical_block = ""
+    if verbs or objects or settings:
+        lexical_block = "LEXICALE PALETTEN (inspiratie, niet verplicht):\n"
+        if verbs:   lexical_block += f"- werkwoorden: {verbs}\n"
+        if objects: lexical_block += f"- objecten: {objects}\n"
+        if settings:lexical_block += f"- settings: {settings}\n"
+
+    fixed = (
+        "Je bent een copy-writer voor een educatieve game.\n"
+        "Schrijf NEDERLANDSTALIGE, KORTE, KINDVRIENDELIJKE zinnen die één concrete activiteit uitdrukken.\n"
+        "REGELS:\n"
+        "- uitsluitend Nederlands; geen emoji; geen Engelse woorden\n"
+        f"- precies {BLOCK_K} regels; elke regel begint met '1.'..'{BLOCK_K}'\n"
+        "- elke zin 5–12 tokens; alles in lowercase\n"
+        "- geen leestekens (punt, komma, streepje, dubbele punt, etc.)\n"
+        "- geen inleiding of afsluiting; geef alleen de zinnen\n"
+        "- gebruik de locatie alleen als inspiratie; noem de locatie niet letterlijk\n"
+    )
+    variable = (
+        f"ASPECT: {domain} → {subdomain}\n"
+        f"SUBASPECT/FACET: {facet_name}\n"
+        f"OPDRACHT: {task}\n"
+    )
+    fmt = (
+        "\nFORMAT:\n"
+        f"Geef {BLOCK_K} regels, exact genummerd als:\n"
+        "1. <zin>\n2. <zin>\n...\n"
+        f"{BLOCK_K}. <zin>\n"
+    )
+    return f"{fixed}\n{variable}\n{lexical_block}\n{examples_block}\n{fmt}"
+
+def parse_numbered_lines(block: str, k: int=BLOCK_K) -> List[str]:
+    lines = [ln.lstrip("-•* \t").strip() for ln in (block or "").splitlines()]
+    outs = []
+    for ln in lines:
+        if not ln:
+            continue
+        m = re.match(r"^(\d+)[\.\)\-]\s+(.*)$", ln)
+        txt = (m.group(2) if m else ln).strip(' "“”')
+        outs.append(txt)
+    cleaned = []
+    for t in outs:
+        t2 = normalize_text(t)
+        n = token_count(t2)
+        if 1 <= n <= MAX_TOKENS_HARD and t2 not in cleaned:
+            cleaned.append(t2)
+        if len(cleaned) == k:
+            break
+    return cleaned
+
+def gen_block_for_facet(facet: dict, method: str) -> List[str]:
+    prompt = build_facet_prompt(facet)
+    if method == "gpt4o" and have_openai():
+        try:
+            raw = _gpt_call(
+                [{"role":"system","content":OPENAI_SYSTEM_PROMPT},
+                 {"role":"user","content":prompt}],
+                max_tokens=1200, timeout=60, tries=3
+            )
+        except Exception as e:
+            log.warning("OpenAI fail (%s): %s", facet.get("facet_id","?"), e)
+            raw = ""
+    elif method in OLLAMA_MODELS and ollama_installed():
+        raw = call_ollama_model(prompt, model=OLLAMA_MODELS[method]) or ""
+    else:
+        return []
+    return parse_numbered_lines(raw, k=BLOCK_K)
+
+# ────────────────────────────────────────────────────────────────────────────
+#  6. Loading facet variable blocks
+# ────────────────────────────────────────────────────────────────────────────
+def load_facet_entries() -> List[dict]:
+    entries = []
+    for p in sorted(PV_BLOCKS.glob("vb_*.json")):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                for obj in data:
+                    entries.append({
+                        "domain_id":   str(obj.get("domain_id","")).strip(),
+                        "subdomain_id":str(obj.get("subdomain_id","")).strip(),
+                        "facet_id":    str(obj.get("facet_id","")).strip(),
+                        "domain":      obj.get("domain",""),
+                        "subdomain":   obj.get("subdomain",""),
+                        "facet":       obj.get("facet",""),
+                        "task":        obj.get("task",""),
+                        "lexical":     obj.get("lexical", {}),
+                        "examples":    obj.get("examples", []),
+                    })
+        except Exception as e:
+            log.warning("Failed to read %s: %s", p.name, e)
+    def id_key(fid: str) -> Tuple:
+        parts = re.split(r"[^\d]+", fid or "")
+        try:
+            return tuple(int(x) for x in parts if x != "")
+        except Exception:
+            return (fid,)
+    entries = [e for e in entries if e.get("facet_id")]
+    entries.sort(key=lambda e: (id_key(e["subdomain_id"]), id_key(e["facet_id"])))
+    return entries
+
+# ────────────────────────────────────────────────────────────────────────────
+#  7. Staging writer
+# ────────────────────────────────────────────────────────────────────────────
+def raw_writer(method: str):
+    path = G_OUT_DIR / f"g_raw_{method}.jsonl"
+    def write(obj: dict):
+        line = json.dumps(obj, ensure_ascii=False) + "\n"
+        with _RAW_LOCK:
+            with open(path, "a", encoding="utf-8") as f:
+                f.write(line)
+    def close():
+        pass  # no per-thread file handle to close anymore
+    return write, close
+
+# ────────────────────────────────────────────────────────────────────────────
+#  8. Facet-pool persistence (immediate checkpointing)
+# ────────────────────────────────────────────────────────────────────────────
+FSYNC_EVERY_WRITE = False  # set True if you want OS-level durability on every line
+
+def _safe_fid(fid: str) -> str:
+    return re.sub(r"[^\w\-\.]+", "_", fid or "unknown")
+
+def pool_path(method: str, facet_id: str) -> Path:
+    return POOLS_DIR / f"pool_{method}_{_safe_fid(facet_id)}.txt"
+
+def load_persisted_pool(method: str, facet_id: str) -> List[str]:
+    p = pool_path(method, facet_id)
+    if not (p.exists() and p.stat().st_size):
+        return []
+    lines = []
+    with open(p, "r", encoding="utf-8") as f:
+        for ln in f:
+            t = ln.strip()
+            if t:
+                lines.append(t)
+    # Ensure uniqueness & normalized (idempotent)
+    seen = set()
+    uniq = []
+    for t in lines:
+        tt = normalize_text(t)
+        if tt and tt not in seen:
+            seen.add(tt)
+            uniq.append(tt)
+    return uniq
+
+def pool_writer(method: str, facet_id: str):
+    p = pool_path(method, facet_id)
+    f = open(p, "a", encoding="utf-8")
+    def write_line(text: str):
+        f.write(text + "\n")
+        f.flush()
+        if FSYNC_EVERY_WRITE:
+            os.fsync(f.fileno())
+    def close():
+        try: f.close()
+        except Exception: pass
+    return write_line, close
+
+
+# ────────────────────────────────────────────────────────────────────────────
+#  9. Pool generation per (facet, method) with validation & facet-level dedupe
+# ────────────────────────────────────────────────────────────────────────────
+def make_pool_for_facet(facet: dict, method: str) -> Tuple[List[str], Dict[str,int]]:
+    """
+    Returns (texts_pool, counters) where pool contains normalized, NL-only, ≤20 tokens,
+    deduped (exact + near-dup) at facet level, up to POOL_MAX_FACET.
+    Also returns counters: {'gen':..., 'pass':..., 'fail_lang':..., 'fail_len':..., 'warn_len':..., 'resume':...}
+
+    NEW:
+    - Loads any previously accepted lines for this (facet,method) from disk.
+    - On every new acceptance, appends to the facet pool file immediately.
+    """
+    write_raw, close_raw = raw_writer(method)
+    write_pool, close_pool = pool_writer(method, facet.get("facet_id",""))
+
+    cnt = defaultdict(int)
+
+    # Resume from disk
+    facet_id = facet.get("facet_id","")
+    resumed = load_persisted_pool(method, facet_id)
+    seen_texts: List[str] = list(resumed)
+    seen_set = set(resumed)
+    cnt["resume"] = len(resumed)
+
+    tries = 0
+
+    def accept_and_log(text: str, why: str, passed: bool, warns: Dict[str,bool]):
+        obj = {
+            "domain_id": facet.get("domain_id",""),
+            "subdomain_id": facet.get("subdomain_id",""),
+            "facet_id": facet_id,
+            "method": method,
+            "text": text,
+            "passed": bool(passed),
+            "reason": "" if passed else why,
+            "warn_len_gt12": bool(warns.get("warn_len_gt12", False)),
+            "token_len": token_count(text),
+            "ts": time.time(),
+        }
+        write_raw(obj)
+        # Persist as soon as we accept a new unique sentence
+        if passed:
+            write_pool(text)
+
+    # If we already have enough, return quickly (still cap by POOL_MAX_FACET)
+    if len(seen_texts) >= POOL_MIN_FACET:
+        log.info("facet %s: resume=%d ≥ POOL_MIN_FACET (%d) → no new gen",
+                 facet_id, len(seen_texts), POOL_MIN_FACET)   
+        close_raw(); close_pool()
+        return seen_texts[:POOL_MAX_FACET], {"gen":0, **cnt}
+
+    while len(seen_texts) < POOL_MIN_FACET and tries < POOL_TRIES_MAX:
+        tries += 1
+        cands = gen_block_for_facet(facet, method) or []
+        cnt["gen"] += len(cands)
+
+        for cand in cands:
+            t = normalize_text(cand)
+            if not t:
+                continue
+
+            if not is_probably_dutch(t):
+                cnt["fail_lang"] += 1
+                accept_and_log(t, "lang", False, {})
+                continue
+
+            n_tok = token_count(t)
+            if n_tok == 0 or n_tok > MAX_TOKENS_HARD:
+                cnt["fail_len"] += 1
+                accept_and_log(t, "len", False, {})
+                continue
+
+            warns = {}
+            if n_tok > SOFT_WARN_AT:
+                warns["warn_len_gt12"] = True
+                cnt["warn_len"] += 1
+
+            # facet-level near-dupe
+            dup_surface = any(char_sim(t, u) >= NEAR_DUP_CHAR_RATIO for u in seen_texts)
+            if dup_surface:
+                accept_and_log(t, "dup_surface", False, warns)
+                continue
+
+            if seen_texts:
+                sample_cmp = seen_texts[-64:]
+                U = embed_unit(sample_cmp + [t])
+                v = U[-1]
+                dup_emb = any(float(np.dot(v, u)) >= NEAR_DUP_EMB for u in U[:-1])
+                if dup_emb:
+                    accept_and_log(t, "dup_emb", False, warns)
+                    continue
+
+            if t not in seen_set:
+                seen_texts.append(t)
+                seen_set.add(t)
+                cnt["pass"] += 1
+                accept_and_log(t, "", True, warns)
+
+            if len(seen_texts) >= POOL_MAX_FACET:
+                break
+
+        if len(seen_texts) < POOL_MIN_FACET:
+            time.sleep(SLEEP)
+
+    close_raw()
+    close_pool()
+    return seen_texts[:POOL_MAX_FACET], cnt
+
+# ────────────────────────────────────────────────────────────────────────────
+#  10. Global near-dup across all facet-pools (per method) with PROTECT_FLOOR
+# ────────────────────────────────────────────────────────────────────────────
+def global_dedupe_pools(perfacet_pools: Dict[str, List[str]],
+                        facets_meta: Dict[str, dict],
+                        protect_floor: int = PROTECT_FLOOR) -> Dict[str, List[str]]:
+    """
+    Cross-facet near-dup removal with a protect floor.
+    OPTIMIZED: precompute embeddings once per facet and reuse; never re-embed kept items.
+    """
+    def id_tuple(x: str) -> Tuple:
+        parts = re.split(r"[^\d]+", x or "")
+        try: return tuple(int(p) for p in parts if p)
+        except: return (x,)
+
+    facet_ids = sorted(perfacet_pools.keys(),
+                       key=lambda fid: (id_tuple(facets_meta[fid]["subdomain_id"]), id_tuple(fid)))
+
+    # Precompute embeddings per facet ONCE
+    emb_by_facet: Dict[str, np.ndarray] = {}
+    emb_dim = None
+    for fid in facet_ids:
+        texts = perfacet_pools.get(fid, [])
+        U = embed_unit(texts) if texts else np.empty((0, 768), dtype=np.float32)
+        emb_by_facet[fid] = U
+        if emb_dim is None and U.shape[0] > 0:
+            emb_dim = U.shape[1]
+    if emb_dim is None:
+        emb_dim = 768  # default
+
+    new_pools: Dict[str, List[str]] = {fid: [] for fid in facet_ids}
+
+    kept_texts: List[str] = []
+    kept_owner: List[str] = []
+    kept_vecs = np.empty((0, emb_dim), dtype=np.float32)  # rows = kept, cols = dims
+    order_index = {fid: i for i, fid in enumerate(facet_ids)}
+
+    for fid in facet_ids:
+        texts = perfacet_pools.get(fid, [])
+        Ufacet = emb_by_facet[fid]
+        for i, t in enumerate(texts):
+            dup_idx = None
+
+            # 1) surface
+            for idx, u in enumerate(kept_texts):
+                if char_sim(t, u) >= NEAR_DUP_CHAR_RATIO:
+                    dup_idx = idx; break
+
+            # 2) embedding
+            if dup_idx is None and kept_vecs.shape[0] > 0:
+                v = Ufacet[i]
+                sims = kept_vecs @ v
+                j = int(np.argmax(sims))
+                if float(sims[j]) >= NEAR_DUP_EMB:
+                    dup_idx = j
+
+            if dup_idx is None:
+                # accept
+                new_pools[fid].append(t)
+                kept_texts.append(t)
+                kept_owner.append(fid)
+                v = Ufacet[i][None, :]
+                kept_vecs = np.vstack([kept_vecs, v])
+                continue
+
+            # conflict: decide who drops
+            prev_fid = kept_owner[dup_idx]
+            prev_count = len(new_pools[prev_fid])
+            curr_count = len(new_pools[fid])
+
+            prev_can_drop = prev_count > protect_floor
+            curr_can_drop = curr_count > protect_floor
+
+            def remove_from_previous():
+                target = kept_texts[dup_idx]
+                lst = new_pools[prev_fid]
+                rm_i = None
+                for k_i, s in enumerate(lst):
+                    if char_sim(s, target) >= NEAR_DUP_CHAR_RATIO:
+                        rm_i = k_i; break
+                if rm_i is not None:
+                    lst.pop(rm_i)
+                # remove from kept buffers
+                kept_texts.pop(dup_idx)
+                kept_owner.pop(dup_idx)
+                nonlocal kept_vecs
+                kept_vecs = np.delete(kept_vecs, dup_idx, axis=0)
+
+            if prev_count > curr_count and prev_can_drop:
+                remove_from_previous()
+                # accept current
+                new_pools[fid].append(t)
+                kept_texts.append(t)
+                kept_owner.append(fid)
+                v = Ufacet[i][None, :]
+                kept_vecs = np.vstack([kept_vecs, v])
+            elif curr_count > prev_count and curr_can_drop:
+                # drop current
+                continue
+            else:
+                if order_index[prev_fid] <= order_index[fid]:
+                    continue
+                else:
+                    if prev_can_drop:
+                        remove_from_previous()
+                        new_pools[fid].append(t)
+                        kept_texts.append(t)
+                        kept_owner.append(fid)
+                        v = Ufacet[i][None, :]
+                        kept_vecs = np.vstack([kept_vecs, v])
+                    else:
+                        continue
+
+    return new_pools
+
+
+# ────────────────────────────────────────────────────────────────────────────
+#  11. Per-(facet,method) selection K=27 via medoid + D²
+# ────────────────────────────────────────────────────────────────────────────
+def select_k_for_facet(pool_texts: List[str], k: int=27, method:str="", facet_id:str="") -> Tuple[List[str], Dict[str,float]]:
+    if not pool_texts:
+        return [], {"mean_pairwise_dist": np.nan, "min_pairwise_dist": np.nan}
+    U = embed_unit(pool_texts)
+    rng = random.Random(f"{RAND_SEED}|select|{method}|{facet_id}")
+    idx = kcenter_d2_select(pool_texts, U, k, rng)
+    chosen = [pool_texts[i] for i in idx]
+    div = pairwise_diversity(U[idx])
+    return chosen, div
+
+# ────────────────────────────────────────────────────────────────────────────
+#  12. Build global finals per method & size via deterministic round-robin
+# ────────────────────────────────────────────────────────────────────────────
+def build_global_finals(selected_map: Dict[str, Dict[str, List[str]]],
+                        facets_meta: Dict[str, dict]) -> Dict[str, Dict[int, pd.DataFrame]]:
+    def sort_key(fid: str) -> Tuple:
+        def idt(x: str) -> Tuple:
+            parts = re.split(r"[^\d]+", x or "")
+            try: return tuple(int(p) for p in parts if p)
+            except: return (x,)
+        meta = facets_meta[fid]
+        return (idt(meta["subdomain_id"]), idt(fid))
+
+    finals = defaultdict(dict)
+    for method, perfacet in selected_map.items():
+        facet_ids = sorted(perfacet.keys(), key=sort_key)
+        streams = {fid: list(perfacet.get(fid, [])) for fid in facet_ids}
+        max_len = max((len(v) for v in streams.values()), default=0)
+        rr_stream: List[Tuple[str,str]] = []
+        for depth in range(max_len):
+            for fid in facet_ids:
+                lst = streams[fid]
+                if depth < len(lst):
+                    rr_stream.append((fid, lst[depth]))
+        for N in SIZES:
+            rows = []
+            for i, (fid, txt) in enumerate(rr_stream[:N]):
+                meta = facets_meta[fid]
+                rows.append({
+                    "domain_id":    meta["domain_id"],
+                    "subdomain_id": meta["subdomain_id"],
+                    "facet_id":     fid,
+                    "method":       method,
+                    "rank":         i+1,
+                    "text":         txt,
+                    "passed":       True,
+                })
+            finals[method][N] = pd.DataFrame(rows, columns=["domain_id","subdomain_id","facet_id","method","rank","text","passed"])
+    return finals
+
+def write_finals_and_combo(finals: Dict[str, Dict[int, pd.DataFrame]]):
+    # Per-method finals: only write when needed
+    for method, sizes in finals.items():
+        for N, df in sizes.items():
+            out = G_OUT_DIR / f"g_final_n{N}_{method}.csv"
+            if out.exists() and _csv_n_rows(out) >= N:
+                log.info("↻ Exists & complete; skip writing %s", out.name)
+                continue
+            df.to_csv(out, index=False)
+            log.info("✔ Wrote %s (%d rows)", out.name, len(df))
+
+    # COMBO finals only when >1 method; skip logic
+    if len(METHODS) <= 1:
+        log.info("Single-method run; skipping COMBO outputs.")
+        return
+
+    for N in SIZES:
+        out = G_OUT_DIR / f"g_final_n{N}_COMBO.csv"
+        # Build round-robin from already constructed finals
+        rr_rows = []
+        k = 0
+        while True:
+            progress = False
+            for m in METHODS:
+                dfm = finals.get(m, {}).get(N, pd.DataFrame())
+                if k < len(dfm):
+                    rr_rows.append(dfm.iloc[k].to_dict())
+                    progress = True
+            if not progress:
+                break
+            k += 1
+
+        if not rr_rows:
+            continue
+
+        if out.exists() and _csv_n_rows(out) >= N:
+            log.info("↻ Exists & complete; skip writing %s", out.name)
+            continue
+
+        cols = ["domain_id","subdomain_id","facet_id","method","rank","text","passed"]
+        pd.DataFrame(rr_rows, columns=cols).to_csv(out, index=False)
+        log.info("✔ Wrote %s (%d rows)", out.name, len(rr_rows))
+
+# ────────────────────────────────────────────────────────────────────────────
+#  13. Intrinsic metrics writer
+# ────────────────────────────────────────────────────────────────────────────
+def write_intrinsic_metrics(metrics_rows: List[dict]):
+    if not metrics_rows:
+        return
+    p = G_OUT_DIR / "g_intrinsic_metrics.csv"
+    df = pd.DataFrame(metrics_rows)
+    if p.exists() and p.stat().st_size:
+        df.to_csv(p, mode="a", header=False, index=False)
+    else:
+        df.to_csv(p, index=False)
+
+
+def _csv_n_rows(path: Path) -> int:
+    if not (path.exists() and path.stat().st_size):
+        return 0
+    # header + rows; return data rows only
+    try:
+        return max(0, sum(1 for _ in open(path, "r", encoding="utf-8", errors="ignore")) - 1)
+    except Exception:
+        return 0
+
+# ────────────────────────────────────────────────────────────────────────────
+#  14. Main function
+# ────────────────────────────────────────────────────────────────────────────
+def run():
+    log.info("=== step_e_1 started ===")
+    facet_entries = load_facet_entries()
+    ids = [e["facet_id"] for e in facet_entries]
+    log.info("Loaded %d unique facets; theoretical max rows = %d",
+         len(ids), len(ids)*K_PER_FACET)
+
+    for k,v in Counter(ids).items():
+        if v>1:
+            log.warning("Duplicate facet_id: %s appears %d times", k, v)
+    assert facet_entries, "No facet variable blocks found under config/prompt_variable_blocks/"
+    facets_meta = {e["facet_id"]: dict(domain_id=e["domain_id"], subdomain_id=e["subdomain_id"],
+                                       domain=e["domain"], subdomain=e["subdomain"], facet=e["facet"])
+                   for e in facet_entries}
+
+    selected_map: Dict[str, Dict[str, List[str]]] = defaultdict(dict)
+    metrics_rows: List[dict] = []
+
+    for method in METHODS:
+        def finals_up_to_size(method: str, N: int) -> bool:
+            p = G_OUT_DIR / f"g_final_n{N}_{method}.csv"
+            return _csv_n_rows(p) >= N
+
+        # Only skip if every target size actually has ≥ N rows
+        all_satisfied = all(finals_up_to_size(method, N) for N in SIZES)
+        if all_satisfied:
+            log.info("↻ All finals for '%s' already meet target sizes; skipping generation.", method)
+            continue
+
+
+        
+        # 1) pools per facet (parallel)
+        pools_by_facet: Dict[str, List[str]] = {}
+        counters_by_facet: Dict[str, Dict[str,int]] = {}
+
+        def _make(e):
+            return e["facet_id"], *make_pool_for_facet(e, method)
+
+        MAX_WORKERS = 4  # tune: 2–4 for Ollama; higher if generation is I/O bound
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+            futs = {ex.submit(_make, e): e for e in facet_entries}
+            for fut in as_completed(futs):
+                fid, pool_pre, cnt = fut.result()
+                pools_by_facet[fid] = pool_pre
+                counters_by_facet[fid] = cnt
+
+        # 2) **global dedupe vóór selectie** met PROTECT_FLOOR
+        pools_post = global_dedupe_pools(pools_by_facet, facets_meta, protect_floor=PROTECT_FLOOR)
+
+        # 3) selection per facet (K-center + D²)  — K=27 by default
+
+        selected_map[method] = {}
+
+        def _select(e):
+            fid = e["facet_id"]
+            pool_post = pools_post.get(fid, [])
+            chosen, div = select_k_for_facet(
+                pool_texts=pool_post,
+                k=K_PER_FACET,
+                method=method,
+                facet_id=fid
+            )
+            return fid, chosen, div
+
+
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+            futs = {ex.submit(_select, e): e for e in facet_entries}
+            for fut in as_completed(futs):
+                fid, chosen, div = fut.result()
+                selected_map[method][fid] = chosen
+                e = next(x for x in facet_entries if x["facet_id"] == fid)
+                cnt = counters_by_facet.get(fid, {})
+                metrics_rows.append({
+                    "method": method,
+                    "facet_id": fid,
+                    "domain_id": e["domain_id"],
+                    "subdomain_id": e["subdomain_id"],
+                    "pool_count_pre": len(pools_by_facet.get(fid, [])),
+                    "pool_count_post": len(pools_post.get(fid, [])),
+                    "selected_count": len(chosen),
+                    "fail_lang": int(cnt.get("fail_lang",0)),
+                    "fail_len": int(cnt.get("fail_len",0)),
+                    "warn_len": int(cnt.get("warn_len",0)),
+                    "mean_pairwise_dist": float(div.get("mean_pairwise_dist", np.nan)),
+                    "min_pairwise_dist":  float(div.get("min_pairwise_dist", np.nan)),
+                })
+
+    write_intrinsic_metrics(metrics_rows)
+
+    # 4) finals + COMBO (writer will skip sizes that already exist; COMBO skipped when single-method)
+    finals = build_global_finals(selected_map, facets_meta)
+    write_finals_and_combo(finals)
+
+    # run_summary
+    sum_rows = []
+    for method in METHODS:
+        for N in SIZES:
+            p = G_OUT_DIR / f"g_final_n{N}_{method}.csv"
+            if p.exists() and p.stat().st_size:
+                n_rows = sum(1 for _ in open(p, "r", encoding="utf-8", errors="ignore")) - 1
+                sum_rows.append({"method": method, "size": N, "n_sent": max(0, n_rows)})
+    if sum_rows:
+        pd.DataFrame(sum_rows).to_csv(RUN_SUMMARY, index=False)
+    log.info("=== step_e_1 completed ===")
+
+# ────────────────────────────────────────────────────────────────────────────
+#  15. Entry-point
+# ────────────────────────────────────────────────────────────────────────────
+def main():
+    if all_methods_complete():
+        print("↻ All synthetic datasets already present for all methods and sizes — no work to do.")
+        print("Run completed (idempotent no-op).")
+        return  # avoid SystemExit traceback in notebooks/IPython
+    run()
+    print("Run completed.")
+
+if __name__ == "__main__":
+    main()

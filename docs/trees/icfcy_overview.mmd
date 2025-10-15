@@ -1,0 +1,51 @@
+%%{init: {'theme':'neutral','flowchart':{'useMaxWidth': false,'nodeSpacing': 30,'rankSpacing': 45}} }%%
+flowchart TB
+  %% ICF-CY overview (with component numbering 1.A / 1.B / 2.A / 2.B)
+
+  ICF([ICF-CY])
+
+  ICF --> P1[Part 1: Functioning & Disability]
+  ICF --> P2[Part 2: Contextual Factors]
+
+  %% Components under Part 1
+  P1 --> C1A[Component 1.A: Body Functions & Structures]
+  P1 --> C1B[Component 1.B: Activities & Participation]
+
+  %% Components under Part 2
+  P2 --> C2A[Component 2.A: Environmental Factors]
+  P2 --> C2B[Component 2.B: Personal Factors]
+
+  %% Constructs + classification levels
+  C1A --> K1[Construct: Change in body function]
+  C1A --> K2[Construct: Change in body structure]
+  K1 --> L1[Classification levels<br/>1–4]
+  K2 --> L2[Classification levels<br/>1–4]
+
+  C1B --> K3[Construct: Capacity]
+  C1B --> K4[Construct: Performance]
+  K3 --> L3[Classification levels<br/>1–4]
+  K4 --> L4[Classification levels<br/>1–4]
+
+  C2A --> K5[Construct: Facilitators]
+  C2A --> K6[Construct: Barriers]
+  K5 --> L5[Classification levels<br/>1–4]
+  K6 --> L6[Classification levels<br/>1–4]
+
+  %% Personal factors note (ICF-CY does not classify these)
+  C2B --> PF[Note: Personal factors are part of context<br/>but are not classified in ICF-CY]
+
+  %% Styling
+  class ICF root;
+  class P1,P2 part;
+  class C1A,C1B,C2A,C2B component;
+  class K1,K2,K3,K4,K5,K6 construct;
+  class L1,L2,L3,L4,L5,L6 leaf;
+  class PF note;
+
+  classDef root fill:#1f2937,color:#ffffff,stroke:#1f2937;
+  classDef part fill:#e5f1ff,color:#111827,stroke:#6aa0ff,stroke-width:1px;
+  classDef component fill:#f7f7f7,color:#111827,stroke:#bdbdbd,stroke-width:1px;
+  classDef construct fill:#fff8e1,color:#111827,stroke:#f7b733,stroke-width:1px;
+  classDef leaf fill:#f0fdf4,color:#111827,stroke:#34d399,stroke-width:1px;
+  classDef note fill:#fef3c7,color:#111827,stroke:#f59e0b,stroke-width:1px;
+

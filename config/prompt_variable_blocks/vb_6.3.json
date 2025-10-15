@@ -1,0 +1,108 @@
+[
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Gezondheid & welzijn",
+    "subdomain_id": "6.3",
+    "facet": "Gezonde slaapgewoontes ontwikkelen",
+    "facet_id": "6.3.1",
+    "task": "Formuleer 16 activiteiten over het ontwikkelen van gezonde slaapgewoontes, ritmes herkennen en zorgen voor voldoende rust",
+    "lexical": {
+      "verbs": ["slapen", "rusten", "uitslapen", "wakker worden", "inslapen", "ontspannen", "klaarmaken voor", "zorgen voor", "luisteren naar", "herkennen", "respecteren", "balanceren"],
+      "objects": ["slaap", "rust", "energie", "ritme", "routine", "vermoeidheid", "bed", "lichaam", "signaal", "herstel", "nacht"],
+      "settings": ["slaapkamer", "bed", "thuis", "avond", "ochtend"]
+    },
+    "constraints": {
+      "healthy_sleep_only": "alle 16 zinnen over gezonde slaapgewoontes en rust - GEEN activiteiten die slaaptekort normaliseren",
+      "body_awareness": "minstens 8 zinnen over lichaamssignalen herkennen (moe zijn, rust nodig hebben)",
+      "sleep_hygiene": "minstens 8 zinnen over goede slaapgewoontes (routine, ontspannen, klaar maken voor bed)",
+      "no_deprivation": "GEEN zinnen over opzettelijk laat opblijven, slaap overslaan of slaaptekort als normaal",
+      "balance": "erkennen dat teenagers andere ritmes hebben, maar binnen gezonde grenzen"
+    },
+    "examples": [
+      "naar lichaamssignalen van vermoeidheid luisteren",
+      "een ontspannende routine voor het slapengaan maken",
+      "in het weekend uitslapen om bij te komen"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Gezondheid & welzijn",
+    "subdomain_id": "6.3",
+    "facet": "Intuïtief & gevarieerd eten",
+    "facet_id": "6.3.2",
+    "task": "Formuleer 16 activiteiten over intuïtief eten, variatie in voeding, genieten van eten en een gezonde relatie met voedsel ontwikkelen",
+    "lexical": {
+      "verbs": ["eten", "genieten van", "luisteren naar", "proberen", "variëren", "ontdekken", "smaken", "respecteren", "kiezen", "balanceren", "delen"],
+      "objects": ["maaltijd", "voedsel", "eten", "smaak", "honger", "verzadiging", "variatie", "groenten", "fruit", "gezelligheid", "eetmoment"],
+      "settings": ["thuis", "tafel", "keuken", "samen", "school"]
+    },
+    "constraints": {
+      "intuitive_eating": "alle 16 zinnen over intuïtief eten, luisteren naar lichaam, genieten van voedsel",
+      "no_restriction": "ABSOLUUT GEEN zinnen over: calorieën tellen, diëten, compenseren, restricties, 'goed/slecht' voedsel labels",
+      "no_disorder_triggers": "GEEN content die eating disorders kan triggeren: geen body shape goals, geen guilt around food, geen exercise-as-punishment",
+      "variety_joy": "minstens 10 zinnen over variatie, nieuwe dingen proberen, genieten, 6 zinnen over luisteren naar lichaam (honger/verzadiging)",
+      "social_eating": "minstens 4 zinnen over sociale, gezellige aspecten van eten",
+      "all_foods_fit": "geen onderscheid tussen 'gezond' en 'ongezond' - alle voedsel heeft een plaats"
+    },
+    "examples": [
+      "naar je hongergevoel luisteren",
+      "genieten van verschillende smaken en gerechten",
+      "samen aan tafel van een maaltijd genieten"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Gezondheid & welzijn",
+    "subdomain_id": "6.3",
+    "facet": "Bewegen voor plezier & welzijn",
+    "facet_id": "6.3.3",
+    "task": "Formuleer 16 activiteiten over bewegen en sporten vanuit plezier, energie en gezondheid, niet vanuit compensatie of uiterlijk",
+    "lexical": {
+      "verbs": ["bewegen", "sporten", "spelen", "rennen", "dansen", "genieten van", "energie kwijtraken", "actief zijn", "ontdekken", "proberen", "variëren", "plezier hebben"],
+      "objects": ["beweging", "sport", "activiteit", "energie", "plezier", "kracht", "vaardigheid", "spel", "team", "uitdaging"],
+      "settings": ["buiten", "sporthal", "thuis", "met vrienden", "park"]
+    },
+    "constraints": {
+      "joyful_movement": "alle 16 zinnen over bewegen vanuit plezier, energie, gezondheid - NOOIT vanuit compensatie, calorieverbranding of body goals",
+      "no_compensation": "ABSOLUUT GEEN zinnen over: bewegen om eten te compenseren, caloriën verbranden, lichaam veranderen",
+      "no_compulsion": "bewegen als keuze en plezier, NIET als verplichting of dwang",
+      "variety_play": "minstens 10 zinnen over verschillende vormen van bewegen (spelen, sport, dans, lopen), 6 zinnen over plezier/energie",
+      "rest_ok": "minstens 3 zinnen die erkennen dat rust en stilzitten ook oké zijn",
+      "functional": "focus op wat lichaam KAN, kracht, vaardigheid - niet op hoe het eruitziet"
+    },
+    "examples": [
+      "bewegen om overtollige energie kwijt te raken",
+      "genieten van dansen op je favoriete muziek",
+      "een nieuwe sport voor het plezier uitproberen"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Gezondheid & welzijn",
+    "subdomain_id": "6.3",
+    "facet": "Veiligheid & risicobewustzijn",
+    "facet_id": "6.3.4",
+    "task": "Formuleer 16 activiteiten over veiligheid bewaken, risico's herkennen en inschatten, gevaren vermijden en weten wanneer hulp te vragen",
+    "lexical": {
+      "verbs": ["herkennen", "inschatten", "vermijden", "opletten", "checken", "zorgen voor", "weten", "hulp vragen", "melden", "reageren op", "bewaken", "beschermen"],
+      "objects": ["gevaar", "risico", "veiligheid", "situatie", "omgeving", "hulp", "vertrouwenspersoon", "noodgeval", "grens", "signaal"],
+      "settings": ["buiten", "onderweg", "thuis", "online", "overal"]
+    },
+    "constraints": {
+      "empowerment_not_fear": "alle 16 zinnen over empowerment en vaardigheden - GEEN angst zaaien of overprotectie",
+      "recognition_skills": "minstens 10 zinnen over herkennen en inschatten van risico's (wat is veilig/onveilig)",
+      "help_seeking": "minstens 6 zinnen over weten wanneer en hoe hulp te vragen",
+      "practical_skills": "concrete, leeftijdsgeschikte veiligheidsvaardigheden voor 10-14 jaar",
+      "balanced": "gezond risicobewustzijn zonder paranoia of extreme angst"
+    },
+    "examples": [
+      "gevaarlijke situaties leren herkennen",
+      "weten wanneer je hulp moet vragen",
+      "op je veiligheid letten in nieuwe situaties"
+    ]
+  }
+]

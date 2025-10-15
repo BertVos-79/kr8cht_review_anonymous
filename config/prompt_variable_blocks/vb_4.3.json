@@ -1,0 +1,127 @@
+[
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Buitenactiviteiten",
+    "subdomain_id": "4.3",
+    "facet": "Buurtspel",
+    "facet_id": "4.3.1",
+    "task": "Formuleer 16 activiteiten over informeel buitenspel in de buurt zoals straatvoetbal, fietsen, skateboarden of andere spontane bewegingsactiviteiten",
+    "lexical": {
+      "verbs": ["voetballen", "fietsen", "skateboarden", "skeeleren", "racen", "oefenen", "trucjes doen", "rondrijden", "spelen", "rennen", "rollen", "springen", "uitdagen", "wedstrijdje houden"],
+      "objects": ["bal", "fiets", "skateboard", "skeelers", "step", "straat", "stoep", "parcours", "hindernis", "trucje", "sprong", "wedstrijdje", "route"],
+      "settings": ["straat", "buurt", "pleintje", "parkeerplaats", "fietspad", "speelstraat"]
+    },
+    "constraints": {
+      "activity_variety": "minstens 5 zinnen voetbal/balspel, 5 zinnen fietsen, 6 zinnen skateboard/skeelers/step",
+      "skill_development": "minstens 8 zinnen over oefenen, trucjes leren, verbeteren",
+      "social_solo": "minstens 8 zinnen samen met vrienden, 8 zinnen solo oefenen",
+      "safety": "alleen veilige activiteiten op geschikte plekken (geen drukke wegen, geen extreem gevaarlijke stunts)"
+    },
+    "examples": [
+      "met vrienden straatvoetbal spelen",
+      "een nieuwe trucje op het skateboard oefenen",
+      "door de buurt op de fiets rondrijden"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Buitenactiviteiten",
+    "subdomain_id": "4.3",
+    "facet": "Natuur",
+    "facet_id": "4.3.2",
+    "task": "Formuleer 16 activiteiten over buiten spelen in de natuur zoals het bos verkennen, hutten bouwen of klimmen",
+    "lexical": {
+      "verbs": ["verkennen", "ontdekken", "bouwen", "maken", "klimmen", "zoeken", "verzamelen", "observeren", "spelen", "verstoppen", "avonturen beleven", "wandelen", "struinen", "vinden"],
+      "objects": ["bos", "boom", "hut", "tak", "pad", "avontuur", "schat", "spoor", "plant", "dier", "natuurgebied", "verstopplaats", "bouwmateriaal", "beek"],
+      "settings": ["bos", "natuurgebied", "park", "bosrand", "weide", "Ardennen"]
+    },
+    "constraints": {
+      "nature_activities": "minstens 5 zinnen verkennen/ontdekken, 5 zinnen bouwen/maken, 6 zinnen klimmen/bewegen",
+      "exploration_focus": "minstens 8 zinnen over ontdekken, nieuwsgierigheid, avontuur",
+      "safety_appropriate": "alleen veilige activiteiten (niet te hoog klimmen, geen gevaarlijke situaties, respect voor natuur)",
+      "environmental_respect": "minstens 3 zinnen die respect voor natuur tonen (observeren, voorzichtig zijn)"
+    },
+    "examples": [
+      "een hut van takken in het bos bouwen",
+      "het bos verkennen en nieuwe paadjes ontdekken",
+      "voorzichtig in een stevige boom klimmen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Buitenactiviteiten",
+    "subdomain_id": "4.3",
+    "facet": "Zwembad & speeltuin",
+    "facet_id": "4.3.3",
+    "task": "Formuleer 16 activiteiten over spelen in het zwembad of op de speeltuin met toestellen, water en bewegingsspel",
+    "lexical": {
+      "verbs": ["zwemmen", "duiken", "spetteren", "glijden", "schommelen", "klimmen", "klauteren", "springen", "hangen", "balanceren", "draaien", "spelen", "plezier maken"],
+      "objects": ["glijbaan", "schommel", "klimrek", "zwemstoeltje", "trampoline", "wipkip", "water", "duikplank", "speeltoestel", "bad", "zwembad"],
+      "settings": ["zwembad", "speeltuin", "speelplein", "waterspeeltuin", "park"]
+    },
+    "constraints": {
+      "location_split": "minstens 8 zinnen zwembad, 8 zinnen speeltuin",
+      "activity_intensity": "minstens 10 zinnen actieve beweging (klimmen, zwemmen, glijden), 6 zinnen rustiger spel",
+      "water_safety": "bij zwembad: alleen veilige activiteiten (niet diep duiken zonder toezicht, geen gevaarlijke sprongen)",
+      "playground_variety": "varieer speeltoestellen (schommel, glijbaan, klimrek, etc.)"
+    },
+    "examples": [
+      "van de glijbaan in het zwembad glijden",
+      "op de speeltuin hoog schommelen",
+      "op het klimrek tot bovenaan klauteren"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Buitenactiviteiten",
+    "subdomain_id": "4.3",
+    "facet": "Verveling & vrij spel",
+    "facet_id": "4.3.4",
+    "task": "Formuleer 16 activiteiten over ongestructureerde tijd buiten waarbij jongeren rondhangen, mijmeren, zich vervelen of spontaan iets verzinnen",
+    "lexical": {
+      "verbs": ["rondhangen", "niksen", "liggen", "zitten", "kijken", "luisteren", "mijmeren", "dagdromen", "nadenken", "ontspannen", "genieten", "observeren", "peinzen", "verzinnen"],
+      "objects": ["wolken", "lucht", "natuur", "omgeving", "gedachten", "stilte", "moment", "rust", "vrije tijd", "idee"],
+      "settings": ["gras", "bank", "park", "tuin", "buiten", "stoep"]
+    },
+    "constraints": {
+      "boredom_positive": "alle 16 zinnen positief framen: verveling als productieve leegte, vrije tijd als ontwikkelingskans",
+      "activity_types": "minstens 8 zinnen over niets doen/observeren/mijmeren, 8 zinnen over spontaan spel/ideeën krijgen",
+      "healthy_downtime": "alle zinnen tonen gezonde ontspanning en creativiteit uit verveling, geen negatieve spiraal",
+      "outdoor_context": "alle activiteiten buiten, in frisse lucht"
+    },
+    "examples": [
+      "in het gras liggen en naar de wolken kijken",
+      "rustig op een bankje zitten en genieten",
+      "uit verveling een nieuw spelletje verzinnen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Buitenactiviteiten",
+    "subdomain_id": "4.3",
+    "facet": "Recreatieve locaties",
+    "facet_id": "4.3.5",
+    "task": "Formuleer 16 activiteiten die plaatsvinden in recreatieve plekken zoals pretparken, de kermis, dierentuinen, het strand of andere uitstapjes",
+    "lexical": {
+      "verbs": ["bezoeken", "gaan naar", "genieten van", "beleven", "proberen", "ontdekken", "verkennen", "spelen", "zwemmen", "kijken naar", "meegaan", "uitproberen", "ervaren"],
+      "objects": ["attractie", "ritje", "dier", "strand", "zee", "golven", "zand", "uitstap", "activiteit", "kermisattractie", "spelletje", "tent"],
+      "settings": ["pretpark", "kermis", "dierentuin", "strand", "zee", "natuurgebied", "attractiepark", "waterpark"]
+    },
+    "constraints": {
+      "location_variety": "minstens 4 zinnen pretpark/kermis, 4 zinnen strand/zee, 4 zinnen dierentuin/natuur, 4 andere recreatie",
+      "experience_types": "minstens 8 zinnen actieve beleving (attracties, zwemmen, spelen), 8 zinnen observeren/genieten (dieren kijken, natuur)",
+      "family_friends": "minstens 8 zinnen met familie of vrienden, 4 zinnen groter gezelschap/uitstap",
+      "special_occasion": "alle zinnen benadrukken bijzonder, feestelijk karakter van uitstapje"
+    },
+    "examples": [
+      "gillen van opwinding op de achtbaan",
+      "een zandkasteel bouwen bij vloedtij",
+      "een olifant in de zoo observeren"
+    ]
+  }
+]

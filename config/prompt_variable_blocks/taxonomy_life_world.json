@@ -1,0 +1,346 @@
+{
+  "taxonomie": "Levensdomeinen 10-14 jaar (Vlaanderen, 2025)",
+  "beschrijving": "Geïntegreerd met ICF-CY classificatie en canonieke locaties",
+  "domeinen": [
+    {
+      "domain": "Onderwijsdomein",
+      "domain_id": "1",
+      "subdomeinen": [
+        {
+          "subdomain": "Leeractiviteiten",
+          "subdomain_id": "1.1",
+          "facetten": [
+            {"facet": "Klassikale instructie", "facet_id": "1.1.1"},
+            {"facet": "Zelfstandig werk", "facet_id": "1.1.2"},
+            {"facet": "Groepswerk", "facet_id": "1.1.3"},
+            {"facet": "Huiswerk & studie", "facet_id": "1.1.4"},
+            {"facet": "Digitaal leren", "facet_id": "1.1.5"},
+            {"facet": "Probleemoplossend leren", "facet_id": "1.1.6"},
+            {"facet": "Creatief & artistiek leren", "facet_id": "1.1.7"}
+          ]
+        },
+        {
+          "subdomain": "Schoolse rituelen & organisatie",
+          "subdomain_id": "1.2",
+          "facetten": [
+            {"facet": "Dagstructuur", "facet_id": "1.2.1"},
+            {"facet": "Evaluatiemomenten", "facet_id": "1.2.2"},
+            {"facet": "Administratieve taken", "facet_id": "1.2.3"},
+            {"facet": "Schoolevenementen", "facet_id": "1.2.4"}
+          ]
+        },
+        {
+          "subdomain": "Sociale schooldynamiek",
+          "subdomain_id": "1.3",
+          "facetten": [
+            {"facet": "Leerkracht-interactie", "facet_id": "1.3.1"},
+            {"facet": "Peer-interactie", "facet_id": "1.3.2"},
+            {"facet": "Klasgroepsdynamiek", "facet_id": "1.3.3"},
+            {"facet": "Overgang basisonderwijs-secundair", "facet_id": "1.3.4"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Gezinsdomein",
+      "domain_id": "2",
+      "subdomeinen": [
+        {
+          "subdomain": "Verzorging & huishouding",
+          "subdomain_id": "2.1",
+          "facetten": [
+            {"facet": "Persoonlijke zorg", "facet_id": "2.1.1"},
+            {"facet": "Maaltijden", "facet_id": "2.1.2"},
+            {"facet": "Huishoudelijke taken", "facet_id": "2.1.3"},
+            {"facet": "Logistiek", "facet_id": "2.1.4"},
+            {"facet": "Zorgen voor anderen", "facet_id": "2.1.5"}
+          ]
+        },
+        {
+          "subdomain": "Gezinsrelaties",
+          "subdomain_id": "2.2",
+          "facetten": [
+            {"facet": "Ouder-kind interactie", "facet_id": "2.2.1"},
+            {"facet": "Broers/zussen", "facet_id": "2.2.2"},
+            {"facet": "Uitgebreide familie", "facet_id": "2.2.3"},
+            {"facet": "Gezinsrituelen", "facet_id": "2.2.4"}
+          ]
+        },
+        {
+          "subdomain": "Autonomie & grenzen",
+          "subdomain_id": "2.3",
+          "facetten": [
+            {"facet": "Regels & afspraken", "facet_id": "2.3.1"},
+            {"facet": "Privacy", "facet_id": "2.3.2"},
+            {"facet": "Onderhandeling", "facet_id": "2.3.3"},
+            {"facet": "Zelfstandigheid", "facet_id": "2.3.4"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Peerdomein",
+      "domain_id": "3",
+      "subdomeinen": [
+        {
+          "subdomain": "Vriendschapspatronen",
+          "subdomain_id": "3.1",
+          "facetten": [
+            {"facet": "Best friends", "facet_id": "3.1.1"},
+            {"facet": "Vriendengroep", "facet_id": "3.1.2"},
+            {"facet": "Klasgenoten", "facet_id": "3.1.3"},
+            {"facet": "Eerste romantiek", "facet_id": "3.1.4"}
+          ]
+        },
+        {
+          "subdomain": "Sociale activiteiten",
+          "subdomain_id": "3.2",
+          "facetten": [
+            {"facet": "Spel & ontspanning", "facet_id": "3.2.1"},
+            {"facet": "Afspreken", "facet_id": "3.2.2"},
+            {"facet": "Groepsactiviteiten", "facet_id": "3.2.3"},
+            {"facet": "Sociale evenementen", "facet_id": "3.2.4"}
+          ]
+        },
+        {
+          "subdomain": "Sociale navigatie",
+          "subdomain_id": "3.3",
+          "facetten": [
+            {"facet": "Groepsdruk", "facet_id": "3.3.1"},
+            {"facet": "Conflicten", "facet_id": "3.3.2"},
+            {"facet": "Reputatie", "facet_id": "3.3.3"},
+            {"facet": "Communicatievaardigheden", "facet_id": "3.3.4"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Vrijetijdsdomein",
+      "domain_id": "4",
+      "subdomeinen": [
+        {
+          "subdomain": "Georganiseerde activiteiten",
+          "subdomain_id": "4.1",
+          "facetten": [
+            {"facet": "Sport", "facet_id": "4.1.1"},
+            {"facet": "Jeugdbeweging", "facet_id": "4.1.2"},
+            {"facet": "Artistieke hobby's", "facet_id": "4.1.3"},
+            {"facet": "Cursussen", "facet_id": "4.1.4"}
+          ]
+        },
+        {
+          "subdomain": "Vrije tijd thuis",
+          "subdomain_id": "4.2",
+          "facetten": [
+            {"facet": "Gaming", "facet_id": "4.2.1"},
+            {"facet": "Media consumptie", "facet_id": "4.2.2"},
+            {"facet": "Creatieve bezigheden", "facet_id": "4.2.3"},
+            {"facet": "Spel", "facet_id": "4.2.4"},
+            {"facet": "Solistisch spel", "facet_id": "4.2.5"}
+          ]
+        },
+        {
+          "subdomain": "Buitenactiviteiten",
+          "subdomain_id": "4.3",
+          "facetten": [
+            {"facet": "Buurtspel", "facet_id": "4.3.1"},
+            {"facet": "Natuur", "facet_id": "4.3.2"},
+            {"facet": "Zwembad & speeltuin", "facet_id": "4.3.3"},
+            {"facet": "Verveling & vrij spel", "facet_id": "4.3.4"},
+            {"facet": "Recreatieve locaties", "facet_id": "4.3.5"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Digitaal Domein",
+      "domain_id": "5",
+      "subdomeinen": [
+        {
+          "subdomain": "Sociale media & communicatie",
+          "subdomain_id": "5.1",
+          "facetten": [
+            {"facet": "Messaging", "facet_id": "5.1.1"},
+            {"facet": "Social media", "facet_id": "5.1.2"},
+            {"facet": "Gaming social", "facet_id": "5.1.3"},
+            {"facet": "Video calling", "facet_id": "5.1.4"},
+            {"facet": "Digitale etiquette & grenzen", "facet_id": "5.1.5"}
+          ]
+        },
+        {
+          "subdomain": "Content & consumptie",
+          "subdomain_id": "5.2",
+          "facetten": [
+            {"facet": "Online creators volgen", "facet_id": "5.2.1"},
+            {"facet": "Streaming entertainment", "facet_id": "5.2.2"},
+            {"facet": "Informatie zoeken", "facet_id": "5.2.3"},
+            {"facet": "Trends & virale content", "facet_id": "5.2.4"}
+          ]
+        },
+        {
+          "subdomain": "Digitale vaardigheden & identiteit",
+          "subdomain_id": "5.3",
+          "facetten": [
+            {"facet": "Account beheer & beveiliging", "facet_id": "5.3.1"},
+            {"facet": "Online identiteit & zelfpresentatie", "facet_id": "5.3.2"},
+            {"facet": "Digitale communicatie-etiquette", "facet_id": "5.3.3"},
+            {"facet": "Online veiligheid & risicobewustzijn", "facet_id": "5.3.4"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Lichamelijk-emotioneel domein",
+      "domain_id": "6",
+      "subdomeinen": [
+        {
+          "subdomain": "Lichaamsbeleving & puberteit",
+          "subdomain_id": "6.1",
+          "facetten": [
+            {"facet": "Fysieke veranderingen herkennen & accepteren", "facet_id": "6.1.1"},
+            {"facet": "Lichamelijke zelfzorg & hygiëne", "facet_id": "6.1.2"},
+            {"facet": "Gezonde zelfwaardering & body positivity", "facet_id": "6.1.3"}
+          ]
+        },
+        {
+          "subdomain": "Emotionele ontwikkeling",
+          "subdomain_id": "6.2",
+          "facetten": [
+            {"facet": "Emoties herkennen & benoemen", "facet_id": "6.2.1"},
+            {"facet": "Zelfbewustzijn & zelfvertrouwen", "facet_id": "6.2.2"},
+            {"facet": "Identiteitsverkenning", "facet_id": "6.2.3"},
+            {"facet": "Stress herkennen & gezond copen", "facet_id": "6.2.4"},
+            {"facet": "Emotieregulatie vaardigheden", "facet_id": "6.2.5"}
+          ]
+        },
+        {
+          "subdomain": "Gezondheid & welzijn",
+          "subdomain_id": "6.3",
+          "facetten": [
+            {"facet": "Gezonde slaapgewoontes ontwikkelen", "facet_id": "6.3.1"},
+            {"facet": "Intuïtief & gevarieerd eten", "facet_id": "6.3.2"},
+            {"facet": "Bewegen voor plezier & welzijn", "facet_id": "6.3.3"},
+            {"facet": "Veiligheid & risicobewustzijn", "facet_id": "6.3.4"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Sensorisch-motorisch domein",
+      "domain_id": "7",
+      "subdomeinen": [
+        {
+          "subdomain": "Zintuiglijke verkenning",
+          "subdomain_id": "7.1",
+          "facetten": [
+            {"facet": "Visuele waarneming & observatie", "facet_id": "7.1.1"},
+            {"facet": "Auditieve verkenning", "facet_id": "7.1.2"},
+            {"facet": "Tactiele ervaring", "facet_id": "7.1.3"},
+            {"facet": "Smaak & geur verkennen", "facet_id": "7.1.4"}
+          ]
+        },
+        {
+          "subdomain": "Motorische vaardigheden",
+          "subdomain_id": "7.2",
+          "facetten": [
+            {"facet": "Grof motorische beweging", "facet_id": "7.2.1"},
+            {"facet": "Fijn motorische precisie", "facet_id": "7.2.2"},
+            {"facet": "Lichaamscontrole & ruimtelijk bewustzijn", "facet_id": "7.2.3"},
+            {"facet": "Sportieve basisvaardigheden", "facet_id": "7.2.4"}
+          ]
+        },
+        {
+          "subdomain": "Ruimtelijk bewustzijn",
+          "subdomain_id": "7.3",
+          "facetten": [
+            {"facet": "Oriëntatie & weg vinden", "facet_id": "7.3.1"},
+            {"facet": "Ruimtelijk inzicht & afstand inschatten", "facet_id": "7.3.2"},
+            {"facet": "Lichaamsschema & bewegingsplanning", "facet_id": "7.3.3"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Ruimtelijk-mobiel domein",
+      "domain_id": "8",
+      "subdomeinen": [
+        {
+          "subdomain": "Verplaatsingspatronen",
+          "subdomain_id": "8.1",
+          "facetten": [
+            {"facet": "Schooltraject", "facet_id": "8.1.1"},
+            {"facet": "Buurtmobiliteit", "facet_id": "8.1.2"},
+            {"facet": "Begeleide verplaatsingen", "facet_id": "8.1.3"},
+            {"facet": "Autonomie-ontwikkeling in mobiliteit", "facet_id": "8.1.4"},
+            {"facet": "Openbaar vervoer gebruiken", "facet_id": "8.1.5"}
+          ]
+        },
+        {
+          "subdomain": "Ruimtegebruik",
+          "subdomain_id": "8.2",
+          "facetten": [
+            {"facet": "Thuisterritoria gebruiken", "facet_id": "8.2.1"},
+            {"facet": "Buurtruimte benutten", "facet_id": "8.2.2"},
+            {"facet": "Commerciële ruimtes verkennen", "facet_id": "8.2.3"},
+            {"facet": "Publieke buitenruimte gebruiken", "facet_id": "8.2.4"},
+            {"facet": "Gemeenschapslocaties benutten", "facet_id": "8.2.5"}
+          ]
+        },
+        {
+          "subdomain": "Geografische horizon",
+          "subdomain_id": "8.3",
+          "facetten": [
+            {"facet": "Lokaal", "facet_id": "8.3.1"},
+            {"facet": "Regionaal", "facet_id": "8.3.2"},
+            {"facet": "Drempelruimtes", "facet_id": "8.3.3"},
+            {"facet": "Cultuurlocaties", "facet_id": "8.3.4"},
+            {"facet": "Reizen", "facet_id": "8.3.5"}
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "Cultureel-maatschappelijk domein",
+      "domain_id": "9",
+      "subdomeinen": [
+        {
+          "subdomain": "Consumptiecultuur",
+          "subdomain_id": "9.1",
+          "facetten": [
+            {"facet": "Financiële vaardigheden ontwikkelen", "facet_id": "9.1.1"},
+            {"facet": "Persoonlijke stijl ontwikkelen", "facet_id": "9.1.2"},
+            {"facet": "Kritisch omgaan met media-invloeden", "facet_id": "9.1.3"},
+            {"facet": "Verzamelen als hobby & sociale activiteit", "facet_id": "9.1.4"}
+          ]
+        },
+        {
+          "subdomain": "Culturele participatie",
+          "subdomain_id": "9.2",
+          "facetten": [
+            {"facet": "Evenementen", "facet_id": "9.2.1"},
+            {"facet": "Culturele instellingen", "facet_id": "9.2.2"},
+            {"facet": "Seizoensgebonden", "facet_id": "9.2.3"},
+            {"facet": "Religieuze/levensbeschouwelijke", "facet_id": "9.2.4"},
+            {"facet": "Religieus-spiritueel", "facet_id": "9.2.5"}
+          ]
+        },
+        {
+          "subdomain": "Maatschappelijk bewustzijn",
+          "subdomain_id": "9.3",
+          "facetten": [
+            {"facet": "Sociale thema's", "facet_id": "9.3.1"},
+            {"facet": "Ecologie", "facet_id": "9.3.2"},
+            {"facet": "Mediageletterdheid", "facet_id": "9.3.3"},
+            {"facet": "Eerste activisme", "facet_id": "9.3.4"},
+            {"facet": "Burgerschap", "facet_id": "9.3.5"}
+          ]
+        }
+      ]
+    }
+  ],
+  "statistieken": {
+    "totaal_domeinen": 9,
+    "totaal_subdomeinen": 27,
+    "totaal_facetten": 123
+  }
+}

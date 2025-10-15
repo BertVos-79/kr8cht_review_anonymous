@@ -1,4 +1,128 @@
+# ------------------------------
+# Project-wide .gitignore (review-ready)
+# ------------------------------
+# Notes:
+# - We *keep* committed results in outputs/ for review; do not ignore it.
+# - Private/raw data in the repo-root data/ is ignored (docs/data/ remains tracked).
+# - Environment specs in envs/ are tracked; virtualenv folders (env/, .venv/) are ignored.
+# - Heavy/ephemeral artifacts from training/caching are ignored unless explicitly unignored below.
+# ------------------------------
+
+# OS / Editor
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Compiled extensions
+*.so
+*.dylib
+*.dll
+
+# Packaging / build
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+
+# Virtual environments (keep envs/ since it contains YAML specs)
+.venv/
+venv/
+env/
+env.bak/
+.conda/
+pip-wheel-metadata/
+
+# Jupyter
 .ipynb_checkpoints/
-.DS_Store
-.ipynb_checkpoints/
+.jupyter/
+
+# Logs & caches
+*.log
+logs/
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage/
+
+# ------------------------------
+# Data & secrets
+# ------------------------------
+# Ignore only the repo-root data/ (docs/data/ remains tracked)
+/data/
+/data/**
+!/data/README.md
+
+# Secrets
+*.secret
+*.secrets
+*.key
+*.pem
+*.crt
+.env
+.env.*
+
+# ------------------------------
+# Models & training artifacts
+# ------------------------------
+# Keep small curated descriptors if needed (e.g., README.md) but ignore heavy pickles/checkpoints
+models/**/checkpoints/
+models/**/runs/
+models/**/tmp/
+models/teacher/**         # ignore all teacher pickles and aux files
+models/**/*.pkl
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.safetensors
+!models/README.md
+!models/**/README.md
+!models/teacher/README.md
+
+# Local HF caches (if accidentally created inside repo)
+huggingface/
+**/hf_cache/
+**/.huggingface/
+**/datasets-cache/
+
+# ------------------------------
+# Outputs — keep final analysis artifacts; ignore heavy/ephemeral detritus
+# ------------------------------
+# d_fine_tuned: ignore trainer temp runs; keep results/*.npy and plots/tables
+outputs/d_fine_tuned/temp/**
+
+# e_1_synth_augmentation: keep facet_pools/*.txt and g_raw_*.jsonl (needed per policy)
+
+# e_2_teacher_labeling: keep label CSVs and synth_embeds cache; ignore raw JSONL logs and per-fold scratch notebooks
+outputs/e_2_teacher_labeling/**/*.jsonl
+outputs/e_2_teacher_labeling/run_fold*.ipynb
+outputs/e_2_teacher_labeling/pm_run_*.ipynb
+
+# e_3_student_scoring: keep the fallback seed vector file but ignore other cache files
+outputs/e_3_student_scoring/cache/**
+!outputs/e_3_student_scoring/cache/X_seed_e5_base.npy
+
+# ------------------------------
+# Node / web (if any future docs tooling is added)
+# ------------------------------
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Misc
+*.ipynb_convert.tmp
+*.swp
+*.swo

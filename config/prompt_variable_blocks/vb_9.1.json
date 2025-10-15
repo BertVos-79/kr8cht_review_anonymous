@@ -1,0 +1,110 @@
+[
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Consumptiecultuur",
+    "subdomain_id": "9.1",
+    "facet": "Financiële vaardigheden ontwikkelen",
+    "facet_id": "9.1.1",
+    "task": "Formuleer 16 activiteiten over omgaan met zakgeld en geld waarbij jongeren financiële vaardigheden ontwikkelen zoals sparen, budgetteren, betalen of geld overmaken",
+    "lexical": {
+      "verbs": ["sparen", "budgetteren", "plannen", "tellen", "berekenen", "betalen", "overmaken", "opnemen", "bijhouden", "verdelen", "afwegen", "kiezen", "uitstellen", "beheren"],
+      "objects": ["zakgeld", "budget", "spaarpot", "rekening", "bankkaart", "betaling", "aankoop", "doel", "plan", "keuze", "uitgave"],
+      "settings": ["thuis", "winkel", "bank", "online", "telefoon"]
+    },
+    "constraints": {
+      "financial_literacy": "alle 16 zinnen over gezonde financiële vaardigheden (sparen, budgetteren, bewust kiezen)",
+      "activities_not_objects": "focus op ACTIVITEITEN met geld (overmaken, betalen, sparen), NIET op bezit of hebben",
+      "responsible_spending": "minstens 10 zinnen over verantwoord omgaan met geld (plannen, afwegen, sparen), maximaal 6 over uitgeven",
+      "long_term_thinking": "minstens 6 zinnen over sparen voor doelen, uitgestelde bevrediging",
+      "no_materialism": "GEEN zinnen die materialisme of status door geld promoten",
+      "practical_skills": "concrete, praktische vaardigheden (betalen, pinnen, overmaken, budget maken)"
+    },
+    "examples": [
+      "zakgeld voor een spaaroel opzij leggen",
+      "een budget voor de maand opstellen",
+      "geld naar een rekening overmaken"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Consumptiecultuur",
+    "subdomain_id": "9.1",
+    "facet": "Persoonlijke stijl ontwikkelen",
+    "facet_id": "9.1.2",
+    "task": "Formuleer 16 activiteiten over mode en persoonlijke stijl waarbij jongeren hun eigen smaak ontdekken, kleding passen, stijlkeuzes maken of zich authentiek uitdrukken",
+    "lexical": {
+      "verbs": ["passen", "kiezen", "uitproberen", "combineren", "ontdekken", "ontwikkelen", "experimenteren", "uitdrukken", "creëren", "stylen", "aanpassen", "verzorgen"],
+      "objects": ["outfit", "kledingstuk", "stijl", "look", "combinatie", "keuze", "persoonlijkheid", "smaak", "expressie", "garderobe"],
+      "settings": ["thuis", "winkel", "paskamer", "kledingwinkel", "online"]
+    },
+    "constraints": {
+      "authenticity_focus": "alle 16 zinnen over authentieke zelfexpressie en persoonlijke stijl, NIET over merken of status",
+      "activities_not_objects": "focus op ACTIVITEITEN (passen, combineren, stylen), NIET op bezit van merkkleding",
+      "no_brand_status": "ABSOLUUT GEEN zinnen over merken, status, 'cool zijn' door kleding, 'in' zijn",
+      "self_expression": "minstens 12 zinnen over persoonlijke smaak, creativiteit, zelfexpressie",
+      "practical_choices": "minstens 8 zinnen over praktische aspecten (passen, combineren, verzorgen)",
+      "no_peer_pressure": "geen zinnen over kleding om erbij te horen of anderen te impressioneren"
+    },
+    "examples": [
+      "verschillende outfits uitproberen en combineren",
+      "een kledingstuk in de winkel passen",
+      "een persoonlijke stijl ontwikkelen"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Consumptiecultuur",
+    "subdomain_id": "9.1",
+    "facet": "Kritisch omgaan met media-invloeden",
+    "facet_id": "9.1.3",
+    "task": "Formuleer 16 activiteiten over kritisch nadenken over media-invloeden, reclame herkennen, bewust keuzes maken ondanks druk of FOMO",
+    "lexical": {
+      "verbs": ["herkennen", "analyseren", "doorgronden", "begrijpen", "kritisch bekijken", "nadenken over", "afwegen", "kiezen", "weerstaan", "reflecteren", "onderscheiden", "beoordelen"],
+      "objects": ["reclame", "beïnvloeding", "marketingtechniek", "FOMO", "druk", "trend", "boodschap", "strategie", "keuze", "autonomie"],
+      "settings": ["online", "thuis", "bij media", "op telefoon"]
+    },
+    "constraints": {
+      "critical_thinking": "alle 16 zinnen over kritisch denken, herkennen van beïnvloeding, autonome keuzes maken",
+      "activities_not_consumption": "focus op ANALYSEREN en REFLECTEREN, NIET op volgen of consumeren",
+      "empowerment": "minstens 12 zinnen over empowerment, autonomie, weerstaan van druk",
+      "media_literacy": "minstens 10 zinnen over media- en reclamegeletterdheid (technieken herkennen, doorzien)",
+      "no_influencer_worship": "GEEN zinnen die influencers of creators blindelings volgen of verheerlijken",
+      "healthy_skepticism": "gezonde, constructieve scepsis tegenover commerciële boodschappen"
+    },
+    "examples": [
+      "reclametechnieken in een video herkennen",
+      "bewust nadenken over wat je echt nodig hebt",
+      "FOMO-gevoelens kritisch bekijken"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Consumptiecultuur",
+    "subdomain_id": "9.1",
+    "facet": "Verzamelen als hobby & sociale activiteit",
+    "facet_id": "9.1.4",
+    "task": "Formuleer 16 activiteiten over verzamelen en ruilen waarbij jongeren de sociale en hobbymatige aspecten beleven, zoals kaarten organiseren, met vrienden ruilen of verzamelingen ordenen",
+    "lexical": {
+      "verbs": ["verzamelen", "ordenen", "sorteren", "ruilen", "uitwisselen", "organiseren", "catalogiseren", "tonen", "bespreken", "vergelijken", "spelen met", "bewaren", "uitbreiden"],
+      "objects": ["verzameling", "kaart", "sticker", "collectie", "ruilmoment", "map", "album", "set", "duplicaat", "vrienden", "hobby"],
+      "settings": ["thuis", "school", "bij vrienden", "ruilmoment", "speelplaats"]
+    },
+    "constraints": {
+      "hobby_social_focus": "alle 16 zinnen over verzamelen als hobby en sociale activiteit, NIET over waarde of status",
+      "activities_not_possessing": "focus op ACTIVITEITEN (ordenen, ruilen, spelen), NIET op bezit of waarde van collectie",
+      "social_connection": "minstens 10 zinnen over sociale aspecten (ruilen, bespreken, samen), 6 zinnen organisatorisch (ordenen, catalogiseren)",
+      "no_monetary_value": "ABSOLUUT GEEN zinnen over financiële waarde, zeldzaamheid als status, investering",
+      "joy_of_hobby": "focus op plezier van verzamelen, niet op volledigheid of waarde",
+      "sharing_not_hoarding": "minstens 6 zinnen over delen, ruilen, samen genieten"
+    },
+    "examples": [
+      "stickers met je vrienden ruilen",
+      "je postzegelverzameling ordenen",
+      "je platencollectie uitbreiden"
+    ]
+  }
+]

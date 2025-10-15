@@ -1,0 +1,8 @@
+{
+  "pca__n_components": 0.9,
+  "chain__n_chains": 3,
+  "chain__cv_splits": 5,
+  "chain__base_rf__n_estimators": 100,
+  "chain__base_rf__max_depth": null,
+  "chain__base_rf__min_samples_leaf": 1
+}

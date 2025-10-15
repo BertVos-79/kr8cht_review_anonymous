@@ -1,0 +1,7 @@
+method,size,n_sent
+gemma,96,96
+gemma,192,192
+gemma,384,384
+gemma,768,768
+gemma,1536,1536
+gemma,3072,3072

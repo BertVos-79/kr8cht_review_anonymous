@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Vriendschapspatronen",
+    "subdomain_id": "3.1",
+    "facet": "Best friends",
+    "facet_id": "3.1.1",
+    "task": "Formuleer 16 activiteiten over de beste vriendschap waarin jongeren geheimen delen, afspreken, samen iets doen of conflicten oplossen",
+    "lexical": {
+      "verbs": ["delen", "vertellen", "toevertrouwen", "afspreken", "plannen", "beloven", "steunen", "helpen", "ruziemaken", "bekvechten", "bijleggen", "verzoenen", "excuses maken", "vergeven", "begrijpen"],
+      "objects": ["geheim", "verhaal", "probleem", "vertrouwen", "afspraak", "plan", "ruzie", "conflict", "meningsverschil", "excuses", "vriendschap", "belofte", "steun"],
+      "settings": ["bij vriend thuis", "op de kamer", "speelafspraak", "park", "buiten", "online"]
+    },
+    "constraints": {
+      "friendship_depth": "minstens 8 zinnen over diepgaande connectie (geheimen, vertrouwen, steun), 4 zinnen over samen activiteiten, 4 zinnen over conflict en herstel",
+      "conflict_resolution": "bij ruzie/conflict: altijd constructieve afloop (bijleggen, excuses, begrip)",
+      "emotional_support": "minstens 6 zinnen die emotionele band tonen (vertrouwen, steun, begrijpen)",
+      "reciprocity": "minstens 4 zinnen die wederkerigheid tonen (elkaar helpen, voor elkaar zijn)"
+    },
+    "examples": [
+      "een geheim aan je beste vriend toevertrouwen",
+      "een ruzie met je beste vriendin bijleggen",
+      "samen iets leuks voor het weekend plannen"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Vriendschapspatronen",
+    "subdomain_id": "3.1",
+    "facet": "Vriendengroep",
+    "facet_id": "3.1.2",
+    "task": "Formuleer 16 activiteiten over hoe jongeren functioneren in een vriendengroep, proberen erbij te horen, groepsactiviteiten doen of omgaan met groepsdynamiek",
+    "lexical": {
+      "verbs": ["aansluiten", "meedoen", "erbij horen", "deelnemen", "afspreken", "plannen", "organiseren", "samen zijn", "lachen", "kletsen", "delen", "meegaan", "aansluiten bij", "proberen"],
+      "objects": ["groep", "vriendengroep", "groepje", "activiteit", "afspraak", "plan", "gesprek", "grap", "verhaal", "groepschat", "uitstap", "samen-zijn"],
+      "settings": ["speelplaats", "park", "winkelcentrum", "bij iemand thuis", "verjaardagsfeestje"]
+    },
+    "constraints": {
+      "group_participation": "minstens 10 zinnen over positieve groepsactiviteiten (meedoen, samen zijn, lol hebben), 6 zinnen over aansluiten/erbij horen willen",
+      "social_navigation": "minstens 6 zinnen die sociale vaardigheden tonen (aansluiten, meegaan, bijdragen aan groep)",
+      "inclusion_focus": "focus op hoe je deel wordt van groep, niet op exclusie of buitensluiten",
+      "positive_dynamics": "alle activiteiten constructief, geen destructieve groepsdruk of pesten"
+    },
+    "examples": [
+      "bij de vriendengroep in de pauze aansluiten",
+      "samen met de groep iets leuks organiseren",
+      "meedoen met een groepsactiviteit in het weekend"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Vriendschapspatronen",
+    "subdomain_id": "3.1",
+    "facet": "Klasgenoten",
+    "facet_id": "3.1.3",
+    "task": "Formuleer 16 activiteiten over omgang met klasgenoten, zoals samenwerken, babbelen tijdens pauzes of sociale momenten delen",
+    "lexical": {
+      "verbs": ["samenwerken", "helpen", "babbelen", "kletsen", "praten", "lachen", "grappen maken", "delen", "uitnodigen", "vieren", "feliciteren", "meevieren", "organiseren", "spelen"],
+      "objects": ["klasgenoot", "project", "opdracht", "pauze", "gesprek", "grap", "verhaal", "verjaardag", "feestje", "traktatie", "uitnodiging", "samenwerking"],
+      "settings": ["klaslokaal", "speelplaats", "refter", "gang", "verjaardagsfeestje", "bij klasgenoot thuis"]
+    },
+    "constraints": {
+      "interaction_variety": "minstens 6 zinnen over schoolse interacties (samenwerken, helpen), 6 zinnen over sociale momenten (babbelen, lachen), 4 zinnen over feestelijke gelegenheden",
+      "social_skills": "minstens 8 zinnen die prosociaal gedrag tonen (helpen, delen, feliciteren, includeren)",
+      "casual_formal_mix": "varieer tussen formele (schooltaken) en informele (pauze, feest) interacties",
+      "positive_tone": "alle interacties constructief en vriendelijk"
+    },
+    "examples": [
+      "met een klasgenoot aan een project werken",
+      "tijdens de pauze gezellig babbelen",
+      "de verjaardag van een klasgenoot vieren"
+    ]
+  },
+  {
+    "domain": "Peerdomein",
+    "domain_id": "3",
+    "subdomain": "Vriendschapspatronen",
+    "subdomain_id": "3.1",
+    "facet": "Eerste romantiek",
+    "facet_id": "3.1.4",
+    "task": "Formuleer 16 activiteiten over eerste romantische gevoelens en ervaringen zoals verliefd zijn, verkering hebben of voorzichtige fysieke toenadering",
+    "lexical": {
+      "verbs": ["verliefd zijn", "leuk vinden", "versieren", "vragen", "verkering vragen", "hand vasthouden", "zoenen", "blozen", "zenuwen", "denken aan", "briefjes geven", "sms'en", "chatten", "date hebben"],
+      "objects": ["verliefdheid", "crush", "verkering", "briefje", "berichtje", "compliment", "hand", "eerste zoen", "vlinders", "zenuwachtigheid", "date", "spraakje"],
+      "settings": ["schoolplein", "bij iemand thuis", "park", "winkelcentrum", "bioscoop"]
+    },
+    "constraints": {
+      "age_appropriate": "alleen onschuldige, leeftijdsgeschikte activiteiten voor 10-14 jaar (hand vasthouden, eerste zoen, briefjes, verliefd zijn)",
+      "emotional_focus": "minstens 8 zinnen over gevoelens en emoties (verliefd zijn, zenuwen, blozen, denken aan), 8 zinnen over communicatie en interactie",
+      "respect_boundaries": "alle activiteiten respectvol, geen druk of ongepaste situaties",
+      "developmental_appropriate": "toon onzekerheid en voorzichtigheid die bij eerste romantiek hoort"
+    },
+    "examples": [
+      "zenuwachtig zijn voor een eerste date",
+      "een briefje naar je crush sturen",
+      "voor het eerst iemands hand vasthouden"
+    ]
+  }
+]

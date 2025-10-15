@@ -1,0 +1,10 @@
+{
+  "reused_from": "output/g_synth_augmented/g_3a_student_scoring_loocv_tuned_sps/results/rrmse_perfold_e5_base__chain_ERCcv_lr__gemma__n384_sps4__full.csv",
+  "generated_full_csv": "output/g_synth_augmented/g_3a_student_scoring_loocv_tuned_sps/results/rrmse_perfold_e5_base__chain_ERCcv_lr__gemma__pct400_K384__Mmax3072__full.csv",
+  "method": "gemma",
+  "pct": 400,
+  "K": 384,
+  "M_max": 3072,
+  "student": "chain_ERCcv_lr",
+  "note": "No tuning performed; reused per-fold tuned results from legacy SPS=4 run."
+}

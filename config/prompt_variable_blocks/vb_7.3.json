@@ -1,0 +1,78 @@
+[
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Ruimtelijk bewustzijn",
+    "subdomain_id": "7.3",
+    "facet": "Oriëntatie & weg vinden",
+    "facet_id": "7.3.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren de weg vinden, kaarten lezen, richting bepalen of oriëntatiepunten gebruiken om te navigeren",
+    "lexical": {
+      "verbs": ["vinden", "zoeken", "navigeren", "lezen", "gebruiken", "herkennen", "volgen", "bepalen", "oriënteren", "plannen", "berekenen", "interpreteren", "lokaliseren"],
+      "objects": ["weg", "route", "kaart", "plattegrond", "richting", "kompas", "oriëntatiepunt", "herkenningspunt", "adres", "locatie", "pad", "instructie"],
+      "settings": ["buurt", "stad", "park", "school", "onbekende plek", "wandeling"]
+    },
+    "constraints": {
+      "skill_variety": "minstens 6 zinnen over kaarten/plattegronden lezen, 5 zinnen over oriëntatiepunten gebruiken, 5 zinnen over richting bepalen",
+      "independence_growth": "minstens 10 zinnen over zelfstandig navigeren, 6 zinnen over hulpmiddelen gebruiken",
+      "practical_contexts": "varieer tussen bekende omgeving (buurt) en onbekende plekken (uitstap, stad)",
+      "age_appropriate": "taken passend bij 10-14 jaar met groeiende zelfstandigheid, met veiligheid in gedachten"
+    },
+    "examples": [
+      "een plattegrond van het park lezen",
+      "de weg naar een nieuwe locatie vinden",
+      "oriëntatiepunten gebruiken om te navigeren"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Ruimtelijk bewustzijn",
+    "subdomain_id": "7.3",
+    "facet": "Ruimtelijk inzicht & afstand inschatten",
+    "facet_id": "7.3.2",
+    "task": "Formuleer 16 activiteiten waarin jongeren afstanden inschatten, ruimtelijke relaties begrijpen en mentale kaarten van hun omgeving vormen",
+    "lexical": {
+      "verbs": ["inschatten", "beoordelen", "meten", "berekenen", "visualiseren", "voorstellen", "begrijpen", "herkennen", "bepalen", "vergelijken", "relateren", "plannen"],
+      "objects": ["afstand", "ruimte", "maat", "verhoudingen", "positie", "locatie", "mentale kaart", "relatie", "perspectief", "dimensie"],
+      "settings": ["buiten", "school", "sporthal", "park", "straat", "buurt"]
+    },
+    "constraints": {
+      "cognitive_spatial": "alle 16 zinnen over ruimtelijk denken en inzicht, niet alleen fysiek bewegen",
+      "estimation_skills": "minstens 10 zinnen over inschatten, beoordelen, berekenen van ruimtelijke aspecten",
+      "mental_mapping": "minstens 6 zinnen over mentale kaarten vormen, ruimtelijke relaties begrijpen",
+      "practical_application": "concrete, alledaagse situaties waarin deze vaardigheden nuttig zijn"
+    },
+    "examples": [
+      "de afstand tot een doel inschatten",
+      "ruimtelijke verhoudingen in je hoofd voorstellen",
+      "berekenen of iets ergens past"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Ruimtelijk bewustzijn",
+    "subdomain_id": "7.3",
+    "facet": "Lichaamsschema & bewegingsplanning",
+    "facet_id": "7.3.3",
+    "task": "Formuleer 16 activiteiten over het bewust zijn van het eigen lichaam in ruimte en bewegingen plannen om door ruimtes te navigeren",
+    "lexical": {
+      "verbs": ["bewegen", "manoeuvreren", "plannen", "aanpassen", "coördineren", "navigeren", "positioneren", "ontwijken", "inschatten", "controleren", "richten", "timing hebben"],
+      "objects": ["lichaam", "beweging", "ruimte", "hindernis", "opening", "pad", "positie", "timing", "coördinatie", "planning"],
+      "settings": ["drukke ruimte", "school", "sporthal", "gang", "winkel", "menigte"]
+    },
+    "constraints": {
+      "body_space_awareness": "alle 16 zinnen over bewustzijn van eigen lichaam in relatie tot ruimte",
+      "movement_planning": "minstens 10 zinnen over bewegingen vooruit plannen, anticiperen",
+      "spatial_navigation": "minstens 6 zinnen over navigeren door ruimtes, obstakels vermijden",
+      "functional": "focus op functionele vaardigheden voor dagelijks leven (door gangen, winkels, menigtes)",
+      "no_body_image": "lichaamsschema als ruimtelijk concept, NIET over uiterlijk of grootte van lichaam"
+    },
+    "examples": [
+      "je beweging plannen door een drukke gang",
+      "inschatten of je ergens doorheen past",
+      "soepel obstakels in een ruimte ontwijken"
+    ]
+  }
+]

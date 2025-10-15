@@ -1,0 +1,81 @@
+[
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Lichaamsbeleving & puberteit",
+    "subdomain_id": "6.1",
+    "facet": "Fysieke veranderingen herkennen & accepteren",
+    "facet_id": "6.1.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren fysieke veranderingen van de puberteit herkennen, begrijpen en accepteren als normaal ontwikkelingsproces",
+    "lexical": {
+      "verbs": ["merken", "opmerken", "herkennen", "begrijpen", "accepteren", "normaliseren", "leren over", "informatie zoeken", "vragen stellen", "bespreken", "omgaan met", "wennen aan"],
+      "objects": ["verandering", "groei", "ontwikkeling", "puberteit", "lichaam", "informatie", "uitleg", "begrip", "proces"],
+      "settings": ["thuis", "eigen kamer", "bij vertrouwenspersoon", "online informatie"]
+    },
+    "constraints": {
+      "normalization_focus": "alle 16 zinnen over herkennen, begrijpen en accepteren - puberteit als normaal, gezond ontwikkelingsproces",
+      "information_seeking": "minstens 8 zinnen over informatie zoeken, vragen stellen, leren over puberteit",
+      "acceptance": "minstens 8 zinnen over acceptatie, normaliseren, omgaan met veranderingen",
+      "no_negative_framing": "geen negatieve, beschamende of problematiserende taal over normale lichaamsveranderingen",
+      "educational": "focus op begrip en kennis, niet op uiterlijk of vergelijking"
+    },
+    "examples": [
+      "informatie over puberteit online opzoeken",
+      "vragen over lichaamsveranderingen aan een ouder stellen",
+      "begrijpen dat groeien bij puberteit hoort"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Lichaamsbeleving & puberteit",
+    "subdomain_id": "6.1",
+    "facet": "Lichamelijke zelfzorg & hygiëne",
+    "facet_id": "6.1.2",
+    "task": "Formuleer 16 activiteiten over praktische lichamelijke zelfzorg en hygiëne die bij de puberteit horen",
+    "lexical": {
+      "verbs": ["gebruiken", "verzorgen", "aanbrengen", "wassen", "douchen", "poetsen", "borstelen", "kiezen", "voorbereiden", "leren", "zorgen voor", "onderhouden"],
+      "objects": ["deodorant", "verzorgingsproduct", "hygiëne", "haar", "huid", "zelfzorg", "routine", "lichaamsproduct", "menstruatieproduct", "verzorging"],
+      "settings": ["badkamer", "thuis", "eigen kamer"]
+    },
+    "constraints": {
+      "practical_care": "alle 16 zinnen over praktische, gezonde zelfzorgactiviteiten",
+      "menstruation_natural": "menstruatie als normaal biologisch proces behandelen (geen schaamte of taboe)",
+      "hygiene_basics": "minstens 10 zinnen over basisverzorging (deodorant, wassen, haar), 6 zinnen over specifieke puberteitszorg",
+      "self_care_positive": "zelfzorg als gezonde gewoonte, niet als obsessie of perfectionisme",
+      "age_appropriate": "verzorgingsproducten en routines passend bij 10-14 jaar"
+    },
+    "examples": [
+      "dagelijks deodorant aanbrengen",
+      "leren omgaan met menstruatieproducten",
+      "een verzorgingsroutine voor de huid opstellen"
+    ]
+  },
+  {
+    "domain": "Lichamelijk-emotioneel domein",
+    "domain_id": "6",
+    "subdomain": "Lichaamsbeleving & puberteit",
+    "subdomain_id": "6.1",
+    "facet": "Gezonde zelfwaardering & body positivity",
+    "facet_id": "6.1.3",
+    "task": "Formuleer 16 activiteiten over het ontwikkelen van gezonde zelfwaardering, zelfacceptatie en een positieve relatie met het eigen lichaam",
+    "lexical": {
+      "verbs": ["accepteren", "waarderen", "respecteren", "zorgen voor", "luisteren naar", "vertrouwen", "focussen op", "omgaan met", "begrijpen", "uitdrukken", "kiezen", "zelf zijn"],
+      "objects": ["lichaam", "eigenheid", "zelfacceptatie", "zelfwaardering", "gezondheid", "welzijn", "kracht", "mogelijkheden", "uniekheid", "stijl", "expressie"],
+      "settings": ["thuis", "eigen kamer", "spiegel", "bij vertrouwenspersoon"]
+    },
+    "constraints": {
+      "body_positivity": "alle 16 zinnen over gezonde zelfacceptatie en body positivity",
+      "no_comparison": "GEEN zinnen over vergelijken met anderen of schoonheidsidealen - focus op eigenwaarde en uniekheid",
+      "functional_focus": "minstens 8 zinnen over wat lichaam KAN (kracht, gezondheid, mogelijkheden) niet alleen hoe het eruit ziet",
+      "self_compassion": "minstens 8 zinnen over zelfacceptatie, zelfrespect, zorg voor jezelf",
+      "healthy_mindset": "geen activiteiten die ongezond zelfbeeld, eating disorders of body dysmorphia kunnen triggeren",
+      "authentic_expression": "minstens 4 zinnen over authentieke zelfexpressie (kleding, stijl) zonder druk"
+    },
+    "examples": [
+      "waarderen wat je lichaam allemaal kan",
+      "een kledingstijl kiezen die bij je past",
+      "vriendelijk zijn voor je eigen lichaam"
+    ]
+  }
+]

@@ -1,0 +1,106 @@
+[
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Motorische vaardigheden",
+    "subdomain_id": "7.2",
+    "facet": "Grof motorische beweging",
+    "facet_id": "7.2.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren grote lichaamsbewegingen maken zoals rennen, springen, klimmen of balanceren om kracht en coördinatie te ontwikkelen",
+    "lexical": {
+      "verbs": ["rennen", "springen", "klimmen", "klauteren", "balanceren", "hinkelen", "draaien", "rollen", "hurken", "bukken", "strekken", "zwaaien", "coördineren", "oefenen"],
+      "objects": ["beweging", "sprong", "balans", "coördinatie", "parcours", "hindernis", "evenwicht", "kracht", "lichaam", "oefening"],
+      "settings": ["buiten", "speelplaats", "sporthal", "park", "tuin", "klimrek"]
+    },
+    "constraints": {
+      "movement_variety": "minstens 5 zinnen rennen/springen, 5 zinnen klimmen/klauteren, 6 zinnen balanceren/coördineren",
+      "skill_development": "minstens 10 zinnen over vaardigheden ontwikkelen, oefenen, verbeteren",
+      "joyful_functional": "alle zinnen over beweging vanuit plezier en functionele ontwikkeling - NOOIT vanuit compensatie of verplichting",
+      "safety": "alleen veilige bewegingen op leeftijdsgeschikte hoogte/intensiteit",
+      "natural_play": "minstens 8 zinnen over natuurlijk, speels bewegen (niet alleen gestructureerd)"
+    },
+    "examples": [
+      "over hindernissen in het park springen",
+      "op een balk of rand balanceren",
+      "grof motorische coördinatie oefenen"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Motorische vaardigheden",
+    "subdomain_id": "7.2",
+    "facet": "Fijn motorische precisie",
+    "facet_id": "7.2.2",
+    "task": "Formuleer 16 activiteiten waarin jongeren met handen en vingers precisiewerk doen zoals schrijven, tekenen, knippen, puzzelen of bouwen",
+    "lexical": {
+      "verbs": ["schrijven", "tekenen", "schilderen", "knippen", "plakken", "vouwen", "rijgen", "puzzelen", "bouwen", "construeren", "manipuleren", "plaatsen", "monteren", "knopen"],
+      "objects": ["potlood", "pen", "schaar", "papier", "puzzel", "bouwblok", "materiaal", "detail", "precisie", "vaardigheid", "handwerk", "knutselwerk"],
+      "settings": ["thuis", "school", "atelier", "bureau", "tafel", "werkplek"]
+    },
+    "constraints": {
+      "skill_range": "minstens 5 zinnen schrijven/tekenen, 5 zinnen knippen/vouwen/handwerk, 6 zinnen bouwen/puzzelen/construeren",
+      "precision_focus": "minstens 10 zinnen over precisie, controle, fijne bewegingen perfectioneren",
+      "functional_creative": "minstens 8 zinnen functionele vaardigheden, 8 zinnen creatieve toepassing",
+      "age_appropriate": "taken passend bij 10-14 jaar (geen baby-activiteiten, wel uitdagend)",
+      "development": "focus op vaardigheid ontwikkelen, niet op perfectie of prestatie"
+    },
+    "examples": [
+      "met precisie kleine details tekenen",
+      "een ingewikkelde puzzel geduldig leggen",
+      "nauwkeurig met een schaar vormen knippen"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Motorische vaardigheden",
+    "subdomain_id": "7.2",
+    "facet": "Lichaamscontrole & ruimtelijk bewustzijn",
+    "facet_id": "7.2.3",
+    "task": "Formuleer 16 activiteiten over lichaamscontrole, houding bewaken, bewegen in ruimte en lichamelijk zelfbewustzijn ontwikkelen",
+    "lexical": {
+      "verbs": ["controleren", "bewaken", "aannemen", "houden", "bewegen", "navigeren", "oriënteren", "aanpassen", "stilzitten", "concentreren", "positioneren", "manoeuvreren"],
+      "objects": ["houding", "positie", "lichaamscontrole", "ruimte", "beweging", "evenwicht", "stabiliteit", "coördinatie", "lichaamsbewustzijn", "pose"],
+      "settings": ["school", "thuis", "sporthal", "yoga", "dans", "overal"]
+    },
+    "constraints": {
+      "body_awareness": "minstens 10 zinnen over bewust zijn van lichaam in ruimte, controle ontwikkelen",
+      "variety": "minstens 5 zinnen stilzitten/concentratie, 5 zinnen actieve beweging, 6 zinnen houdingscontrole",
+      "functional": "focus op functionele vaardigheden (voor school, sport, dagelijks leven)",
+      "no_body_image": "lichaamscontrole als vaardigheid, NIET als body shaping of uiterlijk",
+      "mindful": "minstens 4 zinnen over mindful beweging en lichaamsgevoel"
+    },
+    "examples": [
+      "bewust een goede houding aannemen",
+      "geconcentreerd stilzitten bij een taak",
+      "soepel door een drukke ruimte bewegen"
+    ]
+  },
+  {
+    "domain": "Sensorisch-motorisch domein",
+    "domain_id": "7",
+    "subdomain": "Motorische vaardigheden",
+    "subdomain_id": "7.2",
+    "facet": "Sportieve basisvaardigheden",
+    "facet_id": "7.2.4",
+    "task": "Formuleer 16 activiteiten over fundamentele sportieve vaardigheden zoals gooien, vangen, fietsen, zwemmen en andere algemene bewegingsvaardigheden",
+    "lexical": {
+      "verbs": ["gooien", "vangen", "trappen", "schieten", "fietsen", "zwemmen", "rennen", "mikken", "richten", "slaan", "duiken", "oefenen", "perfectioneren", "leren"],
+      "objects": ["bal", "fiets", "water", "beweging", "techniek", "vaardigheid", "oefening", "doelwit", "coördinatie", "timing"],
+      "settings": ["sportveld", "zwembad", "buiten", "straat", "sporthal", "water"]
+    },
+    "constraints": {
+      "skill_variety": "minstens 5 zinnen bal-vaardigheden, 4 zinnen fietsen, 4 zinnen zwemmen, 3 andere sportvaardigheden",
+      "learning_focus": "minstens 10 zinnen over leren, oefenen, techniek verbeteren",
+      "joyful_mastery": "focus op plezier en competentie, niet op competitie of prestatie onder druk",
+      "fundamental": "basale vaardigheden die breed toepasbaar zijn in verschillende sporten",
+      "safe_progressive": "veilige progressie in moeilijkheid, geen gevaarlijke technieken"
+    },
+    "examples": [
+      "de technieken van zwemmen oefenen",
+      "gericht een bal naar een doel gooien",
+      "zelfstandig op de fiets balanceren en sturen"
+    ]
+  }
+]

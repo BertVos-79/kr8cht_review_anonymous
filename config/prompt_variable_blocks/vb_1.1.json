@@ -1,0 +1,170 @@
+[
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Klassikale instructie",
+    "facet_id": "1.1.1",
+    "task": "Formuleer 16 activiteiten waarin leerlingen actief deelnemen aan klassikale instructie door te luisteren, notities te maken, vragen te stellen of beurten te nemen",
+    "lexical": {
+      "verbs": ["luisteren", "noteren", "opschrijven", "vragen", "antwoorden", "meedoen", "reageren", "samenvatten", "herhalen", "verduidelijken", "aandacht geven", "bijhouden", "markeren", "meeschrijven"],
+      "objects": ["uitleg", "instructie", "verhaal", "presentatie", "uitleg van de leerkracht", "toelichting", "voorbeeld", "demonstratie", "notities", "schema", "kernwoorden", "hoofdpunten"],
+      "settings": ["klaslokaal", "computerlokaal", "bibliotheekhoek", "gymzaal"]
+    },
+    "constraints": {
+      "verb_distribution": "minstens 5 zinnen met 'luisteren/aandacht geven', 4 zinnen met 'noteren/opschrijven', 4 zinnen met 'vragen/antwoorden', 3 gemengd",
+      "interaction": "minstens 6 zinnen waarin de leerling actief reageert of communiceert",
+      "cognitive_levels": "varieer tussen passieve receptie (luisteren) en actieve verwerking (vragen stellen, samenvatten)"
+    },
+    "examples": [
+      "aandachtig naar de uitleg luisteren",
+      "een vraag stellen over de lesstof",
+      "kernwoorden uit de les opschrijven"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Zelfstandig werk",
+    "facet_id": "1.1.2",
+    "task": "Formuleer 16 activiteiten waarin leerlingen zelfstandig oefeningen maken, lezen, schrijven of rekenen zonder directe begeleiding",
+    "lexical": {
+      "verbs": ["oplossen", "oefenen", "berekenen", "schrijven", "lezen", "invullen", "maken", "uitwerken", "controleren", "verbeteren", "nakijken", "herschrijven", "doorbladeren", "bestuderen"],
+      "objects": ["rekensom", "oefening", "werkblad", "tekst", "verhaal", "opstel", "vraag", "taak", "opdracht", "puzzel", "raadsel", "woordprobleem", "grammaticaoefening", "leesboek"],
+      "settings": ["klaslokaal", "bibliotheekhoek", "studiezaal", "eigen bureau"]
+    },
+    "constraints": {
+      "subject_distribution": "minstens 4 taal/lezen, 4 rekenen/wiskunde, 4 schrijven, 4 algemeen/gemengd",
+      "self_regulation": "minstens 3 zinnen over zelfcontrole of zelfcorrectie",
+      "avoid": "geen groepswerk, geen leerkracht die helpt"
+    },
+    "examples": [
+      "een rekensom zelfstandig oplossen",
+      "een boek in stilte lezen",
+      "een opstel over het weekend schrijven"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Groepswerk",
+    "facet_id": "1.1.3",
+    "task": "Formuleer 16 activiteiten waarin leerlingen samenwerken aan projecten, taken verdelen, elkaar helpen of gezamenlijk presentaties voorbereiden",
+    "lexical": {
+      "verbs": ["samenwerken", "overleggen", "verdelen", "helpen", "uitleggen", "voorbereiden", "bespreken", "afspreken", "presenteren", "delen", "combineren", "afstemmen", "brainstormen", "coördineren"],
+      "objects": ["project", "groepsopdracht", "presentatie", "poster", "werkstuk", "onderzoek", "taak", "rol", "plan", "schema", "mindmap", "maquette", "spreekbeurt", "demonstratie"],
+      "settings": ["klaslokaal", "bibliotheekhoek", "computerlokaal", "technieklokaal"]
+    },
+    "constraints": {
+      "collaboration_type": "minstens 5 zinnen over taakverdeling/organisatie, 5 zinnen over kennisdeling/hulp, 6 zinnen over gezamenlijke output",
+      "group_size": "varieer tussen duo's, kleine groepjes en hele klas",
+      "roles": "minstens 2 zinnen waarin expliciete rollen worden genoemd"
+    },
+    "examples": [
+      "een presentatie met klasgenoten voorbereiden",
+      "taken verdelen voor het groepsproject",
+      "elkaar helpen met een moeilijke opdracht"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Huiswerk & studie",
+    "facet_id": "1.1.4",
+    "task": "Formuleer 16 activiteiten waarin leerlingen thuis taken afwerken, voor toetsen leren of studiemateriaal verwerken",
+    "lexical": {
+      "verbs": ["leren", "herhalen", "oefenen", "studeren", "afwerken", "maken", "voorbereiden", "instuderen", "memoriseren", "opzoeken", "nakijken", "samenvatten", "doornemen", "uittypen"],
+      "objects": ["huiswerk", "taak", "toets", "test", "proefwerk", "leerstof", "woordjes", "formules", "hoofdstuk", "lesnotities", "samenvatting", "oefentoets", "vragenlijst"],
+      "settings": ["eigen kamer", "bureauhoek", "keuken", "woonkamer"]
+    },
+    "constraints": {
+      "study_type": "minstens 5 zinnen over leren/memoriseren, 5 zinnen over huiswerk maken, 6 zinnen over voorbereiden/organiseren",
+      "study_strategies": "minstens 4 zinnen die een concrete studiestrategie tonen (herhalen, samenvatten, oefenen)",
+      "time_management": "minstens 2 zinnen over planning of tijdsbeheer"
+    },
+    "examples": [
+      "woordjes voor frans instuderen",
+      "huiswerk na het avondeten afwerken",
+      "een samenvatting van het hoofdstuk maken"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Digitaal leren",
+    "facet_id": "1.1.5",
+    "task": "Formuleer 16 activiteiten waarin leerlingen digitale hulpmiddelen of online platformen gebruiken voor leeractiviteiten",
+    "lexical": {
+      "verbs": ["typen", "uploaden", "opzoeken", "bekijken", "oefenen", "invullen", "versturen", "opslaan", "downloaden", "delen", "inloggen", "zoeken", "klikken", "navigeren"],
+      "objects": ["oefening online", "digitale quiz", "leervideo", "educatieve app", "online opdracht", "document", "bestand", "leerplatform", "browser", "toetsenbord", "computerscherm", "webpagina", "e-mail naar leerkracht"],
+      "settings": ["computerlokaal", "klaslokaal", "bibliotheekhoek", "eigen kamer"]
+    },
+    "constraints": {
+      "activity_type": "minstens 5 zinnen over informatie zoeken/bekijken, 5 zinnen over oefenen/doen, 6 zinnen over produceren/delen",
+      "device_neutral": "vermijd specifieke merknamen of platformnamen",
+      "digital_skills": "toon basisvaardigheden zoals typen, navigeren, opslaan"
+    },
+    "examples": [
+      "een digitale quiz op het leerplatform maken",
+      "een leervideo over dieren bekijken",
+      "een document op de computer opslaan"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Probleemoplossend leren",
+    "facet_id": "1.1.6",
+    "task": "Formuleer 16 activiteiten waarin leerlingen puzzels oplossen, logisch redeneren, strategieën ontwikkelen of creatief problemen aanpakken",
+    "lexical": {
+      "verbs": ["oplossen", "uitpuzzelen", "redeneren", "proberen", "experimenteren", "testen", "bedenken", "uitvinden", "analyseren", "vergelijken", "ontdekken", "onderzoeken", "combineren", "strategieën zoeken"],
+      "objects": ["puzzel", "raadsel", "denkprobleem", "logische vraag", "sudoku", "escape room opdracht", "breinbreker", "doolhof", "code", "patroon", "strategie", "oplossingsmethode", "wiskundige puzzel"],
+      "settings": ["klaslokaal", "computerlokaal", "bibliotheekhoek", "technieklokaal"]
+    },
+    "constraints": {
+      "cognitive_process": "minstens 5 zinnen over analyseren/begrijpen, 5 zinnen over uitproberen/experimenteren, 6 zinnen over strategieën ontwikkelen",
+      "challenge_level": "varieer tussen simpele en complexe problemen",
+      "domain_variety": "minstens 4 wiskundige, 4 logische, 4 creatieve/open problemen"
+    },
+    "examples": [
+      "een wiskundige puzzel uitpuzzelen",
+      "verschillende strategieën voor het probleem proberen",
+      "een patroon in de reeks ontdekken"
+    ]
+  },
+  {
+    "domain": "Onderwijsdomein",
+    "domain_id": "1",
+    "subdomain": "Leeractiviteiten",
+    "subdomain_id": "1.1",
+    "facet": "Creatief & artistiek leren",
+    "facet_id": "1.1.7",
+    "task": "Formuleer 16 activiteiten waarin leerlingen creatief bezig zijn met tekenen, muziek maken, handvaardigheid, drama of andere artistieke expressie in schoolcontext",
+    "lexical": {
+      "verbs": ["tekenen", "schilderen", "knutselen", "zingen", "spelen", "musiceren", "acteren", "uitbeelden", "ontwerpen", "maken", "creëren", "vormgeven", "componeren", "improviseren"],
+      "objects": ["tekening", "schilderij", "knutselwerk", "lied", "melodie", "instrument", "rol", "toneelstuk", "dans", "kunstwerk", "collage", "sculptuur", "improvisatie", "muziekstuk"],
+      "settings": ["klaslokaal", "atelier", "technieklokaal", "gymzaal"]
+    },
+    "constraints": {
+      "art_form": "minstens 5 beeldend, 5 muzikaal, 6 dramatisch/beweging",
+      "creative_process": "minstens 6 zinnen over maken/creëren, 5 zinnen over uitvoeren/presenteren, 5 zinnen over oefenen/perfectioneren",
+      "materials": "varieer materialen en technieken"
+    },
+    "examples": [
+      "een zelfportret met kleurpotloden tekenen",
+      "een eenvoudig lied op de blokfluit spelen",
+      "een kort toneelstukje met klasgenoten opvoeren"
+    ]
+  }
+]

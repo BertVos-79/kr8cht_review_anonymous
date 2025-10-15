@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Georganiseerde activiteiten",
+    "subdomain_id": "4.1",
+    "facet": "Sport",
+    "facet_id": "4.1.1",
+    "task": "Formuleer 16 activiteiten over georganiseerde sport waarin jongeren trainen, wedstrijden spelen, technieken oefenen of samenwerken in teamverband",
+    "lexical": {
+      "verbs": ["trainen", "oefenen", "spelen", "aanvallen", "verdedigen", "passen", "scoren", "zwemmen", "turnen", "springen", "lopen", "dansen", "opwarmen", "afkoelen", "coachen", "aanmoedigen"],
+      "objects": ["training", "wedstrijd", "match", "oefening", "techniek", "beweging", "choreografie", "baan", "parcours", "team", "ploeg", "tegenstander", "score", "warming-up"],
+      "settings": ["sporthal", "zwembad", "atletiekpiste", "sportveld", "turnzaal", "dansstudio"]
+    },
+    "constraints": {
+      "sport_variety": "minstens 4 zinnen balsporten, 4 zinnen individuele sporten (zwemmen, turnen, atletiek), 4 zinnen dans, 4 gemengd",
+      "activity_phase": "minstens 6 zinnen training/oefenen, 5 zinnen wedstrijd/prestatie, 5 zinnen teamwork/sociale aspecten",
+      "skill_development": "minstens 8 zinnen die techniek, verbetering of leren tonen",
+      "team_individual_balance": "minstens 8 zinnen teamsport, 8 zinnen individuele sport"
+    },
+    "examples": [
+      "een nieuwe zwemtechniek oefenen",
+      "de ploeggenoten tijdens de wedstrijd aanmoedigen",
+      "een turnbeweging onder begeleiding perfectioneren"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Georganiseerde activiteiten",
+    "subdomain_id": "4.1",
+    "facet": "Jeugdbeweging",
+    "facet_id": "4.1.2",
+    "task": "Formuleer 16 activiteiten binnen jeugdbewegingen zoals scouts, chiro of KSA, inclusief kampen, spelletjes, vergaderingen en groepsactiviteiten",
+    "lexical": {
+      "verbs": ["kamperen", "spelen", "bouwen", "knutselen", "zingen", "organiseren", "voorbereiden", "deelnemen", "helpen", "leiden", "volgen", "verzamelen", "verkennen", "ontdekken", "samenwerken"],
+      "objects": ["kamp", "tent", "kampvuur", "spel", "proef", "activiteit", "vergadering", "groep", "leiding", "uitstap", "project", "opdracht", "liedje", "uniform", "groepswerk"],
+      "settings": ["jeugdlokaal", "kampterrein", "bos", "veld", "park", "weide"]
+    },
+    "constraints": {
+      "activity_types": "minstens 5 zinnen kamp-gerelateerd, 5 zinnen wekelijkse vergaderingen, 6 zinnen spellen/activiteiten",
+      "skill_building": "minstens 6 zinnen die vaardigheden tonen (bouwen, organiseren, samenwerken)",
+      "tradition_adventure": "minstens 4 zinnen over tradities/rituelen, 4 zinnen over avontuur/verkenning",
+      "roles": "minstens 6 zinnen die rollen tonen (leiden, volgen, helpen, bijdragen)"
+    },
+    "examples": [
+      "een tent op kamp leren opzetten",
+      "een groepsspel met de leiding organiseren",
+      "rond het kampvuur samen liedjes zingen"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Georganiseerde activiteiten",
+    "subdomain_id": "4.1",
+    "facet": "Artistieke hobby's",
+    "facet_id": "4.1.3",
+    "task": "Formuleer 16 activiteiten over artistieke en creatieve hobby's zoals muziekles, tekenen, toneel of kunstacademie",
+    "lexical": {
+      "verbs": ["spelen", "oefenen", "musiceren", "zingen", "tekenen", "schilderen", "beeldhouwen", "acteren", "repeteren", "improviseren", "uitbeelden", "creëren", "componeren", "optreden", "presenteren"],
+      "objects": ["instrument", "melodie", "liedje", "muziekstuk", "tekening", "schilderij", "kunstwerk", "rol", "toneelstuk", "sketch", "improvisatie", "voorstelling", "optreden", "concert", "tentoonstelling"],
+      "settings": ["muziekschool", "atelier", "kunstacademie", "toneelzaal", "studio", "podium"]
+    },
+    "constraints": {
+      "art_forms": "minstens 6 zinnen muziek, 5 zinnen beeldende kunst, 5 zinnen podiumkunst (toneel, dans)",
+      "process_performance": "minstens 10 zinnen over oefenen/leren/maken (proces), 6 zinnen over optreden/presenteren (performance)",
+      "creativity_technique": "minstens 8 zinnen techniek/vaardigheid, 8 zinnen creativiteit/expressie",
+      "individual_group": "minstens 8 zinnen individueel, 8 zinnen samen (orkest, ensemble, groepsvoorstelling)"
+    },
+    "examples": [
+      "een nieuw muziekstuk op het instrument oefenen",
+      "een toneelrol voor de voorstelling instuderen",
+      "een creatief kunstwerk in het atelier maken"
+    ]
+  },
+  {
+    "domain": "Vrijetijdsdomein",
+    "domain_id": "4",
+    "subdomain": "Georganiseerde activiteiten",
+    "subdomain_id": "4.1",
+    "facet": "Cursussen",
+    "facet_id": "4.1.4",
+    "task": "Formuleer 16 activiteiten over gestructureerde cursussen zoals taalles, zwemles, vormsel of andere educatieve activiteiten buiten school",
+    "lexical": {
+      "verbs": ["leren", "oefenen", "studeren", "volgen", "deelnemen", "luisteren", "beantwoorden", "maken", "verbeteren", "begrijpen", "toepassen", "voorbereiden", "afronden", "behalen"],
+      "objects": ["les", "cursus", "oefening", "opdracht", "taak", "examen", "diploma", "certificaat", "niveau", "leerstof", "uitleg", "voorbereiding", "vaardigheid"],
+      "settings": ["cursusruimte", "zwembad", "parochiezaal", "lesruimte", "taalschool"]
+    },
+    "constraints": {
+      "course_types": "minstens 5 zinnen talen, 4 zinnen zwemles/sport-cursus, 4 zinnen levensbeschouwing (vormsel), 3 andere cursussen",
+      "learning_phases": "minstens 8 zinnen over leren/oefenen, 4 zinnen over toepassen, 4 zinnen over afronden/behalen",
+      "motivation": "minstens 6 zinnen die doelgerichtheid tonen (diploma halen, niveau behalen, verbeteren)",
+      "structured": "alle zinnen tonen gestructureerd leren met begeleiding"
+    },
+    "examples": [
+      "een nieuwe taal in de cursus leren",
+      "voor het zwemexamen oefenen",
+      "de vormsellessen wekelijks volgen"
+    ]
+  }
+]

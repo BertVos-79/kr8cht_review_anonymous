@@ -1,0 +1,4 @@
+,static,token_avg,sentence
+static,1.0,-0.694,0.583
+token_avg,0.694,1.0,0.694
+sentence,-0.583,-0.694,1.0

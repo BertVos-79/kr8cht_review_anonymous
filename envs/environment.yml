@@ -1,5 +1,5 @@
 # environment.yml
-name: kr8cht_embedding_comparison
+name: kr8cht_review_anonymous
 channels:
   - pytorch
   - conda-forge

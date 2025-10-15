@@ -1,0 +1,4 @@
+,Static,Frozen word-level (mean|max|cls),Frozen sentence-level
+Static,1.0,0.0001220703125,0.0001220703125
+Frozen word-level (mean|max|cls),0.0001220703125,1.0,0.0001220703125
+Frozen sentence-level,0.0001220703125,0.0001220703125,1.0

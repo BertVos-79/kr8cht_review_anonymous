@@ -1,0 +1,137 @@
+[
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Maatschappelijk bewustzijn",
+    "subdomain_id": "9.3",
+    "facet": "Bewustzijn sociale thema's",
+    "facet_id": "9.3.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren leren over sociale thema's zoals diversiteit, gelijkheid of rechtvaardigheid en zich bewust worden van maatschappelijke kwesties",
+    "lexical": {
+      "verbs": ["leren over", "informeren over", "bespreken", "nadenken over", "begrijpen", "ontdekken", "luisteren naar", "lezen over", "kijken naar", "reflecteren", "bewust worden"],
+      "objects": ["diversiteit", "gelijkheid", "rechtvaardigheid", "inclusie", "discriminatie", "mensenrechten", "respect", "thema", "perspectief", "documentaire", "artikel", "verhaal"],
+      "settings": ["school", "thuis", "klas", "online", "bibliotheek"]
+    },
+    "constraints": {
+      "awareness_learning": "alle 16 zinnen over LEREN en BEWUST WORDEN van sociale thema's - GEEN zinnen over negatief gedrag zelf",
+      "activities_focus": "focus op ACTIVITEITEN (lezen, bespreken, informeren), NIET op passief weten of alleen maar 'bewust zijn'",
+      "constructive_only": "ALLEEN constructieve activiteiten: leren, begrip ontwikkelen, luisteren naar anderen",
+      "no_problematic_behavior": "ABSOLUUT GEEN zinnen over pesten, discrimineren of ander negatief gedrag - alleen over leren erover",
+      "empathy_building": "minstens 10 zinnen over begrip, empathie, verschillende perspectieven leren kennen",
+      "information_sources": "minstens 8 zinnen over actief informatie zoeken (lezen, kijken, luisteren)"
+    },
+    "examples": [
+      "een documentaire over gelijkheid bekijken",
+      "een artikel over diversiteit lezen en bespreken",
+      "luisteren naar verhalen van anderen"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Maatschappelijk bewustzijn",
+    "subdomain_id": "9.3",
+    "facet": "Ecologisch handelen",
+    "facet_id": "9.3.2",
+    "task": "Formuleer 16 activiteiten waarin jongeren concrete ecologische acties ondernemen zoals sorteren, bewust consumeren of milieuvriendelijke keuzes maken",
+    "lexical": {
+      "verbs": ["sorteren", "scheiden", "recyclen", "besparen", "hergebruiken", "kiezen voor", "letten op", "vermijden", "verminderen", "compost maken", "repareren", "opruimen"],
+      "objects": ["afval", "verpakking", "energie", "water", "plastic", "herbruikbare tas", "fiets", "compost", "product", "zwerfvuil", "natuur"],
+      "settings": ["thuis", "school", "buurt", "winkel", "natuur"]
+    },
+    "constraints": {
+      "concrete_actions": "alle 16 zinnen over CONCRETE HANDELINGEN (sorteren, besparen, kiezen), NIET over bezorgdheid of angst",
+      "activities_focus": "focus op wat jongeren DOEN en KUNNEN DOEN, niet op problemen of catastrofes",
+      "practical_accessible": "minstens 12 zinnen over praktische, dagelijkse acties die 10-14 jarigen kunnen doen",
+      "positive_agency": "minstens 10 zinnen die positieve agency tonen (wat ze zelf kunnen bijdragen)",
+      "no_eco_anxiety": "GEEN zinnen die klimaatangst of doom kunnen triggeren - focus op constructieve actie",
+      "varied_actions": "varieer tussen thuis (sorteren), school (projecten), buurt (opruimen), consumptie (keuzes)"
+    },
+    "examples": [
+      "afval thuis consequent sorteren",
+      "zwerfvuil in de buurt opruimen",
+      "bewust voor herbruikbare verpakking kiezen"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Maatschappelijk bewustzijn",
+    "subdomain_id": "9.3",
+    "facet": "Mediageletterdheid ontwikkelen",
+    "facet_id": "9.3.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren mediageletterdheid ontwikkelen door bronnen te checken, nepnieuws te herkennen of kritisch naar beeldvorming te kijken",
+    "lexical": {
+      "verbs": ["checken", "verifiëren", "vergelijken", "analyseren", "herkennen", "onderzoeken", "beoordelen", "nadenken over", "controleren", "achterhalen", "doorzien", "onderscheiden"],
+      "objects": ["bron", "nieuwsbericht", "informatie", "claim", "afbeelding", "verhaal", "fact", "berichtgeving", "perspectief", "bronvermelding"],
+      "settings": ["online", "thuis", "school", "bij nieuws", "op telefoon"]
+    },
+    "constraints": {
+      "critical_skills": "alle 16 zinnen over ACTIEVE, KRITISCHE VAARDIGHEDEN (checken, analyseren, vergelijken)",
+      "activities_focus": "focus op concrete ACTIVITEITEN van mediageletterdheid, niet op passief 'oppassen voor'",
+      "verification": "minstens 10 zinnen over verificatie, bronnen checken, feitencontrole",
+      "analytical": "minstens 8 zinnen over analyseren, doorzien, begrijpen van mechanismen",
+      "constructive_skepticism": "gezonde, constructieve scepsis - geen cynisme of wantrouwen in alles",
+      "practical_tools": "concrete tools en methoden (bronnen vergelijken, afzender checken, context zoeken)"
+    },
+    "examples": [
+      "de bron van een nieuwsbericht controleren",
+      "meerdere bronnen over een onderwerp vergelijken",
+      "een verdachte claim online verifiëren"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Maatschappelijk bewustzijn",
+    "subdomain_id": "9.3",
+    "facet": "Constructieve maatschappelijke betrokkenheid",
+    "facet_id": "9.3.4",
+    "task": "Formuleer 16 activiteiten waarin jongeren op leeftijdsgeschikte wijze maatschappelijk betrokken zijn, zoals petities tekenen, bewustwordingsacties organiseren of deelnemen aan schoolprojecten",
+    "lexical": {
+      "verbs": ["organiseren", "deelnemen aan", "ondertekenen", "steun betuigen", "bewust maken", "informeren", "meewerken aan", "bijdragen aan", "initiëren", "samenwerken", "mobiliseren"],
+      "objects": ["petitie", "actie", "project", "initiatief", "campagne", "bewustwordingsactie", "inzamelactie", "schoolproject", "lokaal project", "thema"],
+      "settings": ["school", "buurt", "online", "gemeenschap", "klaslokaal"]
+    },
+    "constraints": {
+      "age_appropriate": "ALLEEN leeftijdsgeschikte, veilige, legale vormen van activisme voor 10-14 jaar",
+      "activities_focus": "focus op concrete ACTIES (organiseren, deelnemen, informeren), niet op alleen maar 'bezorgd zijn'",
+      "constructive_peaceful": "alle 16 zinnen over constructieve, vreedzame, legale actie - GEEN radicale of gevaarlijke acties",
+      "local_school": "minstens 10 zinnen over school- en buurtprojecten (dichtbij, veilig, begeleid)",
+      "collaboration": "minstens 8 zinnen over samenwerking met anderen (niet alleen)",
+      "positive_change": "focus op positieve verandering, niet op protest tegen alles"
+    },
+    "examples": [
+      "een bewustwordingsactie op school organiseren",
+      "een petitie voor een lokaal thema ondertekenen",
+      "meewerken aan een duurzaamheidsproject"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Maatschappelijk bewustzijn",
+    "subdomain_id": "9.3",
+    "facet": "Democratisch burgerschap leren",
+    "facet_id": "9.3.5",
+    "task": "Formuleer 16 activiteiten waarin jongeren leren over democratie, burgerschap, rechten en plichten door praktische ervaringen in school of samenleving",
+    "lexical": {
+      "verbs": ["leren over", "oefenen met", "deelnemen aan", "stemmen", "bespreken", "begrijpen", "toepassen", "respecteren", "uitoefenen", "ervaren", "nadenken over"],
+      "objects": ["democratie", "stemming", "verkiezing", "recht", "plicht", "regel", "wet", "mening", "klassenraad", "beslissing", "verantwoordelijkheid", "participatie"],
+      "settings": ["school", "klas", "klassenraad", "verkiezing", "gemeenschap"]
+    },
+    "constraints": {
+      "practical_learning": "alle 16 zinnen over PRAKTISCH LEREN en ERVAREN van democratie, niet alleen theorie",
+      "activities_focus": "focus op concrete ACTIVITEITEN (stemmen, deelnemen, bespreken), niet op passief kennis hebben",
+      "school_democracy": "minstens 10 zinnen over praktische democratische ervaring op school (klassenraad, verkiezingen, besluitvorming)",
+      "rights_responsibilities": "minstens 8 zinnen over balans tussen rechten en verantwoordelijkheden",
+      "participation": "minstens 6 zinnen over actieve participatie en eigen stem laten horen",
+      "constructive": "democratie als constructief, niet als conflict of alleen maar protesteren"
+    },
+    "examples": [
+      "deelnemen aan een klassenraad en mee beslissen",
+      "stemmen bij een schoolverkiezing",
+      "leren over rechten en plichten in de samenleving"
+    ]
+  }
+]

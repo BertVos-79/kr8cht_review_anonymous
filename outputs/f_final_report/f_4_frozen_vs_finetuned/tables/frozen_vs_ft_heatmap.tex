@@ -1,0 +1,18 @@
+% Auto-generated: wilcoxon_frozen_vs_ftuned heatmap
+% Requires: \usepackage{booktabs} \usepackage[table]{xcolor} \usepackage{amssymb}
+\newcommand{\sig}{\raisebox{0.35ex}{\tiny$\blacktriangle$}}
+\begin{table}[t]\centering\small
+\setlength\tabcolsep{6pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lccccc}\toprule
+ & \texttt{local_las} & \texttt{local_rf} & \texttt{chain_lr} & \texttt{chain_rf} & \texttt{global_rf} \\
+\midrule
+\texttt{sbert} & \cellcolor[HTML]{3FA85B}0.753\sig & \cellcolor[HTML]{8DCF81}0.823\sig & \cellcolor[HTML]{3DA559}0.749\sig & \cellcolor[HTML]{6FC174}0.797\sig & \cellcolor[HTML]{93D284}0.830\sig \\
+\texttt{sbert\_ft} & \cellcolor[HTML]{FDFEDD}0.989 & \cellcolor[HTML]{FDFEDD}0.989 & \cellcolor[HTML]{FDFEDD}0.989 & \cellcolor[HTML]{FDFEDD}0.989 & \cellcolor[HTML]{FDFEDD}0.989 \\
+\texttt{e5} & \cellcolor[HTML]{238443}0.708\sig & \cellcolor[HTML]{88CD7F}0.819\sig & \cellcolor[HTML]{2A8D49}0.719\sig & \cellcolor[HTML]{7EC97B}0.811\sig & \cellcolor[HTML]{C3E698}0.877\sig \\
+\texttt{e5\_ft} & \cellcolor[HTML]{FFFFE5}0.998 & \cellcolor[HTML]{FFFFE5}0.998 & \cellcolor[HTML]{FFFFE5}0.998 & \cellcolor[HTML]{FFFFE5}0.998 & \cellcolor[HTML]{FFFFE5}0.998 \\
+\texttt{simcse} & \cellcolor[HTML]{39A056}0.744\sig & \cellcolor[HTML]{74C477}0.801\sig & \cellcolor[HTML]{2F934D}0.726\sig & \cellcolor[HTML]{5DB96B}0.782\sig & \cellcolor[HTML]{B2DF90}0.858\sig \\
+\texttt{simcse\_ft} & \cellcolor[HTML]{FDFED9}0.983 & \cellcolor[HTML]{FDFED9}0.983 & \cellcolor[HTML]{FDFED9}0.983 & \cellcolor[HTML]{FDFED9}0.983 & \cellcolor[HTML]{FDFED9}0.983 \\
+\bottomrule
+\caption{Frozen vs Fine-tuned Sentence Encoders (\(\blacktriangle\) marks Wilcoxon $p<0.05$ for frozen vs fine-tuned).}
+\label{tab:frozen_vs_ft_heatmap}
+\end{tabular}\end{table}

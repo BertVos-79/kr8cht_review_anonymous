@@ -1,0 +1,127 @@
+[
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Verzorging & huishouding",
+    "subdomain_id": "2.1",
+    "facet": "Persoonlijke zorg",
+    "facet_id": "2.1.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren zichzelf verzorgen door op te staan, te wassen, aan te kleden of andere hygiënetaken uit te voeren",
+    "lexical": {
+      "verbs": ["opstaan", "wakker worden", "douchen", "wassen", "aankleden", "kiezen", "tandenpoetsen", "poetsen", "borstelen", "kammen", "verzorgen", "afdrogen", "smeren", "aantrekken"],
+      "objects": ["wekker", "tandenborstel", "tandpasta", "handdoek", "kleding", "outfit", "zeep", "shampoo", "kam", "borstel", "haar", "gezicht", "handen", "spiegel"],
+      "settings": ["badkamer", "slaapkamer", "eigen kamer"]
+    },
+    "constraints": {
+      "daily_rhythm": "minstens 8 zinnen over ochtendrutine, 4 zinnen over avondroutine, 4 zinnen algemeen",
+      "autonomy_level": "minstens 10 zinnen die zelfstandigheid tonen, 6 zinnen met keuzes maken",
+      "hygiene_aspects": "minstens 5 zinnen over wassen/verzorgen, 5 zinnen over aankleden, 6 zinnen over opstaan/voorbereiden",
+      "age_appropriate": "taken passend bij 10-14 jaar, zonder ouderlijke hulp"
+    },
+    "examples": [
+      "op tijd uit bed opstaan",
+      "kleding voor de dag kiezen",
+      "grondig de tanden poetsen"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Verzorging & huishouding",
+    "subdomain_id": "2.1",
+    "facet": "Maaltijden",
+    "facet_id": "2.1.2",
+    "task": "Formuleer 16 activiteiten rond maaltijden waarbij jongeren helpen met tafel dekken, eten klaarmaken, samen eten of opruimen",
+    "lexical": {
+      "verbs": ["dekken", "afruimen", "eten", "drinken", "klaarmaken", "smeren", "snijden", "bereiden", "opscheppen", "inschenken", "helpen", "verzamelen", "opruimen", "afdrogen", "afwassen"],
+      "objects": ["bord", "bestek", "mes", "vork", "lepel", "tafel", "brooddoos", "boterham", "beleg", "fruit", "glas", "beker", "servet", "eten", "maaltijd", "ontbijt", "lunch"],
+      "settings": ["keuken", "eetkamer", "woonkamer", "tafel"]
+    },
+    "constraints": {
+      "meal_phases": "minstens 5 zinnen voor de maaltijd (voorbereiden/dekken), 5 zinnen tijdens maaltijd, 6 zinnen na maaltijd (opruimen)",
+      "collaboration": "minstens 6 zinnen waarin met anderen wordt samengewerkt",
+      "food_prep_safety": "alleen veilige bereidingen (smeren, snijden zacht fruit/brood, inschenken), geen oven/fornuis/hete pannen",
+      "self_sufficiency": "minstens 6 zinnen over zelfstandig lunch/ontbijt klaarmaken"
+    },
+    "examples": [
+      "de tafel voor het avondeten dekken",
+      "een boterham voor lunch smeren",
+      "de borden na het eten opruimen"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Verzorging & huishouding",
+    "subdomain_id": "2.1",
+    "facet": "Huishoudelijke taken",
+    "facet_id": "2.1.3",
+    "task": "Formuleer 16 activiteiten waarin jongeren huishoudelijke klusjes doen zoals opruimen, schoonmaken, afwassen of andere taken in huis",
+    "lexical": {
+      "verbs": ["opruimen", "sorteren", "stofzuigen", "vegen", "afwassen", "afdrogen", "buitenzetten", "ophangen", "vouwen", "wegleggen", "verzamelen", "ordenen", "schoonmaken", "poetsen"],
+      "objects": ["kamer", "speelgoed", "spullen", "rommel", "vuilbak", "afval", "afwas", "bord", "glas", "stofzuiger", "bezem", "dweil", "was", "handdoek", "kleding"],
+      "settings": ["eigen kamer", "keuken", "tuin", "oprit", "gang", "woonkamer"]
+    },
+    "constraints": {
+      "task_variety": "minstens 5 zinnen over opruimen/ordenen, 5 zinnen over schoonmaken, 6 zinnen over afwas/was",
+      "responsibility": "minstens 8 zinnen die zelfstandige verantwoordelijkheid tonen",
+      "location_spread": "varieer over verschillende ruimtes (kamer, keuken, buiten)",
+      "age_appropriate": "geen gevaarlijke apparaten, geen zware fysieke taken"
+    },
+    "examples": [
+      "de eigen kamer netjes opruimen",
+      "de vuilnisbak buiten zetten",
+      "de afwas na het eten afdrogen"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Verzorging & huishouding",
+    "subdomain_id": "2.1",
+    "facet": "Logistiek",
+    "facet_id": "2.1.4",
+    "task": "Formuleer 16 activiteiten waarin jongeren spullen zoeken, tassen inpakken, was sorteren of andere organisatorische taken thuis uitvoeren",
+    "lexical": {
+      "verbs": ["zoeken", "vinden", "pakken", "inpakken", "klaarzetten", "sorteren", "controleren", "checken", "voorbereiden", "leggen", "verzamelen", "nakijken", "regelen", "opzoeken"],
+      "objects": ["spullen", "schooltas", "sporttas", "rugzak", "boeken", "schriften", "kleren", "outfit", "sleutels", "telefoon", "lader", "zwemspullen", "was", "schoenen", "jas"],
+      "settings": ["slaapkamer", "eigen kamer", "gang", "keuken", "wasruimte"]
+    },
+    "constraints": {
+      "preparation_type": "minstens 8 zinnen over voorbereiden (tas pakken, klaarzetten), 4 zinnen over zoeken/vinden, 4 zinnen over sorteren/ordenen",
+      "anticipation": "minstens 6 zinnen die vooruitdenken tonen (voor school, sport, volgende dag)",
+      "problem_solving": "minstens 4 zinnen over actief zoeken of situatie oplossen",
+      "independence": "alle taken zelfstandig uitvoerbaar"
+    },
+    "examples": [
+      "de schooltas voor morgen inpakken",
+      "de sleutels van de fiets zoeken",
+      "vuile was in de wasmand sorteren"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Verzorging & huishouding",
+    "subdomain_id": "2.1",
+    "facet": "Zorgen voor anderen",
+    "facet_id": "2.1.5",
+    "task": "Formuleer 16 activiteiten waarin jongeren broertjes, zusjes of ouders helpen met kleine taken of ondersteuning bieden",
+    "lexical": {
+      "verbs": ["helpen", "begeleiden", "voorlezen", "spelen met", "troosten", "meenemen", "vasthouden", "afleiden", "vermaken", "oppassen", "leren", "tonen", "uitleggen", "assisteren"],
+      "objects": ["broertje", "zusje", "kindje", "peuter", "baby", "ouder", "verhaal", "boek", "spelletje", "speelgoed", "hand", "jas", "schoenen", "tas", "boodschappen"],
+      "settings": ["woonkamer", "kinderkamer", "tuin", "keuken", "thuis"]
+    },
+    "constraints": {
+      "care_recipient": "minstens 10 zinnen over zorgen voor jongere broers/zussen, 6 zinnen over ouders helpen",
+      "care_type": "minstens 6 zinnen over spelen/vermaken, 5 zinnen over praktische hulp, 5 zinnen over emotionele ondersteuning",
+      "age_appropriate_care": "alleen taken geschikt voor 10-14 jaar (geen volledige verzorging, geen gevaarlijke situaties)",
+      "prosocial": "alle activiteiten tonen positieve, helpende attitude"
+    },
+    "examples": [
+      "een verhaaltje aan het kleine zusje voorlezen",
+      "het broertje helpen met aankleden",
+      "ouders helpen met boodschappen naar binnen dragen"
+    ]
+  }
+]

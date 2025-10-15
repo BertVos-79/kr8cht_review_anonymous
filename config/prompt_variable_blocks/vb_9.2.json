@@ -1,0 +1,134 @@
+[
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Culturele participatie",
+    "subdomain_id": "9.2",
+    "facet": "Evenementen beleven",
+    "facet_id": "9.2.1",
+    "task": "Formuleer 16 activiteiten die jongeren doen tijdens culturele evenementen zoals kermissen, fuiven, festivals of bioscoopbezoeken - de concrete handelingen die bij deze events horen",
+    "lexical": {
+      "verbs": ["kiezen", "proberen", "genieten van", "meezingen", "dansen", "kijken naar", "eten", "drinken", "foto maken", "verzamelen", "wachten op", "uitproberen", "meedoen", "beleven"],
+      "objects": ["attractie", "ritje", "film", "popcorn", "snack", "muziek", "optreden", "stand", "activiteit", "souvenir", "entreekaartje", "programma"],
+      "settings": ["kermis", "fuif", "festival", "bioscoop", "evenemententerrein", "feestzaal"]
+    },
+    "constraints": {
+      "activities_not_attendance": "alle 16 zinnen over CONCRETE ACTIVITEITEN tijdens events (eten, kiezen, proberen), NIET alleen 'naar X gaan' of 'aanwezig zijn'",
+      "event_variety": "minstens 4 zinnen kermis, 4 zinnen fuif/festival, 4 zinnen bioscoop, 4 zinnen algemene eventactiviteiten",
+      "experiential": "minstens 10 zinnen over actief beleven en meedoen, 6 zinnen over sociale interactie tijdens events",
+      "age_appropriate": "activiteiten passend bij 10-14 jaar (jeugdfuif, familiefilm, geen alcohol/nachtleven)",
+      "sensory_social": "minstens 8 zinnen zintuiglijke/emotionele ervaring, 8 zinnen sociale aspecten"
+    },
+    "examples": [
+      "popcorn kopen en eten in de bioscoop",
+      "een attractie op de kermis uitkiezen",
+      "meezingen met de muziek op een jeugdfuif"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Culturele participatie",
+    "subdomain_id": "9.2",
+    "facet": "Culturele instellingen gebruiken",
+    "facet_id": "9.2.2",
+    "task": "Formuleer 16 activiteiten die jongeren doen in culturele instellingen zoals bibliotheken, jeugdhuizen of musea - de concrete handelingen die deze plekken mogelijk maken",
+    "lexical": {
+      "verbs": ["uitzoeken", "lenen", "bladeren", "ontdekken", "bekijken", "lezen", "luisteren naar", "deelnemen aan", "meedoen met", "volgen", "experimenteren", "creëren", "interacteren met"],
+      "objects": ["boek", "tentoonstelling", "activiteit", "workshop", "rondleiding", "expositie", "audioguide", "interactieve installatie", "lidkaart", "programma"],
+      "settings": ["bibliotheek", "jeugdhuis", "museum", "buurthuis", "cultureel centrum", "mediatheek"]
+    },
+    "constraints": {
+      "activities_not_attendance": "alle 16 zinnen over SPECIFIEKE ACTIVITEITEN in instellingen (boek uitzoeken, rondleiding volgen, interactieve expositie), NIET alleen 'bezoeken'",
+      "institution_variety": "minstens 5 zinnen bibliotheek, 5 zinnen jeugdhuis/buurthuis, 6 zinnen museum/cultureel centrum",
+      "engagement_level": "minstens 10 zinnen actieve participatie (doen, maken, interacteren), 6 zinnen receptief (bekijken, luisteren, leren)",
+      "cultural_access": "activiteiten die culturele toegang en participatie tonen",
+      "institution_specific": "elke zin moet tonen wat die specifieke instelling uniek mogelijk maakt"
+    },
+    "examples": [
+      "een boek in de bibliotheek uitzoeken en lenen",
+      "meedoen aan een workshop in het jeugdhuis",
+      "een interactieve tentoonstelling in het museum verkennen"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Culturele participatie",
+    "subdomain_id": "9.2",
+    "facet": "Seizoensgebonden tradities beleven",
+    "facet_id": "9.2.3",
+    "task": "Formuleer 16 activiteiten rondom seizoensgebonden tradities en feesten zoals Sinterklaas, kerstmarkten of zomervakanties - de concrete handelingen die bij deze tradities horen",
+    "lexical": {
+      "verbs": ["schrijven", "voorbereiden", "versieren", "bakken", "zingen", "knutselen", "uitpakken", "decoreren", "bezoeken", "proeven", "genieten van", "delen", "vieren", "klaarmaken"],
+      "objects": ["brief", "cadeau", "decoratie", "koekje", "lied", "knutselwerk", "markt", "traditie", "vakantieritueel", "kaart", "versiering", "activiteit"],
+      "settings": ["thuis", "kerstmarkt", "school", "familie", "zomerkamp", "vakantie"]
+    },
+    "constraints": {
+      "activities_not_attendance": "alle 16 zinnen over CONCRETE ACTIVITEITEN bij tradities (brief schrijven, decoreren, bakken), NIET alleen 'vieren' of 'aanwezig zijn'",
+      "tradition_variety": "minstens 5 zinnen winter/kerst, 5 zinnen Sinterklaas, 6 zinnen zomer/andere seizoenen",
+      "cultural_actions": "minstens 10 zinnen actief participeren in tradities (maken, voorbereiden, uitvoeren)",
+      "inclusive_flemish": "Vlaams maar inclusief - focus op activiteiten die breed gedeeld worden",
+      "family_community": "minstens 8 zinnen samen met familie/gemeenschap, 8 zinnen persoonlijke participatie"
+    },
+    "examples": [
+      "een brief voor Sinterklaas schrijven",
+      "samen de kerstboom versieren",
+      "kerstkoekjes bakken met de familie"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Culturele participatie",
+    "subdomain_id": "9.2",
+    "facet": "Levensbeschouwelijke ceremonies & overgangen",
+    "facet_id": "9.2.4",
+    "task": "Formuleer 16 activiteiten rondom levensbeschouwelijke ceremonies zoals vormsel of communie - de concrete handelingen die jongeren in deze context doen, voor gezinnen waar dit aan de orde is",
+    "lexical": {
+      "verbs": ["voorbereiden", "oefenen", "leren", "vieren", "uitnodigen", "bedanken", "ontvangen", "delen", "herinneren", "fotograferen", "feesten", "samenkomen"],
+      "objects": ["voorbereiding", "les", "ceremonie", "viering", "uitnodiging", "cadeau", "feest", "familie", "herinnering", "foto", "kaart", "genodigde"],
+      "settings": ["thuis", "familie", "feestzaal", "bij viering", "voorbereidingsles"]
+    },
+    "constraints": {
+      "activities_not_ritual": "alle 16 zinnen over CONCRETE ACTIVITEITEN rondom ceremonies (voorbereiden, uitnodigen, vieren), NIET het ritueel zelf",
+      "optional_respectful": "frame als 'voor gezinnen waar dit aan de orde is' - geen verplichting, wel respect",
+      "phases": "minstens 6 zinnen voorbereiding, 5 zinnen ceremonie-dag, 5 zinnen viering/na",
+      "social_family": "minstens 10 zinnen sociale/familie aspecten, 6 zinnen persoonlijke voorbereiding",
+      "inclusive_tone": "respectvol voor verschillende levensbeschouwelijke tradities, geen enkel geloof favoriseren",
+      "celebratory_not_religious": "focus op viering en sociale aspecten, minder op religieuze inhoud"
+    },
+    "examples": [
+      "uitnodigingen voor de viering schrijven",
+      "de voorbereiding voor de ceremonie volgen",
+      "samen met familie de dag vieren"
+    ]
+  },
+  {
+    "domain": "Cultureel-maatschappelijk domein",
+    "domain_id": "9",
+    "subdomain": "Culturele participatie",
+    "subdomain_id": "9.2",
+    "facet": "Spirituele & contemplatieve praktijken",
+    "facet_id": "9.2.5",
+    "task": "Formuleer 16 activiteiten van spirituele of contemplatieve aard zoals bidden, mediteren of deelnemen aan religieuze gemeenschappen - voor jongeren die dit kiezen",
+    "lexical": {
+      "verbs": ["bidden", "mediteren", "reflecteren", "nadenken", "stil zijn", "deelnemen", "zingen", "luisteren", "aansteken", "ritueel volgen", "gedenken", "contemplatief zijn"],
+      "objects": ["gebed", "meditatie", "stilte", "gedachte", "lied", "hymne", "kaars", "ritueel", "gemeenschap", "dienst", "moment", "innerlijke rust"],
+      "settings": ["thuis", "eigen kamer", "gebedsruimte", "kerk", "moskee", "synagoge", "tempel", "gemeenschap"]
+    },
+    "constraints": {
+      "activities_practices": "alle 16 zinnen over CONCRETE SPIRITUELE PRAKTIJKEN (bidden, mediteren, zingen), niet alleen aanwezig zijn",
+      "multi_faith_inclusive": "expliciet multi-religieus en inclusief (kerk/moskee/synagoge/tempel/seculier)",
+      "personal_choice": "frame als persoonlijke keuze, voor jongeren die dit kiezen - geen verplichting",
+      "contemplative_action": "minstens 10 zinnen actieve spirituele praktijken, 6 zinnen contemplatieve/stille momenten",
+      "diverse_traditions": "minstens 8 zinnen verschillende religieuze tradities, 8 zinnen universele spirituele praktijken (meditatie, reflectie)",
+      "inner_experience": "focus op innerlijke ervaring en betekenisgeving, niet op doctrine"
+    },
+    "examples": [
+      "in stilte mediteren of nadenken",
+      "een kaarsje aansteken in een gebedsruimte",
+      "meezingen met religieuze of spirituele liederen"
+    ]
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Gezinsrelaties",
+    "subdomain_id": "2.2",
+    "facet": "Ouder-kind interactie",
+    "facet_id": "2.2.1",
+    "task": "Formuleer 16 activiteiten waarin jongeren communiceren met ouders, over zaken praten, grenzen aftasten of emotionele momenten delen",
+    "lexical": {
+      "verbs": ["praten", "vertellen", "vragen", "luisteren", "bespreken", "uitleggen", "discussiëren", "overleggen", "ruziemaken", "bijleggen", "knuffelen", "troosten", "vragen om", "onderhandelen"],
+      "objects": ["schooldag", "toets", "vrienden", "probleem", "plan", "afspraak", "ruzie", "meningsverschil", "uitgangsuur", "zakgeld", "toestemming", "verhaal", "dag", "gevoelens"],
+      "settings": ["keuken", "woonkamer", "slaapkamer", "tafel", "auto", "bank"]
+    },
+    "constraints": {
+      "interaction_balance": "minstens 8 positieve interacties (praten, delen, knuffelen), 4 onderhandelend (grenzen, vragen), 4 conflict-gerelateerd met constructieve afloop",
+      "topic_variety": "minstens 5 over school/activiteiten, 5 over regels/grenzen, 6 over emoties/relatie",
+      "autonomy_development": "minstens 6 zinnen die tonen hoe jongere meer zelfstandigheid wil/krijgt",
+      "constructive_conflict": "bij ruzie/conflict: altijd oplossing of herstel tonen (bijleggen, begrijpen, compromis)"
+    },
+    "examples": [
+      "over de schooldag aan tafel vertellen",
+      "onderhandelen over het uitgangsuur",
+      "een ruzie met ouders bijleggen"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Gezinsrelaties",
+    "subdomain_id": "2.2",
+    "facet": "Broers/zussen",
+    "facet_id": "2.2.2",
+    "task": "Formuleer 16 activiteiten over de interactie tussen broers en zussen, inclusief spelen, helpen, ruzies en emoties zoals jaloezie",
+    "lexical": {
+      "verbs": ["spelen", "ruziemaken", "bekvechten", "helpen", "plagen", "uitlachen", "troosten", "delen", "ruilen", "afpakken", "teruggeven", "verzoenen", "excuses maken", "samen doen", "beschermen"],
+      "objects": ["speelgoed", "spel", "kamer", "bed", "tv", "computer", "ruzie", "conflict", "aandacht", "spullen", "spelletje", "geheim", "grap", "avontuur"],
+      "settings": ["kinderkamer", "woonkamer", "tuin", "slaapkamer", "speelkamer", "badkamer"]
+    },
+    "constraints": {
+      "relationship_balance": "minstens 6 positief (spelen, helpen, delen), 5 conflict (ruzie, plagen, jaloezie), 5 herstel/verzoening",
+      "sibling_rivalry": "bij negatieve interacties: altijd constructieve afloop of leermoment",
+      "age_dynamics": "varieer tussen oudere die helpt en jongere die bewondert",
+      "emotional_range": "minstens 4 zinnen die emoties tonen (jaloezie, trots, irritatie, blijdschap)"
+    },
+    "examples": [
+      "samen met broer of zus een spel spelen",
+      "ruzie maken over de afstandsbediening",
+      "het kleine zusje troosten na een val"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Gezinsrelaties",
+    "subdomain_id": "2.2",
+    "facet": "Uitgebreide familie",
+    "facet_id": "2.2.3",
+    "task": "Formuleer 16 activiteiten waarbij jongeren tijd doorbrengen met grootouders, ooms, tantes, neven of nichten tijdens bezoeken, logeren of feesten",
+    "lexical": {
+      "verbs": ["bezoeken", "logeren", "vieren", "helpen", "luisteren naar", "vertellen", "tonen", "leren van", "spelen met", "wandelen met", "eten bij", "cadeautje geven", "verhalen horen"],
+      "objects": ["oma", "opa", "grootouders", "oom", "tante", "neef", "nicht", "verjaardag", "feest", "verhaal", "traditie", "recept", "foto's", "hobby", "taart"],
+      "settings": ["bij oma/opa", "oma's huis", "familiefeest", "tuin van opa", "woonkamer bij familie"]
+    },
+    "constraints": {
+      "generation_mix": "minstens 10 zinnen met grootouders, 6 zinnen met ooms/tantes/neven/nichten",
+      "activity_type": "minstens 6 feestelijk (verjaardag, samen eten), 5 bezoek/logeren, 5 intergenerationeel leren/delen",
+      "family_bonding": "minstens 8 zinnen die verbondenheid en positieve relaties tonen",
+      "traditions": "minstens 4 zinnen over tradities, rituelen of familiegewoontes"
+    },
+    "examples": [
+      "bij oma en opa op bezoek gaan",
+      "logeren bij de grootouders in de vakantie",
+      "de verjaardag van een oom vieren"
+    ]
+  },
+  {
+    "domain": "Gezinsdomein",
+    "domain_id": "2",
+    "subdomain": "Gezinsrelaties",
+    "subdomain_id": "2.2",
+    "facet": "Gezinsrituelen",
+    "facet_id": "2.2.4",
+    "task": "Formuleer 16 activiteiten over terugkerende gezinsgewoontes zoals samen tv kijken, spelletjes spelen, wandelen of andere rituelen",
+    "lexical": {
+      "verbs": ["kijken", "spelen", "wandelen", "fietsen", "eten", "koken", "bakken", "lezen", "praten", "ontspannen", "genieten", "doen", "organiseren", "voorbereiden"],
+      "objects": ["tv-programma", "film", "serie", "bordspel", "kaartspel", "puzzel", "wandeling", "fietstocht", "uitstap", "zondagochtend", "avondritueel", "familietijd", "gezelligheid", "traditie"],
+      "settings": ["woonkamer", "bank", "eettafel", "tuin", "keuken", "terras", "bos", "park"]
+    },
+    "constraints": {
+      "ritual_frequency": "minstens 6 dagelijks/wekelijks (avond-tv, zondagswandeling), 5 regelmatig (spelletjesavond, samen koken), 5 seizoensgebonden",
+      "activity_variety": "minstens 5 media (tv, film), 5 actief (wandelen, spel), 6 eten/koken/samen zijn",
+      "togetherness": "alle activiteiten benadrukken gezamenlijkheid en verbondenheid",
+      "time_moments": "varieer tussen doordeweeks (avond), weekend (zondag), seizoenen"
+    },
+    "examples": [
+      "samen naar een tv-programma kijken",
+      "op zondag een wandeling maken",
+      "een bordspel met het gezin spelen"
+    ]
+  }
+]
