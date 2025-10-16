@@ -1,4 +1,4 @@
 {
-  "pca__n_components": 0.7,
-  "reg__estimator__alpha": 0.01
+  "pca__n_components": 0.9,
+  "reg__estimator__alpha": 0.001
 }
