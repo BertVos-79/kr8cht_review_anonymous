@@ -1,32 +1,152 @@
 # kr8cht_review_anonymous
 
 **Investigating study choice in Flemish schools with multi-target regression (MTR) on Dutch text.**  
-This repository accompanies the submission of the article and contains all code, notebooks, configs, and precomputed artifacts needed to **reproduce the results for review** without access to private data.
+This repository evaluates text representation and multi-target regression strategies for predicting fourteen continuous targets from Dutch activity descriptions in the Kr8cht educational guidance game. The targets comprise eight curricular domains and six RIASEC personality traits. The dataset contains ninety-six expert-annotated activities with target scores in the range −6 to +6.
 
-> **TL;DR findings (from the paper):**
-> - Frozen **sentence-level** transformers + MTR (esp. **E5 + chain_ERCcv_lr**) consistently outperform frozen token-level and static embeddings.
-> - **Local / chain-based** MTR > **global** MTR on this small dataset.
-> - **Fine-tuning** (LoRA) on the tiny dataset does **not** beat frozen+MTR.
-> - **Taxonomy-guided augmentation** (Gemma → teacher pseudo-labels) improves **local_lasso** with statistical significance.
+## Table of Contents
+- [1. Scope and problem definition](#1-scope-and-problem-definition)
+- [2. Data](#2-data)
+- [3. Methods & representations](#3-methods--representations)
+- [4. Overall leaderboard (Top-20)](#4-overall-leaderboard-top-20)
+- [5. Repository map](#5-repository-map)
+- [6. What’s included in this review package](#6-whats-included-in-this-review-package)
+- [7. Artifacts at a glance](#7-artifacts-at-a-glance)
+- [8. Quick start](#8-quick-start)
+- [9. Modes & idempotency](#9-modes--idempotency)
+- [10. Key results & paths](#10-key-results--paths)
+- [11. Reproducibility conventions](#11-reproducibility-conventions)
+- [12. Background & docs](#12-background--docs)
+- [13. License & citation](#13-license--citation)
+- [14. Contact](#14-contact)
 
 ---
 
-## Repository map
+## 1. Scope and problem definition
+
+**Objective.** Learn a predictive model that maps a short Dutch activity description to **fourteen real-valued targets**:
+- eight curricular domains of Flemish secondary education, and
+- six RIASEC personality traits (Realistic, Investigative, Artistic, Social, Enterprising, Conventional).
+
+**Task type.** Multi-target regression evaluated primarily via **RRMSE** (RMSE relative to a per-target mean baseline).  
+An **RRMSE < 1** indicates improvement over the mean baseline.
+
+**Statistical comparisons.** We assess approaches with aligned/original **Friedman + Nemenyi**, paired **Wilcoxon** (Holm), and **Cliff’s Δ** effect sizes.
+
+---
+
+## 2. Data
+
+**Source.** 96 activities with expert scores for 14 targets. No personal data are included.
+
+**Targets.** Eight curricular domains (Taal en Cultuur; STEM; Kunst en Creatie; Land- en Tuinbouw; Economie en Organisatie; Sport; Maatschappij en Welzijn; Voeding en Horeca) and six RIASEC traits.
+
+**Static embeddings (external).** Place required files under `embeddings/`:
+- `word2vec_costoo.bin` (Coosto Dutch Word2Vec)
+- `cc.nl.300.bin.gz` (FastText Common Crawl Dutch)
+
+**Data availability.** The **raw dataset cannot be shared** and is **not included**. All review computations are derived from **precomputed artifacts** in `outputs/`, and notebooks/scripts are designed to **load these idempotently**.
+
+---
+
+## 3. Methods & representations
+
+**Representations.**
+- **Static embeddings.** Word2Vec and FastText token vectors (mean pooled).
+- **Frozen transformers.** Dutch & multilingual encoders with token-level pooling (mean, max, CLS) and sentence encoders (e.g., SBERT, E5, LaBSE, SimCSE). Encoders remain frozen; regression is classical.
+- **Parameter-efficient fine-tuning (optional).** LoRA adapters on selected sentence encoders (SBERT, SimCSE-XLM-R, E5-large).
+
+**Taxonomy-guided augmentation (E-steps).**
+- **E1** synthetic generation: facet-driven prompts produce nested-prefix datasets of sizes **N ∈ {96, 192, 384, 768, 1536, 3072}** per method, with strict validation + diversity selection.
+- **E2** teacher labeling: per-fold, leak-free teachers (selected MTRs) label synthetics for chosen embeddings.
+- **E3** student scoring: students reuse **per-fold hyperparameters** from teachers (no tuning) and are trained on **%K** subsets (**10, 20, 50, 100, 200, 400**%) of labeled synthetics.
+
+**Multi-target regressors (MTR).**
+- **Local:** `local_lr`, `local_lasso`, `local_rf`
+- **Chain-based (ERCcv):** `chain_ERCcv_lr`, `chain_ERCcv_lasso`, `chain_ERCcv_rf`
+- **Global:** `global_rf`, `global_bag`
+
+**Embedding families (examples).**
+- **Static:** Word2Vec, FastText
+- **Frozen token-level:** BERTje, RobBERT v2/2023, DeBERTa-v3, XLM-R large, RemBERT (pool: mean/max/CLS)
+- **Frozen sentence-level:** SBERT-BERT, SBERT-RoBERTa, E5-base/large, LaBSE, SimCSE-XLM-R
+
+*Family labels used in the leaderboard:* `static + MTR`, `frozen token mean + MTR`, `frozen token max + MTR`, `frozen token cls + MTR`, `frozen sentence + MTR`, `fine-tuned LoRA`, and `augmented + …` variants.
+
+---
+
+## 4. Overall leaderboard (Top-20)
+
+Ranked by **global median RRMSE** (lower is better) across folds × targets. Columns:  
+1) **Rank**, 2) **Embedding**, 3) **MTR model**, 4) **Augm.** (`NA` or `A{10|20|50|100|200|400}`), 5) **RRMSE**, 6) **Family**.
+
+```text
+┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ rank ┃ representation_family             ┃ embedding        ┃ mtr_model      ┃ augmentation ┃ rrmse  ┃
+┣━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━┫
+│ 1    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A20          │ 0.6676 │
+│ 2    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A50          │ 0.6737 │
+│ 3    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A10          │ 0.6738 │
+│ 4    │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A50          │ 0.6778 │
+│ 5    │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A100         │ 0.6788 │
+│ 6    │ frozen sentence + MTR             │ e5_base          │ chain_ERCcv_lr │ NA           │ 0.6816 │
+│ 7    │ frozen sentence + MTR             │ e5_large         │ local_lasso    │ NA           │ 0.6820 │
+│ 8    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A400         │ 0.6847 │
+│ 9    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A200         │ 0.6847 │
+│ 10   │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A100         │ 0.6847 │
+│ 11   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A200         │ 0.6852 │
+│ 12   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A20          │ 0.6882 │
+│ 13   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A10          │ 0.6903 │
+│ 14   │ frozen sentence + MTR             │ e5_large         │ chain_ERCcv_lr │ NA           │ 0.6958 │
+│ 15   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A400         │ 0.6980 │
+│ 16   │ frozen sentence + MTR             │ e5_base          │ local_lasso    │ NA           │ 0.7047 │
+│ 17   │ frozen sentence + MTR             │ simcse_xlmr_base │ chain_ERCcv_lr │ NA           │ 0.7355 │
+│ 18   │ frozen sentence + MTR             │ sbert_bert       │ local_lasso    │ NA           │ 0.7359 │
+│ 19   │ frozen sentence + MTR             │ sbert_roberta    │ local_lasso    │ NA           │ 0.7409 │
+│ 20   │ frozen sentence + MTR             │ sbert_bert       │ chain_ERCcv_lr │ NA           │ 0.7410 │
+┗━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━┛
+```
+
+**Full report (all configurations):** `reports/leaderboard/leaderboard.md`  
+**Tables/plots powering this section:** `outputs/r_1_overall/results/*.csv`, `outputs/r_1_overall/plots/*.png`  
+<sub>_Tie-breaks:_ rrmse → family label → embedding (A–Z) → model (A–Z) → augmentation (NA before A10…A400).</sub>
+
+---
+
+## 5. Repository map
 
 - **notebooks/** – Re-runnable analysis notebooks for each stage (static, frozen, fine-tuned, augmentation, final figures). Each has a docstring listing inputs/outputs and idempotent behavior.
 - **scripts/** – Script equivalents of the notebooks plus orchestrator (`run_all.sh`) to re-run everything in order.
 - **outputs/** – All result artifacts (plots/tables/arrays) produced by the pipeline and used in the paper (organized per step).
-- **docs/** – Background documentation and assets for **taxonomy-guided prompting** (Appendix A), Mermaid source trees + SVG/PNG exports, and a small helper render script.
+- **docs/** – Background documentation and assets for **taxonomy-guided prompting**, Mermaid source trees + SVG/PNG exports, and a small helper render script.
 - **envs/** – Conda environments (`environment.yml` and optional `environment.cuda.yml`) to reproduce the software stack.
 - **models/** – Placeholder for local checkpoints if needed (no private data included).
 - **MODEL_CARDS.md** – Short cards describing model families and embeddings used.
 - **REPRODUCIBILITY.md** – Exact steps to rebuild the environment and re-run notebooks/scripts from saved artifacts.
 - **CITATION.cff** – Placeholder for citation (anonymous review; will be updated post-acceptance).
 - **LICENSE** – Code license (Apache-2.0). *Data are not distributed.*
+- **reports/leaderboard/** – Markdown report for the overall ranking (Top-20 + full) with small summary figures.
+- **outputs/r_1_overall/** – CSVs and plots for the leaderboard (`results/top20.csv`, `results/full_leaderboard.csv`).
+- **scripts/r_1_overall_leaderboard.py** – Aggregates artifacts and writes the leaderboard tables/plots/report.
 
 > **Note:** There is **no `src/` package**; code lives in notebooks and `scripts/` by design for clarity during review.
 
-### Artifacts at a glance
+---
+
+## 6. What’s included in this review package
+
+This repository includes all **code**, **environment specs**, and the **artifacts required to re-render every figure and table** in review mode, without access to private data. In particular, we keep:
+- A/B/D LOOCV arrays used across the F-steps,
+- augmentation finals and caches needed for downstream steps (e.g., `facet_pools/*.txt`, `g_raw_gemma.jsonl`,
+  `e_2_teacher_labeling/cache/synth_embeds/*`, and `e_3_student_scoring/cache/X_seed_e5_base.npy`),
+- all finalized paper assets under `outputs/f_final_report/**`,
+- `outputs/r_1_overall/**` and `reports/leaderboard/leaderboard.md` (leaderboard CSVs/plots and markdown report).
+
+For a precise, path-level list of what is **kept** vs **omitted** (e.g., trainer detritus, teacher pickles, raw data),
+see **ARTIFACTS_MANIFEST.md** in the repo root.
+
+---
+
+## 7. Artifacts at a glance
 
 - Baseline static arrays: `outputs/a_static/results/`
 - Frozen transformer arrays: `outputs/b_frozen/results/`
@@ -34,10 +154,12 @@ This repository accompanies the submission of the article and contains all code,
 - Final report figures/tables: `outputs/f_final_report/`  
   Subfolders:  
   `f_1_wilcoxon_heatmap/`, `f_2_pooling_families_cd/`, `f_3_embedding_cd/`, `f_4_frozen_vs_finetuned/`, `f_5_average_diversity/`, `f_6_target_analysis/`
+- Leaderboard tables/plots: `outputs/r_1_overall/`
+- Leaderboard report (markdown): `reports/leaderboard/leaderboard.md`
 
 ---
 
-## Quick start
+## 8. Quick start
 
 **Environment (CPU-only is fine for review):**
 ```bash
@@ -57,7 +179,15 @@ bash scripts/run_all.sh --strict # aborts on first error
 
 Full details and troubleshooting: **[REPRODUCIBILITY.md](REPRODUCIBILITY.md)**.
 
-### Mode selection
+**Optional: regenerate the leaderboard (artifact-only)**
+```bash
+python scripts/r_1_overall_leaderboard.py
+```
+This reads A/B/D/E3 artifacts under `outputs/**`, writes `outputs/r_1_overall/**`, and renders `reports/leaderboard/leaderboard.md`. No raw data or training is required.
+
+---
+
+## 9. Modes & idempotency
 
 ```
 Most notebooks implement a toggle at the top:
@@ -69,13 +199,10 @@ For **f_6_target_analysis** Part B, use:
 export FORCE_REBUILD_PART_B=1   # recompute diagnostics from ./data; omit for review
 ```
 
----
-
-## Execution modes and idempotency
-
 **Definition of modes**  
 • **Compute mode**: end-to-end reproduction that trains or generates artifacts. Requires access to private data and, where applicable, model weights or external LLMs.  
-• **Review mode**: artifact-only reproduction that re-renders tables, statistics, and figures from committed outputs. No access to raw data is required. All review notebooks are idempotent.
+• **Review mode**: artifact-only reproduction that re-renders tables, statistics, and figures from committed outputs. No access to raw data is required. All review notebooks are idempotent.  
+• **Leaderboard aggregator (`scripts/r_1_overall_leaderboard.py`)**: review-only, artifact-based summarization. Deterministic and idempotent; never touches raw data or trains models.
 
 **Per-notebook mode matrix**
 
@@ -104,7 +231,7 @@ The complete figure and table set reported in the paper can be regenerated in re
 
 ---
 
-## Key results & paths
+## 10. Key results & paths
 
 - **Overall model × embedding comparisons**
   - Wilcoxon heatmaps: `outputs/f_final_report/f_1_wilcoxon_heatmap/`
@@ -120,11 +247,21 @@ The complete figure and table set reported in the paper can be regenerated in re
 - **Per-target analyses & diagnostics**
   - Tables + plots: `outputs/f_final_report/f_6_target_analysis/`
 
+- **Top-20 leaderboard (quick scan):** see [4. Overall leaderboard (Top-20)](#4-overall-leaderboard-top-20) and `reports/leaderboard/leaderboard.md`.
+
 Each corresponding notebook in `notebooks/` regenerates the figures/tables from these saved arrays idempotently.
 
 ---
 
-## Background & docs
+## 11. Reproducibility conventions
+
+- All plots and tables are regenerated deterministically from NumPy arrays and CSVs.
+- When both legacy and current filename conventions exist (for static embeddings), loaders try both to ensure portability.
+- The leaderboard (`outputs/r_1_overall/**`) is computed deterministically from committed artifacts; re-running the aggregator reproduces identical CSVs/plots given identical inputs.
+
+---
+
+## 12. Background & docs
 
 - **Taxonomy-guided prompting:** `docs/taxonomy-guided-prompting.md`  
   Visuals and Mermaid sources in `docs/trees/`, render helper in `docs/scripts/render_trees.sh`.
@@ -133,51 +270,13 @@ Each corresponding notebook in `notebooks/` regenerates the figures/tables from 
 
 ---
 
-## Models & embeddings (high level)
-
-- **MTR families:** local (Linear/Lasso/RF), chain-based (ERCcv with base LR/Lasso/RF), global (RF/Bagging); PCA grid for dimensionality.
-- **Embeddings:** static (Word2Vec, fastText), frozen token-level (BERTje, RobBERT v2/2023, DeBERTa-v3, XLM-R large, ReMBERT with mean/max/CLS pooling), frozen sentence-level (SBERT-BERT/RoBERTa, E5 base/large, LaBSE, SimCSE-XLM-R).
-- **Fine-tuning:** LoRA on three sentence encoders (SBERT, SimCSE-XLM-R, E5-large) – optional, heavier, does not outperform frozen+MTR on this dataset.
-
-Details in **[MODEL_CARDS.md](MODEL_CARDS.md)** and the notebook/script docstrings.
-
----
-
-## Reproducibility conventions
-
-- All plots and tables are regenerated deterministically from NumPy arrays and CSVs.
-- When both legacy and current filename conventions exist (for static embeddings), loaders try both to ensure portability.
-
----
-
-## Data availability
-
-The **raw dataset cannot be shared** and is **not included**.  
-All review computations are derived from **precomputed artifacts** in `outputs/`, and notebooks/scripts are designed to **load these idempotently**.
-
----
-
-### What’s included in this review package
-
-This repository includes all **code**, **environment specs**, and the **artifacts required to re-render every figure
-and table** in review mode, without access to private data. In particular, we keep:
-- A/B/D LOOCV arrays used across the F-steps,
-- augmentation finals and caches needed for downstream steps (e.g., `facet_pools/*.txt`, `g_raw_gemma.jsonl`,
-  `e_2_teacher_labeling/cache/synth_embeds/*`, and `e_3_student_scoring/cache/X_seed_e5_base.npy`),
-- and all finalized paper assets under `outputs/f_final_report/**`.
-
-For a precise, path-level list of what is **kept** vs **omitted** (e.g., trainer detritus, teacher pickles, raw data),
-see **ARTIFACTS_MANIFEST.md** in the repo root.
-
----
-
-## License & citation
+## 13. License & citation
 
 - **Code license:** Apache License 2.0 — see **[LICENSE](LICENSE)**.  
 - **Citation:** see **[CITATION.cff](CITATION.cff)** (placeholder; final metadata added post-acceptance).
 
 ---
 
-## Contact
+## 14. Contact
 
-Omitted for double‑blind review. Please use the conference/journal review channel.
+Omitted for double-blind review. Please use the conference/journal review channel.
