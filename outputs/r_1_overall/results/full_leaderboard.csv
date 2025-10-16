@@ -1,0 +1,167 @@
+rank,representation_family,embedding,mtr_model,augmentation,rrmse
+1,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A20,0.6676065921783447
+2,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A50,0.6737381219863892
+3,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A10,0.6737879514694214
+4,augmented + frozen sentence + MTR,e5_base,local_lasso,A50,0.6777620911598206
+5,augmented + frozen sentence + MTR,e5_base,local_lasso,A100,0.6787651181221008
+6,frozen sentence + MTR,e5_base,chain_ERCcv_lr,NA,0.6815699714287151
+7,frozen sentence + MTR,e5_large,local_lasso,NA,0.6819935526556229
+8,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A400,0.6846904754638672
+9,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A200,0.6846904754638672
+10,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A100,0.6846904754638672
+11,augmented + frozen sentence + MTR,e5_base,local_lasso,A200,0.6852312088012695
+12,augmented + frozen sentence + MTR,e5_base,local_lasso,A20,0.6882121562957764
+13,augmented + frozen sentence + MTR,e5_base,local_lasso,A10,0.6903446912765503
+14,frozen sentence + MTR,e5_large,chain_ERCcv_lr,NA,0.6957585191292126
+15,augmented + frozen sentence + MTR,e5_base,local_lasso,A400,0.6980307102203369
+16,frozen sentence + MTR,e5_base,local_lasso,NA,0.7046550520754471
+17,frozen sentence + MTR,simcse_xlmr_base,chain_ERCcv_lr,NA,0.7354910183540948
+18,frozen sentence + MTR,sbert_bert,local_lasso,NA,0.7359021790796512
+19,frozen sentence + MTR,sbert_roberta,local_lasso,NA,0.7408946282373099
+20,frozen sentence + MTR,sbert_bert,chain_ERCcv_lr,NA,0.740976691659745
+21,frozen sentence + MTR,simcse_xlmr_base,local_lasso,NA,0.7443459975917083
+22,frozen token mean + MTR,robbert2023,local_lasso,NA,0.7527659508715315
+23,frozen sentence + MTR,sbert_roberta,chain_ERCcv_lr,NA,0.7562076892106837
+24,frozen sentence + MTR,labse,chain_ERCcv_lr,NA,0.7580231656892906
+25,frozen token mean + MTR,robbert2023,chain_ERCcv_lr,NA,0.763903497092749
+26,frozen sentence + MTR,labse,local_lasso,NA,0.7663618972113972
+27,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A400,0.7718108296394348
+28,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A20,0.7783243656158447
+29,augmented + frozen sentence + MTR,e5_base,local_rf,A400,0.779708981513977
+30,frozen sentence + MTR,sbert_bert,chain_ERCcv_rf,NA,0.7833444452561392
+31,frozen sentence + MTR,simcse_xlmr_base,chain_ERCcv_rf,NA,0.784000285615255
+32,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A200,0.7876052856445312
+33,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A100,0.79018235206604
+34,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A50,0.7916959524154663
+35,augmented + frozen sentence + MTR,e5_base,local_rf,A20,0.7920408248901367
+36,frozen token mean + MTR,rembert,local_lasso,NA,0.794209751807285
+37,frozen sentence + MTR,e5_large,chain_ERCcv_rf,NA,0.7973566997907899
+38,frozen sentence + MTR,simcse_xlmr_base,local_rf,NA,0.7980482441809427
+39,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_rf,A10,0.7982895374298096
+40,frozen token max + MTR,robbert2023,local_lasso,NA,0.8031268313381978
+41,frozen token mean + MTR,bert,local_lasso,NA,0.8055548625825076
+42,frozen sentence + MTR,sbert_bert,local_rf,NA,0.8078873362277804
+43,augmented + frozen sentence + MTR,e5_base,local_rf,A50,0.8105295896530151
+44,frozen sentence + MTR,sbert_bert,global_rf,NA,0.81223421077362
+45,frozen token mean + MTR,rembert,chain_ERCcv_lr,NA,0.8127351612421809
+46,frozen token max + MTR,bert,local_lasso,NA,0.8130099102719834
+47,static + MTR,fasttext,chain_ERCcv_lr,NA,0.8131081318517492
+48,static + MTR,fasttext,local_lasso,NA,0.8138720230247248
+49,static + MTR,fasttext,local_lr,NA,0.8151430135922247
+50,frozen token mean + MTR,bert,chain_ERCcv_lr,NA,0.8157120453072193
+51,augmented + frozen sentence + MTR,e5_base,local_rf,A200,0.8163104057312012
+52,frozen sentence + MTR,sbert_roberta,chain_ERCcv_rf,NA,0.8172705933582293
+53,frozen token max + MTR,robbert2023,chain_ERCcv_lr,NA,0.8188192388585787
+54,augmented + frozen sentence + MTR,e5_base,local_rf,A100,0.8234749436378479
+55,augmented + frozen sentence + MTR,e5_base,global_rf,A400,0.8244231343269348
+56,augmented + frozen sentence + MTR,e5_base,global_rf,A50,0.8244674801826477
+57,frozen sentence + MTR,sbert_roberta,local_rf,NA,0.8253780769011966
+58,frozen sentence + MTR,e5_base,chain_ERCcv_rf,NA,0.8263189244934741
+59,frozen sentence + MTR,e5_large,local_rf,NA,0.8283199569029319
+60,frozen token max + MTR,bert,chain_ERCcv_lr,NA,0.8304135460891455
+61,augmented + frozen sentence + MTR,e5_base,local_rf,A10,0.8339238166809082
+62,frozen sentence + MTR,sbert_roberta,global_rf,NA,0.8342381812521934
+63,augmented + frozen sentence + MTR,e5_base,global_rf,A20,0.8391157984733582
+64,static + MTR,word2vec,local_lasso,NA,0.8406017524316571
+65,frozen sentence + MTR,labse,chain_ERCcv_rf,NA,0.8407615939838032
+66,frozen sentence + MTR,simcse_xlmr_base,global_rf,NA,0.8446403807267875
+67,frozen sentence + MTR,e5_base,local_rf,NA,0.8459190850375101
+68,static + MTR,word2vec,local_lr,NA,0.8461259155631972
+69,frozen sentence + MTR,labse,local_rf,NA,0.8513164756600555
+70,static + MTR,word2vec,chain_ERCcv_lr,NA,0.8514462866076595
+71,frozen token mean + MTR,robbert2023,chain_ERCcv_rf,NA,0.8534669896686533
+72,augmented + frozen sentence + MTR,e5_base,global_rf,A100,0.8535631895065308
+73,augmented + frozen sentence + MTR,e5_base,global_rf,A200,0.8551727533340454
+74,augmented + frozen sentence + MTR,e5_base,global_rf,A10,0.8585060834884644
+75,frozen token max + MTR,robbert_v2,chain_ERCcv_lr,NA,0.8627067005952962
+76,frozen token mean + MTR,robbert_v2,local_lasso,NA,0.8654134681047392
+77,frozen token mean + MTR,xlmr_large,local_lasso,NA,0.8677010844560473
+78,frozen sentence + MTR,e5_large,global_rf,NA,0.8686932466662212
+79,frozen token mean + MTR,robbert2023,local_rf,NA,0.8692673361042687
+80,frozen token max + MTR,robbert_v2,local_lasso,NA,0.8699152062732196
+81,static + MTR,word2vec,chain_ERCcv_rf,NA,0.8702091611107399
+82,frozen token cls + MTR,bert,local_lasso,NA,0.8709018049712243
+83,frozen token cls + MTR,robbert2023,chain_ERCcv_rf,NA,0.8718219595764154
+84,frozen token cls + MTR,robbert2023,local_rf,NA,0.8765309881822925
+85,frozen token mean + MTR,bert,local_rf,NA,0.8777290238380905
+86,frozen sentence + MTR,e5_base,global_rf,NA,0.8784118039289663
+87,frozen token mean + MTR,bert,chain_ERCcv_rf,NA,0.8801948226568321
+88,frozen token cls + MTR,robbert_v2,local_lasso,NA,0.8853026776988231
+89,frozen token mean + MTR,robbert2023,global_rf,NA,0.8855517822855121
+90,static + MTR,fasttext,local_rf,NA,0.8857742371972108
+91,frozen token cls + MTR,bert,chain_ERCcv_lr,NA,0.8869198704366293
+92,static + MTR,word2vec,global_bag,NA,0.8901262574526678
+93,frozen token max + MTR,bert,local_rf,NA,0.8905192245919185
+94,frozen token max + MTR,robbert2023,chain_ERCcv_rf,NA,0.890823090628545
+95,static + MTR,word2vec,local_rf,NA,0.8909127439316208
+96,frozen token mean + MTR,xlmr_large,chain_ERCcv_lr,NA,0.8940931010412414
+97,frozen token mean + MTR,robbert_v2,chain_ERCcv_lr,NA,0.8942179399357139
+98,static + MTR,word2vec,global_rf,NA,0.8942985979760136
+99,static + MTR,fasttext,global_bag,NA,0.8943069521011634
+100,frozen sentence + MTR,labse,global_rf,NA,0.8944459300157585
+101,frozen token cls + MTR,robbert2023,local_lasso,NA,0.8949530043603593
+102,static + MTR,fasttext,chain_ERCcv_rf,NA,0.8953812939492201
+103,frozen token max + MTR,bert,chain_ERCcv_rf,NA,0.8966352744988514
+104,frozen token mean + MTR,rembert,chain_ERCcv_rf,NA,0.8973035501951245
+105,static + MTR,fasttext,global_rf,NA,0.8991964770472818
+106,frozen token cls + MTR,robbert2023,global_rf,NA,0.8995152989579792
+107,frozen token max + MTR,robbert2023,local_rf,NA,0.8997137523969592
+108,frozen token cls + MTR,robbert_v2,chain_ERCcv_lr,NA,0.9101709311820216
+109,frozen token mean + MTR,robbert_v2,local_rf,NA,0.9123357613222913
+110,frozen token cls + MTR,robbert_v2,chain_ERCcv_rf,NA,0.9127331240098877
+111,frozen token mean + MTR,robbert_v2,chain_ERCcv_rf,NA,0.9148878794867963
+112,frozen token cls + MTR,robbert_v2,local_rf,NA,0.9171010462301062
+113,frozen token cls + MTR,bert,chain_ERCcv_rf,NA,0.9178064645788933
+114,frozen token mean + MTR,rembert,local_rf,NA,0.9210688404230492
+115,frozen token cls + MTR,robbert_v2,global_rf,NA,0.9225549520386005
+116,frozen token cls + MTR,bert,local_rf,NA,0.9258395887173746
+117,frozen token mean + MTR,bert,global_rf,NA,0.9258523622579216
+118,frozen token mean + MTR,xlmr_large,local_rf,NA,0.9269232856822798
+119,frozen token max + MTR,robbert2023,global_rf,NA,0.928528992288515
+120,frozen token max + MTR,bert,global_rf,NA,0.9286413062560605
+121,frozen token mean + MTR,xlmr_large,chain_ERCcv_rf,NA,0.9294337001391473
+122,static + MTR,word2vec,chain_ERCcv_lasso,NA,0.9300026744163754
+123,frozen token max + MTR,robbert_v2,local_rf,NA,0.9303049710500937
+124,frozen token mean + MTR,rembert,global_rf,NA,0.9321788039163035
+125,frozen token mean + MTR,robbert_v2,global_rf,NA,0.9340743894515846
+126,frozen token max + MTR,robbert_v2,chain_ERCcv_rf,NA,0.9365420545175582
+127,frozen token max + MTR,rembert,chain_ERCcv_rf,NA,0.9390351626915572
+128,frozen token max + MTR,robbert_v2,global_rf,NA,0.942135463524679
+129,frozen token cls + MTR,bert,global_rf,NA,0.9500938177714613
+130,frozen token max + MTR,xlmr_large,chain_ERCcv_lr,NA,0.9531430955244184
+131,frozen token max + MTR,rembert,local_rf,NA,0.9537761662578068
+132,frozen token max + MTR,rembert,local_lasso,NA,0.955681144018224
+133,frozen token cls + MTR,xlmr_large,chain_ERCcv_rf,NA,0.9588362233227719
+134,frozen token mean + MTR,xlmr_large,global_rf,NA,0.9636755495864203
+135,frozen token max + MTR,xlmr_large,local_lasso,NA,0.9642366843451208
+136,frozen token cls + MTR,robbert2023,chain_ERCcv_lr,NA,0.965874415599276
+137,frozen token cls + MTR,xlmr_large,local_rf,NA,0.9693990096045002
+138,frozen token max + MTR,xlmr_large,global_rf,NA,0.9718082635010481
+139,frozen token cls + MTR,xlmr_large,global_rf,NA,0.9756655117231533
+140,frozen token cls + MTR,xlmr_large,local_lasso,NA,0.9768344938257676
+141,frozen token max + MTR,xlmr_large,chain_ERCcv_rf,NA,0.9814646793490465
+142,frozen token max + MTR,rembert,global_rf,NA,0.9837649961066866
+143,frozen token max + MTR,xlmr_large,local_rf,NA,0.9841041661807342
+144,frozen token mean + MTR,deberta,local_rf,NA,0.9850896471237589
+145,frozen token max + MTR,deberta,chain_ERCcv_rf,NA,0.9854988747036499
+146,frozen token mean + MTR,deberta,chain_ERCcv_rf,NA,0.985592943850647
+147,frozen token cls + MTR,xlmr_large,chain_ERCcv_lr,NA,0.9863822515901448
+148,frozen token mean + MTR,deberta,global_rf,NA,0.9890365053340806
+149,frozen token max + MTR,rembert,chain_ERCcv_lr,NA,0.9893953273214227
+150,frozen token max + MTR,deberta,chain_ERCcv_lr,NA,0.9947712614017894
+151,frozen token max + MTR,deberta,global_rf,NA,0.995209136132538
+152,frozen token max + MTR,deberta,local_rf,NA,0.9957406951258483
+153,frozen token cls + MTR,deberta,chain_ERCcv_lr,NA,0.9978807685052751
+154,frozen token cls + MTR,rembert,local_lasso,NA,0.9999999995274282
+155,static + MTR,fasttext,chain_ERCcv_lasso,NA,0.9999999999993276
+156,frozen token max + MTR,deberta,local_lasso,NA,1.0000000000728009
+157,frozen token mean + MTR,deberta,local_lasso,NA,1.0000000005454663
+158,frozen token cls + MTR,deberta,local_lasso,NA,1.0000000062002967
+159,frozen token mean + MTR,deberta,chain_ERCcv_lr,NA,1.0090582825050787
+160,frozen token cls + MTR,rembert,global_rf,NA,1.0108946191690946
+161,frozen token cls + MTR,deberta,global_rf,NA,1.0148540357436777
+162,frozen token cls + MTR,rembert,chain_ERCcv_lr,NA,1.0159715297769858
+163,frozen token cls + MTR,rembert,local_rf,NA,1.0249401742526847
+164,frozen token cls + MTR,deberta,chain_ERCcv_rf,NA,1.0284469346157818
+165,frozen token cls + MTR,rembert,chain_ERCcv_rf,NA,1.0333196317350979
+166,frozen token cls + MTR,deberta,local_rf,NA,1.0516410057490657

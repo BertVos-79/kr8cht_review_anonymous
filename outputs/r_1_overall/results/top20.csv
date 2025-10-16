@@ -1,0 +1,21 @@
+rank,representation_family,embedding,mtr_model,augmentation,rrmse
+1,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A20,0.6676065921783447
+2,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A50,0.6737381219863892
+3,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A10,0.6737879514694214
+4,augmented + frozen sentence + MTR,e5_base,local_lasso,A50,0.6777620911598206
+5,augmented + frozen sentence + MTR,e5_base,local_lasso,A100,0.6787651181221008
+6,frozen sentence + MTR,e5_base,chain_ERCcv_lr,NA,0.6815699714287151
+7,frozen sentence + MTR,e5_large,local_lasso,NA,0.6819935526556229
+8,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A400,0.6846904754638672
+9,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A200,0.6846904754638672
+10,augmented + frozen sentence + MTR,e5_base,chain_ERCcv_lr,A100,0.6846904754638672
+11,augmented + frozen sentence + MTR,e5_base,local_lasso,A200,0.6852312088012695
+12,augmented + frozen sentence + MTR,e5_base,local_lasso,A20,0.6882121562957764
+13,augmented + frozen sentence + MTR,e5_base,local_lasso,A10,0.6903446912765503
+14,frozen sentence + MTR,e5_large,chain_ERCcv_lr,NA,0.6957585191292126
+15,augmented + frozen sentence + MTR,e5_base,local_lasso,A400,0.6980307102203369
+16,frozen sentence + MTR,e5_base,local_lasso,NA,0.7046550520754471
+17,frozen sentence + MTR,simcse_xlmr_base,chain_ERCcv_lr,NA,0.7354910183540948
+18,frozen sentence + MTR,sbert_bert,local_lasso,NA,0.7359021790796512
+19,frozen sentence + MTR,sbert_roberta,local_lasso,NA,0.7408946282373099
+20,frozen sentence + MTR,sbert_bert,chain_ERCcv_lr,NA,0.740976691659745

@@ -1,0 +1,225 @@
+family,subfamily,embedding,regressor,variant,median_rrmse
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=20,0.6676065921783447
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=50,0.6737381219863892
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=10,0.6737879514694214
+augmented,full,e5_base,local_lasso,method=gemma; pct=50,0.6777620911598206
+augmented,full,e5_base,local_lasso,method=gemma; pct=100,0.6787651181221008
+frozen,sentence,e5_base,chain_ERCcv_lr,—,0.6815699714287151
+frozen,sentence,e5_large,local_lasso,—,0.6819935526556229
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=100,0.6846904754638672
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=200,0.6846904754638672
+augmented,full,e5_base,chain_ERCcv_lr,method=gemma; pct=400,0.6846904754638672
+augmented,full,e5_base,local_lasso,method=gemma; pct=200,0.6852312088012695
+augmented,full,e5_base,local_lasso,method=gemma; pct=20,0.6882121562957764
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=10,0.6892235279083252
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=20,0.6892235279083252
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=200,0.6892235279083252
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=50,0.6892235279083252
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=100,0.6892235279083252
+augmented,baseline,e5_base,chain_ERCcv_lr,method=gemma; pct=400,0.6892235279083252
+augmented,full,e5_base,local_lasso,method=gemma; pct=10,0.6903446912765503
+frozen,sentence,e5_large,chain_ERCcv_lr,—,0.6957585191292126
+augmented,full,e5_base,local_lasso,method=gemma; pct=400,0.6980307102203369
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=400,0.7046522498130798
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=100,0.7046522498130798
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=10,0.7046522498130798
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=20,0.7046522498130798
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=50,0.7046522498130798
+augmented,baseline,e5_base,local_lasso,method=gemma; pct=200,0.7046522498130798
+frozen,sentence,e5_base,local_lasso,—,0.7046550520754471
+frozen,sentence,simcse_xlmr_base,chain_ERCcv_lr,—,0.7354910183540948
+frozen,sentence,sbert_bert,local_lasso,—,0.7359021790796512
+frozen,sentence,sbert_roberta,local_lasso,—,0.7408946282373099
+frozen,sentence,sbert_bert,chain_ERCcv_lr,—,0.740976691659745
+frozen,sentence,simcse_xlmr_base,local_lasso,—,0.7443459975917083
+frozen,token-mean,robbert2023,local_lasso,—,0.7527659508715315
+frozen,sentence,sbert_roberta,chain_ERCcv_lr,—,0.7562076892106837
+frozen,sentence,labse,chain_ERCcv_lr,—,0.7580231656892906
+frozen,token-mean,robbert2023,chain_ERCcv_lr,—,0.763903497092749
+frozen,sentence,labse,local_lasso,—,0.7663618972113972
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=400,0.7718108296394348
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=20,0.7783243656158447
+augmented,full,e5_base,local_rf,method=gemma; pct=400,0.779708981513977
+frozen,sentence,sbert_bert,chain_ERCcv_rf,—,0.7833444452561392
+frozen,sentence,simcse_xlmr_base,chain_ERCcv_rf,—,0.784000285615255
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=200,0.7876052856445312
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=100,0.79018235206604
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=50,0.7916959524154663
+augmented,full,e5_base,local_rf,method=gemma; pct=20,0.7920408248901367
+frozen,token-mean,rembert,local_lasso,—,0.794209751807285
+frozen,sentence,e5_large,chain_ERCcv_rf,—,0.7973566997907899
+frozen,sentence,simcse_xlmr_base,local_rf,—,0.7980482441809427
+augmented,full,e5_base,chain_ERCcv_rf,method=gemma; pct=10,0.7982895374298096
+frozen,token-max,robbert2023,local_lasso,—,0.8031268313381978
+frozen,token-mean,bert,local_lasso,—,0.8055548625825076
+frozen,sentence,sbert_bert,local_rf,—,0.8078873362277804
+augmented,full,e5_base,local_rf,method=gemma; pct=50,0.8105295896530151
+frozen,sentence,sbert_bert,global_rf,—,0.81223421077362
+frozen,token-mean,rembert,chain_ERCcv_lr,—,0.8127351612421809
+frozen,token-max,bert,local_lasso,—,0.8130099102719834
+static,fasttext,fasttext,chain_ERCcv_lr,—,0.8131081318517492
+static,fasttext,fasttext,local_lasso,—,0.8138720230247248
+static,fasttext,fasttext,local_lr,—,0.8151430135922247
+frozen,token-mean,bert,chain_ERCcv_lr,—,0.8157120453072193
+augmented,full,e5_base,local_rf,method=gemma; pct=200,0.8163104057312012
+frozen,sentence,sbert_roberta,chain_ERCcv_rf,—,0.8172705933582293
+frozen,token-max,robbert2023,chain_ERCcv_lr,—,0.8188192388585787
+augmented,full,e5_base,local_rf,method=gemma; pct=100,0.8234749436378479
+augmented,full,e5_base,global_rf,method=gemma; pct=400,0.8244231343269348
+augmented,full,e5_base,global_rf,method=gemma; pct=50,0.8244674801826477
+frozen,sentence,sbert_roberta,local_rf,—,0.8253780769011966
+frozen,sentence,e5_base,chain_ERCcv_rf,—,0.8263189244934741
+frozen,sentence,e5_large,local_rf,—,0.8283199569029319
+frozen,token-max,bert,chain_ERCcv_lr,—,0.8304135460891455
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=100,0.8332480788230896
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=20,0.8332480788230896
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=10,0.8332480788230896
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=50,0.8332480788230896
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=400,0.8332480788230896
+augmented,baseline,e5_base,chain_ERCcv_rf,method=gemma; pct=200,0.8332480788230896
+augmented,full,e5_base,local_rf,method=gemma; pct=10,0.8339238166809082
+frozen,sentence,sbert_roberta,global_rf,—,0.8342381812521934
+augmented,baseline,e5_base,local_rf,method=gemma; pct=400,0.8390518426895142
+augmented,baseline,e5_base,local_rf,method=gemma; pct=20,0.8390518426895142
+augmented,baseline,e5_base,local_rf,method=gemma; pct=200,0.8390518426895142
+augmented,baseline,e5_base,local_rf,method=gemma; pct=100,0.8390518426895142
+augmented,baseline,e5_base,local_rf,method=gemma; pct=10,0.8390518426895142
+augmented,baseline,e5_base,local_rf,method=gemma; pct=50,0.8390518426895142
+augmented,full,e5_base,global_rf,method=gemma; pct=20,0.8391157984733582
+static,word2vec,word2vec,local_lasso,—,0.8406017524316571
+frozen,sentence,labse,chain_ERCcv_rf,—,0.8407615939838032
+frozen,sentence,simcse_xlmr_base,global_rf,—,0.8446403807267875
+frozen,sentence,e5_base,local_rf,—,0.8459190850375101
+static,word2vec,word2vec,local_lr,—,0.8461259155631972
+frozen,sentence,labse,local_rf,—,0.8513164756600555
+static,word2vec,word2vec,chain_ERCcv_lr,—,0.8514462866076595
+frozen,token-mean,robbert2023,chain_ERCcv_rf,—,0.8534669896686533
+augmented,full,e5_base,global_rf,method=gemma; pct=100,0.8535631895065308
+augmented,full,e5_base,global_rf,method=gemma; pct=200,0.8551727533340454
+augmented,full,e5_base,global_rf,method=gemma; pct=10,0.8585060834884644
+frozen,token-max,robbert_v2,chain_ERCcv_lr,—,0.8627067005952962
+frozen,token-mean,robbert_v2,local_lasso,—,0.8654134681047392
+frozen,token-mean,xlmr_large,local_lasso,—,0.8677010844560473
+frozen,sentence,e5_large,global_rf,—,0.8686932466662212
+frozen,token-mean,robbert2023,local_rf,—,0.8692673361042687
+frozen,token-max,robbert_v2,local_lasso,—,0.8699152062732196
+static,word2vec,word2vec,chain_ERCcv_rf,—,0.8702091611107399
+frozen,token-cls,bert,local_lasso,—,0.8709018049712243
+frozen,token-cls,robbert2023,chain_ERCcv_rf,—,0.8718219595764154
+frozen,token-cls,robbert2023,local_rf,—,0.8765309881822925
+augmented,baseline,e5_base,global_rf,method=gemma; pct=50,0.8765345215797424
+augmented,baseline,e5_base,global_rf,method=gemma; pct=20,0.8765345215797424
+augmented,baseline,e5_base,global_rf,method=gemma; pct=400,0.8765345215797424
+augmented,baseline,e5_base,global_rf,method=gemma; pct=100,0.8765345215797424
+augmented,baseline,e5_base,global_rf,method=gemma; pct=200,0.8765345215797424
+augmented,baseline,e5_base,global_rf,method=gemma; pct=10,0.8765345215797424
+frozen,token-mean,bert,local_rf,—,0.8777290238380905
+frozen,sentence,e5_base,global_rf,—,0.8784118039289663
+frozen,token-mean,bert,chain_ERCcv_rf,—,0.8801948226568321
+frozen,token-cls,robbert_v2,local_lasso,—,0.8853026776988231
+frozen,token-mean,robbert2023,global_rf,—,0.8855517822855121
+static,fasttext,fasttext,local_rf,—,0.8857742371972108
+frozen,token-cls,bert,chain_ERCcv_lr,—,0.8869198704366293
+static,word2vec,word2vec,global_bag,—,0.8901262574526678
+frozen,token-max,bert,local_rf,—,0.8905192245919185
+frozen,token-max,robbert2023,chain_ERCcv_rf,—,0.890823090628545
+static,word2vec,word2vec,local_rf,—,0.8909127439316208
+frozen,token-mean,xlmr_large,chain_ERCcv_lr,—,0.8940931010412414
+frozen,token-mean,robbert_v2,chain_ERCcv_lr,—,0.8942179399357139
+static,word2vec,word2vec,global_rf,—,0.8942985979760136
+static,fasttext,fasttext,global_bag,—,0.8943069521011634
+frozen,sentence,labse,global_rf,—,0.8944459300157585
+frozen,token-cls,robbert2023,local_lasso,—,0.8949530043603593
+static,fasttext,fasttext,chain_ERCcv_rf,—,0.8953812939492201
+frozen,token-max,bert,chain_ERCcv_rf,—,0.8966352744988514
+frozen,token-mean,rembert,chain_ERCcv_rf,—,0.8973035501951245
+static,fasttext,fasttext,global_rf,—,0.8991964770472818
+frozen,token-cls,robbert2023,global_rf,—,0.8995152989579792
+frozen,token-max,robbert2023,local_rf,—,0.8997137523969592
+frozen,token-cls,robbert_v2,chain_ERCcv_lr,—,0.9101709311820216
+frozen,token-mean,robbert_v2,local_rf,—,0.9123357613222913
+frozen,token-cls,robbert_v2,chain_ERCcv_rf,—,0.9127331240098877
+frozen,token-mean,robbert_v2,chain_ERCcv_rf,—,0.9148878794867963
+frozen,token-cls,robbert_v2,local_rf,—,0.9171010462301062
+frozen,token-cls,bert,chain_ERCcv_rf,—,0.9178064645788933
+frozen,token-mean,rembert,local_rf,—,0.9210688404230492
+frozen,token-cls,robbert_v2,global_rf,—,0.9225549520386005
+frozen,token-cls,bert,local_rf,—,0.9258395887173746
+frozen,token-mean,bert,global_rf,—,0.9258523622579216
+frozen,token-mean,xlmr_large,local_rf,—,0.9269232856822798
+frozen,token-max,robbert2023,global_rf,—,0.928528992288515
+frozen,token-max,bert,global_rf,—,0.9286413062560605
+frozen,token-mean,xlmr_large,chain_ERCcv_rf,—,0.9294337001391473
+static,word2vec,word2vec,chain_ERCcv_lasso,—,0.9300026744163754
+frozen,token-max,robbert_v2,local_rf,—,0.9303049710500937
+frozen,token-mean,rembert,global_rf,—,0.9321788039163035
+frozen,token-mean,robbert_v2,global_rf,—,0.9340743894515846
+frozen,token-max,robbert_v2,chain_ERCcv_rf,—,0.9365420545175582
+frozen,token-max,rembert,chain_ERCcv_rf,—,0.9390351626915572
+frozen,token-max,robbert_v2,global_rf,—,0.942135463524679
+frozen,token-cls,bert,global_rf,—,0.9500938177714613
+frozen,token-max,xlmr_large,chain_ERCcv_lr,—,0.9531430955244184
+frozen,token-max,rembert,local_rf,—,0.9537761662578068
+frozen,token-max,rembert,local_lasso,—,0.955681144018224
+frozen,token-cls,xlmr_large,chain_ERCcv_rf,—,0.9588362233227719
+frozen,token-mean,xlmr_large,global_rf,—,0.9636755495864203
+frozen,token-max,xlmr_large,local_lasso,—,0.9642366843451208
+frozen,token-cls,robbert2023,chain_ERCcv_lr,—,0.965874415599276
+frozen,token-cls,xlmr_large,local_rf,—,0.9693990096045002
+frozen,token-max,xlmr_large,global_rf,—,0.9718082635010481
+frozen,token-cls,xlmr_large,global_rf,—,0.9756655117231533
+frozen,token-cls,xlmr_large,local_lasso,—,0.9768344938257676
+frozen,token-max,xlmr_large,chain_ERCcv_rf,—,0.9814646793490465
+frozen,token-max,rembert,global_rf,—,0.9837649961066866
+frozen,token-max,xlmr_large,local_rf,—,0.9841041661807342
+frozen,token-mean,deberta,local_rf,—,0.9850896471237589
+frozen,token-max,deberta,chain_ERCcv_rf,—,0.9854988747036499
+frozen,token-mean,deberta,chain_ERCcv_rf,—,0.985592943850647
+frozen,token-cls,xlmr_large,chain_ERCcv_lr,—,0.9863822515901448
+frozen,token-mean,deberta,global_rf,—,0.9890365053340806
+frozen,token-max,rembert,chain_ERCcv_lr,—,0.9893953273214227
+frozen,token-max,deberta,chain_ERCcv_lr,—,0.9947712614017894
+frozen,token-max,deberta,global_rf,—,0.995209136132538
+frozen,token-max,deberta,local_rf,—,0.9957406951258483
+frozen,token-cls,deberta,chain_ERCcv_lr,—,0.9978807685052751
+frozen,token-cls,rembert,local_lasso,—,0.9999999995274282
+frozen,token-mean,robbert_v2,local_mean,—,0.9999999999992564
+static,fasttext,fasttext,chain_ERCcv_mean,—,0.9999999999992564
+static,word2vec,word2vec,local_mean,—,0.9999999999992564
+static,fasttext,fasttext,local_mean,—,0.9999999999992564
+frozen,token-max,rembert,local_mean,—,0.9999999999992564
+frozen,token-max,deberta,local_mean,—,0.9999999999992564
+frozen,sentence,e5_base,local_mean,—,0.9999999999992564
+frozen,sentence,sbert_bert,local_mean,—,0.9999999999992564
+frozen,sentence,e5_large,local_mean,—,0.9999999999992564
+frozen,token-cls,rembert,local_mean,—,0.9999999999992564
+frozen,sentence,labse,local_mean,—,0.9999999999992564
+frozen,token-mean,rembert,local_mean,—,0.9999999999992564
+static,word2vec,word2vec,chain_ERCcv_mean,—,0.9999999999992564
+frozen,token-mean,xlmr_large,local_mean,—,0.9999999999992564
+frozen,token-mean,robbert2023,local_mean,—,0.9999999999992564
+frozen,token-cls,xlmr_large,local_mean,—,0.9999999999992564
+frozen,token-mean,deberta,local_mean,—,0.9999999999992564
+frozen,token-mean,bert,local_mean,—,0.9999999999992564
+frozen,token-max,robbert_v2,local_mean,—,0.9999999999992564
+frozen,token-max,robbert2023,local_mean,—,0.9999999999992564
+frozen,token-cls,robbert_v2,local_mean,—,0.9999999999992564
+frozen,sentence,simcse_xlmr_base,local_mean,—,0.9999999999992564
+frozen,token-max,bert,local_mean,—,0.9999999999992564
+frozen,token-cls,deberta,local_mean,—,0.9999999999992564
+frozen,token-cls,bert,local_mean,—,0.9999999999992564
+frozen,token-max,xlmr_large,local_mean,—,0.9999999999992564
+frozen,token-cls,robbert2023,local_mean,—,0.9999999999992564
+frozen,sentence,sbert_roberta,local_mean,—,0.9999999999992564
+static,fasttext,fasttext,chain_ERCcv_lasso,—,0.9999999999993276
+frozen,token-max,deberta,local_lasso,—,1.0000000000728009
+frozen,token-mean,deberta,local_lasso,—,1.0000000005454663
+frozen,token-cls,deberta,local_lasso,—,1.0000000062002967
+frozen,token-mean,deberta,chain_ERCcv_lr,—,1.0090582825050787
+frozen,token-cls,rembert,global_rf,—,1.0108946191690946
+frozen,token-cls,deberta,global_rf,—,1.0148540357436777
+frozen,token-cls,rembert,chain_ERCcv_lr,—,1.0159715297769858
+frozen,token-cls,rembert,local_rf,—,1.0249401742526847
+frozen,token-cls,deberta,chain_ERCcv_rf,—,1.0284469346157818
+frozen,token-cls,rembert,chain_ERCcv_rf,—,1.0333196317350979
+frozen,token-cls,deberta,local_rf,—,1.0516410057490657
