@@ -71,4 +71,4 @@ The full taxonomy can be consulted in:
 In the `data/` folder, we have also included the mapping of each facet to one (or a small set of) ICF-CY codes.
 
 
-**Next:** [→ For information on how the taxonomy is concretely implemented, continue to: Facet-conditioned prompt design](../prompting/facet-conditioned%20prompt%20design.md#facet-conditioned-prompt-design)
+**Next:** [→ For information on how the taxonomy is concretely implemented, continue to: Facet-conditioned prompt design](../prompting/facet-conditioned-prompt-design.md#facet-conditioned-prompt-design)
