@@ -58,7 +58,14 @@ An **RRMSE < 1** indicates improvement over the mean baseline.
 **Taxonomy-guided augmentation (E-steps).**
 - **E1** synthetic generation: facet-driven prompts produce nested-prefix datasets of sizes **N ∈ {96, 192, 384, 768, 1536, 3072}** per method, with strict validation + diversity selection.
 - **E2** teacher labeling: per-fold, leak-free teachers (selected MTRs) label synthetics for chosen embeddings.
-- **E3** student scoring: students reuse **per-fold hyperparameters** from teachers (no tuning) and are trained on **%K** subsets (**10, 20, 50, 100, 200, 400**%) of labeled synthetics.
+- **E3** student scoring: students reuse **per-fold hyperparameters** from teachers (no tuning) and are trained on **%K** subsets (**10, 20, 50, 100, 200, 400**%) of labeled synthetics.  
+  Multiple *label sources (teachers)* are supported:
+  - default: `teacher_e5_base_chainERCcv_lr`
+  - additional: `teacher_e5_base_local_lasso`  
+  The resulting student models are distinguished by **(student, teacher, augmentation)**; files may include an optional `__labels_*` tag to encode the teacher (e.g., `__labels_local_lasso`).
+  *Students trained on augmented data*
+  - On labels of `e5_base_chainERCcv_lr`: `e5_base_chainERCcv_lr`, `e5_local_lasso`, `e5_local_rf`, `e5_global_rf`, `e5_chain_ERCcv_rf`
+  - On labels of `e5_local_lasso`: `e5_base_chainERCcv_lr`, `e5_local_lasso`
 
 **Multi-target regressors (MTR).**
 - **Local:** `local_lr`, `local_lasso`, `local_rf`
@@ -77,38 +84,58 @@ An **RRMSE < 1** indicates improvement over the mean baseline.
 ## 4. Overall leaderboard (Top-20)
 
 Ranked by **global median RRMSE** (lower is better) across folds × targets. Columns:  
-1) **Rank**, 2) **Embedding**, 3) **MTR model**, 4) **Augm.** (`NA` or `A{10|20|50|100|200|400}`), 5) **RRMSE**, 6) **Family**.
+1) **Rank**, 2) **Family**, 3) **Embedding**, 4) **MTR model**, 5) **Teacher** (label source), 6) **Augm.** (`NA` or `A{10|20|50|100|200|400}`), 7) **RRMSE**.
 
 ```text
-┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━┓
-┃ rank ┃ representation_family             ┃ embedding        ┃ mtr_model      ┃ augmentation ┃ rrmse  ┃
-┣━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━┫
-│ 1    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A20          │ 0.6676 │
-│ 2    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A50          │ 0.6737 │
-│ 3    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A10          │ 0.6738 │
-│ 4    │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A50          │ 0.6778 │
-│ 5    │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A100         │ 0.6788 │
-│ 6    │ frozen sentence + MTR             │ e5_base          │ chain_ERCcv_lr │ NA           │ 0.6816 │
-│ 7    │ frozen sentence + MTR             │ e5_large         │ local_lasso    │ NA           │ 0.6820 │
-│ 8    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A400         │ 0.6847 │
-│ 9    │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A200         │ 0.6847 │
-│ 10   │ augmented + frozen sentence + MTR │ e5_base          │ chain_ERCcv_lr │ A100         │ 0.6847 │
-│ 11   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A200         │ 0.6852 │
-│ 12   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A20          │ 0.6882 │
-│ 13   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A10          │ 0.6903 │
-│ 14   │ frozen sentence + MTR             │ e5_large         │ chain_ERCcv_lr │ NA           │ 0.6958 │
-│ 15   │ augmented + frozen sentence + MTR │ e5_base          │ local_lasso    │ A400         │ 0.6980 │
-│ 16   │ frozen sentence + MTR             │ e5_base          │ local_lasso    │ NA           │ 0.7047 │
-│ 17   │ frozen sentence + MTR             │ simcse_xlmr_base │ chain_ERCcv_lr │ NA           │ 0.7355 │
-│ 18   │ frozen sentence + MTR             │ sbert_bert       │ local_lasso    │ NA           │ 0.7359 │
-│ 19   │ frozen sentence + MTR             │ sbert_roberta    │ local_lasso    │ NA           │ 0.7409 │
-│ 20   │ frozen sentence + MTR             │ sbert_bert       │ chain_ERCcv_lr │ NA           │ 0.7410 │
-┗━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━┛
+┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ rank ┃ representation_family             ┃ embedding ┃ mtr_model      ┃ teacher                       ┃ augmentation ┃ rrmse  ┃
+┣━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━╋━━━━━━━━┫
+│ 1    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A20          │ 0.6676 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 2    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A50          │ 0.6737 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 3    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A10          │ 0.6738 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 4    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_local_lasso   │ A100         │ 0.6756 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 5    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_local_lasso   │ A50          │ 0.6756 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 6    │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_chainERCcv_lr │ A50          │ 0.6778 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 7    │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_local_lasso   │ A20          │ 0.6780 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 8    │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_chainERCcv_lr │ A100         │ 0.6788 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 9    │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_local_lasso   │ A50          │ 0.6790 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 10   │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_local_lasso   │ A100         │ 0.6813 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 11   │ frozen sentence + MTR             │ e5_base   │ chain_ERCcv_lr │ NA                            │ NA           │ 0.6816 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 12   │ frozen sentence + MTR             │ e5_large  │ local_lasso    │ NA                            │ NA           │ 0.6820 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 13   │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_local_lasso   │ A200         │ 0.6841 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 14   │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_local_lasso   │ A10          │ 0.6842 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 15   │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A200         │ 0.6847 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 16   │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A400         │ 0.6847 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 17   │ augmented + frozen sentence + MTR │ e5_base   │ chain_ERCcv_lr │ teacher_e5_base_chainERCcv_lr │ A100         │ 0.6847 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 18   │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_chainERCcv_lr │ A200         │ 0.6852 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 19   │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_chainERCcv_lr │ A20          │ 0.6882 │
+├──────┼───────────────────────────────────┼───────────┼────────────────┼───────────────────────────────┼──────────────┼────────┤
+│ 20   │ augmented + frozen sentence + MTR │ e5_base   │ local_lasso    │ teacher_e5_base_local_lasso   │ A10          │ 0.6903 │
+┗━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━┛
+
 ```
 
 **Full report (all configurations):** `reports/leaderboard/leaderboard.md`  
 **Tables/plots powering this section:** `outputs/r_1_overall/results/*.csv`, `outputs/r_1_overall/plots/*.png`  
-<sub>_Tie-breaks:_ rrmse → family label → embedding (A–Z) → model (A–Z) → augmentation (NA before A10…A400).</sub>
+<sub>_Tie-breaks:_ rrmse → family label → embedding (A–Z) → model (A–Z) → **teacher (A–Z)** → augmentation (NA before A10…A400).</sub>
 
 ---
 
@@ -248,6 +275,8 @@ The complete figure and table set reported in the paper can be regenerated in re
   - Tables + plots: `outputs/f_final_report/f_6_target_analysis/`
 
 - **Top-20 leaderboard (quick scan):** see [4. Overall leaderboard (Top-20)](#4-overall-leaderboard-top-20) and `reports/leaderboard/leaderboard.md`.
+  - The *teacher* column reflects the label source used to train augmented students (e.g., `teacher_e5_base_chainERCcv_lr` or `teacher_e5_base_local_lasso`). Files with `__labels_*` are mapped to canonical teacher names.
+
 
 Each corresponding notebook in `notebooks/` regenerates the figures/tables from these saved arrays idempotently.
 
