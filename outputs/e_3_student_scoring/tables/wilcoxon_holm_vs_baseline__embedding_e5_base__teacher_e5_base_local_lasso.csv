@@ -1,0 +1,13 @@
+student,embedding,regressor,method,pct,K,M_max,labels_source,p_raw,p_holm
+S1,e5_base,chain_ERCcv_lr,gemma,10,10,3072,teacher_e5_base_local_lasso,0.9813769299008078,1.0
+S1,e5_base,chain_ERCcv_lr,gemma,20,19,3072,teacher_e5_base_local_lasso,0.8714034216891254,1.0
+S1,e5_base,chain_ERCcv_lr,gemma,50,48,3072,teacher_e5_base_local_lasso,0.7743105832832,1.0
+S1,e5_base,chain_ERCcv_lr,gemma,100,96,3072,teacher_e5_base_local_lasso,0.3627481841340037,1.0
+S1,e5_base,chain_ERCcv_lr,gemma,200,192,3072,teacher_e5_base_local_lasso,0.9720771289035909,1.0
+S1,e5_base,chain_ERCcv_lr,gemma,400,384,3072,teacher_e5_base_local_lasso,0.47808972851775255,1.0
+S1,e5_base,local_lasso,gemma,10,10,3072,teacher_e5_base_local_lasso,0.0636561182773682,0.1273122365547364
+S1,e5_base,local_lasso,gemma,20,19,3072,teacher_e5_base_local_lasso,0.11708507546930108,0.1273122365547364
+S1,e5_base,local_lasso,gemma,50,48,3072,teacher_e5_base_local_lasso,6.865861603923882e-05,0.00041195169623543294
+S1,e5_base,local_lasso,gemma,100,96,3072,teacher_e5_base_local_lasso,0.0008344431685522861,0.0033377726742091444
+S1,e5_base,local_lasso,gemma,200,192,3072,teacher_e5_base_local_lasso,0.005897525839068459,0.017692577517205377
+S1,e5_base,local_lasso,gemma,400,384,3072,teacher_e5_base_local_lasso,0.0006297976109604222,0.003148988054802111

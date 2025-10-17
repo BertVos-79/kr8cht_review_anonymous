@@ -1,0 +1,13 @@
+method,pct,labels_source,p_raw,cliffs_delta,npos,nneg,nzero,magnitude
+gemma,10,teacher_e5_base_chainERCcv_lr,8.54712867331276e-05,0.043154761904761904,3505,3215,0,negligible
+gemma,20,teacher_e5_base_chainERCcv_lr,2.390130992814121e-09,0.05863095238095238,3557,3163,0,negligible
+gemma,50,teacher_e5_base_chainERCcv_lr,6.800852633240005e-10,0.052976190476190475,3538,3182,0,negligible
+gemma,100,teacher_e5_base_chainERCcv_lr,3.819197330809908e-06,0.034523809523809526,3476,3244,0,negligible
+gemma,200,teacher_e5_base_chainERCcv_lr,1.4927166991980513e-07,0.04404761904761905,3508,3212,0,negligible
+gemma,400,teacher_e5_base_chainERCcv_lr,1.1621765934285677e-15,0.08660714285714285,3651,3069,0,negligible
+gemma,10,teacher_e5_base_local_lasso,0.6913770457773976,-0.014136904761904762,1325,1363,0,negligible
+gemma,20,teacher_e5_base_local_lasso,0.47430166848227756,-0.000744047619047619,1343,1345,0,negligible
+gemma,50,teacher_e5_base_local_lasso,0.019126278794450162,0.028273809523809524,1382,1306,0,negligible
+gemma,100,teacher_e5_base_local_lasso,0.006243640750982182,0.008928571428571428,1356,1332,0,negligible
+gemma,200,teacher_e5_base_local_lasso,0.3363485868383886,-0.03571428571428571,1296,1392,0,negligible
+gemma,400,teacher_e5_base_local_lasso,0.010223212166183574,-0.000744047619047619,1343,1345,0,negligible

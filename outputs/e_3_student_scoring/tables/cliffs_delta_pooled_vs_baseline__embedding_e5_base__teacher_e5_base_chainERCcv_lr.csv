@@ -1,0 +1,7 @@
+method,pct,labels_source,cliffs_delta,magnitude,npos,nneg,nzero
+gemma,10,teacher_e5_base_chainERCcv_lr,0.043154761904761904,negligible,3505,3215,0
+gemma,20,teacher_e5_base_chainERCcv_lr,0.05863095238095238,negligible,3557,3163,0
+gemma,50,teacher_e5_base_chainERCcv_lr,0.052976190476190475,negligible,3538,3182,0
+gemma,100,teacher_e5_base_chainERCcv_lr,0.034523809523809526,negligible,3476,3244,0
+gemma,200,teacher_e5_base_chainERCcv_lr,0.04404761904761905,negligible,3508,3212,0
+gemma,400,teacher_e5_base_chainERCcv_lr,0.08660714285714285,negligible,3651,3069,0

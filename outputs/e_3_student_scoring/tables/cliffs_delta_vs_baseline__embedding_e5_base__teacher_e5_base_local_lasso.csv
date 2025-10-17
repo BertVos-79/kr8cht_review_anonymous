@@ -1,0 +1,13 @@
+student,embedding,regressor,method,pct,K,M_max,labels_source,cliffs_delta_paired,npos,nneg,nzero,magnitude
+S1,e5_base,chain_ERCcv_lr,gemma,10,10,3072,teacher_e5_base_local_lasso,-0.043154761904761904,643,701,0,negligible
+S1,e5_base,chain_ERCcv_lr,gemma,20,19,3072,teacher_e5_base_local_lasso,-0.002976190476190476,670,674,0,negligible
+S1,e5_base,chain_ERCcv_lr,gemma,50,48,3072,teacher_e5_base_local_lasso,-0.00744047619047619,667,677,0,negligible
+S1,e5_base,chain_ERCcv_lr,gemma,100,96,3072,teacher_e5_base_local_lasso,0.013392857142857142,681,663,0,negligible
+S1,e5_base,chain_ERCcv_lr,gemma,200,192,3072,teacher_e5_base_local_lasso,-0.06398809523809523,629,715,0,negligible
+S1,e5_base,chain_ERCcv_lr,gemma,400,384,3072,teacher_e5_base_local_lasso,0.002976190476190476,674,670,0,negligible
+S1,e5_base,local_lasso,gemma,10,10,3072,teacher_e5_base_local_lasso,0.01488095238095238,682,662,0,negligible
+S1,e5_base,local_lasso,gemma,20,19,3072,teacher_e5_base_local_lasso,0.001488095238095238,673,671,0,negligible
+S1,e5_base,local_lasso,gemma,50,48,3072,teacher_e5_base_local_lasso,0.06398809523809523,715,629,0,negligible
+S1,e5_base,local_lasso,gemma,100,96,3072,teacher_e5_base_local_lasso,0.004464285714285714,675,669,0,negligible
+S1,e5_base,local_lasso,gemma,200,192,3072,teacher_e5_base_local_lasso,-0.00744047619047619,667,677,0,negligible
+S1,e5_base,local_lasso,gemma,400,384,3072,teacher_e5_base_local_lasso,-0.004464285714285714,669,675,0,negligible
